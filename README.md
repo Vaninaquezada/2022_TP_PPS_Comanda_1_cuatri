@@ -1,9 +1,8 @@
 # 2022_TP_PPS_Comanda_1_cuatri
-Trabajo práctico grupal - PPS - segundo parcial
 
-Para registrar el grupo completo con todos sus integrantes: https://forms.gle/PK9qneSc2hWzUxMs6
 
-Grupos:
+Integrantes 
+Vanina Quezada
+Nicolas Gomez
 
-Máximo: 3 integrantes
-Mínimo: 2 integrantes
+https://docs.google.com/spreadsheets/d/1IxJ_jOkGoOFVfFLDb5P5j6MW7XNbcHcM7R4uWAIUzC0/edit?usp=sharing
