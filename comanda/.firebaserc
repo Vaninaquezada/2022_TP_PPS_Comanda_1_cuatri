@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "appcomanda-cae9b": {
+      "hosting": {
+        "app": [
+          "appcomanda-cae9b"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "appcomanda-cae9b"
+  }
+}
