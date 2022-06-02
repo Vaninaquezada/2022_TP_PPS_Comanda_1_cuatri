@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">comanda</string>
+    <string name="title_activity_main">comanda</string>
+    <string name="package_name">comanda.Resto.zona.Sur</string>
+    <string name="custom_url_scheme">comanda.Resto.zona.Sur</string>
+</resources>

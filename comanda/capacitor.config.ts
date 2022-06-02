@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
+  appId: 'comanda.Resto.zona.Sur',
   appName: 'comanda',
   webDir: 'www',
   bundledWebRuntime: false
