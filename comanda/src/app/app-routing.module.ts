@@ -7,18 +7,21 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'splash',
     loadChildren: () => import('./splash/splash.module').then( m => m.SplashPageModule)
+  },  {
+    path: 'principal',
+    loadChildren: () => import('./pages/principal/principal.module').then( m => m.PrincipalPageModule)
   },
+  {
+    path: 'registro',
+    loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
+  },
+
 ];
 
 @NgModule({

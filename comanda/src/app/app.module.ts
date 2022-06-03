@@ -15,10 +15,24 @@ import { provideFunctions,getFunctions } from '@angular/fire/functions';
 import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, provideFirebaseApp(() => initializeApp(environment.firebase)), provideAuth(() => getAuth()), provideDatabase(() => getDatabase()), provideFirestore(() => getFirestore()), provideFunctions(() => getFunctions()), provideMessaging(() => getMessaging()), provideStorage(() => getStorage())],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFirestoreModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)), provideAuth(() => getAuth()), provideDatabase(() => getDatabase()), provideFirestore(() => getFirestore()), provideFunctions(() => getFunctions()), provideMessaging(() => getMessaging()), provideStorage(() => getStorage())
+  
+  ],
+  
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

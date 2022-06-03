@@ -1,9 +1,72 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>login</ion-title>
+    <ion-title>
+      <ion-icon name="restaurant-outline"></ion-icon> Inicio de sesion <ion-icon name="restaurant-outline"></ion-icon>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+  
+  <body class="text-center">    
+    <main class="form-signin">
+      <form *ngIf="!iniciado">
 
+        <ion-list>
+          <p> Correo electronico: </p> 
+          <ion-item>
+            
+            <ion-input type="email" id="floatingInput" value={{emailIngreso}} #email ></ion-input>
+          </ion-item>
+        
+          <p> Contraseña: </p> 
+          <ion-item class="item">
+            
+            
+            <ion-input type="password" id="floatingPassword" value={{contraIngreso}} #password></ion-input>
+          </ion-item>
+        
+        </ion-list>
+
+        <ion-button class="botonIngresar" size="small" shape="round" expand="full"  (click)="OnSignIn(email.value, password.value)"><ion-icon name="happy-outline"></ion-icon> Ingresar <ion-icon name="happy-outline"></ion-icon></ion-button>
+      </form>     
+   
+    </main>
+<br>
+   
+    <img src="../../assets/icono1.png">
+  </body>
+
+
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button color="primary" >
+      <ion-icon name="arrow-up-circle-outline"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-list side="start">
+      <ion-fab-button color="danger" (click)="CompletaIngreso('usuario1')" >
+        <img src="../../assets/apoyo.png">
+      </ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="top">
+      <ion-fab-button color="dark" (click)="CompletaIngreso('usuario2')" >
+        Inv.
+      </ion-fab-button>
+      <ion-fab-button color="dark" (click)="CompletaIngreso('usuario3')" >
+        Usu.
+      </ion-fab-button>
+      <ion-fab-button color="dark" (click)="CompletaIngreso('usuario4')" >
+        Anón.
+      </ion-fab-button>
+    </ion-fab-list>
+      <ion-fab-list side="end">
+      <ion-fab-button color="warning" (click)="CompletaIngreso('usuario5')" >
+        <img src="../../assets/tester.png">
+      </ion-fab-button>
+      
+    </ion-fab-list>
+  </ion-fab>
+  
 </ion-content>
+
