@@ -22,6 +22,11 @@
 // Este es el Firebase de mis proyectos para hacer pruebas
 export const environment = {
   production: false,
+  fcmUrl: 'https://fcm.googleapis.com/fcm/send',
+  fcmServerKey:
+    // eslint-disable-next-line max-len
+    // esto se saca de firebase en config, CLOUD MESSAGING
+    'AAAAzXkXFv0:APA91bFM1KTnSHe4Z0N_j4UB36PKfSqkS7TogEM9q095FhVFLWsGwj__xKQO8kZ1BTgjpe89Ig43Rtzh8c_wC8XIURt4sK12yAdwLD26ytPgtwz5OaNVuoyJeRO_hNK2mczS5Woy0NtN	',
   firebase:{
     apiKey: "AIzaSyDYEq0J9-o7Aax-42FrIaaefkkeSwqATIE",
     authDomain: "gomezn-tpfinal-clinica.firebaseapp.com",

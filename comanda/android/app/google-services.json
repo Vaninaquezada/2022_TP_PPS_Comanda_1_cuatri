@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "882499852029",
+    "project_id": "gomezn-tpfinal-clinica",
+    "storage_bucket": "gomezn-tpfinal-clinica.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882499852029:android:0c65d363638fb176fdd094",
+        "android_client_info": {
+          "package_name": "comanda.Resto.zona.Sur"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882499852029-bolqkiq7ka9uqh9ohp98l39ip4o0k862.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAId_vMqH9BXiFeHE6UjtQfmK8ivb5cd7c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882499852029-bolqkiq7ka9uqh9ohp98l39ip4o0k862.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
