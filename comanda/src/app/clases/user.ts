@@ -1,20 +1,18 @@
-export type Roles = 'usuario' | 'tester' | 'admin'| 'especialista';
+export type Roles = 'cliente' | 'empleado' | 'admin'| 'especialista';
+export type subTipo = 'mozo' | 'bartender' | 'metre'| 'cocinero';
 
 export class User {
-    uid: string;
+    uid?: string;
     email: string;
     displayName?: string;
-    emailVerified: boolean;
-    password?: string;
-    photoURL?: string;
+    emailVerified?: boolean;
     role?: Roles;
-    edad?: number;
+    subTipo?: subTipo;
     nombre?: string;
     apellido?: string;
     dni?: number;
-    os?: string;
-    imgFrente?: File;
-    imgPerfil?: File;
+    cuil?: number;
+    foto?: string;    
     verificacionEspec?: boolean;
     id?: string;
     ingresos?: Array<Date>

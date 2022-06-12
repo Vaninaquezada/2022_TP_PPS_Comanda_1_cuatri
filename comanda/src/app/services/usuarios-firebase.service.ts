@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { User } from '../clases/user';
+import { UtilidadesService } from './utilidades.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +22,7 @@ export class UsuariosFirebaseService {
   // usuariosRefEspecialistas: AngularFirestoreCollection<any>;
   // usuariosEspecialistas: Observable<any[]>;
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore, private storage: AngularFireStorage, private utilidadesService: UtilidadesService) {
     this.usuariosRef=db.collection<any>(this.dbpath, ref => ref.orderBy('apellido'));
     this.usuarios=this.usuariosRef.valueChanges(this.dbpath);
 
@@ -56,26 +59,39 @@ export class UsuariosFirebaseService {
     return this.usuarios;
   }
 
-  // getAllPacientes(){
-  //   return this.usuariosPacientes;
-  // }
+  nuevoUsuario(usuario: User, foto: File){
+    usuario.id = this.db.createId();
 
-  // getAllEspecialistas(){
-  //   return this.usuariosEspecialistas;
-  // }
 
-  create(mensaje: User): any{
-    let data = this.usuariosRef.add({...mensaje});
+    let pathRef = `fotos/${usuario.id}`;
+    const fileRef = this.storage.ref(pathRef);
+    const task = this.storage.upload(pathRef, foto);
+    console.log("aca entró"+ task);
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe(async res => {
+          console.log("aca entró 2");
+          usuario.foto = res;          
+          this.db.collection("usuarios").doc(usuario.id).set(usuario);
+          this.utilidadesService.RemoverLoading();
+          this.utilidadesService.PresentarToastAbajo("Usuario creado", "success")
+          
+        })
+      } )
+    ).subscribe();
     
-    return data;
   }
 
+  guardarCambios(usuario: User){
+    this.db.collection("usuarios").doc(usuario.id).set(usuario);
+    
+  }
+
+  borrrar(id: string): Promise<void> {
+    return this.usuariosRef.doc(id).delete();
+  }
 
   update(id: string, data: any): Promise<void> {
     return this.usuariosRef.doc(id).update(data);
-  }
-
-  delete(id: string): Promise<void> {
-    return this.usuariosRef.doc(id).delete();
   }
 }
