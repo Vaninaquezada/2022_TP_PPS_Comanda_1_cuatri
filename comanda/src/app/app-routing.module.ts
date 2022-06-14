@@ -13,7 +13,8 @@ const routes: Routes = [
   {
     path: 'splash',
     loadChildren: () => import('./splash/splash.module').then( m => m.SplashPageModule)
-  },  {
+  },
+  {
     path: 'principal',
     loadChildren: () => import('./pages/principal/principal.module').then( m => m.PrincipalPageModule)
   },
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'registro-empleados',
     loadChildren: () => import('./pages/registro-empleados/registro-empleados.module').then( m => m.RegistroEmpleadosPageModule)
+  },
+  {
+    path: 'registro-duenios-supervisores',
+    loadChildren: () => import('./pages/registro-duenios-supervisores/registro-duenios-supervisores.module').then( m => m.RegistroDueniosSupervisoresPageModule)
   },
 
 ];
