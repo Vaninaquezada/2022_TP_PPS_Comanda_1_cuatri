@@ -1,4 +1,26 @@
 ion-content{
     --background: #23C1E0;
     
-  }
+}
+
+ion-item{
+  
+  margin-bottom: 8%;
+  --background: rgba(0, 0, 0, 0);
+}
+ion-select {
+  /* Applies to the value and placeholder color */
+  color: #2132c7;
+  
+
+  /* Set a different placeholder color */
+  --placeholder-color: #971e49;
+
+  /* Set full opacity on the placeholder */
+  --placeholder-opacity: 1;
+}
+ion-input{
+  
+  margin: 5%;
+  
+}

@@ -40,6 +40,8 @@ export class RegistroEmpleadosPage implements OnInit {
       'DNI': ['', Validators.required],
       'CUIL': ['', Validators.required],
       'foto': ['', Validators.required],
+      'password': ['', Validators.required],
+      'password2': ['', Validators.required],
       
     });
   }
@@ -52,8 +54,30 @@ export class RegistroEmpleadosPage implements OnInit {
     }
   }
 
-  Subir(){
-    this.utilidadesService.PresentarLoading("Creando usuario");
+  async NuevoRegistro(){
+    
+    if(this.forma.get('password').value == this.forma.get('password2').value){
+      this.utilidadesService.PresentarLoading("Creando usuario");
+      console.log("bien contraseñas");
+            
+      try {
+        const user = await this.authSvc.SignUp(this.forma.get('email').value.toLowerCase(), this.forma.get('password').value);
+        if (user) {
+          console.log("creado auth");
+          this.CrearUsuario();
+          this.checkUserIsVerified(user);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }else{
+      this.utilidadesService.PresentarToastAbajo("Las contraseñas no coinciden", "danger");
+      this.utilidadesService.RemoverLoading();
+    }
+  }
+
+  CrearUsuario(){
+    
     let usuario: User = {
       email: this.forma.get('email').value,
       subTipo: this.forma.get('subtipo').value,
@@ -66,6 +90,17 @@ export class RegistroEmpleadosPage implements OnInit {
     const foto = this.imagen;
     this.usuarioService.nuevoUsuario(usuario, foto);
     
+  }
+
+  private checkUserIsVerified(user: User) {
+    if (user && user.verificadoPorAdm) {
+      this.navegador.navigate(['/']);
+      localStorage.setItem('usuario',this.forma.get('email').value.toLowerCase())
+    } else if (user) {
+      this.navegador.navigate(['/verificacion-registro']);
+    } else {
+      this.navegador.navigate(['/registro']);
+    }
   }
 
   Navegar(ruta: string){
