@@ -29,6 +29,18 @@ const routes: Routes = [
     path: 'verificacion-registro',
     loadChildren: () => import('./pages/verificacion-registro/verificacion-registro.module').then( m => m.VerificacionRegistroPageModule)
   },
+  {
+    path: 'principal-adm',
+    loadChildren: () => import('./pages/principal-adm/principal-adm.module').then( m => m.PrincipalAdmPageModule)
+  },
+  {
+    path: 'principal-empleado',
+    loadChildren: () => import('./pages/principal-empleado/principal-empleado.module').then( m => m.PrincipalEmpleadoPageModule)
+  },
+  {
+    path: 'adm-autorizacion-registros',
+    loadChildren: () => import('./pages/adm-autorizacion-registros/adm-autorizacion-registros.module').then( m => m.AdmAutorizacionRegistrosPageModule)
+  },
 
 ];
 

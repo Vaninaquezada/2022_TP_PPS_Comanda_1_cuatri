@@ -50,36 +50,43 @@ export class LoginPage {
       }      
       this.usuariosFire.update(this.usuariosFire.id, {ingresos: this.usuarioLogueado.ingresos});
       console.log(this.usuarioLogueado.role);
-      if(this.usuarioLogueado.role == 'especialista'){
-        console.log("entra en login para especialista");
-        if(!this.usuarioLogueado.verificacionEspec){
-          console.log("entra en login para especialista sin verificacion por Admin");
-          this.router.navigate(['/verificacion-especialista']);
-        }else{
-          localStorage.setItem('role', this.usuarioLogueado.role);
-          console.log("LOGIN: el Role que loguea es: "+this.usuarioLogueado.role);
-          this.router.navigate(['/']);
-        }
-      }else{
-        localStorage.setItem('role', this.usuarioLogueado.role);
-        console.log("LOGIN: el Role que loguea es: "+this.usuarioLogueado.role);
-        this.router.navigate(['/principal']);
-        this.utilidadesService.RemoverLoading();
+      localStorage.setItem('role', this.usuarioLogueado.role);
 
+      switch (this.usuarioLogueado.role) {
+        case 'admin':
+          this.router.navigate(['/principal-adm']);
+          this.utilidadesService.RemoverLoading();
+          break;
+        case 'cliente':
+          if(this.usuarioLogueado.verificadoPorAdm){
+            this.router.navigate(['/principal']);
+            this.utilidadesService.RemoverLoading();
+          }else{
+            this.router.navigate(['/verificacion-registro']);
+            this.utilidadesService.RemoverLoading();
+          }
+          break;
+        case 'empleado':
+          this.router.navigate(['/principal-empleado']);
+          this.utilidadesService.RemoverLoading();
+          break;
+      
+        default:
+          this.router.navigate(['/principal']);
+          this.utilidadesService.RemoverLoading();
+          break;
+      }
 
-        // this.iniciado=true;
-
-        
-      }      
+      // this.iniciado=true;    
     } else if (user) {
       this.utilidadesService.RemoverLoading();
       this.utilidadesService.PresentarToastAbajo("Credenciales Incorrectas", "danger");
       // this.router.navigate(['/verificacion-email']);
-    } else {
-      this.utilidadesService.RemoverLoading();
-      this.utilidadesService.PresentarToastAbajo("Credenciales Incorrectas", "danger");
-      // this.router.navigate(['/registro']);
-    }
+      } else {
+        this.utilidadesService.RemoverLoading();
+        this.utilidadesService.PresentarToastAbajo("Credenciales Incorrectas", "danger");
+        // this.router.navigate(['/registro']);
+      }
   }
 
 
