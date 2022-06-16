@@ -14,6 +14,7 @@ export class User {
     cuil?: number;
     foto?: string;    
     verificacionEspec?: boolean;
+    verificadoPorAdm?: boolean;
     id?: string;
     ingresos?: Array<Date>
 

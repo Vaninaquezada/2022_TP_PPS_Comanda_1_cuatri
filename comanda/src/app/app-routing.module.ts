@@ -25,6 +25,10 @@ const routes: Routes = [
     path: 'registro-empleados',
     loadChildren: () => import('./pages/registro-empleados/registro-empleados.module').then( m => m.RegistroEmpleadosPageModule)
   },
+  {
+    path: 'verificacion-registro',
+    loadChildren: () => import('./pages/verificacion-registro/verificacion-registro.module').then( m => m.VerificacionRegistroPageModule)
+  },
 
 ];
 

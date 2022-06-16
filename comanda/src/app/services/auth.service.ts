@@ -47,7 +47,7 @@ export class AuthService {
         email,
         password
       );
-      await this.sendVerificationEmail();
+      // await this.sendVerificationEmail();
       this.isLoggedIn = true;
       localStorage.setItem('user', JSON.stringify(user))
       return user;
