@@ -42,6 +42,10 @@ const routes: Routes = [
     path: 'adm-autorizacion-registros',
     loadChildren: () => import('./pages/adm-autorizacion-registros/adm-autorizacion-registros.module').then( m => m.AdmAutorizacionRegistrosPageModule)
   },
+  {
+    path: 'registro-duenios-supervisores',
+    loadChildren: () => import('./pages/registro-duenios-supervisores/registro-duenios-supervisores.module').then( m => m.RegistroDueniosSupervisoresPageModule)
+  }
 
 ];
 

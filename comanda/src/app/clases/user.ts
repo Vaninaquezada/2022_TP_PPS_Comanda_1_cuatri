@@ -1,5 +1,5 @@
-export type Roles = 'cliente' | 'empleado' | 'duenio' | 'supervisor' | 'especialista';
-export type subTipo = 'mozo' | 'bartender' | 'metre'| 'cocinero';
+export type Roles = 'cliente' | 'empleado' | 'admin';
+export type subTipo = 'mozo' | 'bartender' | 'metre'| 'cocinero' | 'duenio' | 'supervisor' | 'registrado' | 'anonimo' ;
 
 export class User {
     uid?: string;
