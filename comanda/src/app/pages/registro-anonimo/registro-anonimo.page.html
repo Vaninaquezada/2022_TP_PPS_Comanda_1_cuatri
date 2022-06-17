@@ -28,7 +28,7 @@
         <ion-icon name="camera-outline"></ion-icon>Sacar Fotografia
       </ion-button>
   
-      <ion-button expand="full" type="submit" > Registrar Cliente Anonimo</ion-button>
+      <ion-button expand="full" type="submit" [disabled]="registerForm.invalid"> Registrar Cliente Anonimo</ion-button>
     </form>
   </div>
 

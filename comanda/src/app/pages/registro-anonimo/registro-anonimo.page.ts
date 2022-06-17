@@ -45,8 +45,9 @@ export class RegistroAnonimoPage implements OnInit {
   async register() {
     console.log('registro');
     if (this.registerForm.value.password === this.registerForm.value.passwordR) {
-      this.utilidadesService.PresentarLoading('<img src="../assets/spinner.svg" class="img-align"  />   Creando usuario');
+      this.utilidadesService.PresentarLoading('Creando usuario');
     if (this.registerForm.valid && this.photo !== null) {
+
       const usuario = this.registerForm.value as User;
       usuario.role = 'cliente';
       usuario.subTipo = 'anonimo';
@@ -61,10 +62,16 @@ export class RegistroAnonimoPage implements OnInit {
       this.registerForm.reset();
       this.photo = null;
       this.photoUrl = '';
+      this.utilidadesService.RemoverLoading();
+    }else{
+      this.utilidadesService.RemoverLoading();
+      this.utilidadesService.PresentarToastAbajo('Falta foto', 'danger');
+
     }
     }else{
-      this.utilidadesService.PresentarToastAbajo('Las contraseñas no coinciden', 'danger');
       this.utilidadesService.RemoverLoading();
+      this.utilidadesService.PresentarToastAbajo('Las contraseñas no coinciden', 'danger');
+
     }
   }
 

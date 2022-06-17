@@ -52,7 +52,7 @@ photo: Photo = null;
   async register() {
     console.log('registro');
     if (this.registerForm.value.password === this.registerForm.value.passwordR) {
-      this.utilidadesService.PresentarLoading('<img src="../assets/spinner.svg" class="img-align"  />   Creando usuario');
+      this.utilidadesService.PresentarLoading('Dando de alta cliente');
     if (this.registerForm.valid && this.photo !== null) {
       const usuario = this.registerForm.value as User;
       usuario.role = 'cliente';
@@ -68,6 +68,10 @@ photo: Photo = null;
       this.registerForm.reset();
       this.photo = null;
       this.photoUrl = '';
+    }else{
+      this.utilidadesService.RemoverLoading();
+      this.utilidadesService.PresentarToastAbajo('Falta foto', 'danger');
+
     }
     }else{
       this.utilidadesService.PresentarToastAbajo('Las contraseñas no coinciden', 'danger');

@@ -8,6 +8,7 @@ import { Photo } from '@capacitor/camera';
 import { UtilidadesService } from './utilidades.service';
 import {AuthService} from './auth.service';
 import {FotoService} from './foto.service';
+import { AuthErrorsService } from './auth-errors.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -26,6 +27,7 @@ export class UsuariosFirebaseService {
 
   constructor(private db: AngularFirestore,private auth: AuthService,
      private storage: AngularFireStorage,
+     private authError: AuthErrorsService,
      private foto: FotoService, private utilidadesService: UtilidadesService) {
     this.usuariosRef=db.collection<any>(this.dbpath, ref => ref.orderBy('apellido'));
     this.usuarios=this.usuariosRef.valueChanges(this.dbpath);
@@ -105,7 +107,9 @@ console.log('singup');
 
 
     } catch (error) {
+      this.utilidadesService.RemoverLoading();
       console.log(error.message);
+      this.utilidadesService.PresentarToastAbajo(this.authError.getError(error.code), 'danger');
     }
   }
 

@@ -26,7 +26,7 @@ export class LoginPage {
 
   async OnSignIn(email: string, password: string){
     try {
-      this.utilidadesService.PresentarLoading('<img src="../assets/spinner.svg" class="img-align"  />');
+      this.utilidadesService.PresentarLoading('Ingresando...');
       const user = await this.firebaseService.SignIn(email,password);
       this.checkUserIsVerified(user);
       localStorage.setItem('usuario', email);
@@ -39,16 +39,16 @@ export class LoginPage {
   }
 
   private async checkUserIsVerified(user: User) {
-    console.log('entra en chequeo de usuario')
+    console.log('entra en chequeo de usuario');
     if (user) {
       await this.usuariosFire.obtenerUsuario(user.email);
       this.usuarioLogueado = this.usuariosFire.usuarioSeleccionado;
       if(this.usuarioLogueado.ingresos){
-        this.usuarioLogueado.ingresos.push(new Date())
+        this.usuarioLogueado.ingresos.push(new Date());
       }else{
         this.usuarioLogueado.ingresos = new Array<Date>();
-        this.usuarioLogueado.ingresos.push(new Date())
-      }      
+        this.usuarioLogueado.ingresos.push(new Date());
+      }
       this.usuariosFire.update(this.usuariosFire.id, {ingresos: this.usuarioLogueado.ingresos});
       console.log(this.usuarioLogueado.role);
       localStorage.setItem('role', this.usuarioLogueado.role);
@@ -71,14 +71,13 @@ export class LoginPage {
           this.router.navigate(['/principal-empleado']);
           this.utilidadesService.RemoverLoading();
           break;
-      
         default:
           this.router.navigate(['/principal']);
           this.utilidadesService.RemoverLoading();
           break;
       }
 
-      // this.iniciado=true;    
+      // this.iniciado=true;
     } else if (user) {
       this.utilidadesService.RemoverLoading();
       this.utilidadesService.PresentarToastAbajo('Credenciales Incorrectas', 'danger');

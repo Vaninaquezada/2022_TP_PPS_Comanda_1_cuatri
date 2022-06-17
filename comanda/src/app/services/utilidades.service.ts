@@ -20,7 +20,7 @@ export class UtilidadesService {
 
   async PresentarLoading(mensaje: string){
     const loader = await this.loadingController.create({
-      message: mensaje,
+      message:'<img src="../assets/spinner.svg" class="img-align"  />' + mensaje,
       translucent: true,
       spinner: null,
     });

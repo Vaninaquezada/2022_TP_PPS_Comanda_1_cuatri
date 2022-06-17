@@ -4,6 +4,8 @@ import { Observable, of } from 'rxjs';
 import { User } from '../clases/user';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { switchMap } from 'rxjs/operators';
+import { AuthErrorsService } from './auth-errors.service';
+import { UtilidadesService } from './utilidades.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ export class AuthService {
   public user$: Observable<User>
   isLoggedIn = false;
 
-  constructor(public firebaseAuth: AngularFireAuth, private afs: AngularFirestore) { 
+  constructor(public firebaseAuth: AngularFireAuth,private utilidadesService: UtilidadesService, private afs: AngularFirestore,private authError: AuthErrorsService) { 
     this.user$ = this.firebaseAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
@@ -32,8 +34,10 @@ export class AuthService {
       );
       return user;
     } catch (error) {
+      this.utilidadesService.RemoverLoading();
       console.log(error);
-    }
+      this.utilidadesService.PresentarToastAbajo(this.authError.getError(error.code), 'danger');
+     }
     // await this.firebaseAuth.signInWithEmailAndPassword(email, password).then(res=>{
     //   this.isLoggedIn = true;
     //   localStorage.setItem('user', JSON.stringify(res.user))
@@ -41,7 +45,6 @@ export class AuthService {
   }
 
   async SignUp(email: string, password: string){
-    
     try {
       const { user } = await this.firebaseAuth.createUserWithEmailAndPassword(
         email,
@@ -52,7 +55,9 @@ export class AuthService {
       localStorage.setItem('user', JSON.stringify(user))
       return user;
     } catch (error) {
+      this.utilidadesService.RemoverLoading();
       console.log(error);
+      this.utilidadesService.PresentarToastAbajo(this.authError.getError(error.code), 'danger');
     }
     
   }
@@ -65,11 +70,11 @@ export class AuthService {
   }
 
   async sendVerificationEmail(): Promise<void> {
-    console.log("entro a envio de email " + (await this.firebaseAuth.currentUser).email);
+    console.log('entro a envio de email ' + (await this.firebaseAuth.currentUser).email);
     return (await this.firebaseAuth.currentUser).sendEmailVerification();
   }
 
-  
+
   getAuth()
   {
     return this.firebaseAuth.currentUser;
