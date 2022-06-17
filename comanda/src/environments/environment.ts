@@ -16,9 +16,21 @@
 //   },
 //   production: false
 // };
+// Este es el Firebase La comanda
+ export const environment = {
+   firebase: {
+     projectId: 'appcomanda-cae9b',
+     appId: '1:1059233143564:web:f799fa9db2bad8b8680729',
+     storageBucket: 'appcomanda-cae9b.appspot.com',
+     locationId: 'southamerica-east1',
+     apiKey: 'AIzaSyD30A4Mb9HOOX6bh671rC44nSanL9HO-Gk',
+     authDomain: 'appcomanda-cae9b.firebaseapp.com',
+     messagingSenderId: '1059233143564',
+   },
+   production: false
+ };
 
-
-
+/*
 // Este es el Firebase de mis proyectos para hacer pruebas
 export const environment = {
   production: false,
@@ -36,7 +48,7 @@ export const environment = {
     appId: "1:882499852029:web:684948f66349cf75fdd094"
   }
 };
-
+*
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

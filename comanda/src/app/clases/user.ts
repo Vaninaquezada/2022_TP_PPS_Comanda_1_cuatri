@@ -1,5 +1,5 @@
 export type Roles = 'cliente' | 'empleado' | 'admin'| 'especialista';
-export type subTipo = 'mozo' | 'bartender' | 'metre'| 'cocinero';
+export type subTipo = 'mozo' | 'bartender' | 'metre'| 'cocinero'|'anonimo';
 
 export class User {
     uid?: string;
@@ -12,12 +12,20 @@ export class User {
     apellido?: string;
     dni?: number;
     cuil?: number;
-    foto?: string;    
+    foto?: string;
     verificacionEspec?: boolean;
     id?: string;
-    ingresos?: Array<Date>
+    ingresos?: Array<Date>;
 
-    constructor(){        
+    constructor(){
         this.ingresos = new Array<Date>();
     }
 }
+
+
+export interface UsuarioBarcode {
+    lastName: string;
+    name: string;
+    dni: number;
+    cuil?: number;
+  }

@@ -21,6 +21,8 @@ export class UtilidadesService {
   async PresentarLoading(mensaje: string){
     const loader = await this.loadingController.create({
       message: mensaje,
+      translucent: true,
+      spinner: null,
     });
     await loader.present();
   }

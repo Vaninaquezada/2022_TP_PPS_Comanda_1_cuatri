@@ -36,14 +36,14 @@ export class UsuariosFirebaseService {
 
   async obtenerID(email: string){
     await this.db.collection('/usuarios').ref.where('email', '==', email).get().then((responce)=>{
-      this.id = responce.docs[0].id;      
+      this.id = responce.docs[0].id;
     });
   }
 
   async obtenerRole(email: string){
     await this.db.collection('/usuarios').ref.where('email', '==', email).get().then((responce)=>{
-      this.role = responce.docs[0].data()["role"];
-      console.log(responce.docs[0].data()["role"]);
+      this.role = responce.docs[0].data()['role'];
+      console.log(responce.docs[0].data()['role']);
     });
   }
 
@@ -66,15 +66,15 @@ export class UsuariosFirebaseService {
     let pathRef = `fotos/${usuario.id}`;
     const fileRef = this.storage.ref(pathRef);
     const task = this.storage.upload(pathRef, foto);
-    console.log("aca entró"+ task);
+    console.log('aca entró'+ task);
     task.snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe(async res => {
-          console.log("aca entró 2");
+          console.log('aca entró 2');
           usuario.foto = res;          
-          this.db.collection("usuarios").doc(usuario.id).set(usuario);
+          this.db.collection('usuarios').doc(usuario.id).set(usuario);
           this.utilidadesService.RemoverLoading();
-          this.utilidadesService.PresentarToastAbajo("Usuario creado", "success")
+          this.utilidadesService.PresentarToastAbajo('Usuario creado', 'success')
           
         })
       } )
@@ -82,8 +82,32 @@ export class UsuariosFirebaseService {
     
   }
 
+  nuevoUsuarioFoto(usuario: User, foto: any){
+    usuario.id = this.db.createId();
+
+    const dataUrl = foto.dataUrl;
+    const pathRef = `fotos/${usuario.id}`;
+    const fileRef = this.storage.ref(pathRef);
+    const task = this.storage.upload(pathRef, foto);
+
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe(async res => {
+          console.log('aca entró 2');
+          usuario.foto = res;
+          this.db.collection('usuarios').doc(usuario.id).set(usuario);
+          this.utilidadesService.RemoverLoading();
+          this.utilidadesService.PresentarToastAbajo('Usuario creado', 'success')
+          
+        })
+      } )
+    ).subscribe();
+    
+  }
+
+
   guardarCambios(usuario: User){
-    this.db.collection("usuarios").doc(usuario.id).set(usuario);
+    this.db.collection('usuarios').doc(usuario.id).set(usuario);
     
   }
 

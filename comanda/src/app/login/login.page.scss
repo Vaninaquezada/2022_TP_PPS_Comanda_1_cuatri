@@ -26,6 +26,7 @@ ion-content{
       --background: -webkit-linear-gradient(rgb(11, 238, 181),rgb(27, 108, 110));
       -webkit-background-clip: text;
       --margin-bottom: 20%;
+      margin-top: 10%;
   }
   
   ion-icon{
@@ -39,6 +40,10 @@ ion-content{
     --border-color: aqua;
   }
   
+  .icon{
+    max-width: 50%;
+    margin-left: 25%;
+  }
   
   .item{
     --color: black;
