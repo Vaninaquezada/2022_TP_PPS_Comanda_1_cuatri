@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Registro Cliente</ion-title>
+    <ion-title>Registro Cliente Anonimo</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -17,31 +17,22 @@
         <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Repetir Contraseña</ion-label>
+        <ion-label position="floating">Reingrese Contraseña</ion-label>
         <ion-input type="text" formControlName="passwordR"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Nombre</ion-label>
         <ion-input type="text"  formControlName="nombre"></ion-input>
       </ion-item>
-  
-      <ion-item>
-        <ion-label position="floating">Apellido</ion-label>
-        <ion-input type="text"  formControlName="apellido"></ion-input>
-      </ion-item>  
-      <ion-item>
-        <ion-label position="floating">DNI</ion-label>
-        <ion-input type="number" formControlName="dni"></ion-input>
-      </ion-item>
-  
       <ion-button expand="full" color="tertiary" (click)="getPhoto()">
         <ion-icon name="camera-outline"></ion-icon>Sacar Fotografia
       </ion-button>
   
-      <ion-button expand="full" type="submit" > Registrar Cliente </ion-button>
+      <ion-button expand="full" type="submit" > Registrar Cliente Anonimo</ion-button>
     </form>
   </div>
-  <app-barcode-dni (userBarcode)="getBarcodeData($event)"></app-barcode-dni>
+
   
+
 
 </ion-content>

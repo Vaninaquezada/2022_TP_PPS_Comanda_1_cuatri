@@ -1,0 +1,103 @@
+ion-content{
+    --background: #23C1E0;
+    
+  }
+  ion-title{
+    color: #29dce9;
+    background: -webkit-linear-gradient(rgb(87, 179, 240),rgb(218, 91, 235));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+  }
+  
+  
+  p{
+    color: rgb(233, 17, 100);
+    font-style:oblique;
+  
+  }
+  
+  .btnRedes{
+    --background: transparent;
+  }
+  
+  
+  .botonIngresar{
+    
+      --background: -webkit-linear-gradient(rgb(11, 238, 181),rgb(27, 108, 110));
+      -webkit-background-clip: text;
+      --margin-bottom: 20%;
+      margin-top: 10%;
+  }
+  
+  ion-icon{
+    size: 2%;
+  }
+  
+  ion-list{
+    background-color: transparent;
+    --color: black;
+    --border: none;
+    --border-color: aqua;
+  }
+  
+
+  .item{
+    --color: black;
+    --background: rgba(233, 17, 100, 0.068);;
+    --border-color:transparent;
+  }
+  
+  html,
+  body {
+    height: 90%;
+    background-color: #23C1E0;
+  }
+  
+  main{
+    --margin-bottom: 10%;
+  }
+  
+  // body {
+    
+  //   display: flex;
+  //   align-items: center;
+  
+  // }
+  
+  .form-signin {
+  width: 100%;
+  max-width: 330px;
+  margin: auto;
+  margin-top: 5%;
+  }
+  
+  .form-signin .checkbox {
+  font-weight: 400;
+  }
+  
+  .form-signin .form-floating:focus-within {
+  z-index: 2;
+  }
+  
+  .form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  }
+  
+  .form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  }
+  
+  ion-img{
+    max-width: 50%;
+    margin-left: 25%;
+
+  }
+  app-barcode-dni {
+    max-width: 50%;
+    margin-left: 40%;
+
+  }
