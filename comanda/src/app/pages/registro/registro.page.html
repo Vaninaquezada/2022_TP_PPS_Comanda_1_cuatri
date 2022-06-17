@@ -41,7 +41,7 @@
       <ion-button expand="full" type="submit" > Registrar Cliente </ion-button>
     </form>
   </div>
-  <app-barcode-dni (userBarcode)="getBarcodeData($event)"></app-barcode-dni>
   
-
+  <app-barcode-dni (userBarcode)="getBarcodeData($event)"></app-barcode-dni>
+  <ion-button expand="full" class="anonimo" (click)="navegar('registro-anonimo')"> Registro Anonimo </ion-button>
 </ion-content>

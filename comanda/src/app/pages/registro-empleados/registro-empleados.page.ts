@@ -85,7 +85,7 @@ export class RegistroEmpleadosPage implements OnInit {
       nombre: this.forma.get('nombre').value,
       apellido: this.forma.get('apellido').value,
       dni: this.forma.get('DNI').value,
-      cuil: this.forma.get('CUIL').value 
+      cuil: this.forma.get('CUIL').value, 
     };
     const foto = this.imagen;
     this.usuarioService.nuevoUsuario(usuario, foto);
@@ -95,7 +95,7 @@ export class RegistroEmpleadosPage implements OnInit {
   private checkUserIsVerified(user: User) {
     if (user && user.verificadoPorAdm) {
       this.navegador.navigate(['/']);
-      localStorage.setItem('usuario',this.forma.get('email').value.toLowerCase())
+      localStorage.setItem('usuario',this.forma.get('email').value.toLowerCase());
     } else if (user) {
       this.navegador.navigate(['/verificacion-registro']);
     } else {
