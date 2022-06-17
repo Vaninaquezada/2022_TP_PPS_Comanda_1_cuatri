@@ -1,9 +1,9 @@
-export type Roles = 'cliente' | 'empleado' | 'admin'| 'especialista';
-export type subTipo = 'mozo' | 'bartender' | 'metre'| 'cocinero'|'anonimo';
+export type Roles = 'cliente' | 'empleado' | 'admin';
+export type subTipo = 'mozo' | 'bartender' | 'metre'| 'cocinero' | 'duenio' | 'supervisor' | 'registrado' | 'anonimo' ;
 
 export class User {
     uid?: string;
-    email: string;
+    email?: string;
     displayName?: string;
     emailVerified?: boolean;
     role?: Roles;
@@ -14,6 +14,7 @@ export class User {
     cuil?: number;
     foto?: string;
     verificacionEspec?: boolean;
+    verificadoPorAdm?: boolean;
     id?: string;
     ingresos?: Array<Date>;
 

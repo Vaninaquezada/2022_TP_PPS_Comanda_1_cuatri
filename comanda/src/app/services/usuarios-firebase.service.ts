@@ -4,8 +4,10 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { User } from '../clases/user';
+import { Photo } from '@capacitor/camera';
 import { UtilidadesService } from './utilidades.service';
-
+import {AuthService} from './auth.service';
+import {FotoService} from './foto.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,7 +24,9 @@ export class UsuariosFirebaseService {
   // usuariosRefEspecialistas: AngularFirestoreCollection<any>;
   // usuariosEspecialistas: Observable<any[]>;
 
-  constructor(private db: AngularFirestore, private storage: AngularFireStorage, private utilidadesService: UtilidadesService) {
+  constructor(private db: AngularFirestore,private auth: AuthService,
+     private storage: AngularFireStorage,
+     private foto: FotoService, private utilidadesService: UtilidadesService) {
     this.usuariosRef=db.collection<any>(this.dbpath, ref => ref.orderBy('apellido'));
     this.usuarios=this.usuariosRef.valueChanges(this.dbpath);
 
@@ -63,7 +67,7 @@ export class UsuariosFirebaseService {
     usuario.id = this.db.createId();
 
 
-    let pathRef = `fotos/${usuario.id}`;
+    const pathRef = `fotos/${usuario.id}`;
     const fileRef = this.storage.ref(pathRef);
     const task = this.storage.upload(pathRef, foto);
     console.log('aca entró'+ task);
@@ -71,44 +75,43 @@ export class UsuariosFirebaseService {
       finalize(() => {
         fileRef.getDownloadURL().subscribe(async res => {
           console.log('aca entró 2');
-          usuario.foto = res;          
-          this.db.collection('usuarios').doc(usuario.id).set(usuario);
-          this.utilidadesService.RemoverLoading();
-          this.utilidadesService.PresentarToastAbajo('Usuario creado', 'success')
-          
-        })
-      } )
-    ).subscribe();
-    
-  }
-
-  nuevoUsuarioFoto(usuario: User, foto: any){
-    usuario.id = this.db.createId();
-
-    const dataUrl = foto.dataUrl;
-    const pathRef = `fotos/${usuario.id}`;
-    const fileRef = this.storage.ref(pathRef);
-    const task = this.storage.upload(pathRef, foto);
-
-    task.snapshotChanges().pipe(
-      finalize(() => {
-        fileRef.getDownloadURL().subscribe(async res => {
-          console.log('aca entró 2');
           usuario.foto = res;
           this.db.collection('usuarios').doc(usuario.id).set(usuario);
           this.utilidadesService.RemoverLoading();
-          this.utilidadesService.PresentarToastAbajo('Usuario creado', 'success')
-          
-        })
+          this.utilidadesService.PresentarToastAbajo('Usuario creado', 'success');
+        });
       } )
     ).subscribe();
-    
+
+  }
+
+  async registarUsuarioFoto(usuario: User, password: string, photo: Photo) {
+    try {
+      const id = this.db.createId();
+      usuario.id = id;
+
+      const user = await this.auth.SignUp(
+        usuario.email.toLowerCase(),
+        password
+      );
+console.log('singup');
+      const photoRef = await this.foto.uploadPhoto(photo,id);
+
+      const photoUrl = await photoRef.ref.getDownloadURL();
+
+      this.db.collection('usuarios').doc(id).set(usuario);
+      this.utilidadesService.RemoverLoading();
+      this.utilidadesService.PresentarToastAbajo('Usuario creado', 'success');
+
+
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
 
   guardarCambios(usuario: User){
     this.db.collection('usuarios').doc(usuario.id).set(usuario);
-    
   }
 
   borrrar(id: string): Promise<void> {

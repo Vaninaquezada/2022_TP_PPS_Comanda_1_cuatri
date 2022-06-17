@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.service';
 import { User,UsuarioBarcode} from 'src/app/clases/user';
 import { UtilidadesService } from 'src/app/services/utilidades.service';
+import { FotoService } from 'src/app/services/foto.service';
 import { BarcodeScannerService } from 'src/app/services/barcode-scanner.service';
 @Component({
   selector: 'app-registro',
@@ -26,6 +27,7 @@ photo: Photo = null;
     private formBuild: FormBuilder,
     private auth: AuthService,
     private barcodeSanner: BarcodeScannerService,
+    private uploadPhoto: FotoService,
     private utilidadesService: UtilidadesService) { }
 
 
@@ -43,24 +45,33 @@ photo: Photo = null;
   }
 
   async register() {
-    this.utilidadesService.PresentarLoading('Creando usuario');
+    console.log('registro');
+    this.utilidadesService.PresentarLoading('<img src="../assets/spinner.svg" class="img-align"  />   Creando usuario');
     if (this.registerForm.valid && this.photo !== null) {
       const usuario = this.registerForm.value as User;
       usuario.role = 'cliente';
-      this.usuarioService.nuevoUsuarioFoto(
+      usuario.subTipo = 'registrado';
+     // this.auth.SignUp(this.registerForm.value.email, this.registerForm.value.password);
+     console.log('llora');
+      this.usuarioService.registarUsuarioFoto(
         usuario,
+        this.registerForm.value.password,
         this.photo
       );
-      this.auth.SignUp(this.registerForm.value.email, this.registerForm.value.password);
 
       this.registerForm.reset();
       this.photo = null;
       this.photoUrl = '';
+    }else{
+      this.utilidadesService.PresentarToastAbajo('Las contraseñas no coinciden', 'danger');
+      this.utilidadesService.RemoverLoading();
     }
   }
 
+
+
   async getPhoto() {
-   // this.photo = await this.uploadPhoto.takePhoto();
+    this.photo = await this.uploadPhoto.takePhoto();
     this.photoUrl = this.photo.dataUrl;
   }
 

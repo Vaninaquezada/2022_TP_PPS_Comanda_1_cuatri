@@ -13,7 +13,8 @@ const routes: Routes = [
   {
     path: 'splash',
     loadChildren: () => import('./splash/splash.module').then( m => m.SplashPageModule)
-  },  {
+  },
+  {
     path: 'principal',
     loadChildren: () => import('./pages/principal/principal.module').then( m => m.PrincipalPageModule)
   },
@@ -25,6 +26,26 @@ const routes: Routes = [
     path: 'registro-empleados',
     loadChildren: () => import('./pages/registro-empleados/registro-empleados.module').then( m => m.RegistroEmpleadosPageModule)
   },
+  {
+    path: 'verificacion-registro',
+    loadChildren: () => import('./pages/verificacion-registro/verificacion-registro.module').then( m => m.VerificacionRegistroPageModule)
+  },
+  {
+    path: 'principal-adm',
+    loadChildren: () => import('./pages/principal-adm/principal-adm.module').then( m => m.PrincipalAdmPageModule)
+  },
+  {
+    path: 'principal-empleado',
+    loadChildren: () => import('./pages/principal-empleado/principal-empleado.module').then( m => m.PrincipalEmpleadoPageModule)
+  },
+  {
+    path: 'adm-autorizacion-registros',
+    loadChildren: () => import('./pages/adm-autorizacion-registros/adm-autorizacion-registros.module').then( m => m.AdmAutorizacionRegistrosPageModule)
+  },
+  {
+    path: 'registro-duenios-supervisores',
+    loadChildren: () => import('./pages/registro-duenios-supervisores/registro-duenios-supervisores.module').then( m => m.RegistroDueniosSupervisoresPageModule)
+  }
 
 ];
 

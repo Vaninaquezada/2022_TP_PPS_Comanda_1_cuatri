@@ -24,9 +24,9 @@ export class FotoService {
 
     return capturedPhoto;
   }
-  async uploadPhoto(photo: Photo) {
+  async uploadPhoto(photo: Photo,id) {
     const dataUrl = photo.dataUrl;
-    const fileName = new Date().getTime();
+    const fileName = id;
     const ref = this.fbStorage.ref(`fotos/${fileName}`);
     const result = await ref.putString(dataUrl, 'data_url', {
       contentEncoding: 'image/jpeg',
