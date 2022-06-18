@@ -2,12 +2,18 @@
 
 ## Integrantes:
 
-Vanina Quezada
-Nicolas Gomez
-Federico Alainz
+- Vanina Quezada
+- Nicolas Gomez
+- Federico Alainz
+
+#Division de tareas
 https://raw.githubusercontent.com/Vaninaquezada/2022_TP_PPS_Comanda_1_cuatri/main/comanda/resources/icon.png
 
+<<<<<<< HEAD
 <img src="https://raw.githubusercontent.com/Vaninaquezada/2022_TP_PPS_Comanda_1_cuatri/main/comanda/resources/icon.png" width="200px">
+=======
+<img src="https://raw.githubusercontent.com/Vaninaquezada/2022_TP_PPS_Comanda_1_cuatri/main/comanda/resources/icon.png" width="500px" height="500px">
+>>>>>>> 73f86b154a8e55e140121cf6efe5ffd84fa32a42
 
 Separacion de tareas
 https://docs.google.com/spreadsheets/d/1IxJ_jOkGoOFVfFLDb5P5j6MW7XNbcHcM7R4uWAIUzC0/edit?usp=sharing
