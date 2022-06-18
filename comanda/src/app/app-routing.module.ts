@@ -51,11 +51,7 @@ const routes: Routes = [
     path: 'registro-duenios-supervisores',
     loadChildren: () => import('./pages/registro-duenios-supervisores/registro-duenios-supervisores.module')
     .then( m => m.RegistroDueniosSupervisoresPageModule)
-  },
-  {
-    path: 'menu-cliente',
-    loadChildren: () => import('./pages/menu-cliente/menu-cliente.module').then( m => m.MenuClientePageModule)
-  },
+  }
 
 
 

@@ -36,10 +36,14 @@ import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)), provideAuth(() => getAuth()), provideDatabase(() => getDatabase()), provideFirestore(() => getFirestore()), provideFunctions(() => getFunctions()), provideMessaging(() => getMessaging()), provideStorage(() => getStorage())
-  
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+     provideAuth(() => getAuth()), provideDatabase(() => getDatabase()),
+      provideFirestore(() => getFirestore()),
+      provideFunctions(() => getFunctions()), provideMessaging(() => getMessaging()),
+      provideStorage(() => getStorage())
+
   ],
-  
+
   providers: [BarcodeScanner,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

@@ -29,7 +29,10 @@ photo: Photo = null;
     private auth: AuthService,
     private uploadPhoto: FotoService,
     private router: Router,
-    private utilidadesService: UtilidadesService) { }
+    private utilidadesService: UtilidadesService) {
+
+
+     }
 
 
   ngOnInit(): void {
@@ -68,6 +71,7 @@ photo: Photo = null;
       this.registerForm.reset();
       this.photo = null;
       this.photoUrl = '';
+      this.navegar('login' );
     }else{
       this.utilidadesService.RemoverLoading();
       this.utilidadesService.PresentarToastAbajo('Falta foto', 'danger');
@@ -94,6 +98,9 @@ photo: Photo = null;
   }
 
   navegar(ruta: string){
+    this.registerForm.reset();
+    this.photo = null;
+    this.photoUrl = '';
     this.router.navigate([ruta]);
   }
 }

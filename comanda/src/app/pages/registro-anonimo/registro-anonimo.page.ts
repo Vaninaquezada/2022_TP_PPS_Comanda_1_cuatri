@@ -25,8 +25,11 @@ export class RegistroAnonimoPage implements OnInit {
     private formBuild: FormBuilder,
     private auth: AuthService,
     private uploadPhoto: FotoService,
-    private navegador: Router,
-    private utilidadesService: UtilidadesService) { }
+    private router: Router,
+    private utilidadesService: UtilidadesService) {
+
+
+    }
 
   ngOnInit() {
     this.registerForm = this.formBuild.group({
@@ -41,6 +44,7 @@ export class RegistroAnonimoPage implements OnInit {
       ]),
       nombre: new FormControl('', [Validators.required]),
     });
+
   }
   async register() {
     console.log('registro');
@@ -63,6 +67,7 @@ export class RegistroAnonimoPage implements OnInit {
       this.photo = null;
       this.photoUrl = '';
       this.utilidadesService.RemoverLoading();
+      this.navegar('login' );
     }else{
       this.utilidadesService.RemoverLoading();
       this.utilidadesService.PresentarToastAbajo('Falta foto', 'danger');
@@ -80,5 +85,12 @@ export class RegistroAnonimoPage implements OnInit {
   async getPhoto() {
     this.photo = await this.uploadPhoto.takePhoto();
     this.photoUrl = this.photo.dataUrl;
+  }
+
+  navegar(ruta: string){
+    this.registerForm.reset();
+    this.photo = null;
+    this.photoUrl = '';
+    this.router.navigate([ruta]);
   }
 }
