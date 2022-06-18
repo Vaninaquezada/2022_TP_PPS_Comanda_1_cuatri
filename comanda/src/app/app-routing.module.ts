@@ -51,12 +51,11 @@ const routes: Routes = [
     path: 'registro-duenios-supervisores',
     loadChildren: () => import('./pages/registro-duenios-supervisores/registro-duenios-supervisores.module')
     .then( m => m.RegistroDueniosSupervisoresPageModule)
+  },
+  {
+    path: 'alta-mesa',
+    loadChildren: () => import('./pages/alta-mesa/alta-mesa.module').then( m => m.AltaMesaPageModule)
   }
-
-
-
-
-
 ];
 
 @NgModule({
