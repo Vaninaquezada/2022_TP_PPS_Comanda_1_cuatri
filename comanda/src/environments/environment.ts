@@ -17,8 +17,7 @@ export const environment = {
   production: false
 };
 
-
-
+/*
 // Este es el Firebase de mis proyectos para hacer pruebas
 // export const environment = {
 //   production: false,

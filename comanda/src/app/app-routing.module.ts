@@ -39,12 +39,18 @@ const routes: Routes = [
     loadChildren: () => import('./pages/principal-empleado/principal-empleado.module').then( m => m.PrincipalEmpleadoPageModule)
   },
   {
+    path: 'registro-anonimo',
+    loadChildren: () => import('./pages/registro-anonimo/registro-anonimo.module').then( m => m.RegistroAnonimoPageModule)
+  },
+  {
     path: 'adm-autorizacion-registros',
-    loadChildren: () => import('./pages/adm-autorizacion-registros/adm-autorizacion-registros.module').then( m => m.AdmAutorizacionRegistrosPageModule)
+    loadChildren: () => import('./pages/adm-autorizacion-registros/adm-autorizacion-registros.module')
+    .then( m => m.AdmAutorizacionRegistrosPageModule)
   },
   {
     path: 'registro-duenios-supervisores',
-    loadChildren: () => import('./pages/registro-duenios-supervisores/registro-duenios-supervisores.module').then( m => m.RegistroDueniosSupervisoresPageModule)
+    loadChildren: () => import('./pages/registro-duenios-supervisores/registro-duenios-supervisores.module')
+    .then( m => m.RegistroDueniosSupervisoresPageModule)
   },
   {
     path: 'alta-mesa',

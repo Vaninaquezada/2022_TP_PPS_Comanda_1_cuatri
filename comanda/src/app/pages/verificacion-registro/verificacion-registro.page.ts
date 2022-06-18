@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-verificacion-registro',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VerificacionRegistroPage implements OnInit {
 
-  constructor() { }
+  constructor(private authSvc: AuthService,private navegador: Router) { }
 
   ngOnInit() {
+  }
+  singOut(){
+    this.authSvc.LogOut();
+
+    this.navegador.navigate(['login']);
   }
 
 }

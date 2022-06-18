@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/clases/user';
@@ -15,39 +16,39 @@ export class LoginPage {
   ingresoApp = false;
   iniciado = false;
 
-  emailIngreso: string = "";
-  contraIngreso: string = "";
+  emailIngreso: string = '';
+  contraIngreso: string = '';
   mostrar = false;
   usuarioLogueado = new User();
 
   constructor(public firebaseService: AuthService, private router: Router, private usuariosFire: UsuariosFirebaseService, private utilidadesService: UtilidadesService) {}
 
-  
-  async OnSignIn(email:string, password: string){
+
+  async OnSignIn(email: string, password: string){
     try {
-      this.utilidadesService.PresentarLoading("Iniciando Sesión...")
+      this.utilidadesService.PresentarLoading('Ingresando...');
       const user = await this.firebaseService.SignIn(email,password);
       this.checkUserIsVerified(user);
       localStorage.setItem('usuario', email);
     } catch (error) {
       this.utilidadesService.RemoverLoading();
-      this.utilidadesService.PresentarToastAbajo("Credenciales Incorrectas", "danger");
+      this.utilidadesService.PresentarToastAbajo('Credenciales Incorrectas', 'danger');
       // this.router.navigate(['/registro']);
       console.log(error);
     }
   }
 
   private async checkUserIsVerified(user: User) {
-    console.log("entra en chequeo de usuario")
+    console.log('entra en chequeo de usuario');
     if (user) {
       await this.usuariosFire.obtenerUsuario(user.email);
       this.usuarioLogueado = this.usuariosFire.usuarioSeleccionado;
       if(this.usuarioLogueado.ingresos){
-        this.usuarioLogueado.ingresos.push(new Date())
+        this.usuarioLogueado.ingresos.push(new Date());
       }else{
         this.usuarioLogueado.ingresos = new Array<Date>();
-        this.usuarioLogueado.ingresos.push(new Date())
-      }      
+        this.usuarioLogueado.ingresos.push(new Date());
+      }
       this.usuariosFire.update(this.usuariosFire.id, {ingresos: this.usuarioLogueado.ingresos});
       console.log(this.usuarioLogueado.role);
       localStorage.setItem('role', this.usuarioLogueado.role);
@@ -70,17 +71,16 @@ export class LoginPage {
           this.router.navigate(['/principal-empleado']);
           this.utilidadesService.RemoverLoading();
           break;
-      
         default:
           this.router.navigate(['/principal']);
           this.utilidadesService.RemoverLoading();
           break;
       }
 
-      // this.iniciado=true;    
+      // this.iniciado=true;
     } else if (user) {
       this.utilidadesService.RemoverLoading();
-      this.utilidadesService.PresentarToastAbajo("Credenciales Incorrectas", "danger");
+      this.utilidadesService.PresentarToastAbajo('Credenciales Incorrectas', 'danger');
       // this.router.navigate(['/verificacion-email']);
       } else {
         this.utilidadesService.RemoverLoading();
@@ -92,29 +92,28 @@ export class LoginPage {
 
   CompletaIngreso(ingreso: string){
     switch(ingreso){
-      case "usuario1":
-        this.emailIngreso= "admin@admin.com";
-        this.contraIngreso = "111111";
+      case 'usuario1':
+        this.emailIngreso= 'admin@admin.com';
+        this.contraIngreso = '111111';
         break;
-      case "usuario2":
-        this.emailIngreso= "invitado@invitado.com";
-        this.contraIngreso = "222222";
+      case 'usuario2':
+        this.emailIngreso= 'invitado@invitado.com';
+        this.contraIngreso = '222222';
         break;
-      case "usuario3":
-        this.emailIngreso= "usuario@usuario.com";
-        this.contraIngreso = "333333";
+      case 'usuario3':
+        this.emailIngreso= 'usuario@usuario.com';
+        this.contraIngreso = '333333';
         break;
-      case "usuario4":
-        this.emailIngreso= "anonimo@anonimo.com";
-        this.contraIngreso = "444444";
+      case 'usuario4':
+        this.emailIngreso= 'anonimo@anonimo.com';
+        this.contraIngreso = '444444';
         break;
-      case "usuario5":
-        this.emailIngreso= "tester@tester.com";
-        this.contraIngreso = "555555";
+      case 'usuario5':
+        this.emailIngreso= 'tester@tester.com';
+        this.contraIngreso = '555555';
         break;
       
     }
-    
   }
 
   Mostrar(){

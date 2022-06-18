@@ -12,13 +12,21 @@ export class User {
     apellido?: string;
     dni?: number;
     cuil?: number;
-    foto?: string;    
+    foto?: string;
     verificacionEspec?: boolean;
     verificadoPorAdm?: boolean;
     id?: string;
-    ingresos?: Array<Date>
+    ingresos?: Array<Date>;
 
-    constructor(){        
+    constructor(){
         this.ingresos = new Array<Date>();
     }
 }
+
+
+export interface UsuarioBarcode {
+    apellido: string;
+    nombre: string;
+    dni: number;
+    cuil?: number;
+  }

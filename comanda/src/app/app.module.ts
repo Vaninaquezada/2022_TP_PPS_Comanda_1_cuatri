@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,11 +36,15 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)), provideAuth(() => getAuth()), provideDatabase(() => getDatabase()), provideFirestore(() => getFirestore()), provideFunctions(() => getFunctions()), provideMessaging(() => getMessaging()), provideStorage(() => getStorage())
-  
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+     provideAuth(() => getAuth()), provideDatabase(() => getDatabase()),
+      provideFirestore(() => getFirestore()),
+      provideFunctions(() => getFunctions()), provideMessaging(() => getMessaging()),
+      provideStorage(() => getStorage())
+
   ],
-  
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+
+  providers: [BarcodeScanner,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
