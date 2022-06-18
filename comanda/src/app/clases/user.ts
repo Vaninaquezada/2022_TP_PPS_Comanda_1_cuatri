@@ -25,8 +25,8 @@ export class User {
 
 
 export interface UsuarioBarcode {
-    lastName: string;
-    name: string;
+    apellido: string;
+    nombre: string;
     dni: number;
     cuil?: number;
   }

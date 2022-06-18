@@ -71,7 +71,6 @@ photo: Photo = null;
     }else{
       this.utilidadesService.RemoverLoading();
       this.utilidadesService.PresentarToastAbajo('Falta foto', 'danger');
-
     }
     }else{
       this.utilidadesService.PresentarToastAbajo('Las contraseñas no coinciden', 'danger');
@@ -88,8 +87,8 @@ photo: Photo = null;
 
   async getBarcodeData(user: UsuarioBarcode) {
     this.registerForm.patchValue({
-      name: user.name,
-      lastName: user.lastName,
+      nombre: user.nombre,
+      apellido: user.apellido,
       dni: user.dni,
     });
   }
