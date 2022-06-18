@@ -11,6 +11,9 @@ import { LocalNotifications } from '@capacitor/local-notifications';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { User } from '../clases/user';
+import { UsuariosFirebaseService } from './usuarios-firebase.service';
+import { UtilidadesService } from './utilidades.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,18 +21,24 @@ import { Observable } from 'rxjs';
 export class PushNotificationService {
   private user;
   constructor(
+    private usuariosService: UsuariosFirebaseService,
     private platform: Platform,
     private firestore: Firestore,
-    private http: HttpClient
+    private http: HttpClient,
+    private utilidadesService: UtilidadesService
   ) {
     // const aux = doc(firestore, 'personas/4hjcn6LXY1qVfxBDYub3');
     // docData(aux).subscribe((user) => (this.user = user));
   }
 
-  async inicializar(): Promise<void> {
+  async inicializar(user: User): Promise<void> {
     this.addListeners();
-    // Verificamos que este en un dispositivo y no en una PC y tambien que el usuario no tegna seteado el token
-    if (this.platform.is('capacitor') && this.user.token === '') {
+    // this.utilidadesService.PresentarToastAbajo("se agregaron los listener","danger");
+    // await PushNotifications.register();
+    //Verificamos que este en un dispositivo y no en una PC y tambien que el usuario no tenga seteado el token
+    if (this.platform.is('capacitor') && user.token == "") {
+      console.log("entro por capacitor y que no tiene token");
+      this.utilidadesService.PresentarToastAbajo("Entro como si no tuviera el token","danger");
       const result = await PushNotifications.requestPermissions();
       if (result.receive === 'granted') {
         await PushNotifications.register();
@@ -37,12 +46,9 @@ export class PushNotificationService {
     }
   }
 
-  getUser(): void {
-    const aux = doc(this.firestore, 'personas/4hjcn6LXY1qVfxBDYub3');
-    docData(aux, { idField: 'id' }).subscribe(async (user) => {
-      this.user = user;
-      this.inicializar();
-    });
+  getUser(usuario: User): void {
+    this.user = usuario;
+    console.log(this.user.email);
   }
 
   sendPushNotification(req): Observable<any> {
@@ -63,10 +69,19 @@ export class PushNotificationService {
       async (token: Token) => {
         //Acá deberiamos asociar el token a nuestro usario en nuestra bd
         console.log('Registration token: ', token.value);
-        const aux = doc(this.firestore, `personas/${this.user.id}`);
-        await updateDoc(aux, {
-          token: token.value,
-        });
+        this.utilidadesService.PresentarToastAbajo("entro en registro", "danger");
+        
+        this.user.token = token.value;
+
+        this.usuariosService.guardarCambios(this.user);
+
+
+
+
+        // const aux = doc(this.firestore, `usuarios/${this.user.id}`);
+        // await updateDoc(aux, {
+        //   tokenNotification: token.value,
+        // });
       }
     );
 

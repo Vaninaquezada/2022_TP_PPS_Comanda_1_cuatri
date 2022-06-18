@@ -5,6 +5,11 @@
 
 // Este es el Firebase La comanda
 export const environment = {
+  fcmUrl: 'https://fcm.googleapis.com/fcm/send',
+  fcmServerKey:
+    // eslint-disable-next-line max-len
+    // esto se saca de firebase en config, CLOUD MESSAGING
+    'AAAA9p83Gww:APA91bGYsqsKW7W1VM0iHmVfeB5rWU4PZCJbemaZ4wAkOzKB5UTU0_qNZm8Mqs9nclb81w0HljdjSAJCbu2fl55Wtms_yuBqBn8-piU9MMBJsgqik9RpK3_xAgVcjVHQAOpjmv_lrHM-',
   firebase: {
     projectId: 'appcomanda-cae9b',
     appId: '1:1059233143564:web:f799fa9db2bad8b8680729',

@@ -16,7 +16,8 @@ export class User {
     verificacionEspec?: boolean;
     verificadoPorAdm?: boolean;
     id?: string;
-    ingresos?: Array<Date>
+    ingresos?: Array<Date>;
+    token?: string;
 
     constructor(){        
         this.ingresos = new Array<Date>();

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/clases/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.service';
+import { PushNotificationService } from '../services/push-notification.service';
 import { UtilidadesService } from '../services/utilidades.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class LoginPage {
   mostrar = false;
   usuarioLogueado = new User();
 
-  constructor(public firebaseService: AuthService, private router: Router, private usuariosFire: UsuariosFirebaseService, private utilidadesService: UtilidadesService) {}
+  constructor(public firebaseService: AuthService, private router: Router, private usuariosFire: UsuariosFirebaseService, private utilidadesService: UtilidadesService, private notificationService: PushNotificationService) {}
 
   
   async OnSignIn(email:string, password: string){
@@ -42,6 +43,9 @@ export class LoginPage {
     if (user) {
       await this.usuariosFire.obtenerUsuario(user.email);
       this.usuarioLogueado = this.usuariosFire.usuarioSeleccionado;
+
+      this.notificationService.getUser(this.usuarioLogueado);
+
       if(this.usuarioLogueado.ingresos){
         this.usuarioLogueado.ingresos.push(new Date())
       }else{
@@ -56,6 +60,7 @@ export class LoginPage {
         case 'admin':
           this.router.navigate(['/principal-adm']);
           this.utilidadesService.RemoverLoading();
+          this.notificationService.inicializar(this.usuarioLogueado);
           break;
         case 'cliente':
           if(this.usuarioLogueado.verificadoPorAdm){
