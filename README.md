@@ -2,9 +2,9 @@
 
 ## Integrantes:
 
-Vanina Quezada
-Nicolas Gomez
-Federico Alainz
+- Vanina Quezada
+- Nicolas Gomez
+- Federico Alainz
 https://raw.githubusercontent.com/Vaninaquezada/2022_TP_PPS_Comanda_1_cuatri/main/comanda/resources/icon.png
 
 <img src="https://raw.githubusercontent.com/Vaninaquezada/2022_TP_PPS_Comanda_1_cuatri/main/comanda/resources/icon.png" width="500px" height="500px">
