@@ -7,7 +7,7 @@ Nicolas Gomez
 Federico Alainz
 https://raw.githubusercontent.com/Vaninaquezada/2022_TP_PPS_Comanda_1_cuatri/main/comanda/resources/icon.png
 
-<img src="https://raw.githubusercontent.com/Vaninaquezada/2022_TP_PPS_Comanda_1_cuatri/main/comanda/resources/icon.png" width="25px">
+<img src="https://raw.githubusercontent.com/Vaninaquezada/2022_TP_PPS_Comanda_1_cuatri/main/comanda/resources/icon.png" width="25opx">
 
 Separacion de tareas
 https://docs.google.com/spreadsheets/d/1IxJ_jOkGoOFVfFLDb5P5j6MW7XNbcHcM7R4uWAIUzC0/edit?usp=sharing
