@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
+import { SideMenuComponent } from './side-menu/side-menu.component'; 
 import { AppRoutingModule } from './app-routing.module';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
@@ -18,6 +19,8 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 
 import { HttpClientModule } from '@angular/common/http';
 
+import emailjs from '@emailjs/browser';
+
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
@@ -25,7 +28,7 @@ import { AwesomeCordovaNativePlugin} from '@awesome-cordova-plugins/core';
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,SideMenuComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
     AngularFireDatabaseModule,
     AngularFirestoreModule,
     HttpClientModule,
+    
     FormsModule,
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -44,8 +48,11 @@ import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
       provideStorage(() => getStorage())
 
   ],
+  exports: [
+    SideMenuComponent,
+  ],
 
-  providers: [BarcodeScanner,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [BarcodeScanner, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

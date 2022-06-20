@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/clases/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { EmailService } from 'src/app/services/email.service';
 import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.serv
 export class AdmAutorizacionRegistrosPage implements OnInit {
   listadoUsuarios: any;
 
-  constructor(private navegador: Router, private usuariosService: UsuariosFirebaseService, private authSvc: AuthService) {
+  constructor(private navegador: Router, private usuariosService: UsuariosFirebaseService, private authSvc: AuthService, private emailService: EmailService) {
     this.usuariosService.getAll().subscribe(resultado => {
       this.listadoUsuarios = resultado;
     })
@@ -22,8 +23,15 @@ export class AdmAutorizacionRegistrosPage implements OnInit {
   }
 
   Habilitacion(user: User){
-    user.verificadoPorAdm = !user.verificadoPorAdm
+    user.verificadoPorAdm = !user.verificadoPorAdm;
     this.usuariosService.guardarCambios(user);
+    if(user.verificadoPorAdm){
+      this.emailService.sendEmail(user,"Felicidades, tu habilitación fue Aprobada. Ya puedes ingresar con tus credenciales.");
+    }else{
+      this.emailService.sendEmail(user,"Lo sentimos, tu habilitación fue Rechazada. Por cualquier consulta no dudes en responder a este correo electronico.");
+    }
+    
+    
   }
 
   Navegar(ruta: string){

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
+import { SplashPage } from 'src/app/splash/splash.page';
 
 import { PrincipalAdmPageRoutingModule } from './principal-adm-routing.module';
 
