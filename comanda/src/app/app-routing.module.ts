@@ -55,7 +55,8 @@ const routes: Routes = [
   {
     path: 'alta-mesa',
     loadChildren: () => import('./pages/alta-mesa/alta-mesa.module').then( m => m.AltaMesaPageModule)
-  },  {
+  },
+  {
     path: 'encuesta-clientes',
     loadChildren: () => import('./pages/encuesta-clientes/encuesta-clientes.module').then( m => m.EncuestaClientesPageModule)
   }
