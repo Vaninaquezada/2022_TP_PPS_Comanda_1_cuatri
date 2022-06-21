@@ -55,7 +55,15 @@ const routes: Routes = [
   {
     path: 'alta-mesa',
     loadChildren: () => import('./pages/alta-mesa/alta-mesa.module').then( m => m.AltaMesaPageModule)
+  },  {
+    path: 'reserva-mesas',
+    loadChildren: () => import('./pages/reserva-mesas/reserva-mesas.module').then( m => m.ReservaMesasPageModule)
+  },
+  {
+    path: 'mesa',
+    loadChildren: () => import('./pages/mesa/mesa.module').then( m => m.MesaPageModule)
   }
+
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
 ion-content{
+  --background: url("../../assets/utensilios-de-cocina.png") 50% 50%;
     --background: #23C1E0;
-    
+
   }
   ion-title{
     color: #29dce9;
@@ -25,7 +26,7 @@ ion-content{
     
       --background: -webkit-linear-gradient(rgb(11, 238, 181),rgb(27, 108, 110));
       -webkit-background-clip: text;
-      --margin-bottom: 20%;
+      height: 50%;
       margin-top: 10%;
   }
   
@@ -95,4 +96,12 @@ ion-content{
   border-top-right-radius: 0;
   }
   
-  
+  .fondo{
+    position:absolute;
+    width: 90%;
+    z-index: -1000;
+  }
+  form{
+
+    z-index: 1000;
+  }

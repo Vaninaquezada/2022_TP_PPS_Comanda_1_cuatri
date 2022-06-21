@@ -100,7 +100,7 @@ console.log('singup');
       const photoRef = await this.foto.uploadPhoto(photo,id);
 
       const photoUrl = await photoRef.ref.getDownloadURL();
-
+      usuario.foto = photoUrl;
       this.db.collection('usuarios').doc(id).set(usuario);
       this.utilidadesService.RemoverLoading();
       this.utilidadesService.PresentarToastAbajo('Usuario creado', 'success');

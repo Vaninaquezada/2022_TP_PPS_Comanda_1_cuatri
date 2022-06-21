@@ -22,14 +22,15 @@
         
           <p> Contraseña: </p> 
           <ion-item class="item">
-            
-            
+          
             <ion-input type="password" id="floatingPassword" value={{contraIngreso}} #password></ion-input>
           </ion-item>
-        
+          
+            
         </ion-list>
 
-        <ion-button class="botonIngresar" size="small" shape="round" expand="full"  (click)="OnSignIn(email.value, password.value)"><ion-icon name="happy-outline"></ion-icon> Ingresar <ion-icon name="happy-outline"></ion-icon></ion-button>
+        <ion-button class="botonIngresar" size="large" shape="round" expand="full"  (click)="OnSignIn(email.value, password.value)"><ion-icon name="happy-outline"></ion-icon> Ingresar <ion-icon name="happy-outline"></ion-icon></ion-button>
+        <img class = "fondo" src="../../assets/utensilios-de-cocina.png"> 
       </form>     
    
     </main>
@@ -41,10 +42,10 @@
 
 
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button color="primary" >
-      <ion-icon name="arrow-up-circle-outline"></ion-icon>
+    <ion-fab-button color="primary"  >
+      <img src="../../assets/cocinando.gif">
     </ion-fab-button>
-
+    
     <ion-fab-list side="start">
       <ion-fab-button color="danger" (click)="CompletaIngreso('usuario1')" >
         <img src="../../assets/apoyo.png">
@@ -68,6 +69,6 @@
       
     </ion-fab-list>
   </ion-fab>
-  
+
 </ion-content>
 

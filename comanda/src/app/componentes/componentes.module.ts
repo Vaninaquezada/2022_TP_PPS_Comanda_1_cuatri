@@ -4,6 +4,7 @@ import { BarcodeDniComponent } from './barcode-dni/barcode-dni.component';
 
 
 
+
 @NgModule({
   declarations: [],
   imports: [
