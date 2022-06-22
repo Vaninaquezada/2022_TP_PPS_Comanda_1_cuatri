@@ -38,6 +38,48 @@ export class LoginPage {
     }
   }
 
+  completaIngreso(ingreso: string){
+    switch(ingreso){
+      case 'usuario1':
+        this.emailIngreso= 'admin@admin.com';
+        this.contraIngreso = '111111';
+        break;
+      case 'usuario2':
+        this.emailIngreso= 'tester@tester.com';
+        this.contraIngreso = '555555';
+        break;
+      case 'usuario3':
+        this.emailIngreso= 'metre@empleado.com';
+        this.contraIngreso = '123456';
+        break;
+      case 'usuario4':
+        this.emailIngreso= 'mozo@mozo.com';
+        this.contraIngreso = '123456';
+        break;
+      case 'usuario5':
+        this.emailIngreso= 'bartender@empleado.com';
+        this.contraIngreso = '123456';
+        break;
+      case 'usuario6':
+          this.emailIngreso= 'cocina@empleado.com';
+          this.contraIngreso = '123456';
+          break;
+      case 'usuario7':
+            this.emailIngreso= 'registrado@cliente.com';
+            this.contraIngreso = '123456';
+            break;
+       case 'usuario8':
+        this.emailIngreso= 'anonimo@anonimo.com';
+        this.contraIngreso = '444444';
+        break;
+    }
+  }
+
+  Mostrar(){
+    this.mostrar = !this.mostrar;
+    console.log(this.mostrar);
+  }
+
   private async checkUserIsVerified(user: User) {
     console.log('entra en chequeo de usuario');
     if (user) {
@@ -68,8 +110,22 @@ export class LoginPage {
           }
           break;
         case 'empleado':
+          if(this.usuarioLogueado.subTipo === 'bartender'){
+            this.router.navigate(['/bartender-pedidos']);
+            this.utilidadesService.RemoverLoading();
+          }
+          if(this.usuarioLogueado.subTipo === 'cocinero'){
+            this.router.navigate(['/cocinero-pedidos']);
+            this.utilidadesService.RemoverLoading();
+          }
+          if(this.usuarioLogueado.subTipo === 'mozo'){
+            this.router.navigate(['/mozo-pedidos']);
+            this.utilidadesService.RemoverLoading();
+          }
+          if(this.usuarioLogueado.subTipo === 'metre'){
           this.router.navigate(['/principal-empleado']);
           this.utilidadesService.RemoverLoading();
+        }
           break;
         default:
           this.router.navigate(['/principal']);
@@ -89,35 +145,4 @@ export class LoginPage {
       }
   }
 
-
-  CompletaIngreso(ingreso: string){
-    switch(ingreso){
-      case 'usuario1':
-        this.emailIngreso= 'admin@admin.com';
-        this.contraIngreso = '111111';
-        break;
-      case 'usuario2':
-        this.emailIngreso= 'invitado@invitado.com';
-        this.contraIngreso = '222222';
-        break;
-      case 'usuario3':
-        this.emailIngreso= 'usuario@usuario.com';
-        this.contraIngreso = '333333';
-        break;
-      case 'usuario4':
-        this.emailIngreso= 'anonimo@anonimo.com';
-        this.contraIngreso = '444444';
-        break;
-      case 'usuario5':
-        this.emailIngreso= 'tester@tester.com';
-        this.contraIngreso = '555555';
-        break;
-      
-    }
-  }
-
-  Mostrar(){
-    this.mostrar = !this.mostrar;
-    console.log(this.mostrar);
-  }
 }

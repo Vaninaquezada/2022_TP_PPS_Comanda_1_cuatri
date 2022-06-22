@@ -38,13 +38,15 @@ https://docs.google.com/spreadsheets/d/1IxJ_jOkGoOFVfFLDb5P5j6MW7XNbcHcM7R4uWAIU
 | :heavy_check_mark: |                                                      Registro empleados (page basico con Forms) |
 | :heavy_check_mark: |                    Arreglo servicios registro, modificacion home, creacion page de verificacion |
 | :heavy_check_mark: |                                             Distribucion del login, creacion page vacios de ADM |
-| :heavy_check_mark: |                                      Creacion de servicio emails. Cuenta y configuracion EmailJS|
+| :heavy_check_mark: |                                 Listado funcionando de usuario con boton para habilitar por ADM |
+| :heavy_check_mark: |                                     Creacion de servicio emails. Cuenta y configuracion EmailJS |
 | :heavy_check_mark: |                                                  Envio de email automatico al habilitar Cliente |
-| :heavy_check_mark: |       Diseño y configuracion de SideMenu para el proyecto. Por ahora solo configurado para Admin|
+| :heavy_check_mark: |      Diseño y configuracion de SideMenu para el proyecto. Por ahora solo configurado para Admin |
 | :heavy_check_mark: |                                                               Diseño y generación de codigos QR |
 | :heavy_check_mark: |                                                     Creacion de page y servicios para productos |
 | :heavy_check_mark: |                                       Creacion de page para listado de productos (falta logica) |
 | :heavy_check_mark: |    Creacion de scanner de QR de las mesas q dirige al listado de productos (falta pulir diseño) |
+
 ### Federico Alainz
 
 | :heavy_check_mark: |            Nombre de tarea |
