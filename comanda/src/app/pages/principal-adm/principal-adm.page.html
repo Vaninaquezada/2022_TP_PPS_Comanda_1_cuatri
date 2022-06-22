@@ -1,14 +1,33 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>principal-adm</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Listado Clientes</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-<ion-content>
+    <ion-content class="ion-padding">
+      
+      <ion-list>
+      
+        <ion-item color="dark" *ngFor="let user of listadoUsuariosClientes">
+          <ion-avatar slot="start">
+            <img *ngIf="user.imgPerfil" src="{{user.imgPerfil}}">
+            <img *ngIf="user.foto" src="{{user.foto}}">
+          </ion-avatar>
+          <ion-label>
+            <h2>{{user.email}}</h2>
+            <h3>{{user.apellido}} {{user.nombre}}</h3>
+            <p>{{user.dni}}</p>
+          </ion-label>
+          <ion-button color="danger" *ngIf="user.verificadoPorAdm" (click)="Habilitacion(user)">Desabilitar</ion-button>
+          <ion-button color="primary" *ngIf="!user.verificadoPorAdm" (click)="Habilitacion(user)">Habilitar</ion-button>
+        </ion-item>
+      </ion-list>
 
-  <ion-button color="primary" size="large" expand="full" (click)="Navegar('registro-empleados')">Alta Empleado</ion-button>
-  <ion-button color="secondary" size="large" expand="full" (click)="Navegar('adm-autorizacion-registros')">Chequeo Registros Clientes</ion-button>
-  <ion-button color="danger" size="large" expand="full" (click)="Navegar('registro-duenios-supervisores')">Alta Dueño/Supervisor</ion-button>
-  <ion-button color="warning" size="large" expand="full" (click)="Navegar('alta-mesa')">Alta Mesa</ion-button>
-
-</ion-content>
+    </ion-content>
+  </div>
+</ion-app>

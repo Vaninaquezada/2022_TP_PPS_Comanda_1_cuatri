@@ -1,28 +1,34 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Listado Usuarios</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content fullscreen>
-  <ion-list>
-    <!-- <ion-list-header>
-      Recent Conversations
-    </ion-list-header> -->
+<ion-app>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Listado Usuarios Completos</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-    <ion-item color="dark" *ngFor="let user of listadoUsuarios">
-      <ion-avatar slot="start">
-        <img *ngIf="user.imgPerfil" src="{{user.imgPerfil}}">
-        <img *ngIf="user.foto" src="{{user.foto}}">
-      </ion-avatar>
-      <ion-label>
-        <h2>{{user.email}}</h2>
-        <h3>{{user.apellido}} {{user.nombre}}</h3>
-        <p>{{user.dni}}</p>
-      </ion-label>
-      <ion-button color="danger" *ngIf="user.verificadoPorAdm" (click)="Habilitacion(user)">Desabilitar</ion-button>
-      <ion-button color="primary" *ngIf="!user.verificadoPorAdm" (click)="Habilitacion(user)">Habilitar</ion-button>
-    </ion-item>
-  </ion-list>
+    <ion-content >
+      
+      <ion-list>
+        <ion-item color="dark" *ngFor="let user of listadoUsuarios">
+          <ion-avatar slot="start">
+            <img *ngIf="user.imgPerfil" src="{{user.imgPerfil}}">
+            <img *ngIf="user.foto" src="{{user.foto}}">
+          </ion-avatar>
+          <ion-label>
+            <h2>Role: {{user.role}}</h2>
+            <h3>{{user.email}}</h3>
+            <h4>{{user.apellido}} {{user.nombre}}</h4>
+            <p>{{user.dni}}</p>
+          </ion-label>
+          <ion-button color="danger" *ngIf="user.verificadoPorAdm" (click)="Habilitacion(user)">Desabilitar</ion-button>
+          <ion-button color="primary" *ngIf="!user.verificadoPorAdm" (click)="Habilitacion(user)">Habilitar</ion-button>
+        </ion-item>
+      </ion-list>
 
-</ion-content>
+    </ion-content>
+  </div>
+</ion-app>

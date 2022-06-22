@@ -55,16 +55,37 @@ const routes: Routes = [
   {
     path: 'alta-mesa',
     loadChildren: () => import('./pages/alta-mesa/alta-mesa.module').then( m => m.AltaMesaPageModule)
-  },  {
+  },
+  {
     path: 'reserva-mesas',
     loadChildren: () => import('./pages/reserva-mesas/reserva-mesas.module').then( m => m.ReservaMesasPageModule)
   },
   {
     path: 'mesa',
     loadChildren: () => import('./pages/mesa/mesa.module').then( m => m.MesaPageModule)
+  },
+  { path: 'alta-mesa',
+    loadChildren: () => import('./pages/alta-mesa/alta-mesa.module').then( m => m.AltaMesaPageModule)
+  },
+  {
+    path: 'encuesta-clientes',
+    loadChildren: () => import('./pages/encuesta-clientes/encuesta-clientes.module').then( m => m.EncuestaClientesPageModule)
+  },  {
+    path: 'bartender-pedidos',
+    loadChildren: () => import('./pages/bartender-pedidos/bartender-pedidos.module').then( m => m.BartenderPedidosPageModule)
+  },
+  {
+    path: 'cocinero-pedidos',
+    loadChildren: () => import('./pages/cocinero-pedidos/cocinero-pedidos.module').then( m => m.CocineroPedidosPageModule)
+  },
+  {
+    path: 'mozo-pedidos',
+    loadChildren: () => import('./pages/mozo-pedidos/mozo-pedidos.module').then( m => m.MozoPedidosPageModule)
   }
 
+
 ];
+
 
 @NgModule({
   imports: [

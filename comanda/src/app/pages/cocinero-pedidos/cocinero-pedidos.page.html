@@ -1,0 +1,73 @@
+<utility-header
+  type="menu"
+  title="Comidas a preparar"
+  color="tertiary"
+></utility-header>
+<ion-content color="fondo" class="ion-padding">
+  <ion-list>
+    <ion-list-header>
+      <ion-label>COMIDAS A PREPARAR</ion-label>
+    </ion-list-header>
+    <ion-spinner name="circular" *ngIf="!comidasPendientes"></ion-spinner>
+    <div *ngIf="comidasPendientes">
+      <ion-item-sliding *ngFor="let preparacion of comidasPendientes">
+        <ion-item color="input">
+          <ion-avatar slot="start">
+            <img [src]="preparacion.producto.foto1" />
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ preparacion.producto.nombre }}</h2>
+          </ion-label>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option
+            color="success"
+            (click)="prepararPreparacion(preparacion)"
+            ><ion-icon name="checkmark-outline"></ion-icon
+          ></ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+      <ion-text *ngIf="comidasPendientes.length === 0">
+        <h5>No hay comidas a preparar</h5>
+      </ion-text>
+    </div>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>COMIDAS PREPARÁNDOSE</ion-label>
+    </ion-list-header>
+    <ion-spinner name="circular" *ngIf="!comidasPreparando"></ion-spinner>
+    <div *ngIf="comidasPreparando">
+      <ion-item-sliding *ngFor="let preparacion of comidasPreparando">
+        <ion-item color="input">
+          <ion-avatar slot="start">
+            <img [src]="preparacion.producto.foto1" />
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ preparacion.producto.nombre }}</h2>
+          </ion-label>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option
+            color="success"
+            (click)="terminarPreparacion(preparacion)"
+            ><ion-icon name="checkmark-outline"></ion-icon
+          ></ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+      <ion-text *ngIf="comidasPreparando.length === 0">
+        <h5>No hay comidas en preparación</h5>
+      </ion-text>
+    </div>
+  </ion-list>
+  <!-- <ion-button (click)="debugCrearPedido()" expand="block" fill="clear" shape="round">
+    Click me
+  </ion-button> -->
+</ion-content>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="debugCrearPedido()" color="tertiary">
+    <ion-icon name="add-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

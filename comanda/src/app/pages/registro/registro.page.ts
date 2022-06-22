@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
 })
 export class RegistroPage implements OnInit {
 
-photo: Photo = null;
+  photo: Photo = null;
   registerForm: FormGroup;
   photoUrl = '';
   constructor(
