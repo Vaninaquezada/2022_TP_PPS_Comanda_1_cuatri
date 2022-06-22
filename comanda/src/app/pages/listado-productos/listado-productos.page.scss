@@ -2,6 +2,9 @@ ion-content{
     --background: #23C1E0;
     
 }
+ion-card{
+    background: rgba(0, 0, 0, 0.418);
+}
 
 ion-list{
     background: transparent;
@@ -10,4 +13,8 @@ ion-list{
 
 ion-item{
     background: transparent;
+}
+
+img{
+    height: 150px;
 }

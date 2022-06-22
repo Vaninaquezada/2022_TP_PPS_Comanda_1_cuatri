@@ -15,6 +15,7 @@ import { Encuestas } from '../clases/encuestas';
   providedIn: 'root'
 })
 export class EncuestasFirebaseService {
+  
   private dbpath = '/encuestas'; //ruta de la coleccion de firebase.
   encuestasRef: AngularFirestoreCollection<User>;
   encuestas:Observable<any[]>;
@@ -30,7 +31,7 @@ export class EncuestasFirebaseService {
      private storage: AngularFireStorage,
      private authError: AuthErrorsService,
      private foto: FotoService, private utilidadesService: UtilidadesService) {
-    this.encuestasRef=db.collection<any>(this.dbpath, ref => ref.orderBy('apellido'));
+    this.encuestasRef=db.collection<any>(this.dbpath, ref => ref.orderBy('fecha'));
     this.encuestas=this.encuestasRef.valueChanges(this.dbpath);
 
     
@@ -41,8 +42,18 @@ export class EncuestasFirebaseService {
     return this.encuestas;
   }
 
-  nuevaEncuesta(encuesta: Encuestas){
+  async nuevaEncuesta(encuesta: Encuestas, foto1?: Photo, foto2?: Photo, foto3?: Photo){
     encuesta.id = this.db.createId();
+    if(foto1){
+      encuesta.photourl1 = await this.foto.uploadPhotoEncuesta(foto1, encuesta.id+"_foto1");
+      if(foto2){
+        encuesta.photourl2 = await this.foto.uploadPhotoEncuesta(foto2, encuesta.id+"_foto2");
+        if(foto3){
+          encuesta.photourl3 = await this.foto.uploadPhotoEncuesta(foto3, encuesta.id+"_foto3");
+        }
+      }
+    }
+    
     this.db.collection('encuestas').doc(encuesta.id).set(encuesta);
     this.utilidadesService.RemoverLoading();
     this.utilidadesService.PresentarToastAbajo('Encuesta enviada', 'success');

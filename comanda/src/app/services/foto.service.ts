@@ -34,4 +34,28 @@ export class FotoService {
 
     return result;
   }
+
+  async uploadPhotoProducto(photo: Photo,id) {
+    const dataUrl = photo.dataUrl;
+    const fileName = id;
+    const ref = this.fbStorage.ref(`fotos/Productos/${fileName}`);
+    const result = await ref.putString(dataUrl, 'data_url', {
+      contentEncoding: 'image/jpeg',
+    });
+
+    return result.ref.getDownloadURL();
+  }
+
+  async uploadPhotoEncuesta(photo: Photo,id) {
+    const dataUrl = photo.dataUrl;
+    const fileName = id;
+    const ref = this.fbStorage.ref(`fotos/Encuestas/${fileName}`);
+    const result = await ref.putString(dataUrl, 'data_url', {
+      contentEncoding: 'image/jpeg',
+    });
+
+    return result.ref.getDownloadURL();
+  }
+
+
 }

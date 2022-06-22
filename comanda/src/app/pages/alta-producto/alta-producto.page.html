@@ -1,0 +1,68 @@
+<ion-app>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Alta Producto</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <div>
+        
+        <form [formGroup]="forma" (ngSubmit)="AltaProducto()">
+          
+          <ion-item >
+            <ion-label position="floating">Elegir tipo de producto</ion-label>            
+            <ion-select placeholder="Tipo de Producto" formControlName="tipoProducto">
+              <ion-select-option value="comida">Comida</ion-select-option>
+              <ion-select-option value="bebida">Bebida</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input type="text"  formControlName="nombre"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Descripción</ion-label>
+            <ion-input type="text"  formControlName="descripcion"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Tiempo promedio de preparación en minutos</ion-label>
+            <ion-input type="number"  formControlName="tiempoPromedioMinutos"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Precio</ion-label>
+            <ion-input type="number"  formControlName="precio"></ion-input>
+          </ion-item>
+
+          
+          <ion-label>
+            Sacar 3 fotos del producto: 
+          </ion-label>
+          <div style="text-align: center;">
+            
+            <ion-button color="tertiary" (click)="getPhoto1()">
+              <ion-icon name="camera-outline"></ion-icon>1
+            </ion-button>
+            <ion-button  color="tertiary" (click)="getPhoto2()" *ngIf="tomada1">
+              <ion-icon name="camera-outline"></ion-icon>2
+            </ion-button>
+            <ion-button  color="tertiary" (click)="getPhoto3()" *ngIf="tomada2">
+              <ion-icon name="camera-outline"></ion-icon>3
+            </ion-button>
+          </div>
+          <br><br>
+
+          <ion-button expand="full" type="submit" [disabled]="forma.invalid" > Crear Producto </ion-button>
+        </form>
+      </div>
+    </ion-content>
+
+  </div>
+</ion-app>

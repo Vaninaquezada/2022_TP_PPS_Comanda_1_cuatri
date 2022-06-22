@@ -59,7 +59,15 @@ const routes: Routes = [
   {
     path: 'encuesta-clientes',
     loadChildren: () => import('./pages/encuesta-clientes/encuesta-clientes.module').then( m => m.EncuestaClientesPageModule)
+  },  {
+    path: 'alta-producto',
+    loadChildren: () => import('./pages/alta-producto/alta-producto.module').then( m => m.AltaProductoPageModule)
+  },
+  {
+    path: 'listado-productos',
+    loadChildren: () => import('./pages/listado-productos/listado-productos.module').then( m => m.ListadoProductosPageModule)
   }
+
 
 ];
 
