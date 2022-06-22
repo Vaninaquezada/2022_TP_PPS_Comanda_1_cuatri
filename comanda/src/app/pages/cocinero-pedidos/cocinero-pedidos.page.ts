@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { PreparacionService } from 'src/app/services/preparacion.service';
+import { PlatoService } from 'src/app/services/plato.service';
 import { Plato } from 'src/app/clases/plato';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { ProductosService } from 'src/app/services/productos.service';
@@ -16,15 +16,15 @@ export class CocineroPedidosPage implements OnInit {
 
   constructor(
     public productoService: ProductosService,
-    public preparacionService: PreparacionService,
+    public platoService: PlatoService,
     public pedidoService: PedidosService,
     private modalController: ModalController) { }
 
   ngOnInit() {
-    this.preparacionService
+    this.platoService
       .getPreparaciones('pendiente', 'comida')
       .then((p) => p.subscribe((data) => (this.comidasPendientes = data)));
-    this.preparacionService
+    this.platoService
       .getPreparaciones('preparando', 'comida')
       .then((p) => p.subscribe((data) => (this.comidasPreparando = data)));
   }
@@ -41,16 +41,16 @@ export class CocineroPedidosPage implements OnInit {
     return await modal.present();
   }
 */
-  public prepararPreparacion(preparacion: Plato) {
-    this.preparacionService.updatePreparacionState(
-      preparacion.preparacionId,
+  public prepararPreparacion(plato: Plato) {
+    this.platoService.updatePreparacionState(
+      plato.platoId,
       'preparando'
     );
   }
 
-  public terminarPreparacion(preparacion: Plato) {
-    this.preparacionService.updatePreparacionState(
-      preparacion.preparacionId,
+  public terminarPreparacion(plato: Plato) {
+    this.platoService.updatePreparacionState(
+      plato.platoId,
       'terminado'
     );
   }

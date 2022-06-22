@@ -16,6 +16,8 @@ export class User {
     verificacionEspec?: boolean;
     verificadoPorAdm?: boolean;
     id?: string;
+    numeroMesa?: number;
+    mesaId?: string;
     ingresos?: Array<Date>;
 
     constructor(){

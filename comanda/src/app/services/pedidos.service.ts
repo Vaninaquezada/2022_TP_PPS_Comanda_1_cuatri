@@ -4,7 +4,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { PedidoEstado, Pedidos } from '../clases/pedidos';
 import { Plato } from '../clases/plato';
 import { TipoProducto } from '../clases/productos';
-import { PreparacionService } from './preparacion.service';
+import { PlatoService } from './plato.service';
 import { filter, map, reduce } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -16,15 +16,15 @@ export class PedidosService {
   constructor(
     private db: AngularFirestore,
     private storage: AngularFireStorage,
-    private preparacionService: PreparacionService
+    private preparacionService: PlatoService
   ) {}
 
   async crearPedido(pedido: Pedidos): Promise<void> {
-    pedido.preparaciones.forEach((p) => {
+    pedido.platos.forEach((p) => {
       p.pedidoId = pedido.pedidoId;
-      this.preparacionService.crearPreparacion(p);
+      this.preparacionService.crearPlato(p);
     });
-    pedido.preparaciones = [];
+    pedido.platos = [];
     try {
       await this.db.collection('Pedidos').doc(pedido.pedidoId).set(pedido);
     } catch (error) {
@@ -125,7 +125,7 @@ export class PedidosService {
           pedidos => pedidos
           // Mapeo el array de pedidos a un array de arrays de Preparaciones
           .map(
-            pedido => pedido.preparaciones
+            pedido => pedido.platos
           )
           // Aplano el array de arrays de Preparaciones
           .reduce(
@@ -157,7 +157,7 @@ export class PedidosService {
           pedidos => pedidos
           // Mapeo el array de pedidos a un array de arrays de Preparaciones
           .map(
-            pedido => pedido.preparaciones
+            pedido => pedido.platos
           )
           // Aplano el array de arrays de Preparaciones
           .reduce(

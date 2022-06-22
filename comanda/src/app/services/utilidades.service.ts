@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LoadingController, ToastController } from '@ionic/angular';
+import { HexBase64BinaryEncoding } from 'crypto';
 
 @Injectable({
   providedIn: 'root'
@@ -31,4 +32,5 @@ export class UtilidadesService {
     await this.loadingController.dismiss();
   }
 
+ 
 }

@@ -24,6 +24,7 @@ export class MesaService {
 
   altaMesa(mesa: Mesa, foto: File) {
 
+
     let pathRef = `fotos/mesas/${mesa.numero}`;
     const fileRef = this.storage.ref(pathRef);
     const task = this.storage.upload(pathRef, foto);
@@ -32,7 +33,7 @@ export class MesaService {
       finalize(() => {
         fileRef.getDownloadURL().subscribe(async res => {
           mesa.foto = res;
-          this.mesasRef.add(mesa);
+          this.afs.collection('mesas').doc(mesa.id).set(mesa);
           this.utilidadesService.RemoverLoading();
           this.utilidadesService.PresentarToastAbajo("Mesa Creada!", "success");
         })

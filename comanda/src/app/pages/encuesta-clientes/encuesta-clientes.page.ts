@@ -22,9 +22,6 @@ export class EncuestaClientesPage implements OnInit {
   photo1: Photo = null;
   photo2: Photo = null;
   photo3: Photo = null;
-  photoUrl1 = '';
-  photoUrl2 = '';
-  photoUrl3 = '';
   tomada1: boolean;
   tomada2: boolean;
   tomada3: boolean;
@@ -67,18 +64,14 @@ export class EncuestaClientesPage implements OnInit {
       fecha: new Date(),
     };
 
-    if(this.tomada1){
-      encuesta.photourl1 = this.photoUrl1;
-      if(this.tomada2){
-        encuesta.photourl2 = this.photoUrl2;
-        if(this.tomada3){
-          encuesta.photourl3 = this.photoUrl3;
-        }
-      }
+    if(this.tomada3){
+      await this.encuestaService.nuevaEncuesta(encuesta, this.photo1, this.photo2, this.photo3);
+    }else if(this.tomada2){
+        await this.encuestaService.nuevaEncuesta(encuesta, this.photo1, this.photo2);
+    }else if(this.tomada1){
+          await this.encuestaService.nuevaEncuesta(encuesta, this.photo1);
     }
 
-    this.encuestaService.nuevaEncuesta(encuesta);
-    
     this.navegador.navigate(['/principal']);
   }
 
@@ -87,19 +80,19 @@ export class EncuestaClientesPage implements OnInit {
 
   async getPhoto1() {
     this.photo1 = await this.uploadPhoto.takePhoto();
-    this.photoUrl1 = this.photo1.dataUrl;
+    
     this.tomada1 = true;
   }
 
   async getPhoto2() {
     this.photo2 = await this.uploadPhoto.takePhoto();
-    this.photoUrl2 = this.photo2.dataUrl;
+    
     this.tomada2 = true;
   }
 
   async getPhoto3() {
     this.photo3 = await this.uploadPhoto.takePhoto();
-    this.photoUrl3 = this.photo3.dataUrl;
+    
     this.tomada3 = true;
   }
 

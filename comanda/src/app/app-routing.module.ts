@@ -70,7 +70,8 @@ const routes: Routes = [
   {
     path: 'encuesta-clientes',
     loadChildren: () => import('./pages/encuesta-clientes/encuesta-clientes.module').then( m => m.EncuestaClientesPageModule)
-  },  {
+  },
+  {
     path: 'bartender-pedidos',
     loadChildren: () => import('./pages/bartender-pedidos/bartender-pedidos.module').then( m => m.BartenderPedidosPageModule)
   },
@@ -81,7 +82,23 @@ const routes: Routes = [
   {
     path: 'mozo-pedidos',
     loadChildren: () => import('./pages/mozo-pedidos/mozo-pedidos.module').then( m => m.MozoPedidosPageModule)
+  },
+  {
+    path: 'encuesta-clientes',
+    loadChildren: () => import('./pages/encuesta-clientes/encuesta-clientes.module').then( m => m.EncuestaClientesPageModule)
+  },
+  {
+    path: 'alta-producto',
+    loadChildren: () => import('./pages/alta-producto/alta-producto.module').then( m => m.AltaProductoPageModule)
+  },
+  {
+    path: 'listado-productos',
+    loadChildren: () => import('./pages/listado-productos/listado-productos.module').then( m => m.ListadoProductosPageModule)
+  },  {
+    path: 'cliente-pedido',
+    loadChildren: () => import('./pages/cliente-pedido/cliente-pedido.module').then( m => m.ClientePedidoPageModule)
   }
+
 
 
 ];

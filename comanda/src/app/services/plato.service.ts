@@ -8,15 +8,17 @@ import { TipoProducto } from '../clases/productos';
 @Injectable({
   providedIn: 'root'
 })
-export class PreparacionService {
+export class PlatoService {
 
   constructor(
     private db: AngularFirestore,
     private storage: AngularFireStorage) { }
 
-    async crearPreparacion(preparacion: Plato): Promise<void> {
+    async crearPlato(plato: Plato): Promise<void> {
       try {
-        await this.db.collection('Preparaciones').doc(preparacion.preparacionId).set(preparacion);
+        const id = this.db.createId();
+        plato.platoId = id;
+        await this.db.collection('Preparaciones').doc(plato.platoId).set(plato);
       } catch (error) {
         console.log(error);
         throw Error('No se pudo crear');
@@ -34,7 +36,7 @@ export class PreparacionService {
         .toPromise()
         .then((data) => !data.empty);
     }
-    async hasBebidasForPedido(pedidoId: string): Promise<boolean> {
+    async tieneBebidasForPedido(pedidoId: string): Promise<boolean> {
       return this.db
         .collection<Plato>('Preparaciones', (ref) =>
           ref

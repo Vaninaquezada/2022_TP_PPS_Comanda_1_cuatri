@@ -1,0 +1,62 @@
+<ion-app>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Listado de productos</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content >
+      
+      <ion-list>
+        <ion-card color="dark" *ngFor="let producto of pedido.productos">
+
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <img *ngIf="producto.photourl1" src="{{producto.photourl1}}">
+              </ion-col>
+              <ion-col>
+                <img *ngIf="producto.photourl2" src="{{producto.photourl2}}">
+              </ion-col>
+              <ion-col>
+                <img *ngIf="producto.photourl3" src="{{producto.photourl3}}">
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <!-- <ion-avatar>
+            <img *ngIf="producto.photourl1" src="{{producto.photourl2}}">
+            <img *ngIf="producto.photourl3" src="{{producto.photourl3}}">
+            <img *ngIf="producto.photourl3" src="{{producto.photourl3}}">
+          </ion-avatar> -->
+          
+          <ion-label>
+            <h1>{{producto.nombre}}.</h1>
+            <h2>${{producto.precio}}.-</h2>
+            <h4>Tiempo de preparación: {{producto.tiempoPromedioMinutos}} m.</h4>
+            <p>{{producto.descripcion}}.</p>
+          </ion-label>
+          <div style="text-align: center;" >
+            <ion-button color="danger" size="small" shape="round">
+              <ion-icon name="remove-circle-outline"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" color="dark" disabled="true">
+              {{producto.cantidad}}
+            </ion-button>
+            <ion-button color="danger" size="small" shape="round">
+              <ion-icon name="add-circle-outline"></ion-icon>
+            </ion-button>
+          </div>
+          
+
+          <!-- <ion-button color="danger" *ngIf="producto.verificadoPorAdm" (click)="Habilitacion(producto)">Desabilitar</ion-button>
+          <ion-button color="primary" *ngIf="!producto.verificadoPorAdm" (click)="Habilitacion(producto)">Habilitar</ion-button> -->
+        </ion-card>
+      </ion-list>
+
+    </ion-content>
+  </div>
+</ion-app>

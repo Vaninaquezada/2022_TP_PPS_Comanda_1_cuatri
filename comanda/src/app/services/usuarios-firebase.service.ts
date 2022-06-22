@@ -129,4 +129,8 @@ console.log('singup');
   update(id: string, data: any): Promise<void> {
     return this.usuariosRef.doc(id).update(data);
   }
+
+  crearId(){
+    return this.db.createId();
+  }
 }

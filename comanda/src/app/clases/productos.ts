@@ -1,6 +1,7 @@
 export type TipoProducto = 'comida' | 'bebida';
 
 export class Productos {
+
     id?: string;
     nombre?: string;
     descripcion?: string;
@@ -13,4 +14,3 @@ export class Productos {
     cantidad?: number;
 
 }
-

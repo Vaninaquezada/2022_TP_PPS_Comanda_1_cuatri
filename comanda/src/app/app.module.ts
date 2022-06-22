@@ -27,6 +27,8 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AwesomeCordovaNativePlugin} from '@awesome-cordova-plugins/core';
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 import { NgCalendarModule } from 'ionic2-calendar';
+import {SwiperModule} from 'swiper/angular';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent,SideMenuComponent],
@@ -40,6 +42,8 @@ import { NgCalendarModule } from 'ionic2-calendar';
     AngularFirestoreModule,
     HttpClientModule,
     FormsModule,
+    CommonModule,
+    SwiperModule,
     NgCalendarModule,
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -53,7 +57,7 @@ import { NgCalendarModule } from 'ionic2-calendar';
     SideMenuComponent,
   ],
 
-  providers: [BarcodeScanner, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [Storage,BarcodeScanner, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

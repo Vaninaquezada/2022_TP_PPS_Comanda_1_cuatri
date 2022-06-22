@@ -1,7 +1,7 @@
 import { Productos } from './productos';
 
 export interface Plato {
-    preparacionId: string;
+    platoId?: string;
     producto: Productos;
     estado: PreparacionEstado;
     pedidoId: string;

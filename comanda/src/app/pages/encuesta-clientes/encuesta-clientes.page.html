@@ -1,96 +1,102 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Encuesta de satisfacción</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <div>
-    
-    <form [formGroup]="forma" (ngSubmit)="enviarEncuesta()">
-      
-      <ion-list>
-        <ion-radio-group formControlName="recomendacion">
-          <ion-list-header>
-            <ion-label>Como nos recomendaria ante un conocido: </ion-label>
-          </ion-list-header>
-          <ion-item>
-            <ion-label class="letra">Nada Recomendado</ion-label>
-            <ion-radio slot="end" color="danger" value="nadaRecomendado" mode="ios"></ion-radio>
-          </ion-item>
-      
-          <ion-item>
-            <ion-label class="letra">Poco Recomendado</ion-label>
-            <ion-radio slot="end" color="warning" value="pocoRecomendado" mode="ios"></ion-radio>
-          </ion-item>
-      
-          <ion-item>
-            <ion-label class="letra">Indiferente</ion-label>
-            <ion-radio slot="end" color="dark" value="indiferente" mode="ios"></ion-radio>
-          </ion-item>
-      
-          <ion-item>
-            <ion-label class="letra">Recomendado</ion-label>
-            <ion-radio slot="end" color="primary" value="recomendado" mode="ios"></ion-radio>
-          </ion-item>
-      
-          <ion-item>
-            <ion-label class="letra">Muy Recomendado</ion-label>
-            <ion-radio slot="end" color="success" value="muyRecomendado" mode="ios"></ion-radio>
-          </ion-item>
-        </ion-radio-group>      
-      </ion-list>
-
-      
-
-      <ion-item >
-        <ion-label position="floating">Puntuación del 1 al 5 sobre el establecimiento</ion-label>
+<ion-app>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Encuesta de satisfacción</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <div>
         
-        <ion-select placeholder="Puntuación" formControlName="notaLugar">
-          <ion-select-option value=1>1</ion-select-option>
-          <ion-select-option value=2>2</ion-select-option>
-          <ion-select-option value=3>3</ion-select-option>
-          <ion-select-option value=4>4</ion-select-option>
-          <ion-select-option value=5>5</ion-select-option>
-        </ion-select>
-      </ion-item>
+        <form [formGroup]="forma" (ngSubmit)="enviarEncuesta()">
+          
+          <ion-list>
+            <ion-radio-group formControlName="recomendacion">
+              <ion-list-header>
+                <ion-label>Como nos recomendaria ante un conocido: </ion-label>
+              </ion-list-header>
+              <ion-item>
+                <ion-label class="letra">Nada Recomendado</ion-label>
+                <ion-radio slot="end" color="danger" value="nadaRecomendado" mode="ios"></ion-radio>
+              </ion-item>
+          
+              <ion-item>
+                <ion-label class="letra">Poco Recomendado</ion-label>
+                <ion-radio slot="end" color="warning" value="pocoRecomendado" mode="ios"></ion-radio>
+              </ion-item>
+          
+              <ion-item>
+                <ion-label class="letra">Indiferente</ion-label>
+                <ion-radio slot="end" color="dark" value="indiferente" mode="ios"></ion-radio>
+              </ion-item>
+          
+              <ion-item>
+                <ion-label class="letra">Recomendado</ion-label>
+                <ion-radio slot="end" color="primary" value="recomendado" mode="ios"></ion-radio>
+              </ion-item>
+          
+              <ion-item>
+                <ion-label class="letra">Muy Recomendado</ion-label>
+                <ion-radio slot="end" color="success" value="muyRecomendado" mode="ios"></ion-radio>
+              </ion-item>
+            </ion-radio-group>      
+          </ion-list>
 
-      
+          
 
-      <ion-item>
-        <ion-label position="floating">Puntuación del 1 al 5 sobre los empleados</ion-label>
-        <ion-range min="1" max="5" value="0" [pin]="true" snaps="true" color="light" formControlName="notaEmpleados">
-          <ion-icon slot="start" name="sad-outline"></ion-icon>
-          <ion-icon slot="end" name="happy-outline"></ion-icon>
-        </ion-range>
-      </ion-item>
+          <ion-item >
+            <ion-label position="floating">Puntuación del 1 al 5 sobre el establecimiento</ion-label>
+            
+            <ion-select placeholder="Puntuación" formControlName="notaLugar">
+              <ion-select-option value=1>1</ion-select-option>
+              <ion-select-option value=2>2</ion-select-option>
+              <ion-select-option value=3>3</ion-select-option>
+              <ion-select-option value=4>4</ion-select-option>
+              <ion-select-option value=5>5</ion-select-option>
+            </ion-select>
+          </ion-item>
 
-      
+          
 
-      <ion-item>
-        <ion-label position="floating">Comentarios / Sugerencias</ion-label>
-        <ion-input type="text"  formControlName="comentarios"></ion-input>
-      </ion-item>
+          <ion-item>
+            <ion-label position="floating">Puntuación del 1 al 5 sobre los empleados</ion-label>
+            <ion-range min="1" max="5" value="0" [pin]="true" snaps="true" color="light" formControlName="notaEmpleados">
+              <ion-icon slot="start" name="sad-outline"></ion-icon>
+              <ion-icon slot="end" name="happy-outline"></ion-icon>
+            </ion-range>
+          </ion-item>
 
-      
-      <ion-label>
-        Puede sacar fotos de su estadia para compartir con nosotros (max. 3 fotos): 
-      </ion-label>
-      <div style="text-align: center;">
-        
-        <ion-button color="tertiary" (click)="getPhoto1()">
-          <ion-icon name="camera-outline"></ion-icon>1
-        </ion-button>
-        <ion-button  color="tertiary" (click)="getPhoto2()" *ngIf="tomada1">
-          <ion-icon name="camera-outline"></ion-icon>2
-        </ion-button>
-        <ion-button  color="tertiary" (click)="getPhoto3()" *ngIf="tomada2">
-          <ion-icon name="camera-outline"></ion-icon>3
-        </ion-button>
-      </div>
+          
 
-      <ion-button expand="full" type="submit" [disabled]="forma.invalid" > Enviar Encuesta </ion-button>
-    </form>
+          <ion-item>
+            <ion-label position="floating">Comentarios / Sugerencias</ion-label>
+            <ion-input type="text"  formControlName="comentarios"></ion-input>
+          </ion-item>
+
+          
+          <ion-label>
+            Puede sacar fotos de su estadia para compartir con nosotros (max. 3 fotos): 
+          </ion-label>
+          <div style="text-align: center;">
+            
+            <ion-button color="tertiary" (click)="getPhoto1()">
+              <ion-icon name="camera-outline"></ion-icon>1
+            </ion-button>
+            <ion-button  color="tertiary" (click)="getPhoto2()" *ngIf="tomada1">
+              <ion-icon name="camera-outline"></ion-icon>2
+            </ion-button>
+            <ion-button  color="tertiary" (click)="getPhoto3()" *ngIf="tomada2">
+              <ion-icon name="camera-outline"></ion-icon>3
+            </ion-button>
+          </div>
+
+          <ion-button expand="full" type="submit" [disabled]="forma.invalid" > Enviar Encuesta </ion-button>
+        </form>
+      </div>      
+    </ion-content>
+
   </div>
-  
-</ion-content>
+</ion-app>
