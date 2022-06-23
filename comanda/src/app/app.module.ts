@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
-import { SideMenuComponent } from './side-menu/side-menu.component'; 
+import { SideMenuComponent } from './side-menu/side-menu.component';
 import { AppRoutingModule } from './app-routing.module';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';

@@ -13,7 +13,7 @@ import { Pedidos } from 'src/app/clases/pedidos';
 export class CocineroPedidosPage implements OnInit {
   comidasPendientes: Plato[];
   comidasPreparando: Plato[];
-
+ // Observable<any[]>;
   constructor(
     public productoService: ProductosService,
     public platoService: PlatoService,
@@ -21,38 +21,26 @@ export class CocineroPedidosPage implements OnInit {
     private modalController: ModalController) { }
 
   ngOnInit() {
+
     this.platoService
-      .getPreparaciones('pendiente', 'comida')
+      .getPlato('pendiente', 'comida')
       .then((p) => p.subscribe((data) => (this.comidasPendientes = data)));
     this.platoService
-      .getPreparaciones('preparando', 'comida')
+      .getPlato('preparando', 'comida')
       .then((p) => p.subscribe((data) => (this.comidasPreparando = data)));
+
   }
- /* async presentModal() {
-    const modal = await this.modalController.create({
-      component: AltaProductoComponent,
-      swipeToClose: true,
-      presentingElement: await this.modalController.getTop(),
-      backdropDismiss: false,
-      componentProps: {
-        tipo: 'comida',
-      },
-    });
-    return await modal.present();
-  }
-*/
-  public prepararPreparacion(plato: Plato) {
-    this.platoService.updatePreparacionState(
+  public prepararPlato(plato: Plato) {
+    this.platoService.updatePlatoState(
       plato.platoId,
       'preparando'
     );
   }
 
-  public terminarPreparacion(plato: Plato) {
-    this.platoService.updatePreparacionState(
+  public terminarPlato(plato: Plato) {
+    this.platoService.updatePlatoState(
       plato.platoId,
       'terminado'
     );
   }
-
 }

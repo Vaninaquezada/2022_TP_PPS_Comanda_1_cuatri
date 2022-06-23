@@ -46,7 +46,7 @@ export class PedidosService {
     try {
       pedido.estado = 'preparando';
       await this.db.collection('Pedidos').doc(pedido.pedidoId).set(pedido);
-      await this.preparacionService.updatePreparacionesStateInPedido(pedido.pedidoId, 'pendiente');
+      await this.preparacionService.updatePlatoStateInPedido(pedido.pedidoId, 'pendiente');
     } catch (error) {
       console.log(error);
       throw Error('Pedidos error');
@@ -55,7 +55,7 @@ export class PedidosService {
 
   async deletePedido(pedido: Pedidos): Promise<void> {
     try {
-      await this.preparacionService.deletePreparacionesByPedidoId(pedido.pedidoId);
+      await this.preparacionService.deletePlatoByPedidoId(pedido.pedidoId);
       await this.db.collection('Pedidos').doc(pedido.pedidoId).delete();
     } catch (error) {
       console.log(error);

@@ -22,7 +22,7 @@ export class CuentaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.preparacionService.getPreparacionesByPedidoId(this.pedido.pedidoId)
+    this.preparacionService.getPlatoByPedidoId(this.pedido.pedidoId)
       .then((p) => p.subscribe(
         (data) => this.preparaciones = data
       ));

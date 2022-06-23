@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable } from 'rxjs';
-import { Plato, PreparacionEstado } from '../clases/plato';
+import { Plato, PlatoEstado } from '../clases/plato';
 import { TipoProducto } from '../clases/productos';
 
 @Injectable({
@@ -30,7 +30,7 @@ export class PlatoService {
         .collection<Plato>('Preparaciones', (ref) =>
           ref
             .where('pedidoId', '==', pedidoId)
-            .where('producto.tipo', '==', 'comida')
+            .where('producto.tipoProducto', '==', 'comida')
         )
         .get()
         .toPromise()
@@ -41,19 +41,19 @@ export class PlatoService {
         .collection<Plato>('Preparaciones', (ref) =>
           ref
             .where('pedidoId', '==', pedidoId)
-            .where('producto.tipo', '==', 'bebida')
+            .where('producto.tipoProducto', '==', 'bebida')
         )
         .get()
         .toPromise()
         .then((data) => !data.empty);
     }
-    async updatePreparacionState(preparacionId: string, state: PreparacionEstado) {
+    async updatePlatoState(preparacionId: string, state: PlatoEstado) {
       this.db
       .collection<Plato>('Preparaciones')
       .doc(preparacionId)
       .update({estado: state});
     }
-    async updatePreparacionesStateInPedido(pedidoId: string, state: PreparacionEstado) {
+    async updatePlatoStateInPedido(pedidoId: string, state: PlatoEstado) {
       this.db
         .collection<Plato>('Preparaciones', (ref) =>
           ref
@@ -66,16 +66,16 @@ export class PlatoService {
           )
         );
     }
-    async getPreparaciones(estado: PreparacionEstado, tipo: TipoProducto): Promise<Observable<Plato[]>> {
-      return this.db
+    async getPlato(estado: PlatoEstado, tipo: TipoProducto): Promise<Observable<Plato[]>> {
+   return this.db
         .collection<Plato>('Preparaciones', (ref) =>
           ref
-            .where('estado', '==', estado)
-            .where('producto.tipo', '==', tipo)
+          .where('estado', '==', estado)
+          .where('producto.tipoProducto', '==', tipo)
         )
         .valueChanges();
     }
-    async getPreparacionesByPedidoId(pedidoId: string): Promise<Observable<Plato[]>> {
+    async getPlatoByPedidoId(pedidoId: string): Promise<Observable<Plato[]>> {
       return this.db
         .collection<Plato>('Preparaciones', (ref) =>
           ref
@@ -83,13 +83,13 @@ export class PlatoService {
         )
         .valueChanges();
     }
-    async deletePreparacion(preparacionId: string) {
+    async deletePlato(platoId: string) {
       this.db
         .collection<Plato>('Preparaciones')
-        .doc(preparacionId)
+        .doc(platoId)
         .delete();
     }
-    async deletePreparacionesByPedidoId(pedidoId: string) {
+    async deletePlatoByPedidoId(pedidoId: string) {
       this.db
       .collection<Plato>('Preparaciones', (ref) =>
         ref
