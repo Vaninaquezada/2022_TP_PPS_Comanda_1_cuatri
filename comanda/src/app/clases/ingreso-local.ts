@@ -1,6 +1,6 @@
 import { User } from "./user";
 
-export type EstadoIngreso = 'esperando' | 'aprobado' ;
+export type EstadoIngreso = 'esperando' | 'aprobado'| 'cancelado' ;
 
 export class IngresoLocal {
 

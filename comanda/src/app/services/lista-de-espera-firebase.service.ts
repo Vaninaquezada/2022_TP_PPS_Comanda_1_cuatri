@@ -47,6 +47,10 @@ export class ListaDeEsperaFirebaseService {
   
   }
 
+  guardarCambios(ingreso: IngresoLocal){
+    this.db.collection('listaDeEspera').doc(ingreso.id).set(ingreso);
+  }
+
   
 
 }

@@ -16,6 +16,7 @@ export class MesaService {
   mesas: Observable<any[]>;
   numero: number;
   tipo: TipoDeMesa;
+  mesaSeleccionada: any;
 
   constructor(private afs: AngularFirestore, private storage: AngularFireStorage, private utilidadesService: UtilidadesService) {
     this.mesasRef = this.afs.collection<Mesa>(this.dbpath);
@@ -23,7 +24,6 @@ export class MesaService {
   }
 
   altaMesa(mesa: Mesa, foto: File) {
-
 
     let pathRef = `fotos/mesas/${mesa.numero}`;
     const fileRef = this.storage.ref(pathRef);
@@ -41,4 +41,25 @@ export class MesaService {
     ).subscribe();
 
   }
+
+  getAll(){
+    return this.mesas;
+  }
+
+  async obtenerMesa(id: string){
+    await this.afs.collection('/mesas').ref.where('id', '==', id).get().then((responce)=>{
+      this.mesaSeleccionada = responce.docs[0].data();
+    });
+  }
+
+
+  guardarCambios(ingreso: Mesa){
+    this.afs.collection('listaDeEspera').doc(ingreso.id).set(ingreso);
+  }
+
+  update(id: string, data: any): Promise<void> {
+    return this.mesasRef.doc(id).update(data);
+  }
+
+
 }

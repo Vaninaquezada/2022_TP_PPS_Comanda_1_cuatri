@@ -94,9 +94,14 @@ const routes: Routes = [
   {
     path: 'listado-productos',
     loadChildren: () => import('./pages/listado-productos/listado-productos.module').then( m => m.ListadoProductosPageModule)
-  },  {
+  },
+  {
     path: 'cliente-pedido',
     loadChildren: () => import('./pages/cliente-pedido/cliente-pedido.module').then( m => m.ClientePedidoPageModule)
+  },
+  {
+    path: 'lista-de-espera',
+    loadChildren: () => import('./pages/listada-de-espera/listada-de-espera.module').then( m => m.ListadaDeEsperaPageModule)
   }
 
 
