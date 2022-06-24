@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/clases/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -24,7 +25,10 @@ export class RegistroDueniosSupervisoresPage implements OnInit {
     private fb: FormBuilder,
     private usuarioService: UsuariosFirebaseService,
     private authSvc: AuthService,
-    private utilidadesService: UtilidadesService) { }
+    private utilidadesService: UtilidadesService,
+    private menuController: MenuController) {
+      this.MenuView();
+    }
 
   ngOnInit() {
     this.forma = this.fb.group({
@@ -40,7 +44,11 @@ export class RegistroDueniosSupervisoresPage implements OnInit {
     });
   }
 
-
+  MenuView(){
+    this.menuController.enable(false, 'clientesMenu');
+    this.menuController.enable(false, 'empleadosMenu');
+    this.menuController.enable(true, 'adminMenu');
+  }
 
   changeImg(event) {
     if (event.target.files && event.target.files[0]) {

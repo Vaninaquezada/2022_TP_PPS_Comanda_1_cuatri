@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 import { User } from 'src/app/clases/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { EmailService } from 'src/app/services/email.service';
@@ -21,14 +22,21 @@ export class PrincipalAdmPage implements OnInit {
     private usuarioService: UsuariosFirebaseService,
     private authSvc: AuthService,
     private utilidadesService: UtilidadesService,
-    private emailService: EmailService
-  ) { 
+    private emailService: EmailService,
+    private menuController: MenuController
+  ) {
+    this.MenuView();
     this.usuarioService.getAllClientes().subscribe(resultado => {
       this.listadoUsuariosClientes = resultado;
     })
   }
 
   ngOnInit() {
+  }
+  MenuView(){
+    this.menuController.enable(false, 'clientesMenu');
+    this.menuController.enable(false, 'empleadosMenu');
+    this.menuController.enable(true, 'adminMenu');
   }
 
   Habilitacion(user: User){

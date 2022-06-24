@@ -13,9 +13,9 @@ export class VerificacionRegistroPage implements OnInit {
 
   ngOnInit() {
   }
+  
   singOut(){
     this.authSvc.LogOut();
-
     this.navegador.navigate(['login']);
   }
 

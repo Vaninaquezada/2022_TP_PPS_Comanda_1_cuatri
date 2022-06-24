@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, MenuController, ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { User} from 'src/app/clases/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -26,26 +26,30 @@ export class RegistroEmpleadosPage implements OnInit {
     private fb: FormBuilder,
     private usuarioService: UsuariosFirebaseService,
     private authSvc: AuthService,
-    private utilidadesService: UtilidadesService) { 
-    
-
-  }
+    private utilidadesService: UtilidadesService,
+    private menuController: MenuController) {
+      this.MenuView();
+    }
 
   ngOnInit() {
     this.forma = this.fb.group({
       'subtipo': ['', Validators.required],
-      'email': ['', Validators.required],
+      'email': ['', [Validators.email, Validators.required]],
       'nombre': ['', Validators.required],
       'apellido': ['', Validators.required],      
-      'DNI': ['', Validators.required],
-      'CUIL': ['', Validators.required],
+      'DNI': ['', [Validators.required, Validators.max(99999999)]],
+      'CUIL': ['', [Validators.required, Validators.max(99999999999)]],
       'foto': ['', Validators.required],
-      'password': ['', Validators.required],
-      'password2': ['', Validators.required],
+      'password': ['', [Validators.required, Validators.minLength(6)]],
+      'password2': ['', [Validators.required, Validators.minLength(6)]],
       
     });
   }
-
+  MenuView(){
+    this.menuController.enable(false, 'clientesMenu');
+    this.menuController.enable(false, 'empleadosMenu');
+    this.menuController.enable(true, 'adminMenu');
+  }
 
 
   changeImg(event){

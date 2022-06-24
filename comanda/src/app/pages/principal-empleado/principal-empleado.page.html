@@ -1,9 +1,17 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>principal-empleado</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Principal</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-<ion-content>
-  <ion-button color="warning" size="large" expand="full" (click)="navegar('alta-mesa')">Alta Mesa</ion-button>
-</ion-content>
+    <ion-content>
+      <ion-button color="warning" size="large" expand="full" (click)="navegar('alta-mesa')">Alta Mesa</ion-button>
+    </ion-content>
+
+  </div>
+</ion-app>

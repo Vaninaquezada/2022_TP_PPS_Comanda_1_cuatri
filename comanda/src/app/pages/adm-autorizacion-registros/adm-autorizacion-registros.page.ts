@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 import { User } from 'src/app/clases/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { EmailService } from 'src/app/services/email.service';
@@ -13,13 +14,25 @@ import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.serv
 export class AdmAutorizacionRegistrosPage implements OnInit {
   listadoUsuarios: any;
 
-  constructor(private navegador: Router, private usuariosService: UsuariosFirebaseService, private authSvc: AuthService, private emailService: EmailService) {
-    this.usuariosService.getAll().subscribe(resultado => {
-      this.listadoUsuarios = resultado;
+  constructor(private navegador: Router,
+    private usuariosService: UsuariosFirebaseService,
+    private authSvc: AuthService,
+    private emailService: EmailService,
+    private menuController: MenuController   
+    ) {
+      this.MenuView();
+      this.usuariosService.getAll().subscribe(resultado => {
+        this.listadoUsuarios = resultado;
     })
   }
 
   ngOnInit() {
+  }
+  
+  MenuView(){
+    this.menuController.enable(false, 'clientesMenu');
+    this.menuController.enable(false, 'empleadosMenu');
+    this.menuController.enable(true, 'adminMenu');
   }
 
   Habilitacion(user: User){

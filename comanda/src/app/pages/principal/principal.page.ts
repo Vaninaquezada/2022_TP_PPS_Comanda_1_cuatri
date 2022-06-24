@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
+import { MenuController } from '@ionic/angular';
 
 import { AuthService } from 'src/app/services/auth.service';
 import { UtilidadesService } from 'src/app/services/utilidades.service';
@@ -12,13 +13,21 @@ import { UtilidadesService } from 'src/app/services/utilidades.service';
 })
 export class PrincipalPage implements OnInit {
   code: any;
-  constructor(private navegador: Router, private authSvc: AuthService, private barcodeScanner: BarcodeScanner, private utilidadesService: UtilidadesService) { }
-
+  constructor(private navegador: Router, private authSvc: AuthService, private barcodeScanner: BarcodeScanner, private utilidadesService: UtilidadesService, private menuController: MenuController) { 
+    this.MenuView();
+  }
+  
+  
   ngOnInit() {
   }
 
+  MenuView(){
+    this.menuController.enable(true, 'clientesMenu');
+    this.menuController.enable(false, 'adminMenu');
+  }
 
-  Scan(){
+
+  Scan(): void{
 
     this.barcodeScanner.scan().then(barcodeData => {
       console.log('Barcode data', barcodeData);
