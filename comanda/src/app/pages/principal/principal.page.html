@@ -10,9 +10,36 @@
     </ion-header>
 
     <ion-content>
-      <ion-button size="large" shape="round" expand="full" color="secondary"  (click)="Navegar('cliente-pedido')" > hacer pedido </ion-button>
+      <div id="container">
+          <strong>
+            Bienvenido a nuestra aplicacion. Por favor indicar cantidad de personas y escanea el codigo QR en la entrada para poder ingresar a la lista de espera.
+            
+          </strong>
+          <br>
+          <strong>
+            En cuanto sea posible te notificaremos cuando hay una mesa disponible.
+          </strong>
+          <form [formGroup]="forma" (ngSubmit)="Scan()">                 
 
-      <ion-button size="large" shape="round" expand="full" color="secondary" (click)="Scan()"><ion-icon name="scan-circle-outline"></ion-icon> Escanear <ion-icon name="scan-circle-outline"></ion-icon></ion-button>
+            <ion-item >
+              <ion-label position="floating">Cantidad de comenzales</ion-label>              
+              <ion-select placeholder="Cantidad: " formControlName="cantidadPersonas">
+                <ion-select-option value=1>1</ion-select-option>
+                <ion-select-option value=2>2</ion-select-option>
+                <ion-select-option value=3>3</ion-select-option>
+                <ion-select-option value=4>4</ion-select-option>
+                <ion-select-option value=5>5</ion-select-option>
+                <ion-select-option value=6>6</ion-select-option>
+                <ion-select-option value=7>7</ion-select-option>
+                <ion-select-option value=8>8</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+          <ion-button class="botonScan" size="large" shape="round" expand="full" type="submit" [disabled]="forma.invalid"><ion-icon name="scan-circle-outline"></ion-icon> Escanear <ion-icon name="scan-circle-outline"></ion-icon></ion-button>
+        </form>
+
+      </div>
+      
     </ion-content>
   </div>
 </ion-app>

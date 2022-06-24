@@ -1,9 +1,24 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>mesa</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button menu="clientesMenu"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Ingreso</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-<ion-content>
+    <ion-content>
+      <ion-label>
+        Ya estas en la lista de espera de Resto Zona Sur. 
+        En Breve nuestro metre te notificara cuando podes ingresar y te llevara a tu mesa.
+        En ella encontraras un QR, por favor scanearlo para hacer tu pedido.
+      </ion-label>
+      
 
-</ion-content>
+      <ion-button size="large" shape="round" expand="full" color="secondary"  (click)="Navegar('cliente-pedido')" > Hacer pedido </ion-button>
+
+    </ion-content>
+  </div>
+</ion-app>
