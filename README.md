@@ -16,16 +16,17 @@ https://docs.google.com/spreadsheets/d/1IxJ_jOkGoOFVfFLDb5P5j6MW7XNbcHcM7R4uWAIU
 
 ### Vanina Quezada
 
-| :heavy_check_mark: |                            Nombre de tarea |
-| -----------------: | -----------------------------------------: |
-| :heavy_check_mark: |                         creacion de iconos |
-| :heavy_check_mark: |                           mejoras en login |
-| :heavy_check_mark: |                           creacion spinner |
-| :heavy_check_mark: |               mejoras en manejo de errores |
-| :heavy_check_mark: | Alta cliente con alta foto y lectura de qr |
-| :heavy_check_mark: |                       Alta cliente anonimo |
-| :heavy_check_mark: |        Realizar pedidos (platos y bebidas) |
-| :heavy_check_mark: |                          Confirmar pedidos |
+| :heavy_check_mark: |                                Nombre de tarea |
+| -----------------: |     -----------------------------------------: |
+| :heavy_check_mark: |                             creacion de iconos |
+| :heavy_check_mark: |                               mejoras en login |
+| :heavy_check_mark: |                               creacion spinner |
+| :heavy_check_mark: |                   mejoras en manejo de errores |
+| :heavy_check_mark: |     Alta cliente con alta foto y lectura de qr |
+| :heavy_check_mark: |                           Alta cliente anonimo |
+| :heavy_check_mark: |            Realizar pedidos (platos y bebidas) |
+|                  : |     Confirmar pedidos por lado de los empleados|
+|                    |          Confirmar pedidos por lado del cliente|
 
 ### Nicolas Gomez
 
@@ -48,13 +49,22 @@ https://docs.google.com/spreadsheets/d/1IxJ_jOkGoOFVfFLDb5P5j6MW7XNbcHcM7R4uWAIU
 | :heavy_check_mark: |                                                     Creacion de page y servicios para productos |
 | :heavy_check_mark: |                                       Creacion de page para listado de productos (falta logica) |
 | :heavy_check_mark: |    Creacion de scanner de QR de las mesas q dirige al listado de productos (falta pulir diseño) |
+| :heavy_check_mark: |                                               Mejora en Side Menu division por tipo de usuario) |
+| :heavy_check_mark: |                                                        Mejora y pulido de registro de empleados |
+| :heavy_check_mark: |                                                    QR de ingreso e inclución en lista de espera |
+| :heavy_check_mark: |                               Lista de espera y aprobación por parte de empleado asignando mesa |
+| :heavy_check_mark: |                                                                      QR de mesas (con chequeos) |
+| :heavy_check_mark: |                                                                       Mejoras de estilos varios |
+
 
 ### Federico Alainz
 
-| :heavy_check_mark: |            Nombre de tarea |
-| -----------------: | -------------------------: |
-| :heavy_check_mark: | Alta de dueño / supervisor |
-| :heavy_check_mark: |                  Alta mesa |
-|                    |                            |
+| :heavy_check_mark: |                                                 Nombre de tarea |
+| -----------------: |                                      -------------------------: |
+| :heavy_check_mark: |                                      Alta de dueño / supervisor |
+| :heavy_check_mark: |                                                       Alta mesa |
+|  heavy_check_mark: |     Push notifications -                                        |
+|                    |    Se modificaron todos los registrois de usuarios para incluir |
+|                    |                el id necesario para recibir las notifications.  |
 |                    |                            |
 |                    |                            |
