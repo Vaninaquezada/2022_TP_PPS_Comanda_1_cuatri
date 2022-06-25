@@ -31,7 +31,7 @@
           
 
         <div *ngIf="mostrar">
-          <div *ngIf="!hayPedido"> 
+          <div *ngIf="!pedi"> 
           <br><br>
           <strong>
             Ya estas listo para poder disfrutar de nuestros platos unicos:
@@ -40,7 +40,7 @@
             
           <ion-button class="botonPedir" size="large" shape="round" expand="full" (click)="Navegar('cliente-pedido')" > Hacer pedido </ion-button>
         </div>
-        <div *ngIf="hayPedido"> 
+        <div *ngIf="pedi"> 
           <ion-spinner name="circular" ></ion-spinner>
           <div >
             <ion-item >

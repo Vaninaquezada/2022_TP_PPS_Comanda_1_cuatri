@@ -52,6 +52,11 @@ export class MesaService {
     });
   }
 
+  async obtenerMesaCliente(id: string){
+    await this.afs.collection('/mesas').ref.where('cliente', '==', id).get().then((responce)=>{
+      this.mesaSeleccionada = responce.docs[0].data();
+    });
+  }
 
   guardarCambios(ingreso: Mesa){
     this.afs.collection('listaDeEspera').doc(ingreso.id).set(ingreso);

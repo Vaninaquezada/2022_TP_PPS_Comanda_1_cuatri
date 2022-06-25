@@ -84,6 +84,7 @@ usuario: User;
                       if(element.estado == "libre"){
                         this.utilidadesService.PresentarToastAbajo("Mesa 1", "success");                  
                         this.mesaService.update("JYCjbOgLWRTzkfyknquy", {estado: "ocupado"});
+                        this.mesaService.update("JYCjbOgLWRTzkfyknquy", {cliente: this.usuario.id});
                         this.mostrar = true; 
                      
                         this.pedido.getPedidoByMesaId("JYCjbOgLWRTzkfyknquy").then((p) =>
@@ -91,7 +92,7 @@ usuario: User;
                           this.pedi= data[0];
                           console.log(data[0]);
                           if(this.pedi){
-                            if (this.pedi?.estado !== 'pagado') {
+                            if (this.pedi.estado !== 'pagado') {
                               console.log("lloremos");
                               this.hayPedido = true;
                             }
@@ -117,12 +118,13 @@ usuario: User;
                         this.utilidadesService.PresentarToastAbajo("Mesa 2", "success");                  
                         this.mesaService.update("zZCtyY4gqhvEkkK2RyxD", {estado: "ocupado"});
                         this.mostrar = true; 
-
+                        this.mesaService.update("JYCjbOgLWRTzkfyknquy", {cliente: this.usuario.id});
                         this.pedido.getPedidoByMesaId("zZCtyY4gqhvEkkK2RyxD").then((p) =>
                         p.subscribe((data) => {
                           this.pedi = data[0];
                           console.log(data[0]);
                           if(this.pedi){
+                            console.log("lloremos");
                             if (this.pedi?.estado !== 'pagado') {
                               console.log("lloremos");
                               this.hayPedido = true;

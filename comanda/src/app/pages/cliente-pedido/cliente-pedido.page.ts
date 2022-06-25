@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController, NavController } from '@ionic/angular';
+import { Mesa } from 'src/app/clases/mesa';
 import { Pedidos } from 'src/app/clases/pedidos';
 import { Productos } from 'src/app/clases/productos';
 import { User } from 'src/app/clases/user';
 import { FotosProductoComponent } from 'src/app/componentes/fotos-producto/fotos-producto.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { MesaService } from 'src/app/services/mesa.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { ProductosService } from 'src/app/services/productos.service';
 import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.service';
@@ -23,6 +25,7 @@ export class ClientePedidoPage implements OnInit {
   pedido2: Pedidos =null;
   clientes: User[];
   cliente: User;
+  mesa: Mesa;
 mail;
   constructor(private productoService: ProductosService,
     private pedidoService: PedidosService,
@@ -32,12 +35,16 @@ mail;
     private usuarios: UsuariosFirebaseService,
     private authSvc: AuthService,
     private router: Router,
+    private mesaSer: MesaService,
     private usuarioService: UsuariosFirebaseService) {}
 
  async ngOnInit(){
 
    this.getCliente();
    this.cliente = this.usuarioService.usuarioSeleccionado;
+
+   this.getMesa(this.cliente.id);
+   this.cliente=this.mesa = this.mesaSer.mesaSeleccionada;
 
     this.productoService
     .getProductos()
@@ -67,6 +74,9 @@ mail;
   }
 async getCliente(){
   await this.usuarioService.obtenerUsuario(localStorage.getItem('usuario'));
+}
+async getMesa(id){
+  await this.mesaSer.obtenerMesaCliente(id);
 }
   getProductoCount(productoId: string): number {
     return this.pedido.platos.filter(
@@ -110,13 +120,13 @@ async getCliente(){
   }
 
   realizarPedido() {
-    console.log(this.pedido.mesaId);
-    console.log(this.pedido.numeroMesa);
-    //this.pedido.mesaId = this.cliente.mesaId;
-   //this.pedido.numeroMesa = this.cliente.numeroMesa;
+    console.log( this.mesa.numero);
+    console.log(this.mesa.id);
+    this.pedido.mesaId = this.cliente.mesaId;
+    this.pedido.numeroMesa = this.cliente.numeroMesa;
 
-   this.pedido.mesaId = 'BVIBfLHDswZd77dWWCLR';
-   this.pedido.numeroMesa = 3;
+  // this.pedido.mesaId = this.mesa.id;
+   //this.pedido.numeroMesa = this.mesa.numero;
     this.pedido.precioTotal = this.getPrecioTotal();
     this.pedido.tiempoEstimado = this.getTiempoEstimado();
     this.pedidoService.crearPedido(this.pedido);
