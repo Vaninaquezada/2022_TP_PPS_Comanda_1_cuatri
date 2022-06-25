@@ -83,6 +83,7 @@ export class LoginPage {
         break;
     }
   }
+  
 
   Mostrar() {
     this.mostrar = !this.mostrar;

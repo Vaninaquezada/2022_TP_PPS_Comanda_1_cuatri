@@ -61,9 +61,9 @@ export class PrincipalPage implements OnInit {
             
             // this.listaEsperaService.nuevoIngreso(ingreso);
 
-   // this.barcodeScanner.scan().then(barcodeData => {
-     // console.log('Barcode data', barcodeData);
-   //   this.code = barcodeData.text;
+    this.barcodeScanner.scan().then(barcodeData => {
+      console.log('Barcode data', barcodeData);
+     this.code = barcodeData.text;
    this.code ="listaDeEspera";
         switch (this.code) {
           case "listaDeEspera": //Ingreso lista de espera
@@ -90,9 +90,9 @@ export class PrincipalPage implements OnInit {
         }
        
 
-    // }).catch(err => {
-      //   console.log('Error', err);
-     //});   
+     }).catch(err => {
+        console.log('Error', err);
+     });
 
   }
 
