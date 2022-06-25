@@ -13,6 +13,7 @@ import { UtilidadesService } from 'src/app/services/utilidades.service';
 import { FotoService } from 'src/app/services/foto.service';
 import { BarcodeScannerService } from 'src/app/services/barcode-scanner.service';
 import { Router } from '@angular/router';
+import { PushOneSignalService } from 'src/app/services/push-one-signal.service';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
@@ -29,7 +30,8 @@ export class RegistroPage implements OnInit {
     private auth: AuthService,
     private uploadPhoto: FotoService,
     private router: Router,
-    private utilidadesService: UtilidadesService) {
+    private utilidadesService: UtilidadesService,
+    private pushOneSignal:PushOneSignalService) {
 
 
      }
@@ -60,6 +62,7 @@ export class RegistroPage implements OnInit {
       const usuario = this.registerForm.value as User;
       usuario.role = 'cliente';
       usuario.subTipo = 'registrado';
+      usuario.pushId = "0";
      // this.auth.SignUp(this.registerForm.value.email, this.registerForm.value.password);
      console.log('llora');
       this.usuarioService.registarUsuarioFoto(
@@ -67,11 +70,16 @@ export class RegistroPage implements OnInit {
         this.registerForm.value.password,
         this.photo
       );
+      this.usuarioService.obtenerPushIdAdmins().then(response=>{
+        console.log("this.adminsPushIds"+JSON.stringify(this.usuarioService.adminsPushIds));
+        this.pushOneSignal.enviarNotifClienteParaHabilitar( this.usuarioService.adminsPushIds,"Info adicional bla");
+      });
 
       this.registerForm.reset();
       this.photo = null;
       this.photoUrl = '';
       this.navegar('login' );
+      
     }else{
       this.utilidadesService.RemoverLoading();
       this.utilidadesService.PresentarToastAbajo('Falta foto', 'danger');

@@ -90,6 +90,7 @@ export class RegistroEmpleadosPage implements OnInit {
       apellido: this.forma.get('apellido').value,
       dni: this.forma.get('DNI').value,
       cuil: this.forma.get('CUIL').value, 
+      pushId: "0"
     };
     const foto = this.imagen;
     this.usuarioService.nuevoUsuario(usuario, foto);

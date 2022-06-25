@@ -57,6 +57,7 @@ export class RegistroAnonimoPage implements OnInit {
       usuario.subTipo = 'anonimo';
       usuario.verificacionEspec = false;
       usuario.verificadoPorAdm = true;
+      usuario.pushId = "0";
      // this.auth.SignUp(this.registerForm.value.email, this.registerForm.value.password);
      console.log('llora');
       this.usuarioService.registarUsuarioFoto(
