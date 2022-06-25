@@ -29,6 +29,7 @@ import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 import { NgCalendarModule } from 'ionic2-calendar';
 import {SwiperModule} from 'swiper/angular';
 import { CommonModule } from '@angular/common';
+import { OneSignal } from '@awesome-cordova-plugins/onesignal/ngx';
 
 @NgModule({
   declarations: [AppComponent,SideMenuComponent],
@@ -57,7 +58,7 @@ import { CommonModule } from '@angular/common';
     SideMenuComponent,
   ],
 
-  providers: [Storage,BarcodeScanner, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [Storage,BarcodeScanner,OneSignal, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

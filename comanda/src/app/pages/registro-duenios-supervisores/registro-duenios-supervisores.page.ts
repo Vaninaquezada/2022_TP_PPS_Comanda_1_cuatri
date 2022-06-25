@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.service';
 import { UtilidadesService } from 'src/app/services/utilidades.service';
 
+
 @Component({
   selector: 'app-registro-duenios-supervisores',
   templateUrl: './registro-duenios-supervisores.page.html',
@@ -27,8 +28,8 @@ export class RegistroDueniosSupervisoresPage implements OnInit {
     private authSvc: AuthService,
     private utilidadesService: UtilidadesService,
     private menuController: MenuController) {
-      this.MenuView();
-    }
+    this.MenuView();
+  }
 
   ngOnInit() {
     this.forma = this.fb.group({
@@ -44,7 +45,7 @@ export class RegistroDueniosSupervisoresPage implements OnInit {
     });
   }
 
-  MenuView(){
+  MenuView() {
     this.menuController.enable(false, 'clientesMenu');
     this.menuController.enable(false, 'empleadosMenu');
     this.menuController.enable(true, 'adminMenu');
@@ -85,7 +86,8 @@ export class RegistroDueniosSupervisoresPage implements OnInit {
       apellido: this.forma.get('apellido').value,
       dni: this.forma.get('DNI').value,
       cuil: this.forma.get('CUIL').value,
-      email: this.forma.get('email').value
+      email: this.forma.get('email').value,
+      pushId: "0"
     };
     const foto = this.imagen;
     this.usuarioService.nuevoUsuario(usuario, foto);
@@ -113,6 +115,4 @@ export class RegistroDueniosSupervisoresPage implements OnInit {
       this.navegador.navigate(['/registro']);
     }
   }
-
-
 }

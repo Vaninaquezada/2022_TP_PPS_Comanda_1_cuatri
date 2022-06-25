@@ -19,6 +19,7 @@ export class User {
     numeroMesa?: number;
     mesaId?: string;
     ingresos?: Array<Date>;
+    pushId?: string;
 
     constructor(){
         this.ingresos = new Array<Date>();
