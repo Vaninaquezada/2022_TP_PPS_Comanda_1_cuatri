@@ -5,6 +5,8 @@ import { Plato } from 'src/app/clases/plato';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { ProductosService } from 'src/app/services/productos.service';
 import { Pedidos } from 'src/app/clases/pedidos';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-cocinero-pedidos',
   templateUrl: './cocinero-pedidos.page.html',
@@ -18,7 +20,9 @@ export class CocineroPedidosPage implements OnInit {
     public productoService: ProductosService,
     public platoService: PlatoService,
     public pedidoService: PedidosService,
-    private modalController: ModalController) { }
+    private modalController: ModalController,
+    private router: Router,
+    private authSvc: AuthService) { }
 
   ngOnInit() {
 
@@ -43,5 +47,8 @@ export class CocineroPedidosPage implements OnInit {
       'terminado'
     );
   }
-  signOut(){}
+  signOut(){
+    this.authSvc.LogOut();
+    this.router.navigate(['login']);
+  }
 }

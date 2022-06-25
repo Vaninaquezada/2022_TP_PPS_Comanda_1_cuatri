@@ -24,7 +24,7 @@ export class PedidosService {
       p.pedidoId = pedido.pedidoId;
       this.preparacionService.crearPlato(p);
     });
-    pedido.platos = [];
+    //pedido.platos = [];
     try {
       await this.db.collection('Pedidos').doc(pedido.pedidoId).set(pedido);
     } catch (error) {

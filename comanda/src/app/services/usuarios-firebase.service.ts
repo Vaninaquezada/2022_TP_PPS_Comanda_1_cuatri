@@ -65,6 +65,7 @@ export class UsuariosFirebaseService {
   }
 
 
+
   getAll(){
     return this.usuarios;
   }
@@ -119,7 +120,13 @@ console.log('singup');
 
 
   guardarCambios(usuario: User){
-    this.db.collection('usuarios').doc(usuario.id).set(usuario);
+
+    try {
+      console.log("actualiza");
+      this.db.collection('usuarios').doc(usuario.id).set(usuario);
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
   borrrar(id: string): Promise<void> {

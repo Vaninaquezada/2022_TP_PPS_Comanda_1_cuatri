@@ -30,6 +30,7 @@ export class LoginPage {
       const user = await this.firebaseService.SignIn(email,password);
       this.checkUserIsVerified(user);
       localStorage.setItem('usuario', email);
+
     } catch (error) {
       this.utilidadesService.RemoverLoading();
       //this.utilidadesService.PresentarToastAbajo('Credenciales Incorrectas', 'danger');
@@ -103,7 +104,8 @@ export class LoginPage {
           break;
         case 'cliente':
           if(this.usuarioLogueado.verificadoPorAdm){
-            this.router.navigate(['/principal']);
+           this.router.navigate(['/principal']);
+         
             this.utilidadesService.RemoverLoading();
           }else{
             this.router.navigate(['/verificacion-registro']);

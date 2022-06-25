@@ -16,7 +16,7 @@ import { UtilidadesService } from 'src/app/services/utilidades.service';
   styleUrls: ['./principal.page.scss'],
 })
 export class PrincipalPage implements OnInit {
-
+  
   public forma: FormGroup;
   code: any;
   constructor(private navegador: Router,
@@ -27,11 +27,11 @@ export class PrincipalPage implements OnInit {
     private utilidadesService: UtilidadesService,
     private menuController: MenuController,
     private listaEsperaService: ListaDeEsperaFirebaseService
-    ) {
+    ) { 
     this.MenuView();
   }
-
-
+  
+  
   ngOnInit() {
     this.forma = this.fb.group({      
       'cantidadPersonas': ['', Validators.required],
@@ -48,7 +48,7 @@ export class PrincipalPage implements OnInit {
   async Scan(){
 
     await this.usuarioService.obtenerUsuario(localStorage.getItem("usuario"));
-    // this.utilidadesService.PresentarLoading("Ingresando a lista de espera.");
+    // this.utilidadesService.PresentarLoading("Ingresando a lista de espera.");            
 
             // let ingreso: IngresoLocal = {
             //   cliente: this.usuarioService.usuarioSeleccionado,
@@ -56,17 +56,14 @@ export class PrincipalPage implements OnInit {
             //   cantidadPersonas: Number(this.forma.get('cantidadPersonas').value),
             //   fechaIngreso: new Date(),
             // };
-
+            
             // this.listaEsperaService.nuevoIngreso(ingreso);
 
-    this.barcodeScanner.scan().then(barcodeData => {
-      console.log('Barcode data', barcodeData);
-      this.code = barcodeData.text;
+   // this.barcodeScanner.scan().then(barcodeData => {
+     // console.log('Barcode data', barcodeData);
+   //   this.code = barcodeData.text;
+   this.code ="listaDeEspera";
         switch (this.code) {
-          case "JYCjbOgLWRTzkfyknquy": //Mesa 1
-            this.utilidadesService.PresentarToastAbajo("Mesa 1", "success");
-            this.Navegar('listado-productos');
-            break;
           case "listaDeEspera": //Ingreso lista de espera
 
             let ingreso: IngresoLocal = {
@@ -75,19 +72,21 @@ export class PrincipalPage implements OnInit {
               cantidadPersonas: Number(this.forma.get('cantidadPersonas').value),
               fechaIngreso: new Date(),
             };
-
+            
             this.listaEsperaService.nuevoIngreso(ingreso);
 
             this.Navegar('mesa');
             break;
-
+        
           default:
-            this.utilidadesService.PresentarToastAbajo("Código Invalido", "danger");
+            this.utilidadesService.PresentarToastAbajo("Código Invalido", "danger"); 
             break;
         }
-     }).catch(err => {
-         console.log('Error', err);
-     });
+       
+
+    // }).catch(err => {
+      //   console.log('Error', err);
+     //});   
 
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController, NavController } from '@ionic/angular';
 import { Pedidos } from 'src/app/clases/pedidos';
 import { Productos } from 'src/app/clases/productos';
@@ -19,31 +20,39 @@ export class ClientePedidoPage implements OnInit {
 
   productos: Productos[];
   pedido: Pedidos;
-  cliente: User = null;
-
+  pedido2: Pedidos =null;
+  clientes: User[];
+  cliente: User;
+mail;
   constructor(private productoService: ProductosService,
     private pedidoService: PedidosService,
     private nav: NavController,
     private auth: AuthService,
     private modal: ModalController,
-    private usuarios: UsuariosFirebaseService) {}
+    private usuarios: UsuariosFirebaseService,
+    private authSvc: AuthService,
+    private router: Router,
+    private usuarioService: UsuariosFirebaseService) {}
 
-  ngOnInit(){
-   // this.cliente = this.auth.getAuth();
+ async ngOnInit(){
+
+   this.getCliente();
+   this.cliente = this.usuarioService.usuarioSeleccionado;
+
     this.productoService
-      .getProductos()
-      .then((p) => p.subscribe((data) => (this.productos = data)));
+    .getProductos()
+    .then((p) => p.subscribe((data) => (this.productos = data)));
 
-    this.pedido = {
-      pedidoId: this.usuarios.crearId(),
-      mesaId: '',
-      numeroMesa: 0,
-      tiempoEstimado: 0,
-      precioTotal: 0,
-      estado: 'pendiente',
-      platos: [],
-    };
-  }
+  this.pedido = {
+    pedidoId: this.usuarios.crearId(),
+    mesaId: '',
+    numeroMesa: 0,
+    tiempoEstimado: 0,
+    precioTotal: 0,
+    estado: 'pendiente',
+    platos: [],
+  };
+}
 
   getComidas(): Productos[] {
     return this.productos.filter((p) => p.tipoProducto === 'comida');
@@ -56,7 +65,9 @@ export class ClientePedidoPage implements OnInit {
   getProductoTotalCount(): number {
     return this.pedido.platos.length;
   }
-
+async getCliente(){
+  await this.usuarioService.obtenerUsuario(localStorage.getItem('usuario'));
+}
   getProductoCount(productoId: string): number {
     return this.pedido.platos.filter(
       (prep) => prep.producto.id === productoId
@@ -99,14 +110,17 @@ export class ClientePedidoPage implements OnInit {
   }
 
   realizarPedido() {
-    this.pedido.mesaId = this.cliente.mesaId;
-    this.pedido.numeroMesa = this.cliente.numeroMesa;
-  // this.pedido.mesaId = 'BVIBfLHDswZd77dWWCLR';
-  // this.pedido.numeroMesa = 3;
+    console.log(this.pedido.mesaId);
+    console.log(this.pedido.numeroMesa);
+    //this.pedido.mesaId = this.cliente.mesaId;
+   //this.pedido.numeroMesa = this.cliente.numeroMesa;
+
+   this.pedido.mesaId = 'BVIBfLHDswZd77dWWCLR';
+   this.pedido.numeroMesa = 3;
     this.pedido.precioTotal = this.getPrecioTotal();
     this.pedido.tiempoEstimado = this.getTiempoEstimado();
     this.pedidoService.crearPedido(this.pedido);
-    this.nav.navigateBack('principal');
+    this.nav.navigateBack('mesa');
   }
 
   async detalleFoto(producto: Productos) {
@@ -123,5 +137,8 @@ export class ClientePedidoPage implements OnInit {
     });
     return await modal.present();
   }
-
+  singOut(){
+    this.authSvc.LogOut();
+    this.router.navigate(['login']);
+  }
 }

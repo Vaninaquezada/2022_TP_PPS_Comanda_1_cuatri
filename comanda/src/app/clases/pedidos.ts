@@ -2,7 +2,7 @@ import { Plato } from './plato';
 export interface Pedidos {
     pedidoId?: string;
     mesaId: string;
-    numeroMesa: number;
+    numeroMesa: Number;
     clienteId?: string;
     tiempoEstimado: number; // en minutos
     precioTotal: number; // int

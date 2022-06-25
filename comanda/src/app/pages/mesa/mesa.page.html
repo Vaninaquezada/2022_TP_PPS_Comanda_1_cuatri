@@ -31,6 +31,7 @@
           
 
         <div *ngIf="mostrar">
+          <div *ngIf="!hayPedido"> 
           <br><br>
           <strong>
             Ya estas listo para poder disfrutar de nuestros platos unicos:
@@ -39,16 +40,21 @@
             
           <ion-button class="botonPedir" size="large" shape="round" expand="full" (click)="Navegar('cliente-pedido')" > Hacer pedido </ion-button>
         </div>
-        
-        <div *ngIf="mostrar">
-          <br><br>
-          <strong>
-            Ya estas listo para poder disfrutar de nuestros platos unicos:
-          </strong>
-          <br><br>
-            
-          <ion-button class="botonPedir" size="large" shape="round" expand="full" (click)="Navegar('cliente-pedido')" > Hacer pedido </ion-button>
+        <div *ngIf="hayPedido"> 
+          <ion-spinner name="circular" ></ion-spinner>
+          <div >
+            <ion-item >
+              <ion-item (click)="presentModal(pedi)" color="input">
+                <ion-label>Mesa {{ pedi.numeroMesa }}</ion-label>
+                <ion-label>Estado {{ pedi.estado }}</ion-label>
+              </ion-item>
+              <ion-button *ngIf="pedi.estado === 'confirmarEntrega' " class="botonPedir" size="large" shape="round" expand="full" (click)="confirmarEntrega()" > Confirmar entrega </ion-button>
+
+            </ion-item>
+          </div>
         </div>
+      </div>
+
           
       </div>      
     </ion-content>
