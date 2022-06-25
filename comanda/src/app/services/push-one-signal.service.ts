@@ -42,5 +42,10 @@ export class PushOneSignalService {
     this.enviarNotif(nombreNotif, mensajeNotif, idPush, infoAdjunta);
   }
 
+  enviarNotifAnonimoPendienteDelMetre(idPush: string[], infoAdjunta?: string) {
+    let mensajeNotif = "Hay un nuevo cliente en la lista de espera!";
+    let nombreNotif = "Lista de espera";
+    this.enviarNotif(nombreNotif, mensajeNotif, idPush, infoAdjunta);
+  }
 
 }
