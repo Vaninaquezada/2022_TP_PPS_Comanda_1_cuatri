@@ -20,7 +20,8 @@ export class ListadaDeEsperaPage implements OnInit {
   listaDeEspera: any;
   listadoMesas: any;
   public forma: FormGroup;
-user: User;
+  user: User;
+
   constructor(private navegador: Router,
     private usuariosService: UsuariosFirebaseService,
     private fb: FormBuilder,
@@ -45,8 +46,8 @@ user: User;
       'mesa': ['', [Validators.required, Validators.max(3)]],
     });
 
-    this.getCliente();
-    this.user=  this.usera.usuarioSeleccionado;
+    // this.getCliente();
+    // this.user=  this.usera.usuarioSeleccionado;
   }
   
   MenuView(){
@@ -55,7 +56,7 @@ user: User;
     this.menuController.enable(false, 'adminMenu');
   }
  
-  Habilitacion(ingreso: IngresoLocal){
+  async Habilitacion(ingreso: IngresoLocal){
     ingreso.estado = "aprobado";
     ingreso.mesaNro = Number(this.forma.get('mesa').value);
     for (let index = 0; index < this.listadoMesas.length; index++) {
@@ -66,10 +67,14 @@ user: User;
       }
     }
 
+    await this.usuariosService.obtenerUsuario(localStorage.getItem('usuario'));
+    this.user = this.usuariosService.usuarioSeleccionado;
+    console.log(this.user);
+
     this.user.mesaId = ingreso.mesaId;
-    this.user.numeroMesa = 435345 ;
+    this.user.numeroMesa = ingreso.mesaNro;
     console.log(this.user.mesaId);
-    this.usera.guardarCambios(this.user);
+    this.usuariosService.guardarCambios(this.user);
 
     this.listaEsperaService.guardarCambios(ingreso);
     
