@@ -23,6 +23,8 @@ export class UtilidadesService {
     const loader = await this.loadingController.create({
       message:'<img src="../assets/spinner.svg" class="img-align"  />' + mensaje,
       translucent: true,
+      cssClass: "custom-class",
+      mode: "ios",
       spinner: null,
     });
     await loader.present();
