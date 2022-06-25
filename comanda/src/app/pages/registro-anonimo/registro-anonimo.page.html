@@ -3,30 +3,33 @@
     <ion-title>Registro Cliente Anonimo</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content class="ion-padding">
   <div>
     <ion-img [src]="photoUrl" *ngIf="photoUrl !== ''"></ion-img>
+    <br>
     <form [formGroup]="registerForm" (ngSubmit)="register()">
       <ion-item>
-        <ion-label position="floating">Correo Electronico</ion-label>
-        <ion-input formControlName="email"></ion-input>
+        <ion-label position="floating">Correo Electrónico</ion-label>
+        <ion-input formControlName="email" placeholder="ejemplo@utn.com"></ion-input>
       </ion-item>
   
       <ion-item>
         <ion-label position="floating">Contraseña</ion-label>
-        <ion-input type="password" formControlName="password"></ion-input>
+        <ion-input type="password" formControlName="password" placeholder="Mínimo 6 caracteres"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Reingrese Contraseña</ion-label>
-        <ion-input type="password" formControlName="passwordR"></ion-input>
+        <ion-input type="password" formControlName="passwordR" placeholder="Mínimo 6 caracteres"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Nombre</ion-label>
-        <ion-input type="text"  formControlName="nombre"></ion-input>
+        <ion-input type="text"  formControlName="nombre" placeholder="Nombre"></ion-input>
       </ion-item>
+      <br>
       <ion-button expand="full" color="tertiary" (click)="getPhoto()">
         <ion-icon name="camera-outline"></ion-icon>Sacar Fotografia
       </ion-button>
+      <br><br>
   
       <ion-button expand="full" type="submit" [disabled]="registerForm.invalid"> Registrar Cliente Anonimo</ion-button>
     </form>

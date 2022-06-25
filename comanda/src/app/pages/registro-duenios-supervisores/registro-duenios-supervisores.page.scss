@@ -1,0 +1,55 @@
+ion-content{
+    --background: #23C1E0;
+    
+  }
+  ion-title{
+    color: #29dce9;
+    background: -webkit-linear-gradient(rgb(87, 179, 240),rgb(218, 91, 235));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+  }
+  
+  ion-item{
+    margin-bottom: 2.5%;
+  }
+  
+  
+  ion-label{
+    color: black;
+    margin-right: 15%;
+  }
+  
+  
+  ion-list{
+    .letra{
+      font-size: 0.8em;
+    }
+    ion-item{
+      margin-bottom: 0%;
+    }
+    background-color: transparent;
+    --color: black;
+    --border: none;
+    
+  
+  }
+  
+  
+  .item{
+    --color: black;
+    --background: rgba(0, 0, 0, 0.144);;
+    --border-color:transparent;
+  }
+  
+  ion-select {
+    /* Applies to the value and placeholder color */
+    color: #2132c7;
+    
+  
+    /* Set a different placeholder color */
+    --placeholder-color: #971e49;
+  
+    /* Set full opacity on the placeholder */
+    --placeholder-opacity: 1;
+  }
+  
