@@ -3,9 +3,10 @@
     <ion-title>Registro Cliente Anonimo</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content class="ion-padding">
   <div>
     <ion-img [src]="photoUrl" *ngIf="photoUrl !== ''"></ion-img>
+    <br>
     <form [formGroup]="registerForm" (ngSubmit)="register()">
       <ion-item>
         <ion-label color="light" position="floating">&nbsp;Correo Electronico</ion-label>
@@ -24,9 +25,11 @@
         <ion-label  color="light" position="floating">&nbsp;Nombre</ion-label>
         <ion-input type="text"  formControlName="nombre"></ion-input>
       </ion-item>
+      <br>
       <ion-button expand="full" color="tertiary" (click)="getPhoto()">
         <ion-icon name="camera-outline"></ion-icon>Sacar Fotografia
       </ion-button>
+      <br><br>
   
       <ion-button expand="full" type="submit" [disabled]="registerForm.invalid"> Registrar Cliente Anonimo</ion-button>
     </form>

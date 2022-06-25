@@ -30,8 +30,8 @@ export class AltaMesaPage implements OnInit {
   ngOnInit() {
     this.forma = this.fb.group({
       'tipo': ['', Validators.required],
-      'numero': ['', Validators.required],
-      'cantidadComensales': ['', Validators.required],
+      'numero': ['', [Validators.required, Validators.max(20)]],
+      'cantidadComensales': ['', [Validators.required, Validators.max(10)]],
       'foto': ['', Validators.required]
     });
   }
@@ -51,9 +51,10 @@ export class AltaMesaPage implements OnInit {
   crearMesa() {
     this.utilidadesService.PresentarLoading("Creando mesa");
     let mesa: Mesa = {
+      estado: "libre",
       tipo: this.forma.get('tipo').value,
       numero: this.forma.get('numero').value,
-      cantidadComensales: this.forma.get('cantidadComensales').value
+      cantidadComensales: Number(this.forma.get('cantidadComensales').value)
     };
     const foto = this.imagen;
     this.MesaService.altaMesa(mesa, foto);

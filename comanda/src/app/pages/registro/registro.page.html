@@ -43,7 +43,8 @@
       <ion-button   expand="full" type="submit" [disabled]="registerForm.invalid" > Registrar Cliente </ion-button>
     </form>
   </div>
+  <br>
   
   <app-barcode-dni (userBarcode)="getBarcodeData($event)"></app-barcode-dni>
-  <ion-button expand="full" class="anonimo" (click)="navegar('registro-anonimo')"> Registro Anonimo </ion-button>
+  <ion-button expand="full" class="anonimo" (click)="navegar('registro-anonimo')"> Registro Anónimo </ion-button>
 </ion-content>

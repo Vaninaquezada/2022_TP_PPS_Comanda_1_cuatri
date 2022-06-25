@@ -48,7 +48,7 @@ export class RegistroPage implements OnInit {
       ]),
       nombre: new FormControl('', [Validators.required]),
       apellido: new FormControl('', Validators.required),
-      dni: new FormControl('', [Validators.required]),
+      dni: new FormControl('', [Validators.required, Validators.max(99999999)]),
     });
   }
 

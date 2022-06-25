@@ -5,7 +5,7 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Alta Mesa</ion-title>
+        <ion-title>Alta de mesa</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -13,12 +13,8 @@
       <br>
       <form [formGroup]="forma" (ngSubmit)="crearMesa()">
 
-        <ion-list-header>
-          <ion-label>Alta de mesas</ion-label>
-        </ion-list-header>
-
         <ion-item>
-          <ion-label>Tipo de mesa</ion-label>
+          <ion-label position="floating">Tipo de mesa: </ion-label>
           <ion-select placeholder="Elegir" interface="popover" formControlName="tipo">
             <ion-select-option value="discapacitados">Discapacitados</ion-select-option>
             <ion-select-option value="vip">V.I.P.</ion-select-option>
@@ -27,18 +23,18 @@
         </ion-item>
 
         <ion-item>
-          <ion-label>Numero:</ion-label>
-          <ion-input type="number" formControlName="numero" placeholder="Numero de mesa"></ion-input>
+          <ion-label position="floating">Numero de mesa:</ion-label>
+          <ion-input type="number" formControlName="numero" placeholder="Máximo 20"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Cantidad de comensales:</ion-label>
-          <ion-input type="number" formControlName="cantidadComensales" placeholder="Cantidad de comensales"></ion-input>
+          <ion-label position="floating">Cantidad de comensales:</ion-label>
+          <ion-input type="number" formControlName="cantidadComensales" placeholder="Máximo 10"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Foto:</ion-label>
+          <ion-label >Foto:</ion-label>
           <ion-input type="file" (change)="changeImg($event)" formControlName="foto"> </ion-input>
         </ion-item>
-        <hr class="my-4">
+        <br><br><br>
 
         <ion-button color="primary" size="large" expand="full" type="submit" [disabled]="forma.invalid">Crear Mesa
         </ion-button>
