@@ -1,0 +1,52 @@
+<ion-app>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Lista de espera</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content >
+      
+      <ion-list>
+        <div color="dark" class="item" *ngFor="let ingreso of listaDeEspera">
+          <ion-item class="item" color="dark" *ngIf="ingreso.estado == 'esperando'">
+            
+              <ion-avatar slot="start">
+                <img *ngIf="ingreso.cliente.imgPerfil" src="{{ingreso.cliente.imgPerfil}}">
+                <img *ngIf="ingreso.cliente.foto" src="{{ingreso.cliente.foto}}">
+              </ion-avatar>
+              <ion-label>
+                <h2>Cliente: {{ingreso.cliente.apellido}} {{ingreso.cliente.nombre}}</h2>
+                <h4>{{ingreso.fechaIngreso.toMillis() | date:'dd/MM/yyyy hh:mm a'}}</h4>
+                <h3>Cantidad: {{ingreso.cantidadPersonas}}</h3>
+                
+                
+              </ion-label>
+              <div>
+                <form [formGroup]="forma" (ngSubmit)="Habilitacion(ingreso)">
+                  <ion-item >
+                    <ion-input type="number" formControlName="mesa" placeholder="Nro. mesa"></ion-input>
+                  </ion-item>
+  
+                  <ion-button color="success" size="small" shape="round" type="submit" [disabled]="forma.invalid">
+                    <ion-icon name="checkmark-circle-outline"></ion-icon>
+                  </ion-button>
+                  <ion-button color="danger" size="small" shape="round" (click)="Cancelacion(ingreso)">
+                    <ion-icon name="close-circle-outline"></ion-icon>
+                  </ion-button>          
+                </form>
+                
+              </div>
+              
+          </ion-item>
+        </div>
+        
+      </ion-list>
+
+    </ion-content>
+  </div>
+</ion-app>

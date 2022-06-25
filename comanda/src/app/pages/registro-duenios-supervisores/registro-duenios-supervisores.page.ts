@@ -36,12 +36,12 @@ export class RegistroDueniosSupervisoresPage implements OnInit {
       'perfil': ['', Validators.required],
       'nombre': ['', Validators.required],
       'apellido': ['', Validators.required],
-      'DNI': ['', Validators.required],
-      'CUIL': ['', Validators.required],
+      'DNI': ['', [Validators.required, Validators.max(99999999)]],
+      'CUIL': ['', [Validators.required, Validators.max(99999999999)]],
       'foto': ['', Validators.required],
-      'email': ['', Validators.required],
-      'password': ['', Validators.required],
-      'repetirPassword': ['', Validators.required]
+      'email': ['', [Validators.email, Validators.required]],
+      'password': ['', [Validators.required, Validators.minLength(6)]],
+      'repetirPassword': ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 

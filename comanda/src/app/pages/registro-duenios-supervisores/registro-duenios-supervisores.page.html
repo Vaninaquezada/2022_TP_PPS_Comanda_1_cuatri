@@ -5,22 +5,17 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Registro Dueños y Supervisores</ion-title>
+        <ion-title>Registro Administradores</ion-title>
       </ion-toolbar>
     </ion-header>
 
 
     <ion-content class="ion-padding">
 
-      <br>
       <form [formGroup]="forma" (ngSubmit)="registrarse()">
     
-        <ion-list-header>
-          <ion-label>Alta de Dueño o Supervisor</ion-label>
-        </ion-list-header>
-    
         <ion-item>
-          <ion-label>Perfil del alta</ion-label>
+          <ion-label position="floating">Perfil del alta</ion-label>
           <ion-select placeholder="Elegir" interface="popover" formControlName="perfil">
             <ion-select-option value="duenio">Dueño</ion-select-option>
             <ion-select-option value="supervisor">Supervisor</ion-select-option>
@@ -28,40 +23,41 @@
         </ion-item>
     
         <ion-item>
-          <ion-label>Nombre:</ion-label>
+          <ion-label position="floating">Nombre:</ion-label>
           <ion-input type="text" formControlName="nombre" placeholder="Nombre"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Apellido:</ion-label>
+          <ion-label position="floating">Apellido:</ion-label>
           <ion-input type="text" formControlName="apellido" placeholder="Apellido"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Email:</ion-label>
-          <ion-input type="text" formControlName="email" placeholder="email@ejemplo.utn"></ion-input>
+          <ion-label position="floating">Correo Electrónico:</ion-label>
+          <ion-input type="email" formControlName="email" placeholder="ejemplo@utn.com"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Contraseña:</ion-label>
-          <ion-input type="password" formControlName="password" placeholder="Contraseña"></ion-input>
+          <ion-label position="floating">Contraseña:</ion-label>
+          <ion-input type="password" formControlName="password" placeholder="Mínimo 6 caracteres"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Repetir contraseña:</ion-label>
-          <ion-input type="password" formControlName="repetirPassword" placeholder="Repetir contraseña"></ion-input>
+          <ion-label position="floating">Repetir contraseña:</ion-label>
+          <ion-input type="password" formControlName="repetirPassword" placeholder="Mínimo 6 caracteres"></ion-input>
         </ion-item>
           <ion-item>
-          <ion-label>CUIL:</ion-label>
-          <ion-input type="number" formControlName="CUIL" placeholder="CUIL"></ion-input>
+          <ion-label position="floating">CUIL:</ion-label>
+          <ion-input type="number" formControlName="CUIL" placeholder="CUIL sin guiones"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>DNI:</ion-label>
+          <ion-label position="floating">DNI:</ion-label>
           <ion-input type="number" formControlName="DNI" placeholder="DNI"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Foto:</ion-label>
           <ion-input type="file" (change)="changeImg($event)" formControlName="foto"> </ion-input>
         </ion-item>
-        <hr class="my-4">
+        
     
-        <ion-button color="primary" size="large" expand="full" type="submit" [disabled]="forma.invalid">Crear Usuario
+        <ion-button color="primary" size="large" expand="full" type="submit" [disabled]="forma.invalid">
+          Crear Usuario
         </ion-button>
     
       </form>

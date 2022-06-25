@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PrincipalPageRoutingModule } from './principal-routing.module';
+import { ListadaDeEsperaPageRoutingModule } from './listada-de-espera-routing.module';
 
-import { PrincipalPage } from './principal.page';
+import { ListadaDeEsperaPage } from './listada-de-espera.page';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { PrincipalPage } from './principal.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    PrincipalPageRoutingModule
+    ListadaDeEsperaPageRoutingModule
   ],
-  declarations: [PrincipalPage]
+  declarations: [ListadaDeEsperaPage]
 })
-export class PrincipalPageModule {}
+export class ListadaDeEsperaPageModule {}
