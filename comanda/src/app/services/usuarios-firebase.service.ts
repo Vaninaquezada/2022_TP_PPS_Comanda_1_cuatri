@@ -23,6 +23,7 @@ export class UsuariosFirebaseService {
   usuariosRefClientes: AngularFirestoreCollection<any>;
   usuariosClientes: Observable<any[]>;
   adminsPushIds = new Array<string>();
+  metresPushIds = new Array<string>();
   // usuariosRefEspecialistas: AngularFirestoreCollection<any>;
   // usuariosEspecialistas: Observable<any[]>;
 
@@ -146,6 +147,17 @@ export class UsuariosFirebaseService {
       responce.docs.forEach(user => {
         if (user.data()["pushId"]) {
           this.adminsPushIds.push(user.data()["pushId"]);
+        }
+      });
+    });
+  }
+
+  async obtenerPushIdMetres() {
+    console.log("entro a obtener pushIds de los metres")
+    await this.db.collection('/usuarios').ref.where('subTipo', '==', 'metre').get().then((responce) => {
+      responce.docs.forEach(user => {
+        if (user.data()["pushId"]) {
+          this.metresPushIds.push(user.data()["pushId"]);
         }
       });
     });

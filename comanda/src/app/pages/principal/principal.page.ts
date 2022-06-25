@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ListaDeEsperaFirebaseService } from 'src/app/services/lista-de-espera-firebase.service';
 import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.service';
 import { UtilidadesService } from 'src/app/services/utilidades.service';
+import { PushOneSignalService } from 'src/app/services/push-one-signal.service';
 
 @Component({
   selector: 'app-principal',
@@ -26,7 +27,8 @@ export class PrincipalPage implements OnInit {
     private barcodeScanner: BarcodeScanner,
     private utilidadesService: UtilidadesService,
     private menuController: MenuController,
-    private listaEsperaService: ListaDeEsperaFirebaseService
+    private listaEsperaService: ListaDeEsperaFirebaseService,
+    private pushOneSignal:PushOneSignalService
     ) { 
     this.MenuView();
   }
@@ -75,6 +77,10 @@ export class PrincipalPage implements OnInit {
             
             this.listaEsperaService.nuevoIngreso(ingreso);
 
+            this.usuarioService.obtenerPushIdMetres().then(response=>{
+              console.log("this.metrePushIds"+JSON.stringify(this.usuarioService.metresPushIds));
+              this.pushOneSignal.enviarNotifAnonimoPendienteDelMetre( this.usuarioService.metresPushIds,"Info adicional bla");
+            });
             this.Navegar('mesa');
             break;
         
