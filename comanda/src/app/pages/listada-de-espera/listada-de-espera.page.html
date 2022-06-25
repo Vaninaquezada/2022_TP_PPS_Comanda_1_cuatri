@@ -5,14 +5,14 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Listada de espera</ion-title>
+        <ion-title>Lista de espera</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content >
       
       <ion-list>
-        <ion-item color="dark" class="item" *ngFor="let ingreso of listaDeEspera">
+        <div color="dark" class="item" *ngFor="let ingreso of listaDeEspera">
           <ion-item class="item" color="dark" *ngIf="ingreso.estado == 'esperando'">
             
               <ion-avatar slot="start">
@@ -23,20 +23,27 @@
                 <h2>Cliente: {{ingreso.cliente.apellido}} {{ingreso.cliente.nombre}}</h2>
                 <h4>{{ingreso.fechaIngreso.toMillis() | date:'dd/MM/yyyy hh:mm a'}}</h4>
                 <h3>Cantidad: {{ingreso.cantidadPersonas}}</h3>
-              </ion-label>
-  
-              <ion-item class="item" color="dark" horizontal="end">
-                <ion-button color="success" size="small" shape="round" (click)="Habilitacion(ingreso)">
-                  <ion-icon name="checkmark-circle-outline"></ion-icon>
-                </ion-button>
                 
-                <ion-button color="danger" size="small" shape="round" (click)="Cancelacion(ingreso)">
-                  <ion-icon name="close-circle-outline"></ion-icon>
-                </ion-button>
-              </ion-item>                
-            
+                
+              </ion-label>
+              <div>
+                <form [formGroup]="forma" (ngSubmit)="Habilitacion(ingreso)">
+                  <ion-item >
+                    <ion-input type="number" formControlName="mesa" placeholder="Nro. mesa"></ion-input>
+                  </ion-item>
+  
+                  <ion-button color="success" size="small" shape="round" type="submit" [disabled]="forma.invalid">
+                    <ion-icon name="checkmark-circle-outline"></ion-icon>
+                  </ion-button>
+                  <ion-button color="danger" size="small" shape="round" (click)="Cancelacion(ingreso)">
+                    <ion-icon name="close-circle-outline"></ion-icon>
+                  </ion-button>          
+                </form>
+                
+              </div>
+              
           </ion-item>
-        </ion-item>
+        </div>
         
       </ion-list>
 
