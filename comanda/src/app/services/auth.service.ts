@@ -36,7 +36,8 @@ export class AuthService {
     } catch (error) {
       this.utilidadesService.RemoverLoading();
       console.log(error);
-      this.utilidadesService.PresentarToastAbajo(this.authError.getError(error.code), 'danger');
+     // this.utilidadesService.PresentarToastAbajo(this.authError.getError(error.code), 'danger');
+     throw new Error(this.authError.getError(error.code));
      }
     // await this.firebaseAuth.signInWithEmailAndPassword(email, password).then(res=>{
     //   this.isLoggedIn = true;

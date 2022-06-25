@@ -8,37 +8,39 @@
     <ion-img [src]="photoUrl" *ngIf="photoUrl !== ''"></ion-img>
     <form [formGroup]="registerForm" (ngSubmit)="register()">
       <ion-item>
-        <ion-label position="floating">Correo Electronico</ion-label>
-        <ion-input formControlName="email"></ion-input>
+        <ion-label color="light" position="floating">&nbsp;&nbsp; Correo Electronico</ion-label>
+        <ion-input   type="email" formControlName="email"></ion-input>
+
       </ion-item>
   
       <ion-item>
-        <ion-label position="floating">Contraseña</ion-label>
-        <ion-input type="password" formControlName="password"></ion-input>
+        <ion-label color="light" position="floating">&nbsp;&nbsp;Contraseña</ion-label>
+        <ion-input type="password"   formControlName="password"></ion-input>
+
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Repetir Contraseña</ion-label>
-        <ion-input type="password" formControlName="passwordR"></ion-input>
+        <ion-label color="light" position="floating">&nbsp;&nbsp;Repetir Contraseña</ion-label>
+        <ion-input type="password"  formControlName="passwordR"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Nombre</ion-label>
-        <ion-input type="text"  formControlName="nombre"></ion-input>
+        <ion-label color="light" position="floating">&nbsp;&nbsp;Nombre</ion-label>
+        <ion-input type="text"   formControlName="nombre"></ion-input>
       </ion-item>
   
       <ion-item>
-        <ion-label position="floating">Apellido</ion-label>
-        <ion-input type="text"  formControlName="apellido"></ion-input>
+        <ion-label color="light" position="floating">&nbsp;&nbsp;Apellido</ion-label>
+        <ion-input type="text"   formControlName="apellido"></ion-input>
       </ion-item>  
       <ion-item>
-        <ion-label position="floating">DNI</ion-label>
-        <ion-input type="number" formControlName="dni"></ion-input>
+        <ion-label color="light" position="floating">&nbsp;&nbsp;DNI</ion-label>
+        <ion-input type="number"  formControlName="dni"></ion-input>
       </ion-item>
   
       <ion-button expand="full" color="tertiary" (click)="getPhoto()">
         <ion-icon name="camera-outline"></ion-icon>Sacar Fotografia
       </ion-button>
   
-      <ion-button expand="full" type="submit" [disabled]="registerForm.invalid" > Registrar Cliente </ion-button>
+      <ion-button   expand="full" type="submit" [disabled]="registerForm.invalid" > Registrar Cliente </ion-button>
     </form>
   </div>
   

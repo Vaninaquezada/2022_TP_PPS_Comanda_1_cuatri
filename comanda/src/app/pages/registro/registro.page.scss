@@ -1,5 +1,6 @@
 ion-content{
     --background: #23C1E0;
+    color: white;
     
   }
   ion-title{
@@ -32,7 +33,17 @@ ion-content{
   ion-icon{
     size: 2%;
   }
-  
+  ion-input{
+    color:aliceblue;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 4px;
+    --background: -webkit-linear-gradient(rgb(87, 179, 240),rgb(91, 93, 235));
+  }
+
+  ion-label{
+    z-index: 3000;
+    --color	:aliceblue;
+  }
   ion-list{
     background-color: transparent;
     --color: black;

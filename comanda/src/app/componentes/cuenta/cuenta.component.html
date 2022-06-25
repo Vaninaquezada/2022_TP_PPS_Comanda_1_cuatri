@@ -24,16 +24,16 @@
               >${{ propina }}</ion-label
             >
           </ion-item>
-          <ion-item>
-            <ion-label class="ion-text-left">Total</ion-label>
+          <ion-item class="total">
+            <ion-label class="ion-text-left des">Total</ion-label>
             <ion-label class="ion-text-right"
               >${{ pedido.precioTotal + propina }}</ion-label
             >
           </ion-item>
           <ion-item>
-            <ion-label class="ion-text-left">Estado del pedido </ion-label>
+            <ion-label class="ion-text-left">Estado del pedido</ion-label>
             <ion-label class="ion-text-right"
-              >${{ pedido.estado }}</ion-label
+              >{{ pedido.estado }}</ion-label
             >
           </ion-item>
         </ion-list>
@@ -56,7 +56,7 @@
       Confirmar
     </ion-button>
     <ion-button *ngIf="aentregar"
-    (click)="entregarPedido()"
+    (click)="entregarPedido(pedido)"
     color="secondary"
     type="submit"
     expand="block"

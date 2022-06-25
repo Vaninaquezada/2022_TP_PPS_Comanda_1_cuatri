@@ -32,7 +32,8 @@ export class LoginPage {
       localStorage.setItem('usuario', email);
     } catch (error) {
       this.utilidadesService.RemoverLoading();
-      this.utilidadesService.PresentarToastAbajo('Credenciales Incorrectas', 'danger');
+      //this.utilidadesService.PresentarToastAbajo('Credenciales Incorrectas', 'danger');
+      this.utilidadesService.PresentarToastAbajo(error, 'danger');
       // this.router.navigate(['/registro']);
       console.log(error);
     }

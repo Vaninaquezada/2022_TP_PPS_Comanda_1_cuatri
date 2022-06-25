@@ -10,6 +10,7 @@ import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.serv
 import { UtilidadesService } from 'src/app/services/utilidades.service';
 import { Photo } from '@capacitor/camera';
 import { FotoService } from 'src/app/services/foto.service';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-alta-producto',
@@ -34,8 +35,10 @@ export class AltaProductoPage implements OnInit {
     private utilidadesService: UtilidadesService,
     private productoService: ProductosService,
     private uploadPhoto: FotoService,
+    private menuController: MenuController
     
-    ) { 
+    ) {
+      this.MenuView();
     
 
   }
@@ -48,6 +51,12 @@ export class AltaProductoPage implements OnInit {
       'precio': ['', Validators.required],
       'tipoProducto': ['', Validators.required],
     });
+  }
+
+  MenuView(){
+    this.menuController.enable(false, 'clientesMenu');
+    this.menuController.enable(false, 'empleadosMenu');
+    this.menuController.enable(true, 'adminMenu');
   }
 
   async AltaProducto(){

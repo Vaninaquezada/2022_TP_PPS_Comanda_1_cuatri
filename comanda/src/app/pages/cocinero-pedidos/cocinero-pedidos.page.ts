@@ -43,4 +43,5 @@ export class CocineroPedidosPage implements OnInit {
       'terminado'
     );
   }
+  signOut(){}
 }

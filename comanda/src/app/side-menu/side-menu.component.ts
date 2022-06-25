@@ -14,6 +14,8 @@ import { UtilidadesService } from 'src/app/services/utilidades.service';
 })
 export class SideMenuComponent implements OnInit {
 
+  public role: string = localStorage.getItem('role');
+
   constructor(
     private navegador: Router,
     private usuarioService: UsuariosFirebaseService,
@@ -30,8 +32,7 @@ export class SideMenuComponent implements OnInit {
   }
 
   Desconectarse(){
-    this.authSvc.LogOut();
-    
+    this.authSvc.LogOut();    
     this.Navegar("home");
   }
 

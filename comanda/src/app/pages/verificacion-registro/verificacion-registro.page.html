@@ -1,9 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Verificación de Usuario</ion-title>
-    <div class="ion-float-right" (click)="singOut()">
-      <ion-icon name="enter-outline"></ion-icon>
-    </div>
+      <ion-fab  horizontal="end" vertical="center">
+        <ion-fab-button size="small" color="danger" (click)="singOut()">
+          <ion-icon name="log-out-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
   </ion-toolbar>
 </ion-header>
 
@@ -15,8 +17,30 @@
     <strong>Te llegará un mail en caso de que tu registro sea aprobado o no.</strong>
     <br>
     <br>
-    <strong style="color: rgba(0, 0, 0, 0.5);">Mientras tanto te invitamos a visitarnos en nuestras redes sociales ubicadas abajo.</strong>
+    <strong style="color: rgba(0, 0, 0, 0.5);">Mientras tanto te invitamos a visitarnos en nuestras redes sociales @restozonasur ubicadas abajo.</strong>
   </div>
-  
-
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>
+      <ion-fab horizontal="star" vertical="center">
+        <ion-fab-button  class="btnRedes" >
+          <ion-icon name="logo-facebook"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+
+      <ion-fab horizontal="center" vertical="center">
+        <ion-fab-button  class="btnRedes">
+          <ion-icon name="logo-instagram"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+
+      <ion-fab horizontal="end" vertical="center">
+        <ion-fab-button  class="btnRedes">
+          <ion-icon name="logo-twitter"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

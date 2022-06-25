@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Pedidos } from 'src/app/clases/pedidos';
 import { Plato } from 'src/app/clases/plato';
 import { CuentaComponent } from 'src/app/componentes/cuenta/cuenta.component';
+import { AuthService } from 'src/app/services/auth.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { PlatoService } from 'src/app/services/plato.service';
 
@@ -15,7 +17,9 @@ export class PedidosAEntregarPage implements OnInit {
   pedidosEntregar: Pedidos[];
   pedido: Pedidos;
   platos: Plato[];
-  constructor(private pedidoService: PedidosService,private preparacionService: PlatoService, private modal: ModalController) { }
+  constructor(private pedidoService: PedidosService,
+    private preparacionService: PlatoService,
+     private modal: ModalController, private authSvc: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.pedidoService
@@ -47,5 +51,10 @@ export class PedidosAEntregarPage implements OnInit {
     });
     return await modal.present();
 
+  }
+
+  singOut(){
+    this.authSvc.LogOut();
+    this.router.navigate(['login']);
   }
 }

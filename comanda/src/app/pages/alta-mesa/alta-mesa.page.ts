@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MenuController } from '@ionic/angular';
 import { Mesa } from 'src/app/clases/mesa';
 import { UtilidadesService } from 'src/app/services/utilidades.service';
 import { MesaService } from '../../services/mesa.service';
@@ -17,7 +18,14 @@ export class AltaMesaPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private utilidadesService: UtilidadesService,
-    private MesaService:MesaService) { }
+    private MesaService:MesaService,
+    private menuController: MenuController
+    
+    ) {
+      this.MenuView();
+    
+
+  }
 
   ngOnInit() {
     this.forma = this.fb.group({
@@ -26,6 +34,12 @@ export class AltaMesaPage implements OnInit {
       'cantidadComensales': ['', Validators.required],
       'foto': ['', Validators.required]
     });
+  }
+
+  MenuView(){
+    this.menuController.enable(false, 'clientesMenu');
+    this.menuController.enable(false, 'empleadosMenu');
+    this.menuController.enable(true, 'adminMenu');
   }
 
   changeImg(event) {

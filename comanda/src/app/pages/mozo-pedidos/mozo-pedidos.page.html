@@ -1,13 +1,22 @@
+
 <ion-header>
   <ion-toolbar>
-    <ion-title>mozoPedidos</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Pedidos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="signOut()">
+        <ion-icon name="log-out" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-button size="large" shape="round" expand="full" color="secondary"  (click)="navegar('mozo-pedidos/pedidos-en-preparacion')" > pedidos-en-preparacion</ion-button>
-  <ion-button size="large" shape="round" expand="full" color="secondary"  (click)="navegar('mozo-pedidos/pedidos-aconfirmar')" > pedidos-aconfirmar </ion-button>
-  <ion-button size="large" shape="round" expand="full" color="secondary"  (click)="navegar('mozo-pedidos/pedidos-aentregar')" > pedidos-aentregar </ion-button>
-  <ion-button size="large" shape="round" expand="full" color="secondary"  (click)="navegar('mozo-pedidos/pedidos-acobrar')" > pedidos-acobrar </ion-button>
+  <ion-button size="large" shape="round" expand="full" color="secondary"  (click)="navegar('mozo-pedidos/pedidos-en-preparacion')" > Pedidos en preparacion</ion-button>
+  <ion-button size="large" shape="round" expand="full" color="secondary"  (click)="navegar('mozo-pedidos/pedidos-aconfirmar')" > pedidos a confirmar </ion-button>
+  <ion-button size="large" shape="round" expand="full" color="secondary"  (click)="navegar('mozo-pedidos/pedidos-aentregar')" > Pedidos a entregar </ion-button>
+  <ion-button size="large" shape="round" expand="full" color="secondary"  (click)="navegar('mozo-pedidos/pedidos-acobrar')" > Pedidos a cobrar </ion-button>
 
 </ion-content>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 import { Pedidos } from 'src/app/clases/pedidos';
 import { Productos } from 'src/app/clases/productos';
 import { User } from 'src/app/clases/user';
@@ -17,24 +18,29 @@ import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.serv
 export class ListadoProductosPage implements OnInit {
 
   listadoProductos: any;
-  //pedido = new Pedidos;
+  
 
   constructor(private navegador: Router,
       private usuariosService: UsuariosFirebaseService,
       private authSvc: AuthService,
       private emailService: EmailService,
-      private productosService: ProductosService) {
-
-    this.productosService.getAll().subscribe(resultado => {
-      this.listadoProductos = resultado;
-     // this.pedido.productos = this.listadoProductos;
+      private productosService: ProductosService,
+      private menuController: MenuController
+      
+      ) {
+        this.MenuView();
+        this.productosService.getAll().subscribe(resultado => {
+        this.listadoProductos = resultado;
     });
   }
 
   ngOnInit() {
   }
 
-  Sumar(){
+  MenuView(){
+    this.menuController.enable(false, 'clientesMenu');
+    this.menuController.enable(false, 'empleadosMenu');
+    this.menuController.enable(true, 'adminMenu');
   }
 
   Navegar(ruta: string){

@@ -99,10 +99,10 @@ export class ClientePedidoPage implements OnInit {
   }
 
   realizarPedido() {
-    //this.pedido.mesaId = this.cliente.mesaId;
-   // this.pedido.numeroMesa = this.cliente.numeroMesa;
-   this.pedido.mesaId = 'BVIBfLHDswZd77dWWCLR';
-   this.pedido.numeroMesa = 3;
+    this.pedido.mesaId = this.cliente.mesaId;
+    this.pedido.numeroMesa = this.cliente.numeroMesa;
+  // this.pedido.mesaId = 'BVIBfLHDswZd77dWWCLR';
+  // this.pedido.numeroMesa = 3;
     this.pedido.precioTotal = this.getPrecioTotal();
     this.pedido.tiempoEstimado = this.getTiempoEstimado();
     this.pedidoService.crearPedido(this.pedido);

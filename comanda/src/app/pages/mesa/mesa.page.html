@@ -1,9 +1,58 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>mesa</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button menu="clientesMenu"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Ingreso</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-<ion-content>
 
-</ion-content>
+    <ion-content>
+      <div id="container">
+        <div *ngIf="!mostrar">
+          <strong>
+            Ya estas en la lista de espera de Resto Zona Sur.
+          </strong>
+          <br>
+          <strong>
+            En breve nuestro metre te notificará cuando podes ingresar y te llevará a tu mesa.
+          </strong>
+          <br>
+          <strong>
+            En ella encontrarás un QR, por favor escanearlo para hacer tu pedido.
+          </strong>
+
+          <ion-button class="botonScan" size="large" shape="round" expand="full" (click)="Scan()"><ion-icon name="scan-circle-outline"></ion-icon> Escanear <ion-icon name="scan-circle-outline"></ion-icon></ion-button>
+          
+        </div>
+          
+
+        <div *ngIf="mostrar">
+          <br><br>
+          <strong>
+            Ya estas listo para poder disfrutar de nuestros platos unicos:
+          </strong>
+          <br><br>
+            
+          <ion-button class="botonPedir" size="large" shape="round" expand="full" (click)="Navegar('cliente-pedido')" > Hacer pedido </ion-button>
+        </div>
+        
+        <div *ngIf="mostrar">
+          <br><br>
+          <strong>
+            Ya estas listo para poder disfrutar de nuestros platos unicos:
+          </strong>
+          <br><br>
+            
+          <ion-button class="botonPedir" size="large" shape="round" expand="full" (click)="Navegar('cliente-pedido')" > Hacer pedido </ion-button>
+        </div>
+          
+      </div>      
+    </ion-content>
+
+    
+  </div>
+</ion-app>

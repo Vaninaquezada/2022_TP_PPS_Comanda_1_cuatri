@@ -1,10 +1,15 @@
 
-
+<ion-header>
+    <ion-toolbar>
+      <ion-title>Comidas</ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="signOut()">
+          <ion-icon name="log-out" slot="icon-only"></ion-icon>
+        </ion-button>
+    </ion-toolbar>
+  </ion-header>
 <ion-content class="ion-padding" color="fondo">
   <ion-list>
-      <ion-list-header>
-          <ion-label>COMIDAS</ion-label>
-      </ion-list-header>
       <ion-spinner name="circular" *ngIf="!productos"></ion-spinner>
 
       <div *ngIf="productos">

@@ -9,7 +9,16 @@ ion-content{
       -webkit-text-fill-color: transparent;
   }
   
-  
+  ion-input{
+    color:aliceblue;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 4px;
+    --background: -webkit-linear-gradient(rgb(87, 179, 240),rgb(91, 93, 235));
+  }
+  ion-label{
+    z-index: 3000;
+    --color	:aliceblue;
+  }
   p{
     color: rgb(233, 17, 100);
     font-style:oblique;

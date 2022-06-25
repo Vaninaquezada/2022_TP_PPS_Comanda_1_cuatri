@@ -1,0 +1,22 @@
+ion-content{
+    --background: #23C1E0;
+    color: white;
+    
+  }
+  ion-title{
+    color: #29dce9;
+    background: -webkit-linear-gradient(rgb(87, 179, 240),rgb(218, 91, 235));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+  }
+  ion-header{
+    --background: #ffffff;
+  }
+  ion-item{
+    border-top: 2px solid rgb(255, 255, 255);
+    border-bottom: 2px solid rgb(255, 255, 255);
+  }
+
+  ion-footer{
+    --background: #23C1E0;
+  }
