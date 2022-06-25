@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pedidos a confirmar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-spinner name="circular" *ngIf="!pedidosConfirmar"></ion-spinner>
+  <div *ngIf="pedidosConfirmar">
+    <ion-item *ngFor="let pedido of pedidosConfirmar">
+      <ion-item (click)="presentModal(pedido)" color="input">
+        <ion-label>Mesa {{ pedido.numeroMesa }}</ion-label>
+      </ion-item>
+
+
+    </ion-item>
+    <ion-text *ngIf="pedidosConfirmar.length === 0">
+      <h5>No hay pedidos a confirmar</h5>
+    </ion-text>
+  </div>
+</ion-content>

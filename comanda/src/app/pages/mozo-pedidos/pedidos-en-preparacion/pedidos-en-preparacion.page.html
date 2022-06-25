@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pedidos en preparacion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-spinner name="circular" *ngIf="!pedidosPreparando"></ion-spinner>
+  <div *ngIf="pedidosPreparando">
+    <ion-item
+      color="input"
+      *ngFor="let pedido of pedidosPreparando"
+      (click)="presentModal(pedido)" >
+      <ion-label>Mesa {{ pedido.numeroMesa }}</ion-label>
+    </ion-item>
+    <ion-text *ngIf="pedidosPreparando.length === 0">
+      <h5>No hay pedidos en preparación</h5>
+    </ion-text>
+  </div>
+</ion-content>

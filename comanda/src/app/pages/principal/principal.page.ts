@@ -25,7 +25,7 @@ export class PrincipalPage implements OnInit {
       this.code = barcodeData.text;
         switch (this.code) {
           case "JYCjbOgLWRTzkfyknquy": //Mesa 1
-            this.utilidadesService.PresentarToastAbajo("Mesa 1", "success"); 
+            this.utilidadesService.PresentarToastAbajo("Mesa 1", "success");
             this.Navegar('listado-productos');
             break;
 

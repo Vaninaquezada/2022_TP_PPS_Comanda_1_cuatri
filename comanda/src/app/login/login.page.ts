@@ -41,34 +41,34 @@ export class LoginPage {
   completaIngreso(ingreso: string){
     switch(ingreso){
       case 'usuario1':
-        this.emailIngreso= 'admin@admin.com';
+        this.emailIngreso= 'duenio';
         this.contraIngreso = '111111';
         break;
-      case 'usuario2':
+      case 'supervisor':
         this.emailIngreso= 'tester@tester.com';
         this.contraIngreso = '555555';
         break;
-      case 'usuario3':
+      case 'metre':
         this.emailIngreso= 'metre@empleado.com';
         this.contraIngreso = '123456';
         break;
-      case 'usuario4':
+      case 'mozo':
         this.emailIngreso= 'mozo@mozo.com';
         this.contraIngreso = '123456';
         break;
-      case 'usuario5':
+      case 'bartender':
         this.emailIngreso= 'bartender@empleado.com';
         this.contraIngreso = '123456';
         break;
-      case 'usuario6':
+      case 'cocina':
           this.emailIngreso= 'cocina@empleado.com';
           this.contraIngreso = '123456';
           break;
-      case 'usuario7':
+      case 'registrado':
             this.emailIngreso= 'registrado@cliente.com';
             this.contraIngreso = '123456';
             break;
-       case 'usuario8':
+       case 'anonimo':
         this.emailIngreso= 'anonimo@anonimo.com';
         this.contraIngreso = '444444';
         break;

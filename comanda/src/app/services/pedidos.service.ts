@@ -73,9 +73,14 @@ export class PedidosService {
   }
 
   async getPedidoById(pedidoId: string) {
-    return this.db
+    try {
+      return this.db
       .collection<Pedidos>('Pedidos').doc(pedidoId)
       .valueChanges();
+    } catch (error) {
+      throw error;
+    }
+
   }
 
   async getPedidos(state: PedidoEstado): Promise<Observable<Pedidos[]>> {

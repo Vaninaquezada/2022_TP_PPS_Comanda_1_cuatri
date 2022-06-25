@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MozoPedidosPageRoutingModule } from './mozo-pedidos-routing.module';
 
 import { MozoPedidosPage } from './mozo-pedidos.page';
+import { PedidosACobrarPage } from './pedidos-acobrar/pedidos-acobrar.page';
 
 @NgModule({
   imports: [

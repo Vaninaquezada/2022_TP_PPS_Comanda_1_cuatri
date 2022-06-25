@@ -97,6 +97,10 @@ const routes: Routes = [
   },  {
     path: 'cliente-pedido',
     loadChildren: () => import('./pages/cliente-pedido/cliente-pedido.module').then( m => m.ClientePedidoPageModule)
+  },
+  {
+    path: 'propina',
+    loadChildren: () => import('./pages/propina/propina.module').then( m => m.PropinaPageModule)
   }
 
 

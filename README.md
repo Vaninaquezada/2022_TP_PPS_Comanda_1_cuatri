@@ -24,6 +24,8 @@ https://docs.google.com/spreadsheets/d/1IxJ_jOkGoOFVfFLDb5P5j6MW7XNbcHcM7R4uWAIU
 | :heavy_check_mark: |               mejoras en manejo de errores |
 | :heavy_check_mark: | Alta cliente con alta foto y lectura de qr |
 | :heavy_check_mark: |                       Alta cliente anonimo |
+| :heavy_check_mark: |        Realizar pedidos (platos y bebidas) |
+| :heavy_check_mark: |                          Confirmar pedidos |
 
 ### Nicolas Gomez
 

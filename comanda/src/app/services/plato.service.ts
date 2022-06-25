@@ -78,8 +78,7 @@ export class PlatoService {
     async getPlatoByPedidoId(pedidoId: string): Promise<Observable<Plato[]>> {
       return this.db
         .collection<Plato>('Preparaciones', (ref) =>
-          ref
-            .where('pedidoId', '==', pedidoId)
+          ref.where('pedidoId', '==', pedidoId)
         )
         .valueChanges();
     }

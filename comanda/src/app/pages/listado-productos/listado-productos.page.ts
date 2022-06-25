@@ -35,19 +35,15 @@ export class ListadoProductosPage implements OnInit {
   }
 
   Sumar(){
-    
-    
-    
-    
   }
 
   Navegar(ruta: string){
-    console.log("entra en navegar");
+    console.log('entra en navegar');
     this.navegador.navigate([ruta]);
   }
 
   Desconectarse(){
     this.authSvc.LogOut();
-    this.Navegar("home");
+    this.Navegar('home');
   }
 }
