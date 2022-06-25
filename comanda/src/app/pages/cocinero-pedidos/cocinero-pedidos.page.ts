@@ -15,6 +15,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class CocineroPedidosPage implements OnInit {
   comidasPendientes: Plato[];
   comidasPreparando: Plato[];
+  pedido: Pedidos;
  // Observable<any[]>;
   constructor(
     public productoService: ProductosService,
@@ -32,22 +33,36 @@ export class CocineroPedidosPage implements OnInit {
     this.platoService
       .getPlato('preparando', 'comida')
       .then((p) => p.subscribe((data) => (this.comidasPreparando = data)));
-
   }
+
   public prepararPlato(plato: Plato) {
     this.platoService.updatePlatoState(
       plato.platoId,
       'preparando'
     );
   }
+ public traerPedido(plato: Plato) {
+    this.pedidoService
+    .getPedidoById(plato.pedidoId)
+    .then((p) => p.subscribe((data) => (this.pedido = data)));
+  }
 
-  public terminarPlato(plato: Plato) {
+  async terminarPlato(plato: Plato) {
     this.platoService.updatePlatoState(
       plato.platoId,
       'terminado'
     );
+    this.traerPedido(plato);
+    this.entregarPedido(this.pedido);
   }
-  signOut(){
+
+ async entregarPedido(pedido) {
+    pedido.estado = 'aentregar';
+    this.pedidoService.updatePedido(pedido);
+  }
+
+
+  singOut(){
     this.authSvc.LogOut();
     this.router.navigate(['login']);
   }

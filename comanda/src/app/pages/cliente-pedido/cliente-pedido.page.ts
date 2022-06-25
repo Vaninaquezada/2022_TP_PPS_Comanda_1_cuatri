@@ -26,7 +26,7 @@ export class ClientePedidoPage implements OnInit {
   clientes: User[];
   cliente: User;
   mesa: Mesa;
-mail;
+  mail;
   constructor(private productoService: ProductosService,
     private pedidoService: PedidosService,
     private nav: NavController,
@@ -38,13 +38,7 @@ mail;
     private mesaSer: MesaService,
     private usuarioService: UsuariosFirebaseService) {}
 
- async ngOnInit(){
-
-   this.getCliente();
-   this.cliente = this.usuarioService.usuarioSeleccionado;
-
-   this.getMesa(this.cliente.id);
-   this.cliente=this.mesa = this.mesaSer.mesaSeleccionada;
+  ngOnInit(){
 
     this.productoService
     .getProductos()
@@ -73,10 +67,16 @@ mail;
     return this.pedido.platos.length;
   }
 async getCliente(){
-  await this.usuarioService.obtenerUsuario(localStorage.getItem('usuario'));
+ // await this.usuarioService.obtenerUsuario(localStorage.getItem('usuario'));
 }
+async setCliente(){
+  //this.getCliente();
+ // this.cliente = this.usuarioService.usuarioSeleccionado;
+
+}
+
 async getMesa(id){
-  await this.mesaSer.obtenerMesaCliente(id);
+ // await this.mesaSer.obtenerMesaCliente(id);
 }
   getProductoCount(productoId: string): number {
     return this.pedido.platos.filter(
@@ -120,13 +120,15 @@ async getMesa(id){
   }
 
   realizarPedido() {
-    console.log( this.mesa.numero);
-    console.log(this.mesa.id);
-    this.pedido.mesaId = this.cliente.mesaId;
-    this.pedido.numeroMesa = this.cliente.numeroMesa;
 
-  // this.pedido.mesaId = this.mesa.id;
-   //this.pedido.numeroMesa = this.mesa.numero;
+   // this.setCliente();
+  
+    // this.pedido.mesaId = this.cliente.mesaId;
+  
+    //this.pedido.numeroMesa = this.cliente.numeroMesa;
+
+    this.pedido.mesaId = 'JYCjbOgLWRTzkfyknquy';
+   this.pedido.numeroMesa = 1;
     this.pedido.precioTotal = this.getPrecioTotal();
     this.pedido.tiempoEstimado = this.getTiempoEstimado();
     this.pedidoService.crearPedido(this.pedido);

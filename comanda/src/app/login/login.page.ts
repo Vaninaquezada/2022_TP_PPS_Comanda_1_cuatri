@@ -42,8 +42,8 @@ export class LoginPage {
 
   completaIngreso(ingreso: string){
     switch(ingreso){
-      case 'usuario1':
-        this.emailIngreso= 'duenio';
+      case 'duenio':
+        this.emailIngreso= 'admin@admin.com"';
         this.contraIngreso = '111111';
         break;
       case 'supervisor':

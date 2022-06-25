@@ -48,7 +48,7 @@
                 <ion-label>Mesa {{ pedi.numeroMesa }}</ion-label>
                 <ion-label>Estado {{ pedi.estado }}</ion-label>
               </ion-item>
-              <ion-button *ngIf="pedi.estado === 'confirmarEntrega' " class="botonPedir" size="large" shape="round" expand="full" (click)="confirmarEntrega()" > Confirmar entrega </ion-button>
+              <ion-button *ngIf="pedi.estado == 'confirmarEntrega' " class="botonPedir" size="large" shape="round" expand="full" (click)="confirmarEntrega()" > Confirmar entrega </ion-button>
 
             </ion-item>
           </div>
