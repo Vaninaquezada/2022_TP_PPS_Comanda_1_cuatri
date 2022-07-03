@@ -47,6 +47,23 @@ export class LoginPage {
     }
   }
 
+  async OnSignInWithGoogle() {
+    try {
+      this.utilidadesService.PresentarLoading('Ingresando...');
+      const user = await this.firebaseService.SignInWithGoogle();
+      this.checkUserIsVerified(user);
+      this.updatePushId(user);
+      localStorage.setItem('usuario', user.email);
+
+    } catch (error) {
+      this.utilidadesService.RemoverLoading();
+      //this.utilidadesService.PresentarToastAbajo('Credenciales Incorrectas', 'danger');
+      this.utilidadesService.PresentarToastAbajo(error, 'danger');
+      // this.router.navigate(['/registro']);
+      console.log(error);
+    }
+  }
+
   completaIngreso(ingreso: string) {
     switch (ingreso) {
       case 'usuario1':

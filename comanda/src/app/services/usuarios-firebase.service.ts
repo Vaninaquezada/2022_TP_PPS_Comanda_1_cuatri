@@ -67,12 +67,7 @@ export class UsuariosFirebaseService {
   }
 
 
-<<<<<<< HEAD
-
-  getAll(){
-=======
   getAll() {
->>>>>>> main
     return this.usuarios;
   }
 
