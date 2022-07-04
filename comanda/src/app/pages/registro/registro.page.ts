@@ -71,7 +71,6 @@ export class RegistroPage implements OnInit {
         this.photo
       );
       this.usuarioService.obtenerPushIdAdmins().then(response=>{
-        console.log("this.adminsPushIds"+JSON.stringify(this.usuarioService.adminsPushIds));
         this.pushOneSignal.enviarNotifClienteParaHabilitar( this.usuarioService.adminsPushIds,"Info adicional bla");
       });
 

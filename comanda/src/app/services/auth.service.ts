@@ -51,6 +51,7 @@ export class AuthService {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
       const { user } = await this.firebaseAuth.signInWithPopup(provider);
+      console.log('GoooooooogleLoginDevuelve: ',user);
       return user;
     } catch (error) {
       this.utilidadesService.RemoverLoading();
