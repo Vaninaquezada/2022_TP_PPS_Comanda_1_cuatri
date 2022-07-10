@@ -65,7 +65,7 @@ usuario: User;
   }
 
   Scan(): void{
-    let fechaDeHoy = new Date();
+    
     for (let index = 0; index < this.listaDeEspera.length; index++) {
       const element = this.listaDeEspera[index];
       console.log(element.id)
@@ -77,7 +77,7 @@ usuario: User;
          this.barcodeScanner.scan().then(barcodeData => {
            console.log('Barcode data', barcodeData);
            this.code = barcodeData.text;
-           this.code ="JYCjbOgLWRTzkfyknquy";
+           
               switch (this.code) {
                 case "JYCjbOgLWRTzkfyknquy": //Mesa 1
                   for (let index = 0; index < this.listaMesas.length; index++) {

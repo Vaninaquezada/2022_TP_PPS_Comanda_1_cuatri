@@ -155,7 +155,7 @@ export class LoginPage {
               this.utilidadesService.RemoverLoading();
             }
             if (this.usuarioLogueado.subTipo === 'metre') {
-              this.router.navigate(['/principal-empleado']);
+              this.router.navigate(['/lista-de-espera']);
               this.utilidadesService.RemoverLoading();
             }
             break;
