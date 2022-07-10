@@ -27,7 +27,14 @@ ion-content{
       --background: -webkit-linear-gradient(rgb(11, 238, 181),rgb(27, 108, 110));
       -webkit-background-clip: text;
       height: 50%;
-      margin-top: 10%;
+      margin-top: 7%;
+  }
+  .botonIngresarGoogle{
+    --background: -webkit-linear-gradient(rgb(238, 11, 60),rgb(65, 7, 12));
+      -webkit-background-clip: text;
+      height: 50%;
+      margin-top: 7%;
+      color: rgba(37, 37, 37, 0.966);
   }
   
   ion-icon{

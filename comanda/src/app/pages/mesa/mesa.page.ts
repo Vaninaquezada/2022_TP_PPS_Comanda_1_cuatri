@@ -43,7 +43,7 @@ usuario: User;
   )
   {
     this.MenuView();
-    this.listaEsperaService.getAll().subscribe(resultado => {
+    this.listaEsperaService.getAllToday().subscribe(resultado => {
       this.listaDeEspera = resultado;
 
     })
@@ -65,16 +65,18 @@ usuario: User;
   }
 
   Scan(): void{
+    let fechaDeHoy = new Date();
     for (let index = 0; index < this.listaDeEspera.length; index++) {
       const element = this.listaDeEspera[index];
       console.log(element.id)
+      
       if(element.cliente.email == localStorage.getItem("usuario")){
         // console.log("coincide mail")
         if(element.estado == "aprobado"){          
           
-     //     this.barcodeScanner.scan().then(barcodeData => {
-           // console.log('Barcode data', barcodeData);
-           // this.code = barcodeData.text;
+         this.barcodeScanner.scan().then(barcodeData => {
+           console.log('Barcode data', barcodeData);
+           this.code = barcodeData.text;
            this.code ="JYCjbOgLWRTzkfyknquy";
               switch (this.code) {
                 case "JYCjbOgLWRTzkfyknquy": //Mesa 1
@@ -175,10 +177,10 @@ usuario: User;
                   break;
               }           
       
-        //   }).catch(err => {
-          //     console.log('Error', err);
+          }).catch(err => {
+              console.log('Error', err);
               
-          //})
+          })
 
 
         }else{

@@ -110,7 +110,7 @@ export class LoginPage {
     if (user) {
       await this.usuariosFire.obtenerUsuario(user.email);
       this.usuarioLogueado = this.usuariosFire.usuarioSeleccionado;
-      console.log('checkUserIsVerified!!! usuario logeado: ' + JSON.stringify(this.usuarioLogueado));
+      // console.log('checkUserIsVerified!!! usuario logeado: ' + JSON.stringify(this.usuarioLogueado));
       if (typeof this.usuarioLogueado === 'undefined') {
         console.log('No existe un user con este email, no continuo con el checkUser.');
         this.utilidadesService.RemoverLoading();
@@ -125,6 +125,7 @@ export class LoginPage {
         this.usuariosFire.update(this.usuariosFire.id, { ingresos: this.usuarioLogueado.ingresos });
         console.log(this.usuarioLogueado.role);
         localStorage.setItem('role', this.usuarioLogueado.role);
+        localStorage.setItem('subtipo', this.usuarioLogueado.subTipo);
 
         switch (this.usuarioLogueado.role) {
           case 'admin':

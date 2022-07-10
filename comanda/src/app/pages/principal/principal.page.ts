@@ -50,21 +50,12 @@ export class PrincipalPage implements OnInit {
   async Scan(){
 
     await this.usuarioService.obtenerUsuario(localStorage.getItem("usuario"));
-    // this.utilidadesService.PresentarLoading("Ingresando a lista de espera.");            
+    this.utilidadesService.PresentarLoading("Ingresando a lista de espera.");            
 
-            // let ingreso: IngresoLocal = {
-            //   cliente: this.usuarioService.usuarioSeleccionado,
-            //   estado: 'esperando',
-            //   cantidadPersonas: Number(this.forma.get('cantidadPersonas').value),
-            //   fechaIngreso: new Date(),
-            // };
-            
-            // this.listaEsperaService.nuevoIngreso(ingreso);
+    this.barcodeScanner.scan().then(barcodeData => {
+     console.log('Barcode data', barcodeData);
+     this.code = barcodeData.text;
 
-   // this.barcodeScanner.scan().then(barcodeData => {
-     // console.log('Barcode data', barcodeData);
-   //   this.code = barcodeData.text;
-   this.code ="listaDeEspera";
         switch (this.code) {
           case "listaDeEspera": //Ingreso lista de espera
 
@@ -90,9 +81,9 @@ export class PrincipalPage implements OnInit {
         }
        
 
-    // }).catch(err => {
-      //   console.log('Error', err);
-     //});   
+    }).catch(err => {
+        console.log('Error', err);
+     });   
 
   }
 
