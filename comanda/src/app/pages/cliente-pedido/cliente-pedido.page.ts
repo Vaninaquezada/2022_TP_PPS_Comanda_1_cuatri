@@ -36,9 +36,16 @@ export class ClientePedidoPage implements OnInit {
     private authSvc: AuthService,
     private router: Router,
     private mesaSer: MesaService,
-    private usuarioService: UsuariosFirebaseService) {}
+    private usuarioService: UsuariosFirebaseService) {
+
+      this.mesaSer.update('JYCjbOgLWRTzkfyknquy', {estado: 'ocupado'});
+      this.mesaSer.update('JYCjbOgLWRTzkfyknquy', {cliente: this.usuarioService.id});
+
+    }
 
   ngOnInit(){
+
+     this.getCliente();
 
     this.productoService
     .getProductos()
@@ -53,6 +60,8 @@ export class ClientePedidoPage implements OnInit {
     estado: 'pendiente',
     platos: [],
   };
+  this.cliente = this.usuarioService.usuarioSeleccionado;
+
 }
 
   getComidas(): Productos[] {
@@ -67,7 +76,7 @@ export class ClientePedidoPage implements OnInit {
     return this.pedido.platos.length;
   }
 async getCliente(){
- // await this.usuarioService.obtenerUsuario(localStorage.getItem('usuario'));
+  await this.usuarioService.obtenerUsuario(localStorage.getItem('usuario'));
 }
 async setCliente(){
   //this.getCliente();
@@ -122,13 +131,13 @@ async getMesa(id){
   realizarPedido() {
 
    // this.setCliente();
-  
-    // this.pedido.mesaId = this.cliente.mesaId;
-  
-    //this.pedido.numeroMesa = this.cliente.numeroMesa;
 
-    this.pedido.mesaId = 'JYCjbOgLWRTzkfyknquy';
-   this.pedido.numeroMesa = 1;
+    this.pedido.mesaId = this.cliente.mesaId;
+
+    this.pedido.numeroMesa = this.cliente.numeroMesa;
+
+   // this.pedido.mesaId = 'JYCjbOgLWRTzkfyknquy';
+   //this.pedido.numeroMesa = 1;
     this.pedido.precioTotal = this.getPrecioTotal();
     this.pedido.tiempoEstimado = this.getTiempoEstimado();
     this.pedidoService.crearPedido(this.pedido);

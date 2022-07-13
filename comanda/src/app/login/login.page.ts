@@ -27,7 +27,7 @@ export class LoginPage {
   constructor(public firebaseService: AuthService, private router: Router, private usuariosFire: UsuariosFirebaseService, private utilidadesService: UtilidadesService) { }
 
   ngOnInit() {
-    this.OneSignalInit();
+   // this.OneSignalInit();
   }
 
   async OnSignIn(email: string, password: string) {
@@ -161,7 +161,7 @@ export class LoginPage {
     // OneSignal.setLogLevel(6, 0);
 
     // NOTE: Update the setAppId value below with your OneSignal AppId.
-    OneSignal.setAppId("0a7bacb7-1822-4740-b3fe-31f0c4399931");
+   OneSignal.setAppId("0a7bacb7-1822-4740-b3fe-31f0c4399931");
 
     //Se abre una notif
     OneSignal.setNotificationOpenedHandler(notification => {

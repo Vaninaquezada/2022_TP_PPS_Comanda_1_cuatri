@@ -13,7 +13,9 @@ export class BartenderPedidosPage implements OnInit {
 
   bebidasPendientes: Plato[];
   bebidasPreparando: Plato[];
+  pedidoTerminado: boolean;
  // Observable<any[]>;
+  platos: Plato[];
   constructor(
     public productoService: ProductosService,
     public platoService: PlatoService,
@@ -41,6 +43,24 @@ console.log();
       plato.platoId,
       'terminado'
     );
-  }
+    this.platoService.getPlatoByPedidoId(plato.pedidoId)
+    .then(
+      p => p.subscribe(data => {
+        this.platos = data;
+         this.verificarPedido();
 
+         if(this.pedidoTerminado){
+          console.log('se termina?',this.platos);
+           this.pedidoService.terminarPedido(plato.pedidoId);
+        }
+      })
+    );
+  }
+  verificarPedido(){
+
+    // this.comidasPedido = this.pedido.platos;
+    this.pedidoTerminado = this.platos.every( e => e.estado === 'terminado');
+    console.log('terminado?',this.pedidoTerminado);
+    console.log('platos?',this.platos);
+   }
 }

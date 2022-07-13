@@ -23,7 +23,7 @@ export class PedidosAEntregarPage implements OnInit {
 
   ngOnInit() {
     this.pedidoService
-    .getPedidos('terminado')
+    .getPedidos('aEntregar')
     .then((p) => p.subscribe((data) => (this.pedidosEntregar = data)));
   }
 

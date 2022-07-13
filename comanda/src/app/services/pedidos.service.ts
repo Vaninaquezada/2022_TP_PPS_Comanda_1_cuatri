@@ -41,6 +41,16 @@ export class PedidosService {
     }
   }
 
+  async terminarPedido(pedidoId: string): Promise<void> {
+    try {
+
+      await this.db.collection('Pedidos').doc(pedidoId).update({estado: 'aEntregar'});
+     // await this.preparacionService.updatePlatoStateInPedido(pedidoId, 'pendiente');
+    } catch (error) {
+      console.log(error);
+      throw Error('Pedidos error');
+    }
+  }
 
   async confirmarPedido(pedido: Pedidos): Promise<void> {
     try {
@@ -180,4 +190,7 @@ export class PedidosService {
         ),
       );
   }
+
+
+ 
 }

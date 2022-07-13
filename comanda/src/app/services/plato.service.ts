@@ -18,7 +18,7 @@ export class PlatoService {
       try {
         const id = this.db.createId();
         plato.platoId = id;
-        await this.db.collection('Preparaciones').doc(plato.platoId).set(plato);
+        await this.db.collection('Platos').doc(plato.platoId).set(plato);
       } catch (error) {
         console.log(error);
         throw Error('No se pudo crear');
@@ -27,7 +27,7 @@ export class PlatoService {
 
     async tieneComidasForPedido(pedidoId: string): Promise<boolean> {
       return this.db
-        .collection<Plato>('Preparaciones', (ref) =>
+        .collection<Plato>('Platos', (ref) =>
           ref
             .where('pedidoId', '==', pedidoId)
             .where('producto.tipoProducto', '==', 'comida')
@@ -38,7 +38,7 @@ export class PlatoService {
     }
     async tieneBebidasForPedido(pedidoId: string): Promise<boolean> {
       return this.db
-        .collection<Plato>('Preparaciones', (ref) =>
+        .collection<Plato>('Platos', (ref) =>
           ref
             .where('pedidoId', '==', pedidoId)
             .where('producto.tipoProducto', '==', 'bebida')
@@ -47,15 +47,48 @@ export class PlatoService {
         .toPromise()
         .then((data) => !data.empty);
     }
+    async tienePlatosForTerminar(pedidoId: string): Promise<boolean> {
+
+     try {
+      return this.db
+        .collection<Plato>('Platos', (ref) =>
+          ref
+            .where('pedidoId', '==', pedidoId)
+            .where('producto.estado', '!=', 'terminado')
+        )
+        .get()
+        .toPromise()
+        .then((data) => !data.empty);
+     } catch (error) {
+       console.log(error);
+     }
+    }
+
     async updatePlatoState(preparacionId: string, state: PlatoEstado) {
       this.db
-      .collection<Plato>('Preparaciones')
+      .collection<Plato>('Platos')
       .doc(preparacionId)
       .update({estado: state});
+
+
     }
+
     async updatePlatoStateInPedido(pedidoId: string, state: PlatoEstado) {
       this.db
-        .collection<Plato>('Preparaciones', (ref) =>
+        .collection<Plato>('Platos', (ref) =>
+          ref
+            .where('pedidoId', '==', pedidoId)
+        )
+        .get()
+        .subscribe(
+          (data) => data.docs.forEach(
+            (prep) => prep.ref.update({estado: state})
+          )
+        );
+    }
+    async updatePlatosStateInPedido(pedidoId: string, state: PlatoEstado) {
+      this.db
+        .collection<Plato>('Platos', (ref) =>
           ref
             .where('pedidoId', '==', pedidoId)
         )
@@ -68,7 +101,7 @@ export class PlatoService {
     }
     async getPlato(estado: PlatoEstado, tipo: TipoProducto): Promise<Observable<Plato[]>> {
    return this.db
-        .collection<Plato>('Preparaciones', (ref) =>
+        .collection<Plato>('Platos', (ref) =>
           ref
           .where('estado', '==', estado)
           .where('producto.tipoProducto', '==', tipo)
@@ -77,20 +110,20 @@ export class PlatoService {
     }
     async getPlatoByPedidoId(pedidoId: string): Promise<Observable<Plato[]>> {
       return this.db
-        .collection<Plato>('Preparaciones', (ref) =>
+        .collection<Plato>('Platos', (ref) =>
           ref.where('pedidoId', '==', pedidoId)
         )
         .valueChanges();
     }
     async deletePlato(platoId: string) {
       this.db
-        .collection<Plato>('Preparaciones')
+        .collection<Plato>('Platos')
         .doc(platoId)
         .delete();
     }
     async deletePlatoByPedidoId(pedidoId: string) {
       this.db
-      .collection<Plato>('Preparaciones', (ref) =>
+      .collection<Plato>('Platos', (ref) =>
         ref
           .where('pedidoId', '==', pedidoId)
       )

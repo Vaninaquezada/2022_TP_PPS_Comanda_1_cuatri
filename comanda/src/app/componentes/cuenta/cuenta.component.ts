@@ -34,7 +34,7 @@ export class CuentaComponent implements OnInit {
       this.propina = 10;
       this.preparacionService.getPlatoByPedidoId(this.pedido.pedidoId)
       .then(
-        p => p.subscribe(data => {this.platos = data; console.log(this.platos);})
+        p => p.subscribe(data => {this.platos = data;})
       );
       this.mostrarBoton(this.navParams.data.boton);
   }

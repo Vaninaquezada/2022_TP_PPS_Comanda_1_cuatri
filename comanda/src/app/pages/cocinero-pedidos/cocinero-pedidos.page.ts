@@ -7,6 +7,7 @@ import { ProductosService } from 'src/app/services/productos.service';
 import { Pedidos } from 'src/app/clases/pedidos';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { threadId } from 'worker_threads';
 @Component({
   selector: 'app-cocinero-pedidos',
   templateUrl: './cocinero-pedidos.page.html',
@@ -15,13 +16,15 @@ import { AuthService } from 'src/app/services/auth.service';
 export class CocineroPedidosPage implements OnInit {
   comidasPendientes: Plato[];
   comidasPreparando: Plato[];
+  comidasPedido: Plato[];
+  platos: Plato[];
   pedido: Pedidos;
+  pedidoTerminado: boolean;
  // Observable<any[]>;
   constructor(
     public productoService: ProductosService,
     public platoService: PlatoService,
     public pedidoService: PedidosService,
-    private modalController: ModalController,
     private router: Router,
     private authSvc: AuthService) { }
 
@@ -52,16 +55,38 @@ export class CocineroPedidosPage implements OnInit {
       plato.platoId,
       'terminado'
     );
-    this.traerPedido(plato);
-    this.entregarPedido(this.pedido);
+
+    this.platoService.getPlatoByPedidoId(plato.pedidoId)
+    .then(
+      p => p.subscribe(data => {
+        this.platos = data;
+         this.verificarPedido();
+
+         if(this.pedidoTerminado){
+           this.pedidoService.terminarPedido(plato.pedidoId);
+        }
+      })
+    );
+
+
+
+
+
   }
 
  async entregarPedido(pedido) {
-    pedido.estado = 'aentregar';
+    pedido.estado = 'aEntregar';
     this.pedidoService.updatePedido(pedido);
   }
 
 
+verificarPedido(){
+
+ // this.comidasPedido = this.pedido.platos;
+ this.pedidoTerminado = this.platos.every( e => e.estado === 'terminado');
+ console.log('terminado?',this.pedidoTerminado);
+ console.log('platos?',this.platos);
+}
   singOut(){
     this.authSvc.LogOut();
     this.router.navigate(['login']);
