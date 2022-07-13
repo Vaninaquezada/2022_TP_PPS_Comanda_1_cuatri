@@ -13,12 +13,11 @@ import { FotoService } from 'src/app/services/foto.service';
 import { MenuController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-alta-producto',
-  templateUrl: './alta-producto.page.html',
-  styleUrls: ['./alta-producto.page.scss'],
+  selector: 'app-alta-producto-bebida',
+  templateUrl: './alta-producto-bebida.page.html',
+  styleUrls: ['./alta-producto-bebida.page.scss'],
 })
-export class AltaProductoPage implements OnInit {
-
+export class AltaProductoBebidaPage implements OnInit {
   public forma: FormGroup;
   photo1: Photo = null;
   photo2: Photo = null;
@@ -59,8 +58,8 @@ export class AltaProductoPage implements OnInit {
     this.menuController.enable(false, 'adminMenu');
     this.menuController.enable(false, 'mozoMenu');
     this.menuController.enable(false, 'metreMenu');
-    this.menuController.enable(true, 'cocineroMenu');
-    this.menuController.enable(false, 'bartenderMenu');
+    this.menuController.enable(false, 'cocineroMenu');
+    this.menuController.enable(true, 'bartenderMenu');
   }
 
   async AltaProducto(){
@@ -101,7 +100,7 @@ export class AltaProductoPage implements OnInit {
             await this.productoService.nuevoProducto(producto, this.photo1);
       }
   
-      this.navegador.navigate(['/cocinero-pedidos']);
+      this.navegador.navigate(['/bartender-pedidos']);
     }
     
     
@@ -127,3 +126,4 @@ export class AltaProductoPage implements OnInit {
   }
 
 }
+

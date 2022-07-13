@@ -1,70 +1,68 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Pedidos Cocina </ion-title>
-    <ion-buttons slot="end">
-      <ion-button fill="clear" (click)="singOut()">
-        <ion-icon name="log-out" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Pedidos Cocina</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-<ion-content color="fondo" class="ion-padding">
-  <ion-list>
-    <ion-list-header>
-      <ion-label>COMIDAS A PREPARAR</ion-label>
-    </ion-list-header>
-    <ion-spinner name="circular" *ngIf="!comidasPendientes"></ion-spinner>
-    <div *ngIf="comidasPendientes">
-      <ion-item *ngFor="let plato of comidasPendientes">
-        <ion-item color="input">
-          <ion-avatar slot="start">
-            <img [src]="plato.producto.photourl1" />
-          </ion-avatar>
-          <ion-label>
-            <h2>{{ plato.producto.nombre }}</h2>
-            <h2>{{ plato.estado }}</h2>
-          </ion-label>
-        </ion-item>
-        <ion-fab-button  (click)="prepararPlato(plato)" color="primary"  >
-          <img src="../../assets/cocinando.gif">
-        </ion-fab-button>
-      </ion-item>
-      <ion-text *ngIf="comidasPendientes.length === 0">
-        <h5>No hay comidas a preparar</h5>
-      </ion-text>
-    </div>
-  </ion-list>
+    <ion-content color="fondo" class="ion-padding">
+      <ion-list>
+        <ion-list-header>
+          <ion-label>COMIDAS A PREPARAR</ion-label>
+        </ion-list-header>
+        <ion-spinner name="circular" *ngIf="!comidasPendientes"></ion-spinner>
+        <div *ngIf="comidasPendientes">
+          <ion-item *ngFor="let plato of comidasPendientes">
+            <ion-item color="input">
+              <ion-avatar slot="start">
+                <img [src]="plato.producto.photourl1" />
+              </ion-avatar>
+              <ion-label>
+                <h2>{{ plato.producto.nombre }}</h2>
+                <h2>{{ plato.estado }}</h2>
+              </ion-label>
+            </ion-item>
+            <ion-fab-button  (click)="prepararPlato(plato)" color="primary"  >
+              <img src="../../assets/cocinando.gif">
+            </ion-fab-button>
+          </ion-item>
+          <ion-text *ngIf="comidasPendientes.length === 0">
+            <h5>No hay comidas a preparar</h5>
+          </ion-text>
+        </div>
+      </ion-list>
 
-  <ion-list>
-    <ion-list-header>
-      <ion-label>COMIDAS PREPARÁNDOSE</ion-label>
-    </ion-list-header>
-    <ion-spinner name="circular" *ngIf="!comidasPreparando"></ion-spinner>
-    <div *ngIf="comidasPreparando">
-      <ion-item *ngFor="let plato of comidasPreparando">
-        <ion-item color="input">
-          <ion-avatar slot="start">
-            <img [src]="plato.producto.photourl1" />
-          </ion-avatar>
-          <ion-label>
-            <h2>{{ plato.producto.nombre }}</h2>
-            <h2>{{ plato.estado }}</h2>
-          </ion-label>
-        </ion-item>
-          <ion-fab-button  (click)="terminarPlato(plato)" color="primary"  >
-            <img src="../../assets/cocinando.gif">
-          </ion-fab-button>
+      <ion-list>
+        <ion-list-header>
+          <ion-label>COMIDAS PREPARÁNDOSE</ion-label>
+        </ion-list-header>
+        <ion-spinner name="circular" *ngIf="!comidasPreparando"></ion-spinner>
+        <div *ngIf="comidasPreparando">
+          <ion-item *ngFor="let plato of comidasPreparando">
+            <ion-item color="input">
+              <ion-avatar slot="start">
+                <img [src]="plato.producto.photourl1" />
+              </ion-avatar>
+              <ion-label>
+                <h2>{{ plato.producto.nombre }}</h2>
+                <h2>{{ plato.estado }}</h2>
+              </ion-label>
+            </ion-item>
+              <ion-fab-button  (click)="terminarPlato(plato)" color="primary"  >
+                <img src="../../assets/cocinando.gif">
+              </ion-fab-button>
 
-      </ion-item>
-      <ion-text *ngIf="comidasPreparando.length === 0">
-        <h5>No hay comidas en preparación</h5>
-      </ion-text>
-    </div>
-  </ion-list>
-</ion-content>
+          </ion-item>
+          <ion-text *ngIf="comidasPreparando.length === 0">
+            <h5>No hay comidas en preparación</h5>
+          </ion-text>
+        </div>
+      </ion-list>
+    </ion-content>
 
-
+  </div>
+</ion-app>

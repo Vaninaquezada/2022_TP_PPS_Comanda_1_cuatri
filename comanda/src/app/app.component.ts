@@ -23,7 +23,7 @@ export class AppComponent {
   initiallizeApp() {
     this.platform.ready().then(() => {
       this.router.navigateByUrl('splash');
-      this.OneSignalInit();
+      // this.OneSignalInit();
     })
   }
 
