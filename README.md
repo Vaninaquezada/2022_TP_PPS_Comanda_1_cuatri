@@ -25,8 +25,16 @@ https://docs.google.com/spreadsheets/d/1IxJ_jOkGoOFVfFLDb5P5j6MW7XNbcHcM7R4uWAIU
 | :heavy_check_mark: |     Alta cliente con alta foto y lectura de qr |
 | :heavy_check_mark: |                           Alta cliente anonimo |
 | :heavy_check_mark: |            Realizar pedidos (platos y bebidas) |
-|                  : |     Confirmar pedidos por lado de los empleados|
-|                    |          Confirmar pedidos por lado del cliente|
+| :heavy_check_mark: |                  creacion de menu de productos |
+| :heavy_check_mark: |            listado de productos con 3 imagenes |
+| :heavy_check_mark: |            Realizar pedidos (platos y bebidas) |
+| :heavy_check_mark: |     Confirmar pedidos por lado de los empleados|
+| :heavy_check_mark: |          Confirmar pedidos por lado del cliente|
+| :heavy_check_mark: |                                   Qr de propina|
+| :heavy_check_mark: |    consultar' al mozo, chat entre mozos y mesas|
+| :heavy_check_mark: |                       ver el estado del pedido.|
+| :heavy_check_mark: |                                 acceder al menú|
+| :heavy_check_mark: |                   mejoras en disño de pantallas|
 
 ### Nicolas Gomez
 
@@ -66,5 +74,5 @@ https://docs.google.com/spreadsheets/d/1IxJ_jOkGoOFVfFLDb5P5j6MW7XNbcHcM7R4uWAIU
 |  heavy_check_mark: |     Push notifications -                                        |
 |                    |    Se modificaron todos los registrois de usuarios para incluir |
 |                    |                el id necesario para recibir las notifications.  |
-|                    |                            |
-|                    |                            |
+|                    |                                                                 |
+|                    |                                                                 |
