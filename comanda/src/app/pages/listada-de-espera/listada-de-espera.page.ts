@@ -33,7 +33,7 @@ export class ListadaDeEsperaPage implements OnInit {
     private usera: UsuariosFirebaseService
     ) {
       this.MenuView();
-      this.listaEsperaService.getAll().subscribe(resultado => {
+      this.listaEsperaService.getAllToday().subscribe(resultado => {
         this.listaDeEspera = resultado;
       })
       this.mesaService.getAll().subscribe(resultado => {
@@ -52,8 +52,11 @@ export class ListadaDeEsperaPage implements OnInit {
   
   MenuView(){
     this.menuController.enable(false, 'clientesMenu');
-    this.menuController.enable(true, 'empleadosMenu');
     this.menuController.enable(false, 'adminMenu');
+    this.menuController.enable(false, 'mozoMenu');
+    this.menuController.enable(true, 'metreMenu');
+    this.menuController.enable(false, 'cocineroMenu');
+    this.menuController.enable(false, 'bartenderMenu');
   }
  
   async Habilitacion(ingreso: IngresoLocal){

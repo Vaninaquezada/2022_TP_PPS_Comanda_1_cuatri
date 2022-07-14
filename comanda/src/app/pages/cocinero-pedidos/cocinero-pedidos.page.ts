@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { MenuController, ModalController } from '@ionic/angular';
 import { PlatoService } from 'src/app/services/plato.service';
 import { Plato } from 'src/app/clases/plato';
 import { PedidosService } from 'src/app/services/pedidos.service';
@@ -20,13 +20,19 @@ export class CocineroPedidosPage implements OnInit {
   platos: Plato[];
   pedido: Pedidos;
   pedidoTerminado: boolean;
+  subtipo: string;
  // Observable<any[]>;
   constructor(
     public productoService: ProductosService,
     public platoService: PlatoService,
     public pedidoService: PedidosService,
     private router: Router,
-    private authSvc: AuthService) { }
+    private authSvc: AuthService,
+    private menuController: MenuController) {
+      this.subtipo = localStorage.getItem("subtipo");
+      console.log(this.subtipo);
+      this.MenuView();
+    }
 
   ngOnInit() {
 
@@ -37,6 +43,16 @@ export class CocineroPedidosPage implements OnInit {
       .getPlato('preparando', 'comida')
       .then((p) => p.subscribe((data) => (this.comidasPreparando = data)));
   }
+
+  MenuView(){
+    this.menuController.enable(false, 'clientesMenu');
+    this.menuController.enable(false, 'adminMenu');
+    this.menuController.enable(false, 'mozoMenu');
+    this.menuController.enable(false, 'metreMenu');
+    this.menuController.enable(true, 'cocineroMenu');
+    this.menuController.enable(false, 'bartenderMenu');
+  }
+
 
   public prepararPlato(plato: Plato) {
     this.platoService.updatePlatoState(

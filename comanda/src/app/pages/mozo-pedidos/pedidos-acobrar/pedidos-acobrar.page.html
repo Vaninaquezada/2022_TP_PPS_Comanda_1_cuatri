@@ -19,8 +19,8 @@
     <div *ngIf="pedidosCobrar">
       <ion-item-sliding *ngFor="let pedido of pedidosCobrar">
         <ion-item (click)="presentModal(pedido)" color="input">
-          <ion-label>Mesa {{ pedido.numeroMesa }}</ion-label>
-          <ion-label>Total ${{ pedido.precioTotal }}</ion-label>
+          <ion-label><span>Mesa {{ pedido.numeroMesa }}</span></ion-label>
+          <ion-label><span>Total ${{ pedido.precioTotal }}</span></ion-label>
         </ion-item>
         
       </ion-item-sliding>

@@ -1,0 +1,66 @@
+ion-content{
+    --background: url("../../../assets/utensilios-de-cocina.png") 50% 50%;
+      --background: #23C1E0;
+  
+    }
+    ion-title{
+      color: #29dce9;
+      background: -webkit-linear-gradient(rgb(87, 179, 240),rgb(218, 91, 235));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    p{
+      color: rgb(233, 17, 100);
+      font-style:oblique;
+    
+    }
+    
+    ion-item{
+        --color:  #29dce9;;
+        --border-color:rgb(218, 91, 235);
+        background-color: #23C1E0;
+        --background: #23C1E0;
+    }
+    span{
+        color: #ffffff;
+    }
+    ion-radio{
+
+        --border-color:transparent;
+      
+        --color:rgb(248, 255, 255);
+        --border-radius:rgb(248, 255, 255);
+        --inner-border-radius:rgba(233, 17, 100, 0.068);
+        --color-checked:yellow;
+    }
+    
+    .botonIngresar{
+      
+        --background: -webkit-linear-gradient(rgb(11, 238, 181),rgb(27, 108, 110));
+        -webkit-background-clip: text;
+        height: 50%;
+        margin-top: 7%;
+    }
+    
+   
+    ion-list{
+      background-color: transparent;
+      --color: black;
+      --border: none;
+      --border-color: aqua;
+    }
+    
+    
+    html,
+    body {
+      height: 90%;
+      background-color: #23C1E0;
+    }
+    
+    main{
+      --margin-bottom: 10%;
+    }
+    
+
+   

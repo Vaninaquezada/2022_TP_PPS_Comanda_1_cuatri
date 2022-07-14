@@ -7,8 +7,8 @@ export class IngresoLocal {
     id?: string;
     cliente?: User;
     mesaId?: string;
-    mesaNro?: Number;
+    mesaNro?: number;
     fechaIngreso?: Date;
-    cantidadPersonas?: Number;
+    cantidadPersonas?: number;
     estado?: EstadoIngreso;
 }

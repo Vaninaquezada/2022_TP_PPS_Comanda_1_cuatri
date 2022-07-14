@@ -6,6 +6,7 @@ import { CuentaComponent } from './cuenta/cuenta.component';
 import {SwiperModule} from 'swiper/angular';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicModule } from '@ionic/angular';
+import { QrpropinaComponent } from './qrpropina/qrpropina.component';
 
 
 @NgModule({
@@ -16,6 +17,6 @@ import { IonicModule } from '@ionic/angular';
     IonicModule
 
   ],
-  exports: [BarcodeDniComponent,FotosProductoComponent,CuentaComponent]
+  exports: [BarcodeDniComponent,FotosProductoComponent,CuentaComponent,QrpropinaComponent]
 })
 export class ComponentesModule { }

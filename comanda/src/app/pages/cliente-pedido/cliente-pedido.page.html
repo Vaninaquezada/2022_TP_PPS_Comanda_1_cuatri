@@ -13,6 +13,9 @@
   </ion-header>
 <ion-content class="ion-padding" color="fondo">
   <ion-list>
+    <ion-list-header>
+        <ion-label>Comidas</ion-label>
+    </ion-list-header>
       <ion-spinner name="circular" *ngIf="!productos"></ion-spinner>
 
       <div *ngIf="productos">
@@ -26,7 +29,7 @@
               </ion-label>
 
               <div class="item-end" slot="end">
-                  <ion-note>${{ producto.precio }}</ion-note>
+                
                  
                   <ion-button (click)="addProducto(producto)" color="success" expand="block" fill="clear" shape="round">
                     <ion-icon name="add-outline"></ion-icon>
@@ -36,7 +39,7 @@
                       <ion-icon name="remove-outline"></ion-icon>
                   </ion-button>
 
-
+                  <ion-note>Precio ${{ producto.precio }}</ion-note>
               </div>
           </ion-item>
       </div>
@@ -59,7 +62,7 @@
               </ion-label>
 
               <div class="item-end">
-                  <ion-note>${{ producto.precio }}</ion-note>
+
                   
                   <ion-button (click)="addProducto(producto)" color="success" expand="block" fill="clear" shape="round">
                     <ion-icon name="add-outline"></ion-icon>
@@ -69,7 +72,7 @@
                       <ion-icon name="remove-outline"></ion-icon>
                   </ion-button>
 
-                  <ion-note>${{ producto.precio }}</ion-note>
+                  <ion-note>Precio ${{ producto.precio }}</ion-note>
               </div>
           </ion-item>
       </div>
@@ -81,8 +84,10 @@
       <ion-label slot="start">{{ getProductoTotalCount() }} ítems</ion-label>
       <div class="item-end" slot="end">
           <ion-label>
-              <h2>${{ getPrecioTotal() }}</h2>
-              <h3>~{{ getTiempoEstimado() }} min.</h3>
+              <h2>Total ${{ getPrecioTotal() }}</h2>
+              <h3>Tiempor estimado ~{{ getTiempoEstimado()}} min.</h3>
+              <h3>Propina ${{ this.pedido.propina }}</h3>
+              <h3>Descuentos $0 </h3>
           </ion-label>
           <ion-button (click)="realizarPedido()" expand="block" fill="clear" shape="round" color="tertiary">
               Pedir

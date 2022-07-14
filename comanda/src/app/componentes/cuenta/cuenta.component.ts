@@ -15,6 +15,7 @@ export class CuentaComponent implements OnInit {
   propina: number;
   platos: Plato[];
   idPedido: string;
+  estado: 'string';
   pedidosPreparando: Pedidos[];
   pedidosEntregar: Pedidos[];
   acobrar = false;
@@ -31,7 +32,7 @@ export class CuentaComponent implements OnInit {
 
   ngOnInit() {
    this.pedido = this.navParams.data.pedido;
-      this.propina = 10;
+
       this.preparacionService.getPlatoByPedidoId(this.pedido.pedidoId)
       .then(
         p => p.subscribe(data => {this.platos = data;})

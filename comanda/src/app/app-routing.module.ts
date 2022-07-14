@@ -106,7 +106,15 @@ const routes: Routes = [
   {
     path: 'lista-de-espera',
     loadChildren: () => import('./pages/listada-de-espera/listada-de-espera.module').then( m => m.ListadaDeEsperaPageModule)
+  },  {
+    path: 'alta-producto-bebida',
+    loadChildren: () => import('./pages/alta-producto-bebida/alta-producto-bebida.module').then( m => m.AltaProductoBebidaPageModule)
+  },
+  {
+    path: 'chat',
+    loadChildren: () => import('./pages/chat/chat.module').then( m => m.ChatPageModule)
   }
+
 
 
 

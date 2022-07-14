@@ -38,8 +38,8 @@ export class ClientePedidoPage implements OnInit {
     private mesaSer: MesaService,
     private usuarioService: UsuariosFirebaseService) {
 
-      this.mesaSer.update('JYCjbOgLWRTzkfyknquy', {estado: 'ocupado'});
-      this.mesaSer.update('JYCjbOgLWRTzkfyknquy', {cliente: this.usuarioService.id});
+     // this.mesaSer.update('JYCjbOgLWRTzkfyknquy', {estado: 'ocupado'});
+     //this.mesaSer.update('JYCjbOgLWRTzkfyknquy', {cliente: this.usuarioService.id});
 
     }
 
@@ -56,6 +56,7 @@ export class ClientePedidoPage implements OnInit {
     mesaId: '',
     numeroMesa: 0,
     tiempoEstimado: 0,
+    propina: 0,
     precioTotal: 0,
     estado: 'pendiente',
     platos: [],

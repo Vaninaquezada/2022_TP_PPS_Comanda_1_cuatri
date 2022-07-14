@@ -16,6 +16,7 @@ export class BarcodeDniComponent implements OnInit {
   ngOnInit() {}
 
   async scan() {
-    this.userBarcode.emit(await this.barcodeSanner.scanDni());
+  this.userBarcode.emit(await this.barcodeSanner.scanDni());
+
   }
 }

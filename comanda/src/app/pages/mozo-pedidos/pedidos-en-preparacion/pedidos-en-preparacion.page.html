@@ -19,7 +19,7 @@
       color="input"
       *ngFor="let pedido of pedidosPreparando"
       (click)="presentModal(pedido)" >
-      <ion-label>Mesa {{ pedido.numeroMesa }}</ion-label>
+      <ion-label><span></span>Mesa {{ pedido.numeroMesa }}</ion-label>
     </ion-item>
     <ion-text *ngIf="pedidosPreparando.length === 0">
       <h5>No hay pedidos en preparación</h5>

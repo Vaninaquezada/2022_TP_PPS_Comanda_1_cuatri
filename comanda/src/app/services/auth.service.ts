@@ -6,6 +6,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { switchMap } from 'rxjs/operators';
 import { AuthErrorsService } from './auth-errors.service';
 import { UtilidadesService } from './utilidades.service';
+import firebase from "firebase/compat/app";
+
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +45,18 @@ export class AuthService {
     //   this.isLoggedIn = true;
     //   localStorage.setItem('user', JSON.stringify(res.user))
     // })
+  }
+
+  async SignInWithGoogle() {
+    try {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      const { user } = await this.firebaseAuth.signInWithPopup(provider);
+      console.log('GoooooooogleLoginDevuelve: ',user);
+      return user;
+    } catch (error) {
+      this.utilidadesService.RemoverLoading();
+      console.log('ERROR en Autenticacion con google: ', error);
+    }
   }
 
   async SignUp(email: string, password: string){

@@ -12,6 +12,13 @@ ion-content{
   ion-header{
     --background: #ffffff;
   }
+  .linea {
+    border-top: 1px solid #23C1E0;
+    height: 2px;
+    max-width: 200px;
+    padding: 0;
+    margin: 50px auto 0 auto;
+  }
   ion-item{
     border-top: 2px solid rgb(255, 255, 255);
     border-bottom: 2px solid rgb(255, 255, 255);

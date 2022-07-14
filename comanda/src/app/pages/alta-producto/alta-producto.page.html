@@ -10,16 +10,18 @@
     </ion-header>
     <ion-content>
       <div>
+        <h1 *ngIf="subtipo === 'bartender'"> Bebida</h1>
+        <h1 *ngIf="subtipo === 'cocinero'"> Comida</h1>
         
         <form [formGroup]="forma" (ngSubmit)="AltaProducto()">
           
-          <ion-item >
+          <!-- <ion-item >
             <ion-label position="floating">Elegir tipo de producto</ion-label>            
             <ion-select placeholder="Tipo de Producto" formControlName="tipoProducto">
               <ion-select-option value="comida">Comida</ion-select-option>
               <ion-select-option value="bebida">Bebida</ion-select-option>
             </ion-select>
-          </ion-item>
+          </ion-item> -->
 
           <ion-item>
             <ion-label position="floating">Nombre</ion-label>

@@ -41,20 +41,39 @@
           <ion-button class="botonPedir" size="large" shape="round" expand="full" (click)="Navegar('cliente-pedido')" > Hacer pedido </ion-button>
         </div>
         <div *ngIf="pedi"> 
-          <ion-spinner name="circular" ></ion-spinner>
-          <div >
-            <ion-item >
-              <ion-item (click)="presentModal(pedi)" color="input">
-                <ion-label>Mesa {{ pedi.numeroMesa }}</ion-label>
-                <ion-label>Estado {{ pedi.estado }}</ion-label>
-              </ion-item>
-              <ion-button *ngIf="pedi.estado === 'confirmarEntrega' " class="botonPedir" size="large" shape="round" expand="full" (click)="confirmarEntrega()" > Confirmar entrega </ion-button>
-              <ion-button *ngIf="pedi.estado === 'aPagar' " class="botonPedir" size="large" shape="round" expand="full" (click)="pagar()" > Pagar </ion-button>
-              <ion-button *ngIf="pedi.estado === 'entregado' " class="botonPedir" size="large" shape="round" expand="full" (click)="pedirCuenta()" > Pedir Cuenta </ion-button>
-            </ion-item>
 
-            <ion-button *ngIf="pedi.estado === 'aCobrar' || pedi.estado === 'aPagar'  " class="botonPedir" size="large" shape="round" expand="full" (click)="propina()" > Propina <ion-icon name="scan-circle-outline"></ion-icon></ion-button>
+          <div >
+            <strong>
+              Pedido:
+            </strong>
+            <br><br>
+            <ion-item (click)="presentModal(pedi)" expand="full"  color="input">
+              <ion-item >
+                <ion-label class="ion-text-left">Mesa {{ pedi.numeroMesa }}</ion-label>
+              </ion-item>
+              <ion-item >
+                <ion-label class="ion-text-right">Estado: {{ pedi.estado }}</ion-label>
+              </ion-item>
+              <ion-item class="qr">
+              </ion-item>
+
+            </ion-item>
+           
+            <ion-button slot="end" *ngIf="pedi.estado === 'confirmarEntrega' " class="botonPedido"  shape="round" expand="full" (click)="confirmarEntrega()" > Confirmar entrega </ion-button>
+            <ion-button slot="end" *ngIf="pedi.estado === 'aPagar' " class="botonPedido"  shape="round" expand="full" (click)="pagar()" > Pagar </ion-button>
+            <ion-button slot="end" *ngIf="pedi.estado === 'entregado' " class="botonPedido"  shape="round" expand="full" (click)="pedirCuenta()" > Pedir Cuenta </ion-button>
+            <ion-button  class="botonPedido"  shape="round" expand="full" (click)="this.Navegar('chat')" > Consultar al mozo </ion-button>
           </div>
+          
+          <ion-fab *ngIf="pedi.estado === 'aCobrar' || pedi.estado === 'aPagar' " (click)="getQrPropinaData()">
+          
+            <ion-fab-button size="large" color="success" vertical="center" horizontal="start">
+              <ion-icon name="qr-code-outline"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+          
+
+          {{cosa}}
         </div>
       </div>
 

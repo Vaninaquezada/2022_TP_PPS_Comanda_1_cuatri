@@ -18,7 +18,7 @@
   <div *ngIf="pedidosConfirmar">
     <ion-item *ngFor="let pedido of pedidosConfirmar">
       <ion-item (click)="presentModal(pedido)" color="input">
-        <ion-label>Mesa {{ pedido.numeroMesa }}</ion-label>
+        <ion-label><span>Mesa {{ pedido.numeroMesa }}</span></ion-label>
       </ion-item>
 
 

@@ -61,8 +61,12 @@ export class UsuariosFirebaseService {
 
   async obtenerUsuario(email: string) {
     await this.db.collection('/usuarios').ref.where('email', '==', email).get().then((responce) => {
-      this.usuarioSeleccionado = responce.docs[0].data();
-      this.id = responce.docs[0].id;
+      if(responce.docs.length===0){
+        console.log('No hay usuario registrado con ese email: ',email);
+      }else{
+        this.usuarioSeleccionado = responce.docs[0].data();
+        this.id = responce.docs[0].id;
+      }
     });
   }
 

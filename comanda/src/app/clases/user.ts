@@ -16,7 +16,7 @@ export class User {
     verificacionEspec?: boolean;
     verificadoPorAdm?: boolean;
     id?: string;
-    numeroMesa?: Number;
+    numeroMesa?: number;
     mesaId?: string;
     ingresos?: Array<Date>;
     pushId?: string;

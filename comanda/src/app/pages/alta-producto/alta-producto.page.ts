@@ -26,6 +26,7 @@ export class AltaProductoPage implements OnInit {
   tomada1: boolean;
   tomada2: boolean;
   tomada3: boolean;
+  subtipo: string;
   
   constructor(
     private navegador: Router,
@@ -38,9 +39,9 @@ export class AltaProductoPage implements OnInit {
     private menuController: MenuController
     
     ) {
+      this.subtipo = localStorage.getItem("subtipo");
+      console.log(this.subtipo);
       this.MenuView();
-    
-
   }
 
   ngOnInit() {
@@ -49,42 +50,62 @@ export class AltaProductoPage implements OnInit {
       'descripcion': ['', Validators.required],
       'tiempoPromedioMinutos': ['', Validators.required],
       'precio': ['', Validators.required],
-      'tipoProducto': ['', Validators.required],
+      // 'tipoProducto': ['', Validators.required],
     });
   }
 
   MenuView(){
     this.menuController.enable(false, 'clientesMenu');
-    this.menuController.enable(false, 'empleadosMenu');
-    this.menuController.enable(true, 'adminMenu');
+    this.menuController.enable(false, 'adminMenu');
+    this.menuController.enable(false, 'mozoMenu');
+    this.menuController.enable(false, 'metreMenu');
+    this.menuController.enable(true, 'cocineroMenu');
+    this.menuController.enable(false, 'bartenderMenu');
   }
 
   async AltaProducto(){
-    // console.log(Number(this.forma.get('notaEmpleados').value));
-    this.utilidadesService.PresentarLoading("Creando producto");
     
-    let producto: Productos = {
-      
-      nombre: this.forma.get('nombre').value,
-      descripcion: this.forma.get('descripcion').value,
-      tiempoPromedioMinutos: this.forma.get('tiempoPromedioMinutos').value,
-      precio: Number(this.forma.get('precio').value),
-      tipoProducto: this.forma.get('tipoProducto').value,      
-  
-    };
+    let tipo;
 
-    if(this.tomada3){
-      await this.productoService.nuevoProducto(producto, this.photo1, this.photo2, this.photo3);
-    }else if(this.tomada2){
-        await this.productoService.nuevoProducto(producto, this.photo1, this.photo2);
-    }else if(this.tomada1){
-          await this.productoService.nuevoProducto(producto, this.photo1);
+    if (this.subtipo == "cocinero"){
+      console.log("entra en cocinero");
+      tipo = "comida"
     }
+    if (this.subtipo == "bartender"){
+      console.log("entra en bartender");
+      tipo = "bebida"
+    }
+    console.log(tipo);
 
-    this.navegador.navigate(['/principal']);
+    if(tipo === undefined){
+      this.utilidadesService.PresentarToastAbajo("servicio no habilitado para tu usuario", "warning");
+      
+    }else{
+      this.utilidadesService.PresentarLoading("Creando producto");
+      console.log("entra a crear producto");
+      let producto: Productos = {
+      
+        nombre: this.forma.get('nombre').value,
+        descripcion: this.forma.get('descripcion').value,
+        tiempoPromedioMinutos: this.forma.get('tiempoPromedioMinutos').value,
+        precio: Number(this.forma.get('precio').value),
+        tipoProducto: tipo,      
+    
+      };
+  
+      if(this.tomada3){
+        await this.productoService.nuevoProducto(producto, this.photo1, this.photo2, this.photo3);
+      }else if(this.tomada2){
+          await this.productoService.nuevoProducto(producto, this.photo1, this.photo2);
+      }else if(this.tomada1){
+            await this.productoService.nuevoProducto(producto, this.photo1);
+      }
+  
+      this.navegador.navigate(['/cocinero-pedidos']);
+    }
+    
+    
   }
-
-
 
 
   async getPhoto1() {

@@ -30,8 +30,15 @@ ion-content{
   margin-top: 10%;
 }
   
-  
-
+.botonPedido{
+  height: 100px;
+  --background: -webkit-linear-gradient(rgba(5, 255, 172, 0.886),rgba(0, 0, 0, 0.685));
+  -webkit-background-clip: text;    
+  margin-top: 10%;
+}
+.qr{
+  width: 10%;
+}
   .item{
     --color: black;
     --background: rgba(0, 0, 0, 0.144);;

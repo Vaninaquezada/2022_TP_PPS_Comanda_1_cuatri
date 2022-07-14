@@ -16,9 +16,12 @@ export class ListaDeEsperaFirebaseService {
   private dbpath = '/listaDeEspera'; //ruta de la coleccion de firebase.
   ingresosRef: AngularFirestoreCollection<User>;
   listaDeEspera:Observable<any[]>;
+  ingresosHoyRef: AngularFirestoreCollection<User>;
+  listaDeEsperaHoy:Observable<any[]>;
   id: string;
   role: string;
   ingresoseleccionado: any;
+  fechaDehoy= new Date();
   
   constructor(
     private db: AngularFirestore,
@@ -26,14 +29,21 @@ export class ListaDeEsperaFirebaseService {
     private authError: AuthErrorsService,
     private utilidadesService: UtilidadesService)
     {
+    this.fechaDehoy.setDate(this.fechaDehoy.getDate()-1);
     this.ingresosRef=db.collection<any>(this.dbpath, ref => ref.orderBy('fechaIngreso'));
     this.listaDeEspera=this.ingresosRef.valueChanges(this.dbpath);
+    this.ingresosHoyRef=db.collection<any>(this.dbpath, ref => ref.where('fechaIngreso', '>', this.fechaDehoy));
+    this.listaDeEsperaHoy=this.ingresosHoyRef.valueChanges(this.dbpath);
 
   }
 
 
   getAll(){
     return this.listaDeEspera;
+  }
+
+  getAllToday(){
+    return this.listaDeEsperaHoy;
   }
 
   async nuevoIngreso(ingreso: IngresoLocal){

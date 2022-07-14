@@ -1,0 +1,31 @@
+ion-content{
+    --background: #23C1E0;
+    background: #23C1E0;
+  }
+  ion-title{
+    color: #ffffff;
+    background: #ffffff;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+  }
+  
+  
+  ion-item, ion-list{
+    --color:  #29dce9;;
+    --border-color:rgb(218, 91, 235);
+    background-color: #23C1E0;
+    --background: #23C1E0;
+}
+
+
+ 
+
+
+
+  #fotoContainer{
+    margin-top: 30%;
+  }
+  ion-toolbar{
+    --background: #ffffff;
+    background: #ffffff;
+  }

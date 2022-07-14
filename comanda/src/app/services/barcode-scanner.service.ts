@@ -35,7 +35,7 @@ export class BarcodeScannerService {
     return user;
   }
   async scanMesa() {
-    const result = await this.barcodeScanner.scan({ formats: 'PDF_417' });
+    const result = await this.barcodeScanner.scan({ formats: 'EAN_13,EAN_8,QR_CODE,PDF_417' });
     if (result.cancelled) {
       return null;
     }
@@ -48,6 +48,19 @@ export class BarcodeScannerService {
 
     };
     return mesa;
+  }
+
+  async scanPropina() {
+    const result = await this.barcodeScanner.scan({ formats: 'EAN_13,EAN_8,QR_CODE,PDF_417' });
+    if (result.cancelled) {
+      return null;
+    }
+
+    if(result.text ==='propina')
+    {
+      return 'propina';
+    };
+    return 'nopropina';
   }
 
 }

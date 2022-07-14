@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,8 +9,12 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./mozo-pedidos.page.scss'],
 })
 export class MozoPedidosPage implements OnInit {
-
-  constructor(private router: Router,private authSvc: AuthService ) { }
+  subtipo: string;
+  constructor(private router: Router,private authSvc: AuthService,private menuController: MenuController) {
+    this.subtipo = localStorage.getItem('subtipo');
+    console.log(this.subtipo);
+    this.MenuView();
+  }
 
   ngOnInit() {
   }
@@ -21,5 +26,14 @@ export class MozoPedidosPage implements OnInit {
   signOut(){
     this.authSvc.LogOut();
     this.router.navigate(['login']);
+  }
+
+  MenuView(){
+    this.menuController.enable(false, 'clientesMenu');
+    this.menuController.enable(false, 'adminMenu');
+    this.menuController.enable(true, 'mozoMenu');
+    this.menuController.enable(false, 'metreMenu');
+    this.menuController.enable(false, 'cocineroMenu');
+    this.menuController.enable(false, 'bartenderMenu');
   }
 }

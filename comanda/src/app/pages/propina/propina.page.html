@@ -1,9 +1,46 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>propina</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="clientesMenu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Seleccione el % de propina</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="singOut()">
+        <ion-icon name="log-out" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-list  >
+    <ion-radio-group  [(ngModel)]="valor" allow-empty-selection="true" name="radio-group" (ionChange)="radioGroupChange($event)" #radioGroup>
+
+    <ion-item>
+      <ion-label><span>Excelente - 20% </span></ion-label>
+      <ion-radio name="options" value="20%" checked></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label><span>Muy Bueno - 15%"</span></ion-label>
+      <ion-radio name="options" value="15%"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label><span>Bueno - 10%</span></ion-label>
+      <ion-radio name="options" value="10%" [disabled]="isDisabled"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label><span>Regular - 5%</span></ion-label>
+      <ion-radio name="options" value="5%" [disabled]="isDisabled"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label><span>Malo - 0%</span></ion-label>
+      <ion-radio name="options" value="0%" [disabled]="isDisabled"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+  </ion-list>
+  
+
+  <ion-button expand="full" class="anonimo" (click)="darPropina()"> Dar propina</ion-button>
 
 </ion-content>

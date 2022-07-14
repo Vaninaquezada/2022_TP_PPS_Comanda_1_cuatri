@@ -23,13 +23,14 @@ export class MesaPage implements OnInit {
   code: any;
   listaDeEspera: any;
   listaMesas: any;
-  mostrar: boolean;
+  mostrar = true;
   hayPedido= false;
   pedi: Pedidos;
+  cosa: any;
  mesaNumero: string;
  idMesa: string;
 usuario: User;
-mesaActual:string;
+mesaActual: string;
   constructor(
     private navegador: Router,
     private authSvc: AuthService,
@@ -44,7 +45,7 @@ mesaActual:string;
   )
   {
     this.MenuView();
-    this.listaEsperaService.getAll().subscribe(resultado => {
+    this.listaEsperaService.getAllToday().subscribe(resultado => {
       this.listaDeEspera = resultado;
 
     })
@@ -58,7 +59,10 @@ mesaActual:string;
     this.getCliente();
     this.usuario = this.usera.usuarioSeleccionado;
   }
-
+  ionViewDidEnter(){
+    this.gestionPedidos(this.usuario.mesaId);
+    //this.mostrar = false;
+}
   MenuView(){
     this.menuController.enable(true, 'clientesMenu');
     this.menuController.enable(false, 'adminMenu');
@@ -86,8 +90,11 @@ mesaActual:string;
                     if(element.id == "JYCjbOgLWRTzkfyknquy"){
                       if(element.estado == "libre"){
                         this.utilidadesService.PresentarToastAbajo("Mesa 1", "success");                  
-                        this.mesaService.update("JYCjbOgLWRTzkfyknquy", {estado: "ocupado"});
-                        this.mesaService.update("JYCjbOgLWRTzkfyknquy", {cliente: this.usuario.id});
+                        this.mesaService.update("JYCjbOgLWRTzkfyknquy", {estado: "ocupado",cliente: this.usuario.id});
+                        this.usuario.mesaId = "JYCjbOgLWRTzkfyknquy";
+                        this.usuario.numeroMesa = 1;
+                        this.usera.guardarCambios( this.usuario);
+
                         this.mostrar = true; 
                           
                         this.gestionPedidos("JYCjbOgLWRTzkfyknquy");
@@ -109,6 +116,9 @@ mesaActual:string;
                       if(element.estado == "libre"){
                         this.utilidadesService.PresentarToastAbajo("Mesa 2", "success");                  
                         this.mesaService.update("zZCtyY4gqhvEkkK2RyxD", {estado: "ocupado",cliente: this.usuario.id});
+                        this.usuario.mesaId = "zZCtyY4gqhvEkkK2RyxD";
+                        this.usuario.numeroMesa = 2;
+                        this.usera.guardarCambios( this.usuario);
                         this.mostrar = true; 
 
                         this.gestionPedidos("zZCtyY4gqhvEkkK2RyxD");
@@ -130,8 +140,12 @@ mesaActual:string;
                         this.utilidadesService.PresentarToastAbajo("Mesa 3", "success");                  
                         this.mesaService.update("BVIBfLHDswZd77dWWCLR", {estado: "ocupado",cliente: this.usuario.id});
                         this.mostrar = true;   
-                       
+                        this.usuario.mesaId = "BVIBfLHDswZd77dWWCLR";
+                        this.usuario.numeroMesa = 3;
+                        this.usera.guardarCambios( this.usuario);
+
                         this.gestionPedidos("BVIBfLHDswZd77dWWCLR");
+
                         break;
                       }else{
                         this.utilidadesService.PresentarToastAbajo("Mesa 3 no disponible", "danger");
@@ -172,7 +186,7 @@ mesaActual:string;
   async getCliente(){
     await this.usera.obtenerUsuario(localStorage.getItem('usuario'));
   }
- 
+
   getEstadoPedido(estadoPedido: string) {
     const estado = estadoPedido || '';
     switch (estado) {
@@ -202,13 +216,17 @@ mesaActual:string;
   pagar() {
     this.pedi.estado = 'pagado';
     this.pedido.updatePedido(this.pedi);
-    this.mesaService.update(this.pedi.mesaId, {estado: 'libre',cliente:''});
+    this.mesaService.update(this.pedi.mesaId, {estado: 'libre',cliente:null});
+    this.usuario.mesaId = null;
+    this.usuario.numeroMesa = null;
+    console.log( this.usuario.mesaId);
+    this.usera.guardarCambios( this.usuario);
     this.Navegar('/principal');
   }
 
   pedirCuenta(){
     this.pedi.estado = 'aCobrar';
-    console.log(" this.pedi.estado", this.pedi.estado);
+    console.log(' this.pedi.estado', this.pedi.estado);
     this.pedido.updatePedido(this.pedi);
 
   }
@@ -249,8 +267,27 @@ mesaActual:string;
               })
             );
     }
-    propina(){
 
+    async getQrPropinaData() {
+      console.log('barcodeData.text');
+      this.barcodeScanner.scan().then(barcodeData => {
+        console.log('barcodeData.text');
+        if (barcodeData.text === 'propina') {
+          this.Navegar('/propina');
+        }else{
+        this.utilidadesService.PresentarToastAbajo('Qr invalido', 'danger');
+      }
 
+      });
+    /*  console.log('getQrPropinaData',propina);
+      this.cosa = propina;
+      this.Navegar('/propina');
+      if (propina ==='propina') {
+        this.Navegar('/propina');
+      }else{
+      this.utilidadesService.PresentarToastAbajo('Qr invalido', 'danger');
     }
+    */
+    }
+
 }
