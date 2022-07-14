@@ -23,7 +23,7 @@ export class MesaPage implements OnInit {
   code: any;
   listaDeEspera: any;
   listaMesas: any;
-  mostrar = true;
+  mostrar = false;
   hayPedido= false;
   pedi: Pedidos;
   cosa: any;
@@ -94,7 +94,7 @@ mesaActual: string;
                         this.usuario.mesaId = "JYCjbOgLWRTzkfyknquy";
                         this.usuario.numeroMesa = 1;
                         this.usera.guardarCambios( this.usuario);
-
+                        this.mesaNumero = "Mesa 1";
                         this.mostrar = true; 
                           
                         this.gestionPedidos("JYCjbOgLWRTzkfyknquy");
@@ -119,6 +119,7 @@ mesaActual: string;
                         this.usuario.mesaId = "zZCtyY4gqhvEkkK2RyxD";
                         this.usuario.numeroMesa = 2;
                         this.usera.guardarCambios( this.usuario);
+                        this.mesaNumero = "Mesa 2";
                         this.mostrar = true; 
 
                         this.gestionPedidos("zZCtyY4gqhvEkkK2RyxD");
@@ -143,7 +144,7 @@ mesaActual: string;
                         this.usuario.mesaId = "BVIBfLHDswZd77dWWCLR";
                         this.usuario.numeroMesa = 3;
                         this.usera.guardarCambios( this.usuario);
-
+                        this.mesaNumero = "Mesa 3";
                         this.gestionPedidos("BVIBfLHDswZd77dWWCLR");
 
                         break;

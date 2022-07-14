@@ -50,18 +50,18 @@ export class ClientePedidoPage implements OnInit {
     this.productoService
     .getProductos()
     .then((p) => p.subscribe((data) => (this.productos = data)));
-
+    this.cliente = this.usuarioService.usuarioSeleccionado;
   this.pedido = {
     pedidoId: this.usuarios.crearId(),
-    mesaId: '',
-    numeroMesa: 0,
+    mesaId: this.cliente.mesaId,
+    numeroMesa: this.cliente.numeroMesa,
     tiempoEstimado: 0,
     propina: 0,
     precioTotal: 0,
     estado: 'pendiente',
     platos: [],
   };
-  this.cliente = this.usuarioService.usuarioSeleccionado;
+
 
 }
 
@@ -137,8 +137,6 @@ async getMesa(id){
 
     this.pedido.numeroMesa = this.cliente.numeroMesa;
 
-   // this.pedido.mesaId = 'JYCjbOgLWRTzkfyknquy';
-   //this.pedido.numeroMesa = 1;
     this.pedido.precioTotal = this.getPrecioTotal();
     this.pedido.tiempoEstimado = this.getTiempoEstimado();
     this.pedidoService.crearPedido(this.pedido);
