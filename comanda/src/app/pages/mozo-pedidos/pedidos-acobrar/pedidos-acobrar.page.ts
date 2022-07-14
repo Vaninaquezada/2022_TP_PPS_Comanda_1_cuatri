@@ -23,13 +23,13 @@ export class PedidosACobrarPage implements OnInit {
 
   ngOnInit() {
     this.pedidoService
-    .getPedidos('aPagar')
+    .getPedidos('aCobrar')
     .then((p) => p.subscribe((data) => (this.pedidosCobrar = data)));
   }
 
 
   public cobrarPedido(pedido: Pedidos) {
-    pedido.estado = 'pagado';
+    pedido.estado = 'aPagar';
     this.pedidoService.updatePedido(pedido);
     // liberar mesa
   }

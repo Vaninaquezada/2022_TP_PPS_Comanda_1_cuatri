@@ -53,8 +53,9 @@ export class MesaService {
   }
 
   async obtenerMesaCliente(id: string){
-    await this.afs.collection('/mesas').ref.where('cliente', '==', id).get().then((responce)=>{
-      this.mesaSeleccionada = responce.docs[0].data();
+    return   this.afs.collection('/mesas').ref.where('cliente', '==', id).get().then((responce)=>{
+       this.mesaSeleccionada = responce.docs[0].data();
+       return this.mesaSeleccionada ;
     });
   }
 

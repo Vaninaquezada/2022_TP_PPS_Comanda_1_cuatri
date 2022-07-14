@@ -17,7 +17,7 @@ import { PushOneSignalService } from 'src/app/services/push-one-signal.service';
   styleUrls: ['./principal.page.scss'],
 })
 export class PrincipalPage implements OnInit {
-  
+
   public forma: FormGroup;
   code: any;
   constructor(private navegador: Router,
@@ -51,16 +51,23 @@ export class PrincipalPage implements OnInit {
 
     await this.usuarioService.obtenerUsuario(localStorage.getItem("usuario"));
     // this.utilidadesService.PresentarLoading("Ingresando a lista de espera.");            
-
-            // let ingreso: IngresoLocal = {
-            //   cliente: this.usuarioService.usuarioSeleccionado,
-            //   estado: 'esperando',
-            //   cantidadPersonas: Number(this.forma.get('cantidadPersonas').value),
-            //   fechaIngreso: new Date(),
-            // };
+/*
+             let ingreso: IngresoLocal = {
+               cliente: this.usuarioService.usuarioSeleccionado,
+               estado: 'esperando',
+               cantidadPersonas: Number(this.forma.get('cantidadPersonas').value),
+               fechaIngreso: new Date(),
+             };
             
-            // this.listaEsperaService.nuevoIngreso(ingreso);
+             this.listaEsperaService.nuevoIngreso(ingreso);
 
+             
+            this.usuarioService.obtenerPushIdMetres().then(response=>{
+              console.log("this.metrePushIds"+JSON.stringify(this.usuarioService.metresPushIds));
+              this.pushOneSignal.enviarNotifAnonimoPendienteDelMetre( this.usuarioService.metresPushIds,"Info adicional bla");
+            });
+            this.Navegar('mesa');
+*/
     this.barcodeScanner.scan().then(barcodeData => {
       console.log('Barcode data', barcodeData);
      this.code = barcodeData.text;

@@ -78,6 +78,7 @@ export class PedidosService {
       .collection<Pedidos>('Pedidos', (ref) =>
         ref
           .where('mesaId', '==', mesaId)
+          .where('estado', '!=','pagado')
       )
       .valueChanges();
   }

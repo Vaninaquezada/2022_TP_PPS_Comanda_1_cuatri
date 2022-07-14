@@ -29,6 +29,7 @@ export class MesaPage implements OnInit {
  mesaNumero: string;
  idMesa: string;
 usuario: User;
+mesaActual:string;
   constructor(
     private navegador: Router,
     private authSvc: AuthService,
@@ -65,17 +66,19 @@ usuario: User;
   }
 
   Scan(): void{
+    
     for (let index = 0; index < this.listaDeEspera.length; index++) {
       const element = this.listaDeEspera[index];
       console.log(element.id)
+      
       if(element.cliente.email == localStorage.getItem("usuario")){
         // console.log("coincide mail")
         if(element.estado == "aprobado"){          
           
-        this.barcodeScanner.scan().then(barcodeData => {
-            console.log('Barcode data', barcodeData);
-            this.code = barcodeData.text;
-           this.code ="JYCjbOgLWRTzkfyknquy";
+         this.barcodeScanner.scan().then(barcodeData => {
+           console.log('Barcode data', barcodeData);
+           this.code = barcodeData.text;
+           
               switch (this.code) {
                 case "JYCjbOgLWRTzkfyknquy": //Mesa 1
                   for (let index = 0; index < this.listaMesas.length; index++) {
@@ -86,20 +89,9 @@ usuario: User;
                         this.mesaService.update("JYCjbOgLWRTzkfyknquy", {estado: "ocupado"});
                         this.mesaService.update("JYCjbOgLWRTzkfyknquy", {cliente: this.usuario.id});
                         this.mostrar = true; 
-                     
-                        this.pedido.getPedidoByMesaId("JYCjbOgLWRTzkfyknquy").then((p) =>
-                        p.subscribe((data) => {
-                          this.pedi= data[0];
-                          console.log(data[0]);
-                          if(this.pedi){
-                            if (this.pedi.estado !== 'pagado') {
-                              console.log("lloremos");
-                              this.hayPedido = true;
-                            }
-                          }
-
-                        })
-                      );           
+                          
+                        this.gestionPedidos("JYCjbOgLWRTzkfyknquy");
+           
                         break;
                       }else{
                         this.utilidadesService.PresentarToastAbajo("Mesa 1 no disponible", "danger");
@@ -116,22 +108,10 @@ usuario: User;
                     if(element.id == "zZCtyY4gqhvEkkK2RyxD"){
                       if(element.estado == "libre"){
                         this.utilidadesService.PresentarToastAbajo("Mesa 2", "success");                  
-                        this.mesaService.update("zZCtyY4gqhvEkkK2RyxD", {estado: "ocupado"});
+                        this.mesaService.update("zZCtyY4gqhvEkkK2RyxD", {estado: "ocupado",cliente: this.usuario.id});
                         this.mostrar = true; 
-                        this.mesaService.update("JYCjbOgLWRTzkfyknquy", {cliente: this.usuario.id});
-                        this.pedido.getPedidoByMesaId("zZCtyY4gqhvEkkK2RyxD").then((p) =>
-                        p.subscribe((data) => {
-                          this.pedi = data[0];
-                          console.log(data[0]);
-                          if(this.pedi){
-                            console.log("lloremos");
-                            if (this.pedi?.estado !== 'pagado') {
-                              console.log("lloremos");
-                              this.hayPedido = true;
-                            }
-                          }
-                        })
-                      );
+
+                        this.gestionPedidos("zZCtyY4gqhvEkkK2RyxD");
               
                         break;
                       }else{
@@ -148,19 +128,10 @@ usuario: User;
                     if(element.id == "BVIBfLHDswZd77dWWCLR"){
                       if(element.estado == "libre"){
                         this.utilidadesService.PresentarToastAbajo("Mesa 3", "success");                  
-                        this.mesaService.update("BVIBfLHDswZd77dWWCLR", {estado: "ocupado"});
+                        this.mesaService.update("BVIBfLHDswZd77dWWCLR", {estado: "ocupado",cliente: this.usuario.id});
                         this.mostrar = true;   
                        
-                        this.pedido.getPedidoByMesaId("BVIBfLHDswZd77dWWCLR").then((p) =>
-                        p.subscribe((data) => {
-                          this.pedi = data[0];
-                          console.log(data[0]);
-                          if (this.pedi.estado != 'pagado') {
-                            this.hayPedido = true;
-                            console.log("hola");
-                          }
-                        })
-                      );    
+                        this.gestionPedidos("BVIBfLHDswZd77dWWCLR");
                         break;
                       }else{
                         this.utilidadesService.PresentarToastAbajo("Mesa 3 no disponible", "danger");
@@ -175,7 +146,7 @@ usuario: User;
                   break;
               }           
       
-           }).catch(err => {
+          }).catch(err => {
               console.log('Error', err);
               
           })
@@ -191,7 +162,8 @@ usuario: User;
 
   }
 
-  
+
+
   Navegar(ruta: string){
     console.log("entra en navegar");
     this.navegador.navigate([ruta]);
@@ -222,11 +194,26 @@ usuario: User;
         return 'No se ha realizado un pedido';
     }
   }
-  
+
   confirmarEntrega() {
     this.pedi.estado = 'entregado';
     this.pedido.updatePedido(this.pedi);
   }
+  pagar() {
+    this.pedi.estado = 'pagado';
+    this.pedido.updatePedido(this.pedi);
+    this.mesaService.update(this.pedi.mesaId, {estado: 'libre',cliente:''});
+    this.Navegar('/principal');
+  }
+
+  pedirCuenta(){
+    this.pedi.estado = 'aCobrar';
+    console.log(" this.pedi.estado", this.pedi.estado);
+    this.pedido.updatePedido(this.pedi);
+
+  }
+
+
   async presentModal(pedido: Pedidos) {
     const pedidoId = pedido.pedidoId;
 
@@ -236,12 +223,34 @@ usuario: User;
       presentingElement: await this.modal.getTop(),
       backdropDismiss: false,
       componentProps: {
-        pedido,
+        pedido:this.pedi,
         pedidoId,
-        boton: 'enpreparacion'
+        boton: ''
       },
     });
     return await modal.present();
 
   }
+
+    gestionPedidos(codigo: string){
+
+              this.pedido.getPedidoByMesaId(codigo).then((p) =>
+              p.subscribe((data) => {
+                console.log('data',data);
+                this.pedi= data[0];
+                console.log(data[0]);
+                if(this.pedi){
+                  if (this.pedi.estado !== 'pagado') {
+                    console.log('lloremos',this.pedi);
+                    this.hayPedido = true;
+                  }
+                }
+
+              })
+            );
+    }
+    propina(){
+
+
+    }
 }

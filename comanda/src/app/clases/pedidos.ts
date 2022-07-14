@@ -10,7 +10,7 @@ export interface Pedidos {
     platos: Array<Plato>;
     propina?: number;
 }
-export type PedidoEstado = 'pendiente' | 'preparando' | 'terminado' | 'aEntregar' | 'confirmarEntrega' | 'entregado' | 'aPagar' | 'pagado';
+export type PedidoEstado = 'pendiente' | 'preparando' | 'terminado' | 'aEntregar' | 'confirmarEntrega' | 'entregado' | 'aCobrar'| 'aPagar' | 'pagado' | 'pendientePago';
 
 /*
 import { User } from "@angular/fire/auth";

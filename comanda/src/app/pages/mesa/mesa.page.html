@@ -48,9 +48,12 @@
                 <ion-label>Mesa {{ pedi.numeroMesa }}</ion-label>
                 <ion-label>Estado {{ pedi.estado }}</ion-label>
               </ion-item>
-              <ion-button *ngIf="pedi.estado == 'confirmarEntrega' " class="botonPedir" size="large" shape="round" expand="full" (click)="confirmarEntrega()" > Confirmar entrega </ion-button>
-
+              <ion-button *ngIf="pedi.estado === 'confirmarEntrega' " class="botonPedir" size="large" shape="round" expand="full" (click)="confirmarEntrega()" > Confirmar entrega </ion-button>
+              <ion-button *ngIf="pedi.estado === 'aPagar' " class="botonPedir" size="large" shape="round" expand="full" (click)="pagar()" > Pagar </ion-button>
+              <ion-button *ngIf="pedi.estado === 'entregado' " class="botonPedir" size="large" shape="round" expand="full" (click)="pedirCuenta()" > Pedir Cuenta </ion-button>
             </ion-item>
+
+            <ion-button *ngIf="pedi.estado === 'aCobrar' || pedi.estado === 'aPagar'  " class="botonPedir" size="large" shape="round" expand="full" (click)="propina()" > Propina <ion-icon name="scan-circle-outline"></ion-icon></ion-button>
           </div>
         </div>
       </div>

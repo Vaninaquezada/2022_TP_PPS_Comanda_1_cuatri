@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="secondary">
-    <ion-title>Detalle de cuenta Mesa {{plato.producto.numeroMesa}}</ion-title>
+    <ion-title>Detalle de cuenta Mesa {{pedido.numeroMesa}}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="cerrarModal()">
         <ion-icon name="close-outline"></ion-icon>
@@ -22,6 +22,12 @@
             <ion-label class="ion-text-left">Propina</ion-label>
             <ion-label class="ion-text-right"
               >${{ propina }}</ion-label
+            >
+          </ion-item>
+          <ion-item>
+            <ion-label class="ion-text-left">Descuentos</ion-label>
+            <ion-label class="ion-text-right"
+              >$0</ion-label
             >
           </ion-item>
           <ion-item class="total">

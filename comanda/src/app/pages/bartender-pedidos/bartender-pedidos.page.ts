@@ -3,6 +3,8 @@ import { PlatoService } from 'src/app/services/plato.service';
 import { Plato } from 'src/app/clases/plato';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { ProductosService } from 'src/app/services/productos.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-bartender-pedidos',
@@ -19,7 +21,9 @@ export class BartenderPedidosPage implements OnInit {
   constructor(
     public productoService: ProductosService,
     public platoService: PlatoService,
-    public pedidoService: PedidosService) { }
+    public pedidoService: PedidosService,
+    public router: Router,
+    public authSvc: AuthService) { }
 
   ngOnInit() {
 
@@ -63,4 +67,8 @@ console.log();
     console.log('terminado?',this.pedidoTerminado);
     console.log('platos?',this.platos);
    }
+   singOut(){
+    this.authSvc.LogOut();
+    this.router.navigate(['login']);
+  }
 }

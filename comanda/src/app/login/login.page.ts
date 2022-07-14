@@ -27,7 +27,7 @@ export class LoginPage {
   constructor(public firebaseService: AuthService, private router: Router, private usuariosFire: UsuariosFirebaseService, private utilidadesService: UtilidadesService) { }
 
   ngOnInit() {
-   // this.OneSignalInit();
+   this.OneSignalInit();
   }
 
   async OnSignIn(email: string, password: string) {

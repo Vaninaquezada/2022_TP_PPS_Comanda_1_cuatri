@@ -56,7 +56,7 @@ export class CuentaComponent implements OnInit {
     this.modalController.dismiss();
   }
   public cobrarPedido(pedido: Pedidos) {
-    pedido.estado = 'pagado';
+    pedido.estado = 'aPagar';
     this.pedidoService.updatePedido(pedido);
     this.cerrarModal() ;
   }
