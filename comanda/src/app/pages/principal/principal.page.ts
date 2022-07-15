@@ -92,7 +92,7 @@ export class PrincipalPage implements OnInit {
             break;
         
           default:
-            this.utilidadesService.PresentarToastAbajo("Código Invalido", "danger"); 
+            this.utilidadesService.PresentarToastAbajo("Código Inválido", "danger"); 
             break;
         }
        

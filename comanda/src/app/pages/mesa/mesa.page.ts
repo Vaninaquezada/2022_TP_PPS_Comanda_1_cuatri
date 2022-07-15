@@ -72,92 +72,110 @@ mesaActual: string;
   Scan(): void{
     
     for (let index = 0; index < this.listaDeEspera.length; index++) {
-      const element = this.listaDeEspera[index];
-      console.log(element.id)
+      const ingreso = this.listaDeEspera[index];
+      console.log(ingreso.id)
       
-      if(element.cliente.email == localStorage.getItem("usuario")){
+      if(ingreso.cliente.email == localStorage.getItem("usuario")){
         // console.log("coincide mail")
-        if(element.estado == "aprobado"){          
+        if(ingreso.estado == "aprobado"){          
           
          this.barcodeScanner.scan().then(barcodeData => {
            console.log('Barcode data', barcodeData);
            this.code = barcodeData.text;
            
               switch (this.code) {
+
                 case "JYCjbOgLWRTzkfyknquy": //Mesa 1
-                  for (let index = 0; index < this.listaMesas.length; index++) {
-                    const element = this.listaMesas[index];
-                    if(element.id == "JYCjbOgLWRTzkfyknquy"){
-                      if(element.estado == "libre"){
-                        this.utilidadesService.PresentarToastAbajo("Mesa 1", "success");                  
-                        this.mesaService.update("JYCjbOgLWRTzkfyknquy", {estado: "ocupado",cliente: this.usuario.id});
-                        this.usuario.mesaId = "JYCjbOgLWRTzkfyknquy";
-                        this.usuario.numeroMesa = 1;
-                        this.usera.guardarCambios( this.usuario);
-                        this.mesaNumero = "Mesa 1";
-                        this.mostrar = true; 
-                          
-                        this.gestionPedidos("JYCjbOgLWRTzkfyknquy");
-           
-                        break;
-                      }else{
-                        this.utilidadesService.PresentarToastAbajo("Mesa 1 no disponible", "danger");
-                        break;
+                  if(ingreso.mesaId == this.code){
+                    for (let index = 0; index < this.listaMesas.length; index++) {
+                      const element = this.listaMesas[index];
+                      if(element.id == "JYCjbOgLWRTzkfyknquy"){
+                        if(element.estado == "libre"){
+                          this.utilidadesService.PresentarToastAbajo("Mesa 1", "success");                  
+                          this.mesaService.update("JYCjbOgLWRTzkfyknquy", {estado: "ocupado",cliente: this.usuario.id});
+                          this.usuario.mesaId = "JYCjbOgLWRTzkfyknquy";
+                          this.usuario.numeroMesa = 1;
+                          this.usera.guardarCambios( this.usuario);
+                          this.mesaNumero = "Mesa 1";
+                          this.mostrar = true; 
+                            
+                          this.gestionPedidos("JYCjbOgLWRTzkfyknquy");
+             
+                          break;
+                        }else{
+                          this.utilidadesService.PresentarToastAbajo("Mesa 1 no disponible", "danger");
+                          break;
+                        }
                       }
                     }
-                  }
+                  }else{
+                    this.utilidadesService.PresentarToastAbajo("Tu mesa asignada es la: "+ ingreso.mesaNro, "danger");
+                    break;
+                  }                  
                   break;
                   
       
                 case "zZCtyY4gqhvEkkK2RyxD": //Mesa 2
-                  for (let index = 0; index < this.listaMesas.length; index++) {
-                    const element = this.listaMesas[index];
-                    if(element.id == "zZCtyY4gqhvEkkK2RyxD"){
-                      if(element.estado == "libre"){
-                        this.utilidadesService.PresentarToastAbajo("Mesa 2", "success");                  
-                        this.mesaService.update("zZCtyY4gqhvEkkK2RyxD", {estado: "ocupado",cliente: this.usuario.id});
-                        this.usuario.mesaId = "zZCtyY4gqhvEkkK2RyxD";
-                        this.usuario.numeroMesa = 2;
-                        this.usera.guardarCambios( this.usuario);
-                        this.mesaNumero = "Mesa 2";
-                        this.mostrar = true; 
+                  if(ingreso.mesaId == this.code){
+                    for (let index = 0; index < this.listaMesas.length; index++) {
+                      const element = this.listaMesas[index];
+                      if(element.id == "zZCtyY4gqhvEkkK2RyxD"){
+                        if(element.estado == "libre"){
+                          this.utilidadesService.PresentarToastAbajo("Mesa 2", "success");                  
+                          this.mesaService.update("zZCtyY4gqhvEkkK2RyxD", {estado: "ocupado",cliente: this.usuario.id});
+                          this.usuario.mesaId = "zZCtyY4gqhvEkkK2RyxD";
+                          this.usuario.numeroMesa = 2;
+                          this.usera.guardarCambios( this.usuario);
+                          this.mesaNumero = "Mesa 2";
+                          this.mostrar = true; 
 
-                        this.gestionPedidos("zZCtyY4gqhvEkkK2RyxD");
-              
-                        break;
-                      }else{
-                        this.utilidadesService.PresentarToastAbajo("Mesa 2 no disponible", "danger");
-                        break;
+                          this.gestionPedidos("zZCtyY4gqhvEkkK2RyxD");
+                
+                          break;
+                        }else{
+                          this.utilidadesService.PresentarToastAbajo("Mesa 2 no disponible", "danger");
+                          break;
+                        }
                       }
                     }
+                  }else{
+                    this.utilidadesService.PresentarToastAbajo("Tu mesa asignada es la: "+ ingreso.mesaNro, "danger");
+                    break;
                   }
                   break;
       
-                case "BVIBfLHDswZd77dWWCLR": //Mesa 3
-                  for (let index = 0; index < this.listaMesas.length; index++) {
-                    const element = this.listaMesas[index];
-                    if(element.id == "BVIBfLHDswZd77dWWCLR"){
-                      if(element.estado == "libre"){
-                        this.utilidadesService.PresentarToastAbajo("Mesa 3", "success");                  
-                        this.mesaService.update("BVIBfLHDswZd77dWWCLR", {estado: "ocupado",cliente: this.usuario.id});
-                        this.mostrar = true;   
-                        this.usuario.mesaId = "BVIBfLHDswZd77dWWCLR";
-                        this.usuario.numeroMesa = 3;
-                        this.usera.guardarCambios( this.usuario);
-                        this.mesaNumero = "Mesa 3";
-                        this.gestionPedidos("BVIBfLHDswZd77dWWCLR");
 
-                        break;
-                      }else{
-                        this.utilidadesService.PresentarToastAbajo("Mesa 3 no disponible", "danger");
-                        break;
+                case "BVIBfLHDswZd77dWWCLR": //Mesa 3
+                  if(ingreso.mesaId == this.code){
+                    for (let index = 0; index < this.listaMesas.length; index++) {
+                      const element = this.listaMesas[index];
+                      if(element.id == "BVIBfLHDswZd77dWWCLR"){
+                        if(element.estado == "libre"){
+                          this.utilidadesService.PresentarToastAbajo("Mesa 3", "success");                  
+                          this.mesaService.update("BVIBfLHDswZd77dWWCLR", {estado: "ocupado",cliente: this.usuario.id});
+                          this.mostrar = true;   
+                          this.usuario.mesaId = "BVIBfLHDswZd77dWWCLR";
+                          this.usuario.numeroMesa = 3;
+                          this.usera.guardarCambios( this.usuario);
+                          this.mesaNumero = "Mesa 3";
+                          this.gestionPedidos("BVIBfLHDswZd77dWWCLR");
+
+                          break;
+                        }else{
+                          this.utilidadesService.PresentarToastAbajo("Mesa 3 no disponible", "danger");
+                          break;
+                        }
                       }
                     }
+                  }else{
+                    this.utilidadesService.PresentarToastAbajo("Tu mesa asignada es la: "+ ingreso.mesaNro, "danger");
+                    break;
                   }
-                  break;          
+                  break;
+
               
                 default:
-                  this.utilidadesService.PresentarToastAbajo("PROBA CON OTRO CODIGO", "danger"); 
+                  this.utilidadesService.PresentarToastAbajo("Código inválido", "danger"); 
                   break;
               }           
       
