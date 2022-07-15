@@ -11,16 +11,21 @@ import { finalize } from 'rxjs/operators';
 })
 export class MesaService {
 
-  private dbpath = '/mesas';
-  mesasRef: AngularFirestoreCollection<Mesa>;
+  private dbpathMesas = '/mesas';
+  private dbpathReservas = '/reservas';
+  mesasRef: AngularFirestoreCollection<any>;
   mesas: Observable<any[]>;
   numero: number;
   tipo: TipoDeMesa;
   mesaSeleccionada: any;
+  listaDeReservas:Observable<any[]>;
+  reservasRef: AngularFirestoreCollection<any[]>;
+
 
   constructor(private afs: AngularFirestore, private storage: AngularFireStorage, private utilidadesService: UtilidadesService) {
-    this.mesasRef = this.afs.collection<Mesa>(this.dbpath);
-    this.mesas = this.mesasRef.valueChanges(this.dbpath);
+    this.mesasRef = this.afs.collection<Mesa>(this.dbpathMesas);
+    this.mesas = this.mesasRef.valueChanges(this.dbpathMesas);
+    this.listaDeReservas=this.reservasRef.valueChanges(this.dbpathReservas);
   }
 
   altaMesa(mesa: Mesa, foto: File) {
@@ -67,5 +72,16 @@ export class MesaService {
     return this.mesasRef.doc(id).update(data);
   }
 
+  listaReservas(){
+    return this.listaDeReservas;
+  }
 
+  public traerMesas() {
+    //return this.afs.collection('mesas').get().toPromise();
+    return this.mesasRef.get().toPromise();
+  }
+
+  public crearReserva(reserva:any){
+    return this.reservasRef.add(reserva).then(ref => ref.id);
+  }
 }
