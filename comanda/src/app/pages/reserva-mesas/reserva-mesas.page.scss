@@ -1,55 +1,98 @@
-ion-content{
-    --background: #23C1E0;
-    
-  }
-  ion-title{
-    color: #29dce9;
-    background: -webkit-linear-gradient(rgb(87, 179, 240),rgb(218, 91, 235));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-  }
-  
-  ion-item{
-    margin-bottom: 2.5%;
-  }
-  
-  
-  ion-label{
-    color: black;
-    margin-right: 15%;
-  }
-  
-  
-  ion-list{
-    .letra{
-      font-size: 0.8em;
-    }
-    ion-item{
-      margin-bottom: 0%;
-    }
-    background-color: transparent;
-    --color: black;
-    --border: none;
-    
-  
-  }
-  
-  
-  .item{
-    --color: black;
-    --background: rgba(0, 0, 0, 0.144);;
-    --border-color:transparent;
-  }
-  
-  ion-select {
-    /* Applies to the value and placeholder color */
-    color: #2132c7;
-    
-  
-    /* Set a different placeholder color */
-    --placeholder-color: #971e49;
-  
-    /* Set full opacity on the placeholder */
-    --placeholder-opacity: 1;
-  }
-  
+.snow {
+  --color: snow;
+  font-size: 2em !important;
+
+}
+
+ion-button {
+  margin-top: 2% !important;
+}
+
+ion-card {
+  border-radius: 15px;
+  position: relative;
+  margin-top: 25%;
+  --background: rgba(37, 40, 199, 0.7);
+}
+
+ion-item {
+  --ion-background-color: transparent !important;
+  --ion-text-color: var(--ion-color-cubiertos);
+}
+
+h1 {
+  display: inline-block;
+  position: relative;
+  color: snow;
+}
+
+h1::after,
+h1::before {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 3px;
+  background-color: #ffdf26;
+  top: 0.6em;
+}
+
+h1::before {
+  left: -109px;
+}
+
+h1::after {
+
+  left: 160px;
+}
+
+.divTop {
+  z-index: 99999;
+  top: -100;
+}
+
+ion-back-button {
+  size: 20%;
+}
+
+.loading {
+  z-index: 99999999 !important;
+  width: 150px;
+  height: 150px;
+  position: fixed !important;
+  top: 35%;
+  left: 30%;
+}
+
+.validation-errors {
+  padding: 0 10px;
+}
+
+.error-message {
+  padding: 0 10px;
+  color: var(--ion-color-cubiertos);
+}
+
+ion-content {
+  --background: #23C1E0;
+}
+
+ion-list {
+  background: transparent;
+  padding: 0%;
+  margin: 0%;
+}
+
+ion-item {
+  background: transparent;
+}
+
+ion-input {
+  width: 80px;
+}
+
+.item {
+  --background: transparent;
+  color: black;
+  --border: none;
+
+}

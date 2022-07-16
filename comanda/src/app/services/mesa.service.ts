@@ -25,6 +25,7 @@ export class MesaService {
   constructor(private afs: AngularFirestore, private storage: AngularFireStorage, private utilidadesService: UtilidadesService) {
     this.mesasRef = this.afs.collection<Mesa>(this.dbpathMesas);
     this.mesas = this.mesasRef.valueChanges(this.dbpathMesas);
+    this.reservasRef = this.afs.collection<any>(this.dbpathReservas);
     this.listaDeReservas=this.reservasRef.valueChanges(this.dbpathReservas);
   }
 
