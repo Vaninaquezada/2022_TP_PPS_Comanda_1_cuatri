@@ -144,22 +144,24 @@ export class LoginPage {
             }
             break;
           case 'empleado':
-            if (this.usuarioLogueado.subTipo === 'bartender') {
-              this.router.navigate(['/bartender-pedidos']);
-              this.utilidadesService.RemoverLoading();
-            }
-            if (this.usuarioLogueado.subTipo === 'cocinero') {
-              this.router.navigate(['/cocinero-pedidos']);
-              this.utilidadesService.RemoverLoading();
-            }
-            if (this.usuarioLogueado.subTipo === 'mozo') {
-              this.router.navigate(['/mozo-pedidos']);
-              this.utilidadesService.RemoverLoading();
-            }
-            if (this.usuarioLogueado.subTipo === 'metre') {
-              this.router.navigate(['/lista-de-espera']);
-              this.utilidadesService.RemoverLoading();
-            }
+            this.router.navigate(['/encuesta-empleado']);
+            this.utilidadesService.RemoverLoading();
+            // if (this.usuarioLogueado.subTipo === 'bartender') {
+            //   this.router.navigate(['/bartender-pedidos']);
+            //   this.utilidadesService.RemoverLoading();
+            // }
+            // if (this.usuarioLogueado.subTipo === 'cocinero') {
+            //   this.router.navigate(['/cocinero-pedidos']);
+            //   this.utilidadesService.RemoverLoading();
+            // }
+            // if (this.usuarioLogueado.subTipo === 'mozo') {
+            //   this.router.navigate(['/mozo-pedidos']);
+            //   this.utilidadesService.RemoverLoading();
+            // }
+            // if (this.usuarioLogueado.subTipo === 'metre') {
+            //   this.router.navigate(['/lista-de-espera']);
+            //   this.utilidadesService.RemoverLoading();
+            // }
             break;
           default:
             this.router.navigate(['/principal']);

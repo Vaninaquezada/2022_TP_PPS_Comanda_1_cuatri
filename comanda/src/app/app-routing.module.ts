@@ -117,6 +117,10 @@ const routes: Routes = [
   {
     path: 'lista-reservas',
     loadChildren: () => import('./pages/lista-reservas/lista-reservas.module').then( m => m.ListaReservasPageModule)
+  },
+  {
+    path: 'encuesta-empleado',
+    loadChildren: () => import('./pages/encuesta-empleado/encuesta-empleado.module').then( m => m.EncuestaEmpleadoPageModule)
   }
 
 

@@ -6,15 +6,19 @@ export type Recomendacion = 'nadaRecomendado' | 'pocoRecomendado' | 'indiferente
 export class Encuestas {
 
     id?: string;
-    usuario: User;
-    tipoEncuesta: Roles;
-    notaLugar: number;
-    notaEmpleados: number;
-    comentarios: string;
-    recomendacion: Recomendacion;
-    fecha: Date;
+    usuario?: User;
+    tipoEncuesta?: Roles;
+    notaLugar?: number;
+    notaEmpleados?: number;
+    comentarios?: string;
+    recomendacion?: Recomendacion;
+    fecha?: Date;
     photourl1?: string;
     photourl2?: string;
     photourl3?: string;
+    puntuacionEspacioDeTrabajo?: Number;
+    ordenEspacioDeTrabajo?: string;
+    limpiezaEspacioDeTrabajo?: string;
+
 
 }
