@@ -83,6 +83,11 @@ export class MesaService {
   }
 
   public crearReserva(reserva:any){
-    return this.reservasRef.add(reserva).then(ref => ref.id);
+    reserva.id = this.afs.createId();
+    return this.reservasRef.doc(reserva.id).set(reserva);
+  }
+
+  updateReserva(id: string, data: any): Promise<void> {
+    return this.reservasRef.doc(id).update(data);
   }
 }

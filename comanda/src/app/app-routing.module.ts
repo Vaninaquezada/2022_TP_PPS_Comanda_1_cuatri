@@ -113,6 +113,10 @@ const routes: Routes = [
   {
     path: 'chat',
     loadChildren: () => import('./pages/chat/chat.module').then( m => m.ChatPageModule)
+  },
+  {
+    path: 'lista-reservas',
+    loadChildren: () => import('./pages/lista-reservas/lista-reservas.module').then( m => m.ListaReservasPageModule)
   }
 
 

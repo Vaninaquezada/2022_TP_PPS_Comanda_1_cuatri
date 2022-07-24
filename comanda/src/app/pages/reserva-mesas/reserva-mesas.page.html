@@ -1,70 +1,78 @@
 <ion-app>
-  <div class="ion-page" id="main-content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-        <ion-title>Solicitar reserva</ion-title>
-      </ion-toolbar>
-    </ion-header>
+    <div class="ion-page" id="main-content">
+        <ion-header>
+            <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-menu-button></ion-menu-button>
+                </ion-buttons>
+                <ion-title>Solicitar reserva</ion-title>
+            </ion-toolbar>
+        </ion-header>
 
 
-    <ion-content class="ion-padding">
+        <ion-content class="ion-padding">
 
-      <ion-card>
-        <form [formGroup]="miFormulario">
-            <ion-item id="open-modal" fill="outline">
-                <ion-icon icon="calendar-outline" slot="start" color="primary"></ion-icon>
-                <ion-label>Seleccionar fecha</ion-label>
-                <ion-text slot="end">{{fechaValorActual}}</ion-text>
-            </ion-item>
-            <ion-modal trigger="open-modal">
-                <ng-template>
-                    <ion-content>
-                        <ion-item>
-                            <ion-label>Date</ion-label>
-                            <ion-datetime size="cover" showDefaultButtons="true" presentation="time-date" [value]='fechaValorActual' [min]="fechaValorMinimo" [max]="fechaValorMaximo" (ionChange)='Ifecha($event)'></ion-datetime>
-                        </ion-item>
-                    </ion-content>
-                </ng-template>
+            <form [formGroup]="miFormulario" (ngSubmit)="registrarse()">
 
-            </ion-modal>
-            <ng-container *ngFor="let validation of validation_messages.nombre">
-                <div class="error-message" *ngIf="miFormulario.get('fecha').hasError(validation.type) && (miFormulario.get('fecha').dirty || miFormulario.get('fecha').touched)">
-                    {{ validation.message }}
-                </div>
-            </ng-container>
-            <ion-item class="labels" fill="outline">
-                <ion-label position='floating'>Cantidad de personas:</ion-label>
-                <ion-input type='number' min=1 max=99 formControlName="comensales" placeholder='cargue la cantidad'></ion-input>
-            </ion-item>
-            <ng-container *ngFor="let validation of validation_messages.comensales">
-                <div class="error-message" *ngIf="miFormulario.get('comensales').hasError(validation.type) && (miFormulario.get('comensales').dirty || miFormulario.get('comensales').touched)">
-                    {{ validation.message }}
-                </div>
-            </ng-container>
-            <ion-item class="labels" fill="outline">
-                <ion-label position='floating'>Tipo de Mesa:</ion-label>
-                <ion-select formControlName="tipoMesa" placeholder='seleccione un tipo' (ionChange)='ITipo($event)'>
-                    <ion-select-option value='estandar'>Estandar</ion-select-option>
-                    <ion-select-option value='vip'>VIP</ion-select-option>
-                    <ion-select-option value='discapacitados'>Discapacitados</ion-select-option>
-                </ion-select>
-            </ion-item>
-            <ng-container *ngFor="let validation of validation_messages.tipoMesa">
-                <div class="error-message" *ngIf="miFormulario.get('tipoMesa').hasError(validation.type) && (miFormulario.get('tipoMesa').dirty || miFormulario.get('tipoMesa').touched)">
-                    {{ validation.message }}
-                </div>
-            </ng-container>
-            <ion-button [disabled]='!miFormulario.valid' color='cubiertos' expand='block' (click)='cargarReserva()'>Cargar Reserva</ion-button>
-        </form>
-    </ion-card>
-    
-    </ion-content>
-  </div>
+                <ion-item id="open-modal">
+                    <ion-icon icon="calendar-outline" slot="start" color="primary"></ion-icon>
+                    <ion-label position="floating">Fecha de la reserva</ion-label>
+                    <ion-text slot="end">
+                        {{formatedDate}}
+                    </ion-text>
+                </ion-item>
+                <ion-modal trigger="open-modal">
+                    <ng-template>
+                        <ion-content>
+                            <ion-item>
+                                <ion-label>Date</ion-label>
+                                <ion-datetime size="cover" #datetime showDefaultButtons="true" presentation="time-date"
+                                    [value]='date' [min]="fechaValorMinimo" [max]="fechaValorMaximo"
+                                    (ionChange)='Ifecha(datetime.value)' formControlName='fecha'></ion-datetime>
+                            </ion-item>
+                        </ion-content>
+                    </ng-template>
+                </ion-modal>
+                <ng-container *ngFor="let validation of validation_messages.nombre">
+                    <div class="error-message"
+                        *ngIf="miFormulario.get('fecha').hasError(validation.type) && (miFormulario.get('fecha').dirty || miFormulario.get('fecha').touched)">
+                        {{ validation.message }}
+                    </div>
+                </ng-container>
+
+                <ion-item>
+                    <ion-label position="floating">Cantidad de personas:</ion-label>
+                    <ion-input type='number' min=1 max=99 formControlName="comensales" placeholder="Ingresar cantidad">
+                    </ion-input>
+                </ion-item>
+                <ng-container *ngFor="let validation of validation_messages.comensales">
+                    <div class="error-message"
+                        *ngIf="miFormulario.get('comensales').hasError(validation.type) && (miFormulario.get('comensales').dirty || miFormulario.get('comensales').touched)">
+                        {{ validation.message }}
+                    </div>
+                </ng-container>
+
+                <ion-item class="labels" fill="outline">
+                    <ion-label position='floating'>Tipo de Mesa:</ion-label>
+                    <ion-select interface="popover" formControlName="tipoMesa" placeholder='seleccione un tipo' (ionChange)='ITipo($event)'>
+                        <ion-select-option value='estandar'>Estandar</ion-select-option>
+                        <ion-select-option value='vip'>VIP</ion-select-option>
+                        <ion-select-option value='discapacitados'>Discapacitados</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ng-container *ngFor="let validation of validation_messages.tipoMesa">
+                    <div class="error-message"
+                        *ngIf="miFormulario.get('tipoMesa').hasError(validation.type) && (miFormulario.get('tipoMesa').dirty || miFormulario.get('tipoMesa').touched)">
+                        {{ validation.message }}
+                    </div>
+                </ng-container>
+                <ion-button [disabled]='!miFormulario.valid' color='primary' expand='block' (click)='cargarReserva()'>
+                    Cargar Reserva</ion-button>
+            </form>
+
+        </ion-content>
+    </div>
 
 
 
-  </ion-app>
-
+</ion-app>

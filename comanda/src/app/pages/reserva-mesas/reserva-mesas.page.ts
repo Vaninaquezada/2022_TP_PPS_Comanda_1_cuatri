@@ -1,6 +1,7 @@
 import { Component, ViewChild, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MenuController } from '@ionic/angular';
+import { format, parseISO, addMinutes, subMinutes,getTime } from 'date-fns';
 import { User } from 'src/app/clases/user';
 import { MesaService } from 'src/app/services/mesa.service';
 import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.service';
@@ -18,17 +19,21 @@ export class ReservaMesasPage implements OnInit {
 	public splash: boolean = false;
 	public listaReservas: Array<any> = [];
 	private miFormulario: FormGroup;
-	public fechaValorActual: string;
+	// public fechaValorActual: string;
 	public fechaValorMinimo: string;
 	public fechaValorMaximo: string;
 	public flagNumMesa: any = null;
+	date = format(new Date(), 'yyyy-MM-dd') + 'T09:00:00.000Z'
+	formatedDate = '';
 
 	constructor(
 		private mesasService: MesaService,
 		private formBuilder: FormBuilder,
 		private utilidadesService: UtilidadesService,
 		private usuariosFire: UsuariosFirebaseService
-	) {	}
+	) {
+		this.setToday();
+	}
 
 	validation_messages = {
 		'fecha': [
@@ -43,6 +48,10 @@ export class ReservaMesasPage implements OnInit {
 			{ type: 'max', message: 'El numero de personas debe ser menor a 100.' },
 		]
 	};
+
+	setToday() {
+		this.formatedDate = format(parseISO(format(new Date(), 'yyyy-MM-dd') + 'T09:00:00.000Z'), 'HH:mm, MMM d, yyyy');
+	}
 
 	ngOnInit() {
 		this.miFormulario = this.formBuilder.group({
@@ -59,34 +68,26 @@ export class ReservaMesasPage implements OnInit {
 		});
 	}
 
-	Ifecha($event) {
-		let fecha = new Date($event.detail.value);
-		console.log("fecha"+fecha);
-		console.log("fecha"+JSON.stringify(fecha.getTime()));
-		this.fechaValorActual = fecha.toISOString();
-		// this.miFormulario.get('fecha').setValue(fecha.getTime());
-		this.miFormulario.controls.fecha.setValue(fecha.getTime());
+	Ifecha(value) {
+		console.log(value);
+		this.date = value;
+		this.formatedDate = format(parseISO(value), 'HH:mm, MMM d, yyyy');
 	}
 
 	ITipo($event) {
 		this.miFormulario.controls.tipoMesa.setValue($event.detail.value);
 	}
 
-	cargarReserva() {
-		this.utilidadesService.PresentarLoading("Solicitando reserva");
+	async cargarReserva() {
+		await this.utilidadesService.PresentarLoading('Solicitando reserva');
 		this.usuarioLogueado = this.usuariosFire.usuarioSeleccionado;
-		console.log("entro a carga reserva y presento loading");
 		let auxMesas: Array<any> = [];
-		let fechaAntes: number = this.miFormulario.value.fecha - (40 * 60 * 1000);
-		let fechaDespues: number = this.miFormulario.value.fecha + (40 * 60 * 1000);
-		console.log("Fecha antes: " + fechaAntes);
-		console.log("Fecha despues: " + fechaDespues);
+		let fechaAntes: Date = subMinutes(parseISO(this.date), 40);
+		let fechaDespues: Date = addMinutes(parseISO(this.date), 40);
+
 		if (this.miFormulario.valid) {
-			console.log("If form valido");
-			if (this.miFormulario.value.fecha > (Date.now() + (40 * 60 * 1000))) {
-				console.log("Segundo if ");
+			if (getTime(parseISO(this.date)) > (Date.now() + (40 * 60 * 1000))) {
 				if (this.listaReservas.length == 0) {
-					console.log("Tercer if ");
 					this.mesasService.traerMesas().then(snaps => {
 						auxMesas = snaps.docs.map(x => {
 							const y: any = x.data() as any; y['id'] = x.id; return { ...y };
@@ -94,16 +95,16 @@ export class ReservaMesasPage implements OnInit {
 						console.log("AuxMesas.length: " + auxMesas.length);
 						if (auxMesas.length > 0) {
 							this.flagNumMesa = auxMesas[0].numero;
-							return this.crearReserva(this.flagNumMesa, this.miFormulario.value.fecha);
+							return this.crearReserva(this.flagNumMesa, getTime(parseISO(this.date)));
 						} else {
 							this.utilidadesService.PresentarToastAbajo('No se han encontrado mesas que cumplan con los filtros.', 'danger');
 						}
 					}).then(ref => {
-						//Enviar notification
-						this.utilidadesService.PresentarToastAbajo('Reserva cargada con exito. el dueño o supervisor revisara su solicitud.', 'success');
-					}).finally(() => this.utilidadesService.RemoverLoading());
+						//Enviar notificationn
+						this.utilidadesService.PresentarToastAbajo('Reserva cargada con exito. El dueño o supervisor revisara su solicitud.', 'success');
+					});//.finally(() => this.utilidadesService.RemoverLoading());
 				} else {
-					if (this.listaReservas.findIndex(x => x.cliente === this.usuarioLogueado.id && (x.fecha >= fechaAntes && x.fecha <= fechaDespues)) === -1) {
+					if (this.listaReservas.findIndex(x => x.clienteId === this.usuarioLogueado.id && (x.fecha >= getTime(fechaAntes) && x.fecha <= getTime(fechaDespues))) === -1) {
 						this.mesasService.traerMesas().then(snaps => {
 							auxMesas = snaps.docs.map(x => {
 								const y: any = x.data() as any; y['id'] = x.id; return { ...y };
@@ -111,44 +112,44 @@ export class ReservaMesasPage implements OnInit {
 							if (auxMesas.length > 0) {
 								auxMesas.forEach(x => {
 									console.log("AuxMesas[x]: " + JSON.stringify(x));
-									if (this.listaReservas.findIndex(y => y.mesa === x.numero && (y.fecha >= fechaAntes && y.fecha <= fechaDespues)) === -1) {
+									//FALTA VALIDAR EL ESTADO EN TRUE
+									if (this.listaReservas.findIndex(y => y.mesa === x.numero && (y.fecha >= getTime(fechaAntes) && y.fecha <= getTime(fechaDespues))) === -1) {
 										this.flagNumMesa = x.numero;
 									}
 								});
 								if (this.flagNumMesa !== null) {
-									return this.crearReserva(this.flagNumMesa, this.miFormulario.value.fecha);
+									return this.crearReserva(this.flagNumMesa, getTime(parseISO(this.date)));
 								} else {
-									this.utilidadesService.PresentarToastAbajo('Todas las mesas que cumplen con los requisitos ya estan reservadas para este horario (' + new Date(fechaAntes).toLocaleString() + ' - ' + new Date(fechaDespues).toLocaleString() + ').', 'danger');
-									this.utilidadesService.RemoverLoading();
+									this.utilidadesService.PresentarToastAbajo('Todas las mesas que cumplen con los requisitos ya estan reservadas para este horario (' + fechaAntes + ' - ' + fechaDespues + ').', 'danger');
 								}
 							} else {
 								this.utilidadesService.PresentarToastAbajo('No se han encontrado mesas que cumplan con los requisitos solicitados.', 'danger');
-								this.utilidadesService.RemoverLoading();
 							}
 						}).then(ref => {
 							//Enviar Notif
 							this.utilidadesService.PresentarToastAbajo('Reserva cargada con exito. el dueño o supervisor revisara su solicitud.', 'success');
-							this.utilidadesService.RemoverLoading();
-						}).finally(() => this.utilidadesService.RemoverLoading());
+						});//.finally(() => this.utilidadesService.RemoverLoading());
 					} else {
-						this.utilidadesService.RemoverLoading();
-						this.utilidadesService.PresentarToastAbajo('Ya tienes una reservacion echa para este horario (' + new Date(fechaAntes).toLocaleString() + ' - ' + new Date(fechaDespues).toLocaleString() + ').', 'danger');
+						this.utilidadesService.PresentarToastAbajo('Ya tienes una reserva hecha para este horario (' + format(fechaAntes, 'HH:mm, MMM d, yyyy') + ' - ' + format(fechaDespues, 'HH:mm, MMM d, yyyy')+ ').', 'danger');
 					}
 				}
 			} else {
-				this.utilidadesService.RemoverLoading();
-				this.utilidadesService.PresentarToastAbajo('se ha asignado una fecha invalida. la reserva se debe cargar 40 minutos antes de ser efectiva.', 'danger');
+				this.utilidadesService.PresentarToastAbajo('Se ha asignado una fecha invalida. La reserva se debe cargar 40 minutos antes de ser efectiva.', 'danger');
 			}
 		}
+		this.utilidadesService.RemoverLoading();
 	}
 
 	crearReserva(mesa, fecha) {
 		console.log("Crear reserva: mesa y fecha " + mesa + fecha);
 		let reservaJson = {
 			fecha: fecha,
-			cliente: this.usuarioLogueado.id,
+			fechaFormateada: format(fecha, 'HH:mm, MMM d, yyyy'),
+			clienteId: this.usuarioLogueado.id,
+			nombreCliente: this.usuarioLogueado.nombre+' '+this.usuarioLogueado.apellido,
 			mesa: mesa,
 			estado: false,
+			pendiente: true
 		}
 		console.log(reservaJson);
 		return this.mesasService.crearReserva(reservaJson);
