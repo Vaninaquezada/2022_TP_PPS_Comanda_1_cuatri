@@ -1,0 +1,105 @@
+<ion-app>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Encuesta Empleado  </ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="cerrarModal()">
+            <ion-icon name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <div>
+        
+        <form [formGroup]="forma" (ngSubmit)="enviarEncuesta()" >
+          
+          <ion-list>
+            <ion-radio-group formControlName="pregunta1">
+              <ion-list-header>
+                <ion-label>Limpieza del cliente</ion-label>
+              </ion-list-header>
+              <ion-item>
+                <ion-label class="letra">Nada limpio</ion-label>
+                <ion-radio slot="end" color="danger" value="nadaLimpio" mode="ios"></ion-radio>
+              </ion-item>
+          
+              <ion-item>
+                <ion-label class="letra">Poco limpio</ion-label>
+                <ion-radio slot="end" color="warning" value="pocoLimpio" mode="ios"></ion-radio>
+              </ion-item>
+          
+              <ion-item>
+                <ion-label class="letra">Indiferente</ion-label>
+                <ion-radio slot="end" color="dark" value="indiferente" mode="ios"></ion-radio>
+              </ion-item>
+          
+              <ion-item>
+                <ion-label class="letra">Limpio</ion-label>
+                <ion-radio slot="end" color="primary" value="Limpio" mode="ios"></ion-radio>
+              </ion-item>
+          
+              <ion-item>
+                <ion-label class="letra">Muy limpio</ion-label>
+                <ion-radio slot="end" color="success" value="muyLimpio" mode="ios"></ion-radio>
+              </ion-item>
+            </ion-radio-group>      
+          </ion-list>
+
+          
+
+          <ion-item >
+            <ion-label position="floating">Comportamiento del cliente</ion-label>
+            
+            <ion-select placeholder="Puntuación" formControlName="pregunta2">
+              <ion-select-option value=1>1</ion-select-option>
+              <ion-select-option value=2>2</ion-select-option>
+              <ion-select-option value=3>3</ion-select-option>
+              <ion-select-option value=4>4</ion-select-option>
+              <ion-select-option value=5>5</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          
+
+          <ion-item>
+            <ion-label position="floating">El cliente es problematico</ion-label>
+            <ion-range min="1" max="5" value="0" [pin]="true" snaps="true" color="light" formControlName="pregunta3">
+              <ion-icon slot="start" name="sad-outline"></ion-icon>
+              <ion-icon slot="end" name="happy-outline"></ion-icon>
+            </ion-range>
+          </ion-item>
+
+          <ion-list formControlName="pregunta4">
+            <ion-label position="floating">Trato al personal  </ion-label>
+            <ion-item>
+              <ion-label>Buena</ion-label>
+              <ion-checkbox slot="end" value="buena" [disabled]="isDisabled"></ion-checkbox>
+            </ion-item>
+          
+            <ion-item>
+              <ion-label>Mala</ion-label>
+              <ion-checkbox slot="end" value="mala" [disabled]="isDisabled"></ion-checkbox>
+            </ion-item>
+          
+            <ion-item>
+              <ion-label>Mas o menos</ion-label>
+              <ion-checkbox slot="end" value="masoMenos" [disabled]="isDisabled"></ion-checkbox>
+            </ion-item>
+          </ion-list>
+          
+
+          <ion-item>
+            <ion-label position="floating">Comentarios del cliente</ion-label>
+            <ion-input type="text"  formControlName="pregunta5"></ion-input>
+          </ion-item>
+
+
+          <ion-button expand="full" type="submit" > Enviar Encuesta </ion-button>
+        </form>
+      </div>      
+    </ion-content>
+
+  </div>
+</ion-app>

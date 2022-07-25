@@ -1,0 +1,31 @@
+<ion-app>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button menu="adminMenu"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Listado Clientes</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      
+      <ion-list>
+      
+        <ion-item color="dark" *ngFor="let user of listadoUsuariosClientes" (click)="presentModal(user)">
+          <ion-avatar slot="start">
+            <img *ngIf="user.imgPerfil" src="{{user.imgPerfil}}">
+            <img *ngIf="user.foto" src="{{user.foto}}">
+          </ion-avatar>
+          <ion-label>
+            <h2>{{user.email}}</h2>
+            <h3>{{user.apellido}} {{user.nombre}}</h3>
+            <p>{{user.dni}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+    </ion-content>
+  </div>
+</ion-app>

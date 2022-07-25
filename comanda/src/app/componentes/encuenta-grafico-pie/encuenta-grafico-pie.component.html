@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-float-left">{{this.titulo}}</ion-title>
+
+      <ion-button (click)="cerrarModal()" slot="end">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class='canvas-responsive'>
+
+    <canvas #valueBarsCanvas></canvas>
+  </div>
+</ion-content>

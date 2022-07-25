@@ -22,6 +22,8 @@ export class UsuariosFirebaseService {
   usuarioSeleccionado: any;
   usuariosRefClientes: AngularFirestoreCollection<any>;
   usuariosClientes: Observable<any[]>;
+  usuariosRefEmpleados: AngularFirestoreCollection<any>;
+  usuariosEmpleados: Observable<any[]>;
   adminsPushIds = new Array<string>();
   metresPushIds = new Array<string>();
   // usuariosRefEspecialistas: AngularFirestoreCollection<any>;
@@ -37,6 +39,9 @@ export class UsuariosFirebaseService {
     this.usuariosRefClientes = db.collection<any>(this.dbpath, ref => ref.where('role', '==', 'cliente').orderBy('apellido'));
     this.usuariosClientes = this.usuariosRefClientes.valueChanges(this.dbpath);
 
+    this.usuariosRefEmpleados = db.collection<any>(this.dbpath, ref => ref.where('role', '==', 'empleado').orderBy('apellido'));
+    this.usuariosEmpleados = this.usuariosRefEmpleados.valueChanges(this.dbpath);
+
     // this.usuariosRefEspecialistas=db.collection<any>(this.dbpath, ref => ref.where('role', '==', 'especialista').orderBy('apellido'));
     // this.usuariosEspecialistas=this.usuariosRefEspecialistas.valueChanges(this.dbpath);
   }
@@ -45,6 +50,9 @@ export class UsuariosFirebaseService {
     return this.usuariosClientes;
   }
 
+  getAllEmpleados() {
+    return this.usuariosEmpleados;
+  }
 
   async obtenerID(email: string) {
     await this.db.collection('/usuarios').ref.where('email', '==', email).get().then((responce) => {

@@ -10,6 +10,7 @@ import {AuthService} from './auth.service';
 import {FotoService} from './foto.service';
 import { AuthErrorsService } from './auth-errors.service';
 import { Encuestas } from '../clases/encuestas';
+import { EncuestaSupervisor } from '../clases/encuesta-supervisor';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,15 @@ import { Encuestas } from '../clases/encuestas';
 export class EncuestasFirebaseService {
   
   private dbpath = '/encuestas'; //ruta de la coleccion de firebase.
+  private dbpathSupervisor = '/encuestas-supervisor'; //ruta de la coleccion de firebase.
   encuestasRef: AngularFirestoreCollection<User>;
   encuestas:Observable<any[]>;
+  encuestasRefSupervisor: AngularFirestoreCollection<User>;
+  encuestasSupervisor:Observable<any[]>;
+  encuestasRefSupervisorCliente: AngularFirestoreCollection<User>;
+  encuestasSupervisorCliente:Observable<any[]>;
+  encuestasRefSupervisorEmpleados : AngularFirestoreCollection<User>;
+  encuestasSupervisorEmpleados :Observable<any[]>;
   id: string;
   role: string;
   encuestaseleccionado: any;
@@ -31,10 +39,21 @@ export class EncuestasFirebaseService {
      private storage: AngularFireStorage,
      private authError: AuthErrorsService,
      private foto: FotoService, private utilidadesService: UtilidadesService) {
-    this.encuestasRef=db.collection<any>(this.dbpath, ref => ref.orderBy('fecha'));
+    this.encuestasRef=db.collection<any>(this.dbpathSupervisor, ref => ref.orderBy('fecha'));
     this.encuestas=this.encuestasRef.valueChanges(this.dbpath);
 
-    
+    this.encuestasRefSupervisor=db.collection<any>(this.dbpathSupervisor, ref => ref.orderBy('fecha'));
+    this.encuestasSupervisor=this.encuestasRefSupervisor.valueChanges(this.dbpathSupervisor);
+
+
+    this.encuestasRefSupervisorEmpleados = db.collection<any>(this.dbpathSupervisor,
+        ref => ref.where('tipoEncuesta', '==', 'empleado').orderBy('fecha'));
+    this.encuestasSupervisorEmpleados=this.encuestasRefSupervisorEmpleados.valueChanges(this.dbpathSupervisor);
+
+    this.encuestasRefSupervisorCliente = db.collection<any>(this.dbpathSupervisor,
+        ref => ref.where('tipoEncuesta', '==', 'cliente').orderBy('fecha'));
+    this.encuestasSupervisorCliente=this.encuestasRefSupervisorCliente.valueChanges(this.dbpathSupervisor);
+
   }
 
 
@@ -64,4 +83,20 @@ export class EncuestasFirebaseService {
     return `${value}%`
   }
 
+  getAllSupervisor(){
+    return this.encuestasSupervisor;
+  }
+  getSupervisorCliente(){
+    return this.encuestasSupervisorCliente;
+  }
+  getSupervisorEmpleado(){
+    return this.encuestasSupervisorEmpleados;
+  }
+  async nuevaEncuestaSupervisor(encuesta: EncuestaSupervisor){
+    this.utilidadesService.RemoverLoading();
+    encuesta.id = this.db.createId();
+    this.db.collection('encuestas-supervisor').doc(encuesta.id).set(encuesta);
+    this.utilidadesService.RemoverLoading();
+    this.utilidadesService.PresentarToastAbajo('Encuesta enviada', 'success');
+  }
 }
