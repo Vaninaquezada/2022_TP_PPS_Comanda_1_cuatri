@@ -106,7 +106,8 @@ const routes: Routes = [
   {
     path: 'lista-de-espera',
     loadChildren: () => import('./pages/listada-de-espera/listada-de-espera.module').then( m => m.ListadaDeEsperaPageModule)
-  },  {
+  },
+  {
     path: 'alta-producto-bebida',
     loadChildren: () => import('./pages/alta-producto-bebida/alta-producto-bebida.module').then( m => m.AltaProductoBebidaPageModule)
   },
@@ -117,6 +118,10 @@ const routes: Routes = [
   {
     path: 'encuenta-supervisor',
     loadChildren: () => import('./pages/encuenta-supervisor/encuenta-supervisor.module').then( m => m.EncuentaSupervisorPageModule)
+  },
+  {
+    path: 'graficos-encuesta-cliente',
+    loadChildren: () => import('./pages/graficos-encuesta/graficos-encuesta.module').then( m => m.GraficosEncuestaPageModule)
   }
 
 

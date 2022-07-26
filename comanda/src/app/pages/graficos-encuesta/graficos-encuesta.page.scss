@@ -15,8 +15,7 @@ ion-content{
   
   
   ion-label{
-    color: white;
-    --color: white;
+    color: black;
   }
   
   
@@ -26,20 +25,17 @@ ion-content{
     }
     ion-item{
       margin-bottom: 0%;
-      --color: white;
     }
     background-color: transparent;
-    --color: white;
+    --color: black;
     --border: none;
     
 
   }
-  ion-icon {
-    --color: rgb(255, 240, 32);
-    color: rgb(255, 240, 32);
-    
+  
+  ion-button {
+ margin-top: 8%;
   }
-
   .item{
     --color: black;
     --background: rgba(0, 0, 0, 0.144);;

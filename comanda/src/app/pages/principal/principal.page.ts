@@ -28,7 +28,7 @@ export class PrincipalPage implements OnInit {
     private utilidadesService: UtilidadesService,
     private menuController: MenuController,
     private listaEsperaService: ListaDeEsperaFirebaseService,
-    private pushOneSignal:PushOneSignalService
+    private pushOneSignal: PushOneSignalService
     ) { 
     this.MenuView();
   }

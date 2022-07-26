@@ -15,7 +15,8 @@ import { UtilidadesService } from 'src/app/services/utilidades.service';
 export class SideMenuComponent implements OnInit {
 
   public role: string = localStorage.getItem('role');
-
+  usuario: User;
+  existe = false;
   constructor(
     private navegador: Router,
     private usuarioService: UsuariosFirebaseService,
@@ -23,7 +24,18 @@ export class SideMenuComponent implements OnInit {
     private menuControl: MenuController
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    try {
+          this.usuario = this.usuarioService.usuarioSeleccionado;
+          if (this.usuario !== undefined){
+            if (this.usuario.encuestaCompletada !== undefined || this.usuario.encuestaCompletada !== null){
+                this.existe = true;
+            }
+          }
+    } catch (error) {
+    }
+
+  }
 
   Navegar(ruta: string){
     console.log("entra en navegar");

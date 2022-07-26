@@ -137,7 +137,6 @@ export class LoginPage {
             if (this.usuarioLogueado.verificadoPorAdm) {
                 this.router.navigate(['/principal']);
                 this.utilidadesService.RemoverLoading();
-
             } else {
               this.router.navigate(['/verificacion-registro']);
               this.utilidadesService.RemoverLoading();

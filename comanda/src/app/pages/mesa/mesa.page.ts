@@ -237,6 +237,7 @@ mesaActual: string;
     this.pedido.updatePedido(this.pedi);
     this.mesaService.update(this.pedi.mesaId, {estado: 'libre',cliente:null});
     this.usuario.mesaId = null;
+    this.usuario.encuestaCompletada = false;
     this.usuario.numeroMesa = null;
     console.log( this.usuario.mesaId);
     this.usera.guardarCambios( this.usuario);
@@ -308,5 +309,10 @@ mesaActual: string;
     }
     */
     }
-
+    encuesta(){
+      this.Navegar('/encuesta-clientes');
+    }
+    encuestaGraficos(){
+      this.Navegar('/graficos-encuesta');
+    }
 }
