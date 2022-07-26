@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Mesa, TipoDeMesa } from '../clases/mesa';
 import { UtilidadesService } from './utilidades.service';
 import { finalize } from 'rxjs/operators';
+import { format, parseISO, addMinutes, subMinutes, getTime } from 'date-fns';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class MesaService {
   numero: number;
   tipo: TipoDeMesa;
   mesaSeleccionada: any;
-  listaDeReservas:Observable<any[]>;
+  listaDeReservas: Observable<any[]>;
   reservasRef: AngularFirestoreCollection<any[]>;
 
 
@@ -26,7 +27,7 @@ export class MesaService {
     this.mesasRef = this.afs.collection<Mesa>(this.dbpathMesas);
     this.mesas = this.mesasRef.valueChanges(this.dbpathMesas);
     this.reservasRef = this.afs.collection<any>(this.dbpathReservas);
-    this.listaDeReservas=this.reservasRef.valueChanges(this.dbpathReservas);
+    this.listaDeReservas = this.reservasRef.valueChanges(this.dbpathReservas);
   }
 
   altaMesa(mesa: Mesa, foto: File) {
@@ -48,24 +49,24 @@ export class MesaService {
 
   }
 
-  getAll(){
+  getAll() {
     return this.mesas;
   }
 
-  async obtenerMesa(id: string){
-    await this.afs.collection('/mesas').ref.where('id', '==', id).get().then((responce)=>{
+  async obtenerMesa(id: string) {
+    await this.afs.collection('/mesas').ref.where('id', '==', id).get().then((responce) => {
       this.mesaSeleccionada = responce.docs[0].data();
     });
   }
 
-  async obtenerMesaCliente(id: string){
-    return   this.afs.collection('/mesas').ref.where('cliente', '==', id).get().then((responce)=>{
-       this.mesaSeleccionada = responce.docs[0].data();
-       return this.mesaSeleccionada ;
+  async obtenerMesaCliente(id: string) {
+    return this.afs.collection('/mesas').ref.where('cliente', '==', id).get().then((responce) => {
+      this.mesaSeleccionada = responce.docs[0].data();
+      return this.mesaSeleccionada;
     });
   }
 
-  guardarCambios(ingreso: Mesa){
+  guardarCambios(ingreso: Mesa) {
     this.afs.collection('listaDeEspera').doc(ingreso.id).set(ingreso);
   }
 
@@ -73,7 +74,7 @@ export class MesaService {
     return this.mesasRef.doc(id).update(data);
   }
 
-  listaReservas(){
+  listaReservas() {
     return this.listaDeReservas;
   }
 
@@ -82,12 +83,56 @@ export class MesaService {
     return this.mesasRef.get().toPromise();
   }
 
-  public crearReserva(reserva:any){
+  public crearReserva(reserva: any) {
     reserva.id = this.afs.createId();
     return this.reservasRef.doc(reserva.id).set(reserva);
   }
 
   updateReserva(id: string, data: any): Promise<void> {
     return this.reservasRef.doc(id).update(data);
+  }
+
+  async actualizarEstadoMesasSegunReservas() {
+    console.log('Entro en actualizarEstadoMesasSegunReservas');
+    //declaro la fecha y hora actual
+    const date = new Date();
+    let fechaAntes: Date = subMinutes(date, 40);
+    let fechaDespues: Date = addMinutes(date, 40);
+    //busco en la base todas las reservas
+    //filtro las reservas que esten +- 40 minutos segun fecha y hora actual
+    let auxReservas: Array<any> = [];
+    await this.traerReservas().then(snaps => {
+      auxReservas = snaps.docs.map(x => {
+        const y: any = x.data() as any;
+        y['id'] = x.id;
+        return { ...y };
+      }).filter(x => fechaAntes <= x.fecha && x.fecha <= fechaDespues);
+    });
+    //de las reservas que sobreviven al filtro saco las mesas y
+    //hago update a las mesas resultantes como ocupadas 
+    if (auxReservas.length > 0) {
+      //Actualizo el estado de la mesa correspondiente a cada reserva activa
+      let auxMesas: Array<any> = [];
+      await this.traerMesas().then(snaps => {
+        auxMesas = snaps.docs.map(x => {
+          const y: any = x.data() as any;
+          y['id'] = x.id;
+          return { ...y };
+        });
+      });
+      auxReservas.forEach(reserva => {
+        auxMesas.forEach(mesa => {
+          if (reserva.mesa===mesa.numero) {
+            mesa.estado="Esperando reserva";
+            this.update(mesa.id,mesa);
+          }
+        });
+      });
+    }
+    console.log('Salgo de actualizarEstadoMesasSegunReservas');
+  }
+
+  public traerReservas() {
+    return this.reservasRef.get().toPromise();
   }
 }
