@@ -58,7 +58,7 @@ export class PrincipalPage implements OnInit {
 
 
   async Scan() {
-
+    await this.mesaService.actualizarEstadoMesasSegunReservas();
     await this.usuarioService.obtenerUsuario(localStorage.getItem("usuario"));
     // this.utilidadesService.PresentarLoading("Ingresando a lista de espera.");            
     /*
@@ -111,8 +111,9 @@ export class PrincipalPage implements OnInit {
                 this.usuario.mesaId = "JYCjbOgLWRTzkfyknquy";
                 this.usuario.numeroMesa = 1;
                 this.usuarioService.guardarCambios(this.usuario);
-//faltaria clavar un navigate al componente mesa pero que al llegar al componente tenga elmostrar en true
-//ver como hacer eso, en el constructor se podriapreguntar por el user y si tiene una mesa, de tenerla se pasa a true, de no tenerla se deja false
+                //faltaria clavar un navigate al componente mesa pero que al llegar al componente tenga elmostrar en true
+                //ver como hacer eso, en el constructor se podriapreguntar por el user y si tiene una mesa, de tenerla se pasa a true, de no tenerla se deja false
+                this.Navegar('mesa');
                 break;
               } else {
                 this.utilidadesService.PresentarToastAbajo("Mesa 1 no disponible", "danger");
@@ -132,7 +133,7 @@ export class PrincipalPage implements OnInit {
                 this.usuario.mesaId = "zZCtyY4gqhvEkkK2RyxD";
                 this.usuario.numeroMesa = 2;
                 this.usuarioService.guardarCambios(this.usuario);
-
+                this.Navegar('mesa');
                 break;
               } else {
                 this.utilidadesService.PresentarToastAbajo("Mesa 2 no disponible", "danger");
@@ -152,7 +153,7 @@ export class PrincipalPage implements OnInit {
                 this.usuario.mesaId = "BVIBfLHDswZd77dWWCLR";
                 this.usuario.numeroMesa = 3;
                 this.usuarioService.guardarCambios(this.usuario);
-
+                this.Navegar('mesa');
                 break;
               } else {
                 this.utilidadesService.PresentarToastAbajo("Mesa 3 no disponible", "danger");

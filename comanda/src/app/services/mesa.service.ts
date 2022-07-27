@@ -4,8 +4,9 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable } from 'rxjs';
 import { Mesa, TipoDeMesa } from '../clases/mesa';
 import { UtilidadesService } from './utilidades.service';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 import { format, parseISO, addMinutes, subMinutes, getTime } from 'date-fns';
+import { Console } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -106,10 +107,11 @@ export class MesaService {
         const y: any = x.data() as any;
         y['id'] = x.id;
         return { ...y };
-      }).filter(x => fechaAntes <= x.fecha && x.fecha <= fechaDespues);
+      }).filter(x => fechaAntes <= x.fecha && x.fecha <= fechaDespues && x.estado === true && x.cambioEstadoDeMesa === false);
     });
+    console.log('auxReservas filtradas: ' + JSON.stringify(auxReservas));
     //de las reservas que sobreviven al filtro saco las mesas y
-    //hago update a las mesas resultantes como ocupadas 
+    //hago update a las mesas resultantes como Esperando reserva 
     if (auxReservas.length > 0) {
       //Actualizo el estado de la mesa correspondiente a cada reserva activa
       let auxMesas: Array<any> = [];
@@ -122,9 +124,12 @@ export class MesaService {
       });
       auxReservas.forEach(reserva => {
         auxMesas.forEach(mesa => {
-          if (reserva.mesa===mesa.numero) {
-            mesa.estado="Esperando reserva";
-            this.update(mesa.id,mesa);
+          if (reserva.mesa === mesa.numero) {
+            mesa.estado = "Esperando reserva";
+            mesa.usuarioConReserva = reserva.clienteId;
+            this.update(mesa.id, mesa);
+            reserva.cambioEstadoDeMesa = true;
+            this.updateReserva(reserva.id, reserva);
           }
         });
       });

@@ -52,11 +52,41 @@ export class MesaPage implements OnInit {
       this.listaMesas = resultado;
     })
 
+    this.usuario = this.usera.usuarioSeleccionado;
+    console.log('previo al if');
+    if (this.usuario) {
+      console.log('previo al switch');
+      switch (this.usuario.mesaId) {
+        case "JYCjbOgLWRTzkfyknquy"://mesa1
+          console.log('adentro case mesa 1');
+          this.mesaNumero = "Mesa 1";
+          this.mostrar = true;
+          this.gestionPedidos("JYCjbOgLWRTzkfyknquy");
+          break;
+        case "zZCtyY4gqhvEkkK2RyxD"://mesa2
+          console.log('adentro case mesa 2');
+          this.mesaNumero = "Mesa 2";
+          this.mostrar = true;
+          this.gestionPedidos("zZCtyY4gqhvEkkK2RyxD");
+          break;
+        case "BVIBfLHDswZd77dWWCLR"://mesa3
+          console.log('adentro case mesa 3');
+
+          this.mesaNumero = "Mesa 3";
+          this.mostrar = true;
+          this.gestionPedidos("BVIBfLHDswZd77dWWCLR");
+          break;
+        default:
+          break;
+      }
+    }
+
   }
 
   ngOnInit() {
     this.getCliente();
     this.usuario = this.usera.usuarioSeleccionado;
+
   }
   ionViewDidEnter() {
     this.gestionPedidos(this.usuario.mesaId);
@@ -226,7 +256,7 @@ export class MesaPage implements OnInit {
   pagar() {
     this.pedi.estado = 'pagado';
     this.pedido.updatePedido(this.pedi);
-    this.mesaService.update(this.pedi.mesaId, { estado: 'libre', cliente: null });
+    this.mesaService.update(this.pedi.mesaId, { estado: 'libre', cliente: null, usuarioConReserva:'' });
     this.usuario.mesaId = null;
     this.usuario.numeroMesa = null;
     console.log(this.usuario.mesaId);

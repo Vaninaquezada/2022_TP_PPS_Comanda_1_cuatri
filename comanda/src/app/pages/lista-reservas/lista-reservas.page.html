@@ -18,12 +18,12 @@
             <h2>Cliente: {{reserva.nombreCliente}}</h2>
             <h2>Fecha: {{reserva.fechaFormateada}}</h2>
             <h3>Mesa Nº{{reserva.mesa}}</h3>
-            <ion-button color="success" *ngIf="reserva.pendiente" (click)="aceptar(reserva)">Aceptar</ion-button>
-            <ion-button color="danger" *ngIf="reserva.pendiente" (click)="rechazar(reserva)">Rechazar</ion-button>
-            <ion-label *ngIf="!reserva.pendiente && reserva.estado">
+            <ion-button color="success" *ngIf="reserva.pendienteValidacion" (click)="aceptar(reserva)">Aceptar</ion-button>
+            <ion-button color="danger" *ngIf="reserva.pendienteValidacion" (click)="rechazar(reserva)">Rechazar</ion-button>
+            <ion-label *ngIf="!reserva.pendienteValidacion && reserva.estado">
               <h3 style="color:green;">Reserva aceptada.</h3>
             </ion-label>
-            <ion-label *ngIf="!reserva.pendiente && !reserva.estado">
+            <ion-label *ngIf="!reserva.pendienteValidacion && !reserva.estado">
               <h3 style="color:red;">Reserva rechazada.</h3>
             </ion-label>
           </ion-label>

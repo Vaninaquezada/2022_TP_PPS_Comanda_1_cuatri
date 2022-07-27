@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MenuController } from '@ionic/angular';
-import { format, parseISO, addMinutes, subMinutes,getTime } from 'date-fns';
+import { format, parseISO, addMinutes, subMinutes, getTime } from 'date-fns';
 import { User } from 'src/app/clases/user';
 import { MesaService } from 'src/app/services/mesa.service';
 import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.service';
@@ -19,7 +19,7 @@ export class ReservaMesasPage implements OnInit {
 	public splash: boolean = false;
 	public listaReservas: Array<any> = [];
 	private miFormulario: FormGroup;
-	// public fechaValorActual: string;
+	private listaReservasPorUsuario: Array<any> = [];
 	public fechaValorMinimo: string;
 	public fechaValorMaximo: string;
 	public flagNumMesa: any = null;
@@ -66,6 +66,8 @@ export class ReservaMesasPage implements OnInit {
 		this.mesasService.listaReservas().subscribe(result => {
 			this.listaReservas = result;
 		});
+		this.usuarioLogueado = this.usuariosFire.usuarioSeleccionado;
+		this.filtrarReservasPorUsuario();
 	}
 
 	Ifecha(value) {
@@ -76,6 +78,16 @@ export class ReservaMesasPage implements OnInit {
 
 	ITipo($event) {
 		this.miFormulario.controls.tipoMesa.setValue($event.detail.value);
+	}
+
+	async filtrarReservasPorUsuario() {
+		await this.mesasService.traerReservas().then(snaps => {
+			this.listaReservasPorUsuario = snaps.docs.map(x => {
+				const y: any = x.data() as any;
+				y['id'] = x.id;
+				return { ...y };
+			}).filter(x => x.clienteId === this.usuarioLogueado.id);
+		});
 	}
 
 	async cargarReserva() {
@@ -92,7 +104,6 @@ export class ReservaMesasPage implements OnInit {
 						auxMesas = snaps.docs.map(x => {
 							const y: any = x.data() as any; y['id'] = x.id; return { ...y };
 						}).filter(x => x.cantidadComensales === this.miFormulario.value.comensales && x.tipo === this.miFormulario.value.tipoMesa);
-						console.log("AuxMesas.length: " + auxMesas.length);
 						if (auxMesas.length > 0) {
 							this.flagNumMesa = auxMesas[0].numero;
 							return this.crearReserva(this.flagNumMesa, getTime(parseISO(this.date)));
@@ -130,7 +141,7 @@ export class ReservaMesasPage implements OnInit {
 							this.utilidadesService.PresentarToastAbajo('Reserva cargada con exito. el dueño o supervisor revisara su solicitud.', 'success');
 						});//.finally(() => this.utilidadesService.RemoverLoading());
 					} else {
-						this.utilidadesService.PresentarToastAbajo('Ya tienes una reserva hecha para este horario (' + format(fechaAntes, 'HH:mm, MMM d, yyyy') + ' - ' + format(fechaDespues, 'HH:mm, MMM d, yyyy')+ ').', 'danger');
+						this.utilidadesService.PresentarToastAbajo('Ya tienes una reserva hecha para este horario (' + format(fechaAntes, 'HH:mm, MMM d, yyyy') + ' - ' + format(fechaDespues, 'HH:mm, MMM d, yyyy') + ').', 'danger');
 					}
 				}
 			} else {
@@ -146,10 +157,11 @@ export class ReservaMesasPage implements OnInit {
 			fecha: fecha,
 			fechaFormateada: format(fecha, 'HH:mm, MMM d, yyyy'),
 			clienteId: this.usuarioLogueado.id,
-			nombreCliente: this.usuarioLogueado.nombre+' '+this.usuarioLogueado.apellido,
+			nombreCliente: this.usuarioLogueado.nombre + ' ' + this.usuarioLogueado.apellido,
 			mesa: mesa,
 			estado: false,
-			pendiente: true
+			pendienteValidacion: true,
+			cambioEstadoDeMesa: false
 		}
 		console.log(reservaJson);
 		return this.mesasService.crearReserva(reservaJson);

@@ -54,7 +54,8 @@
 
                 <ion-item class="labels" fill="outline">
                     <ion-label position='floating'>Tipo de Mesa:</ion-label>
-                    <ion-select interface="popover" formControlName="tipoMesa" placeholder='seleccione un tipo' (ionChange)='ITipo($event)'>
+                    <ion-select interface="popover" formControlName="tipoMesa" placeholder='seleccione un tipo'
+                        (ionChange)='ITipo($event)'>
                         <ion-select-option value='estandar'>Estandar</ion-select-option>
                         <ion-select-option value='vip'>VIP</ion-select-option>
                         <ion-select-option value='discapacitados'>Discapacitados</ion-select-option>
@@ -69,6 +70,28 @@
                 <ion-button [disabled]='!miFormulario.valid' color='primary' expand='block' (click)='cargarReserva()'>
                     Cargar Reserva</ion-button>
             </form>
+
+            <ion-list>
+                <ion-label>Mis reservas:</ion-label>
+
+                <ion-item color="dark" *ngFor="let reserva of listaReservasPorUsuario">
+                    <ion-label>
+                        <h2>Cliente: {{reserva.nombreCliente}}</h2>
+                        <h2>Fecha: {{reserva.fechaFormateada}}</h2>
+                        <h3>Mesa Nº{{reserva.mesa}}</h3>
+                        <ion-label *ngIf="!reserva.pendienteValidacion && reserva.estado">
+                            <h3 style="color:green;">Reserva aceptada.</h3>
+                        </ion-label>
+                        <ion-label *ngIf="!reserva.pendienteValidacion && !reserva.estado">
+                            <h3 style="color:red;">Reserva rechazada.</h3>
+                        </ion-label>
+                        <ion-label *ngIf="reserva.pendienteValidacion">
+                            <h3 style="color:rgb(43, 41, 131);">Reserva pendiente de validacion.</h3>
+                        </ion-label>
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+
 
         </ion-content>
     </div>

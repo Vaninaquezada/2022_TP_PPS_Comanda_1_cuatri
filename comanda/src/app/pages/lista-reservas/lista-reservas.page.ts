@@ -30,8 +30,8 @@ export class ListaReservasPage implements OnInit {
 
   aceptar(reserva: any) {
     reserva.estado = true;
-    reserva.pendiente=false;
-      this.mesasService.updateReserva(reserva.id, reserva);
+    reserva.pendienteValidacion=false;
+    this.mesasService.updateReserva(reserva.id, reserva);
     if (reserva.estado) {
       //mandar notif? o mail?
     } else {
@@ -41,7 +41,7 @@ export class ListaReservasPage implements OnInit {
 
   rechazar(reserva: any) {
     reserva.estado = false;
-    reserva.pendiente=false;
+    reserva.pendienteValidacion=false;
     this.mesasService.updateReserva(reserva.id, reserva);
     if (reserva.estado) {
       //mandar notif? o mail?
