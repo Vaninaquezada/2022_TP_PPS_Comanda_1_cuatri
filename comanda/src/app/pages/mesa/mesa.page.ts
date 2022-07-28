@@ -24,13 +24,13 @@ export class MesaPage implements OnInit {
   listaDeEspera: any;
   listaMesas: any;
   mostrar = false;
-  hayPedido= false;
+  hayPedido = false;
   pedi: Pedidos;
   cosa: any;
- mesaNumero: string;
- idMesa: string;
-usuario: User;
-mesaActual: string;
+  mesaNumero: string;
+  idMesa: string;
+  usuario: User;
+  mesaActual: string;
   constructor(
     private navegador: Router,
     private authSvc: AuthService,
@@ -42,8 +42,7 @@ mesaActual: string;
     private pedido: PedidosService,
     private modal: ModalController,
     private listaEsperaService: ListaDeEsperaFirebaseService
-  )
-  {
+  ) {
     this.MenuView();
     this.listaEsperaService.getAllToday().subscribe(resultado => {
       this.listaDeEspera = resultado;
@@ -53,24 +52,54 @@ mesaActual: string;
       this.listaMesas = resultado;
     })
 
+    this.usuario = this.usera.usuarioSeleccionado;
+    console.log('previo al if');
+    if (this.usuario) {
+      console.log('previo al switch');
+      switch (this.usuario.mesaId) {
+        case "JYCjbOgLWRTzkfyknquy"://mesa1
+          console.log('adentro case mesa 1');
+          this.mesaNumero = "Mesa 1";
+          this.mostrar = true;
+          this.gestionPedidos("JYCjbOgLWRTzkfyknquy");
+          break;
+        case "zZCtyY4gqhvEkkK2RyxD"://mesa2
+          console.log('adentro case mesa 2');
+          this.mesaNumero = "Mesa 2";
+          this.mostrar = true;
+          this.gestionPedidos("zZCtyY4gqhvEkkK2RyxD");
+          break;
+        case "BVIBfLHDswZd77dWWCLR"://mesa3
+          console.log('adentro case mesa 3');
+
+          this.mesaNumero = "Mesa 3";
+          this.mostrar = true;
+          this.gestionPedidos("BVIBfLHDswZd77dWWCLR");
+          break;
+        default:
+          break;
+      }
+    }
+
   }
 
   ngOnInit() {
     this.getCliente();
     this.usuario = this.usera.usuarioSeleccionado;
+
   }
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     this.gestionPedidos(this.usuario.mesaId);
     //this.mostrar = false;
-}
-  MenuView(){
+  }
+  MenuView() {
     this.menuController.enable(true, 'clientesMenu');
     this.menuController.enable(false, 'adminMenu');
     this.menuController.enable(false, 'empleadosMenu');
   }
 
-  Scan(): void{
-    
+  Scan(): void {
+
     for (let index = 0; index < this.listaDeEspera.length; index++) {
       const ingreso = this.listaDeEspera[index];
       console.log(ingreso.id)
@@ -82,7 +111,7 @@ mesaActual: string;
          this.barcodeScanner.scan().then(barcodeData => {
            console.log('Barcode data', barcodeData);
            this.code = barcodeData.text;
-           
+           this.mesaService.actualizarEstadoMesasSegunReservas();
               switch (this.code) {
 
                 case "JYCjbOgLWRTzkfyknquy": //Mesa 1
@@ -102,9 +131,12 @@ mesaActual: string;
                           this.gestionPedidos("JYCjbOgLWRTzkfyknquy");
              
                           break;
-                        }else{
-                          this.utilidadesService.PresentarToastAbajo("Mesa 1 no disponible", "danger");
-                          break;
+                        }else if (element.estado === 'Esperando reserva') {
+                      		this.utilidadesService.PresentarToastAbajo("Mesa 1 reservada.", "danger");
+	                     	break;
+	                    } else {
+	                      this.utilidadesService.PresentarToastAbajo("Mesa 1 no disponible", "danger");
+	                      break;	
                         }
                       }
                     }
@@ -132,9 +164,12 @@ mesaActual: string;
                           this.gestionPedidos("zZCtyY4gqhvEkkK2RyxD");
                 
                           break;
-                        }else{
-                          this.utilidadesService.PresentarToastAbajo("Mesa 2 no disponible", "danger");
-                          break;
+                        }else if (element.estado === 'Esperando reserva') {
+                     		 this.utilidadesService.PresentarToastAbajo("Mesa 2 reservada.", "danger");
+                      		 break;
+                    	} else {
+	                      	this.utilidadesService.PresentarToastAbajo("Mesa 2 no disponible", "danger");
+	                      	break;
                         }
                       }
                     }
@@ -161,7 +196,10 @@ mesaActual: string;
                           this.gestionPedidos("BVIBfLHDswZd77dWWCLR");
 
                           break;
-                        }else{
+                        }else if (element.estado === 'Esperando reserva') {
+                      		this.utilidadesService.PresentarToastAbajo("Mesa 3 reservada.", "danger");
+                    		break;
+                    	} else{
                           this.utilidadesService.PresentarToastAbajo("Mesa 3 no disponible", "danger");
                           break;
                         }
@@ -180,29 +218,29 @@ mesaActual: string;
               }           
       
           }).catch(err => {
-              console.log('Error', err);
-              
+            console.log('Error', err);
+
           })
 
 
-        }else{
-          this.utilidadesService.PresentarToastAbajo("Aun no fue aprobado por el metre", "warning"); 
+        } else {
+          this.utilidadesService.PresentarToastAbajo("Aun no fue aprobado por el metre", "warning");
         }
-      }else{
-        this.utilidadesService.PresentarToastAbajo("Ustedes no esta en la lista de espera", "danger"); 
+      } else {
+        this.utilidadesService.PresentarToastAbajo("Ustedes no esta en la lista de espera", "danger");
       }
-    } 
+    }
 
   }
 
 
 
-  Navegar(ruta: string){
+  Navegar(ruta: string) {
     console.log("entra en navegar");
     this.navegador.navigate([ruta]);
   }
 
-  async getCliente(){
+  async getCliente() {
     await this.usera.obtenerUsuario(localStorage.getItem('usuario'));
   }
 
@@ -235,15 +273,15 @@ mesaActual: string;
   pagar() {
     this.pedi.estado = 'pagado';
     this.pedido.updatePedido(this.pedi);
-    this.mesaService.update(this.pedi.mesaId, {estado: 'libre',cliente:null});
+    this.mesaService.update(this.pedi.mesaId, { estado: 'libre', cliente: null, usuarioConReserva:'' });
     this.usuario.mesaId = null;
     this.usuario.numeroMesa = null;
-    console.log( this.usuario.mesaId);
-    this.usera.guardarCambios( this.usuario);
+    console.log(this.usuario.mesaId);
+    this.usera.guardarCambios(this.usuario);
     this.Navegar('/principal');
   }
 
-  pedirCuenta(){
+  pedirCuenta() {
     this.pedi.estado = 'aCobrar';
     console.log(' this.pedi.estado', this.pedi.estado);
     this.pedido.updatePedido(this.pedi);
@@ -260,7 +298,7 @@ mesaActual: string;
       presentingElement: await this.modal.getTop(),
       backdropDismiss: false,
       componentProps: {
-        pedido:this.pedi,
+        pedido: this.pedi,
         pedidoId,
         boton: ''
       },
@@ -269,35 +307,35 @@ mesaActual: string;
 
   }
 
-    gestionPedidos(codigo: string){
+  gestionPedidos(codigo: string) {
 
-              this.pedido.getPedidoByMesaId(codigo).then((p) =>
-              p.subscribe((data) => {
-                console.log('data',data);
-                this.pedi= data[0];
-                console.log(data[0]);
-                if(this.pedi){
-                  if (this.pedi.estado !== 'pagado') {
-                    console.log('lloremos',this.pedi);
-                    this.hayPedido = true;
-                  }
-                }
+    this.pedido.getPedidoByMesaId(codigo).then((p) =>
+      p.subscribe((data) => {
+        console.log('data', data);
+        this.pedi = data[0];
+        console.log(data[0]);
+        if (this.pedi) {
+          if (this.pedi.estado !== 'pagado') {
+            console.log('lloremos', this.pedi);
+            this.hayPedido = true;
+          }
+        }
 
-              })
-            );
-    }
+      })
+    );
+  }
 
-    async getQrPropinaData() {
+  async getQrPropinaData() {
+    console.log('barcodeData.text');
+    this.barcodeScanner.scan().then(barcodeData => {
       console.log('barcodeData.text');
-      this.barcodeScanner.scan().then(barcodeData => {
-        console.log('barcodeData.text');
-        if (barcodeData.text === 'propina') {
-          this.Navegar('/propina');
-        }else{
+      if (barcodeData.text === 'propina') {
+        this.Navegar('/propina');
+      } else {
         this.utilidadesService.PresentarToastAbajo('Qr invalido', 'danger');
       }
 
-      });
+    });
     /*  console.log('getQrPropinaData',propina);
       this.cosa = propina;
       this.Navegar('/propina');
@@ -307,6 +345,6 @@ mesaActual: string;
       this.utilidadesService.PresentarToastAbajo('Qr invalido', 'danger');
     }
     */
-    }
+  }
 
 }
