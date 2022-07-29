@@ -1,96 +1,101 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>
-      Ionic Calendar
-    </ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="openCalModal()">
-        <ion-icon name="add" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+    <div class="ion-page" id="main-content">
+        <ion-header>
+            <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-menu-button></ion-menu-button>
+                </ion-buttons>
+                <ion-title>Solicitar reserva</ion-title>
+            </ion-toolbar>
+        </ion-header>
 
-<ion-content>
-  <ion-segment [(ngModel)]="calendar.mode">
-    <ion-segment-button value="month">
-      <ion-label>Month</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="week">
-      <ion-label>Week</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="day">
-      <ion-label>Day</ion-label>
-    </ion-segment-button>
-  </ion-segment>
 
-  <ion-row>
-    <ion-col size="6">
-      <ion-button (click)="createRandomEvents()" expand="block" fill="outline">
-        Add random events
-      </ion-button>
-    </ion-col>
-    <ion-col size="6">
-      <ion-button (click)="removeEvents()" expand="block" fill="outline">
-        Remove all events
-      </ion-button>
-    </ion-col>
-  </ion-row>
+        <ion-content class="ion-padding">
 
-  <ion-row>
-    <!-- Move back one screen of the slides -->
-    <ion-col size="2">
-      <ion-button fill="clear" (click)="back()">
-        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-col>
+            <form [formGroup]="miFormulario" (ngSubmit)="registrarse()">
 
-    <ion-col size="8" class="ion-text-center">
-      <h2>{{ viewTitle }}</h2>
-    </ion-col>
+                <ion-item id="open-modal">
+                    <ion-icon icon="calendar-outline" slot="start" color="primary"></ion-icon>
+                    <ion-label position="floating">Fecha de la reserva</ion-label>
+                    <ion-text slot="end">
+                        {{formatedDate}}
+                    </ion-text>
+                </ion-item>
+                <ion-modal trigger="open-modal">
+                    <ng-template>
+                        <ion-content>
+                            <ion-item>
+                                <ion-label>Date</ion-label>
+                                <ion-datetime size="cover" #datetime showDefaultButtons="true" presentation="time-date"
+                                    [value]='date' [min]="fechaValorMinimo" [max]="fechaValorMaximo"
+                                    (ionChange)='Ifecha(datetime.value)' formControlName='fecha'></ion-datetime>
+                            </ion-item>
+                        </ion-content>
+                    </ng-template>
+                </ion-modal>
+                <ng-container *ngFor="let validation of validation_messages.nombre">
+                    <div class="error-message"
+                        *ngIf="miFormulario.get('fecha').hasError(validation.type) && (miFormulario.get('fecha').dirty || miFormulario.get('fecha').touched)">
+                        {{ validation.message }}
+                    </div>
+                </ng-container>
 
-    <!-- Move forward one screen of the slides -->
-    <ion-col size="2">
-      <ion-button fill="clear" (click)="next()">
-        <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-col>
-  </ion-row>
+                <ion-item>
+                    <ion-label position="floating">Cantidad de personas:</ion-label>
+                    <ion-input type='number' min=1 max=99 formControlName="comensales" placeholder="Ingresar cantidad">
+                    </ion-input>
+                </ion-item>
+                <ng-container *ngFor="let validation of validation_messages.comensales">
+                    <div class="error-message"
+                        *ngIf="miFormulario.get('comensales').hasError(validation.type) && (miFormulario.get('comensales').dirty || miFormulario.get('comensales').touched)">
+                        {{ validation.message }}
+                    </div>
+                </ng-container>
 
-  1
-  2
-  3
-  4
-  5
-  6
-  7
-  8
-  9
-  10
-  11
-  12
-  13
-  14
-  15
-  16
-  17
-  18
-  19
-  20
-  21
-  22
-  <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
-    (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" startHour="6" endHour="20"
-    step="30" startingDayWeek="1" [monthviewDisplayEventTemplate]="template">
-  </calendar>
+                <ion-item class="labels" fill="outline">
+                    <ion-label position='floating'>Tipo de Mesa:</ion-label>
+                    <ion-select interface="popover" formControlName="tipoMesa" placeholder='seleccione un tipo'
+                        (ionChange)='ITipo($event)'>
+                        <ion-select-option value='estandar'>Estandar</ion-select-option>
+                        <ion-select-option value='vip'>VIP</ion-select-option>
+                        <ion-select-option value='discapacitados'>Discapacitados</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ng-container *ngFor="let validation of validation_messages.tipoMesa">
+                    <div class="error-message"
+                        *ngIf="miFormulario.get('tipoMesa').hasError(validation.type) && (miFormulario.get('tipoMesa').dirty || miFormulario.get('tipoMesa').touched)">
+                        {{ validation.message }}
+                    </div>
+                </ng-container>
+                <ion-button [disabled]='!miFormulario.valid' color='primary' expand='block' (click)='cargarReserva()'>
+                    Cargar Reserva</ion-button>
+            </form>
 
-  <ng-template #template let-view="view" let-row="row" let-col="col">
-    <div [class.with-event]="view.dates[row*7+col].events.length">
-      {{view.dates[row*7+col].label}}
-      <div class="indicator-container">
-        <div class="event-indicator" *ngFor="let e of view.dates[row*7+col].events"></div>
-      </div>
+            <ion-list>
+                <ion-label>Mis reservas:</ion-label>
+
+                <ion-item color="dark" *ngFor="let reserva of listaReservasPorUsuario">
+                    <ion-label>
+                        <h2>Cliente: {{reserva.nombreCliente}}</h2>
+                        <h2>Fecha: {{reserva.fechaFormateada}}</h2>
+                        <h3>Mesa Nº{{reserva.mesa}}</h3>
+                        <ion-label *ngIf="!reserva.pendienteValidacion && reserva.estado">
+                            <h3 style="color:green;">Reserva aceptada.</h3>
+                        </ion-label>
+                        <ion-label *ngIf="!reserva.pendienteValidacion && !reserva.estado">
+                            <h3 style="color:red;">Reserva rechazada.</h3>
+                        </ion-label>
+                        <ion-label *ngIf="reserva.pendienteValidacion">
+                            <h3 style="color:rgb(43, 41, 131);">Reserva pendiente de validacion.</h3>
+                        </ion-label>
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+
+
+        </ion-content>
     </div>
-  </ng-template>
 
-</ion-content>
+
+
+</ion-app>

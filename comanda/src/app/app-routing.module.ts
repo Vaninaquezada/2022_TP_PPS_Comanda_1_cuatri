@@ -115,7 +115,15 @@ const routes: Routes = [
     loadChildren: () => import('./pages/chat/chat.module').then( m => m.ChatPageModule)
   },
   {
-    path: 'encuenta-supervisor',
+    path: 'lista-reservas',
+    loadChildren: () => import('./pages/lista-reservas/lista-reservas.module').then( m => m.ListaReservasPageModule)
+  },
+  {
+    path: 'encuesta-empleado',
+    loadChildren: () => import('./pages/encuesta-empleado/encuesta-empleado.module').then( m => m.EncuestaEmpleadoPageModule)
+  },
+  {
+  	path: 'encuenta-supervisor',
     loadChildren: () => import('./pages/encuenta-supervisor/encuenta-supervisor.module').then( m => m.EncuentaSupervisorPageModule)
   },
   {

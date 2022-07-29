@@ -1,0 +1,69 @@
+<ion-app>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Encuesta espacio de trabajo</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+
+    <ion-content class="ion-padding">
+
+      <form [formGroup]="registerForm" (ngSubmit)="enviarEncuesta()">
+        <ion-list>
+          <ion-radio-group formControlName="limpieza" (ionChange)='EstadoLimpieza($event)'>
+            <ion-list-header>
+              <h4>Como esta el espacio de trabajo?</h4>
+            </ion-list-header>
+            <ion-item>
+              <ion-label>Sucio</ion-label>
+              <ion-radio slot="start" value="sucio"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Limpio</ion-label>
+              <ion-radio slot="start" value="limpio"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+          
+          <ion-list-header>
+            <h4>Seleccione el nivel de orden:</h4>
+          </ion-list-header>
+          <ion-item class="labels" fill="outline">
+            <ion-label position='floating'>Espacio ordenado?</ion-label>
+            <ion-select interface="popover" formControlName="orden" (ionChange)='EstadoOrden($event)'>
+              <ion-select-option value='ordenado'>Ordenado</ion-select-option>
+              <ion-select-option value='desordenado'>Desordenado</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position='floating'>Califica tu espacio de trabajo:</ion-label>
+            <ion-range formControlName="calificacion" min="1" max="5" value="1" pin="true" ticks="true" snaps="true"></ion-range>
+          </ion-item>
+
+          <ion-list-header>
+            <h4>Tome una foto del espacio de trabajo:</h4>
+          </ion-list-header>
+          <br>
+
+          <ion-button expand="full" color="tertiary" (click)="getPhoto()">
+            <ion-icon name="camera-outline"></ion-icon> Sacar Fotografia
+          </ion-button>
+          <br>
+
+          <ion-button expand="full" type="submit" color="tertiary" [disabled]="registerForm.invalid">
+            <ion-icon name="mail-open-outline"></ion-icon>
+             Enviar encuesta
+          </ion-button>
+
+
+        </ion-list>
+
+      </form>
+
+    </ion-content>
+  </div>
+
+
+
+</ion-app>
