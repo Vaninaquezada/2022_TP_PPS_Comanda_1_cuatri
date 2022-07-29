@@ -20,6 +20,9 @@ export class User {
     mesaId?: string;
     ingresos?: Array<Date>;
     pushId?: string;
+    encuestaCompletada?: boolean;
+    sonido?: boolean;
+
 
     constructor(){
         this.ingresos = new Array<Date>();

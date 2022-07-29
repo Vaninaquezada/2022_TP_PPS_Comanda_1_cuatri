@@ -117,6 +117,10 @@ const routes: Routes = [
   {
     path: 'encuenta-supervisor',
     loadChildren: () => import('./pages/encuenta-supervisor/encuenta-supervisor.module').then( m => m.EncuentaSupervisorPageModule)
+  },
+  {
+    path: 'graficos-encuesta',
+    loadChildren: () => import('./pages/graficos-encuesta/graficos-encuesta.module').then( m => m.GraficosEncuestaPageModule)
   }
 
 

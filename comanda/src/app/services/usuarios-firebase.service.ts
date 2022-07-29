@@ -109,7 +109,8 @@ export class UsuariosFirebaseService {
     try {
       const id = this.db.createId();
       usuario.id = id;
-
+      usuario.encuestaCompletada = false;
+      usuario.sonido = true;
       const user = await this.auth.SignUp(
         usuario.email.toLowerCase(),
         password

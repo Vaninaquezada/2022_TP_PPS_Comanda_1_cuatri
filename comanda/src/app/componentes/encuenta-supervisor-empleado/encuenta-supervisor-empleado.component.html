@@ -71,22 +71,22 @@
             </ion-range>
           </ion-item>
 
-          <ion-list formControlName="pregunta4">
+          <ion-list >
             <ion-label position="floating">Resolución de problemas
             </ion-label>
             <ion-item>
               <ion-label>Buena</ion-label>
-              <ion-checkbox slot="end" value="buena" [disabled]="isDisabled"></ion-checkbox>
+              <ion-checkbox slot="end" (ionChange)="checkBoxLongiClick($event)"  value="'Buena'" name="options" [disabled]="isDisabled"></ion-checkbox>
             </ion-item>
           
             <ion-item>
               <ion-label>Mala</ion-label>
-              <ion-checkbox slot="end" value="mala" [disabled]="isDisabled"></ion-checkbox>
+              <ion-checkbox slot="end" value="Mala" (ionChange)="checkBoxLongiClick($event)" name="options" [disabled]="isDisabled"></ion-checkbox>
             </ion-item>
           
             <ion-item>
               <ion-label>Mas o menos</ion-label>
-              <ion-checkbox slot="end" value="masoMenos" [disabled]="isDisabled"></ion-checkbox>
+              <ion-checkbox slot="end" value="Mas o menos" (ionChange)="checkBoxLongiClick($event)"  name="options" [disabled]="isDisabled"></ion-checkbox>
             </ion-item>
           </ion-list>
           

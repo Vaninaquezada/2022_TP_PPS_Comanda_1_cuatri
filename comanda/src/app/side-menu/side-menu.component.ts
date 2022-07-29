@@ -13,9 +13,9 @@ import { UtilidadesService } from 'src/app/services/utilidades.service';
   styleUrls: ['./side-menu.component.scss'],
 })
 export class SideMenuComponent implements OnInit {
-
+  audio = new Audio();
   public role: string = localStorage.getItem('role');
-
+  usuario: User;
   constructor(
     private navegador: Router,
     private usuarioService: UsuariosFirebaseService,
@@ -23,17 +23,31 @@ export class SideMenuComponent implements OnInit {
     private menuControl: MenuController
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.usuario = this.usuarioService.usuarioSeleccionado;
+  }
 
   Navegar(ruta: string){
-    console.log("entra en navegar");
+    console.log('entra en navegar');
     this.navegador.navigate([ruta]);
     this.menuControl.toggle();
   }
 
   Desconectarse(){
-    this.authSvc.LogOut();    
-    this.Navegar("home");
+    this.audio.src ='src/assets/sound/out.acc';
+    this.audio.load();
+
+   if( typeof this.usuario.sonido === 'undefined') {
+     this.usuario.sonido = true;
+    }else {
+      if ( this.usuario.sonido) {
+        this.audio.play();
+      }
+    }
+
+
+    this.authSvc.LogOut();
+    this.Navegar('home');
   }
 
 }

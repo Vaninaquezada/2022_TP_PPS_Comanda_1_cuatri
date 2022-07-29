@@ -25,7 +25,7 @@ export class EncuestaClientesPage implements OnInit {
   tomada1: boolean;
   tomada2: boolean;
   tomada3: boolean;
-  
+  user: User;
   constructor(
     private navegador: Router,
     private fb: FormBuilder,
@@ -41,6 +41,8 @@ export class EncuestaClientesPage implements OnInit {
   }
 
   ngOnInit() {
+    this.user = this.usuarioService.usuarioSeleccionado;
+
     this.forma = this.fb.group({
       'notaLugar': ['', Validators.required],
       'notaEmpleados': ['', Validators.required],
@@ -72,7 +74,10 @@ export class EncuestaClientesPage implements OnInit {
           await this.encuestaService.nuevaEncuesta(encuesta, this.photo1);
     }
 
-    this.navegador.navigate(['/principal']);
+   // this.navegador.navigate(['/principal']);
+   this.usuarioService.update(this.user.id, { encuestaCompletada: true });
+
+   this.navegador.navigate(['/mesa']);
   }
 
 

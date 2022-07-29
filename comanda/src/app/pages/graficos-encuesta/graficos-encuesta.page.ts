@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController, ModalController } from '@ionic/angular';
-import { EncuestaSupervisor } from 'src/app/clases/encuesta-supervisor';
+import { Encuestas } from 'src/app/clases/encuestas';
 import { EncuentaGraficoBarrasComponent } from 'src/app/componentes/encuenta-grafico-barras/encuenta-grafico-barras.component';
 import { EncuentaGraficoDoughnutComponent } from 'src/app/componentes/encuenta-grafico-doughnut/encuenta-grafico-doughnut.component';
 import { EncuentaGraficoLineComponent } from 'src/app/componentes/encuenta-grafico-line/encuenta-grafico-line.component';
@@ -12,15 +12,14 @@ import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.serv
 import { UtilidadesService } from 'src/app/services/utilidades.service';
 
 @Component({
-  selector: 'app-graficos',
-  templateUrl: './graficos.page.html',
-  styleUrls: ['./graficos.page.scss'],
+  selector: 'app-graficos-encuesta',
+  templateUrl: './graficos-encuesta.page.html',
+  styleUrls: ['./graficos-encuesta.page.scss'],
 })
-export class GraficosPage implements OnInit {
-
-  listadoUsuariosClientes: EncuestaSupervisor[];
-  listadoEncuestaEmpleados: EncuestaSupervisor[];
-  listadoEncuestaRespuestas: EncuestaSupervisor[];
+export class GraficosEncuestaPage implements OnInit {
+  listadoUsuariosClientes: Encuestas[];
+  listadoEncuesta: Encuestas[];
+  listadoEncuestaRespuestas: Encuestas[];
   respuesta= [];
   pregunta= '';
 
@@ -38,9 +37,9 @@ export class GraficosPage implements OnInit {
   }
 
   menuView(){
-    this.menuController.enable(false, 'clientesMenu');
+    this.menuController.enable(true, 'clientesMenu');
     this.menuController.enable(false, 'empleadosMenu');
-    this.menuController.enable(true, 'adminMenu');
+    this.menuController.enable(false, 'adminMenu');
   }
   navegar(ruta: string){
     console.log('entra en navegar');
@@ -48,15 +47,10 @@ export class GraficosPage implements OnInit {
   }
 
   ngOnInit() {
-    this.encuesta.getSupervisorCliente().subscribe(resultado => {
-      this.listadoUsuariosClientes = resultado;
+    this.encuesta.getAll().subscribe(resultado => {
+      this.listadoEncuesta = resultado;
       console.log('entra en navegar',this.listadoUsuariosClientes);
 
-    });
-    this.encuesta.getSupervisorEmpleado().subscribe(resultado => {
-      this.listadoEncuestaEmpleados = resultado;
-      console.log('entra en navegar',this.listadoEncuestaEmpleados);
-      console.log('entra en resultado',resultado);
     });
   }
 
@@ -64,11 +58,9 @@ export class GraficosPage implements OnInit {
   async presentModal(pregunta: string) {
     this.dataModal(pregunta);
 
-   const listadoUsuariosEmpleados= this.listadoEncuestaEmpleados;
+   const listadoUsuariosEmpleados= this.listadoEncuesta;
    const preguntaText = this.pregunta;
-   const respuesta=this.respuesta;
-
-   console.log('listadoEncuestaEmpleados'+ this.listadoEncuestaEmpleados);
+   const respuesta= this.respuesta;
 
 
     const modal = await this.modal.create({
@@ -90,11 +82,11 @@ export class GraficosPage implements OnInit {
   async presentModalBar(pregunta: string) {
     this.dataModal(pregunta);
 
-   const listadoUsuariosEmpleados= this.listadoEncuestaEmpleados;
+   const listadoUsuariosEmpleados= this.listadoEncuesta;
    const preguntaText = this.pregunta;
    const respuesta=this.respuesta;
 
-   console.log('listadoEncuestaEmpleados'+ this.listadoEncuestaEmpleados);
+   console.log('listadoEncuestaEmpleados'+ this.listadoEncuesta);
 
 
     const modal = await this.modal.create({
@@ -116,11 +108,11 @@ export class GraficosPage implements OnInit {
   async presentModalLine(pregunta: string) {
     this.dataModal(pregunta);
 
-   const listadoUsuariosEmpleados= this.listadoEncuestaEmpleados;
+   const listadoUsuariosEmpleados= this.listadoEncuesta;
    const preguntaText = this.pregunta;
    const respuesta=this.respuesta;
 
-   console.log('listadoEncuestaEmpleados'+ this.listadoEncuestaEmpleados);
+   console.log('listadoEncuestaEmpleados'+ this.listadoEncuesta);
 
 
     const modal = await this.modal.create({
@@ -141,11 +133,11 @@ export class GraficosPage implements OnInit {
 
   async presentModalPie(pregunta: string) {
     this.dataModal(pregunta);
-   const listadoUsuariosEmpleados= this.listadoEncuestaEmpleados;
+   const listadoUsuariosEmpleados= this.listadoEncuesta;
    const preguntaText = this.pregunta;
    const respuesta=this.respuesta;
 
-   console.log('listadoEncuestaEmpleados'+ this.listadoEncuestaEmpleados);
+   console.log('listadoEncuestaEmpleados'+ this.listadoEncuesta);
 
 
     const modal = await this.modal.create({
@@ -168,28 +160,29 @@ export class GraficosPage implements OnInit {
 
   dataModal(pregunta){
     this.respuesta = [];
-    this.listadoEncuestaEmpleados.forEach(element => {
+    console.log( this.listadoEncuesta);
+    this.listadoEncuesta.forEach(element => {
+      console.log(element);
 
-      if(pregunta === 'respuesta1'){
-       this.pregunta = element.pregunta1;
-       console.log('respuesta1',element.respuesta1);
-       this.respuesta.push(element.respuesta1);
+      if(pregunta === 'notaEmpleados'){
+
+
+        console.log(pregunta);
+       this.pregunta = 'Puntuacion  Empleados';
+       this.respuesta.push(element.notaEmpleados);
+       console.log(this.respuesta);
       };
-      if(pregunta === 'respuesta2'){
-        this.pregunta = element.pregunta2;
-        this.respuesta.push(element.respuesta2);
+      if(pregunta === 'notaLugar'){
+        this.pregunta = 'Puntuacion Lugar';
+        this.respuesta.push(element.notaLugar);
 
        };
-       if(pregunta === 'respuesta3'){
-        this.pregunta = element.pregunta3;
-        this.respuesta.push(element.respuesta3);
+       if(pregunta === 'recomendacion'){
+        this.pregunta = 'Recomendacion';
+        this.respuesta.push(element.recomendacion);
 
        };
-       if(pregunta === 'respuesta4'){
-        this.pregunta = element.pregunta4;
-        this.respuesta.push(element.respuesta4);
 
-       };
      });
   }
 

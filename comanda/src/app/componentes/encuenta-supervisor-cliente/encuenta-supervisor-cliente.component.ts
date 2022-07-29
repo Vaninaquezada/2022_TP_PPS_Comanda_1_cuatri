@@ -18,7 +18,7 @@ export class EncuentaSupervisorClienteComponent implements OnInit {
 
   forma: FormGroup;
   usuario: User;
-
+  valor = 'Buena';
   constructor(
     private navegador: Router,
     private fb: FormBuilder,
@@ -36,10 +36,10 @@ export class EncuentaSupervisorClienteComponent implements OnInit {
     this.usuario = this.navParams.data.usuario;
 
     this.forma = this.fb.group({
-      'pregunta1': ['', Validators.required],
-      'pregunta2': ['', Validators.required],
-      'pregunta3': ['', Validators.required],
-      'pregunta5': ['', Validators.required]
+      pregunta1: ['', Validators.required],
+      pregunta2: ['', Validators.required],
+      pregunta3: ['', Validators.required],
+      pregunta5: ['', Validators.required]
     });
   }
 
@@ -57,11 +57,12 @@ export class EncuentaSupervisorClienteComponent implements OnInit {
       pregunta3:'El cliente es problematico',
       respuesta3:Number(this.forma.get('pregunta3').value) ,
       pregunta4:'Trato al personal',
-      respuesta4:'Buena',
+      respuesta4:this.valor,
       comentarios: this.forma.get('pregunta5').value,
       fecha: new Date(),
     };
     console.log('hola');
+    console.log(this.valor);
     console.log(encuesta);
      this.utilidadesService.RemoverLoading();
     await this.encuestaService.nuevaEncuestaSupervisor(encuesta);
@@ -70,6 +71,9 @@ export class EncuentaSupervisorClienteComponent implements OnInit {
 
   }
 
+  checkBoxLongiClick(e){
+    this.valor = e.currentTarget.getAttribute('value');
+  }
 
 
   cerrarModal() {

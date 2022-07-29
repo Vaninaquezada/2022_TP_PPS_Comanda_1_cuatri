@@ -19,7 +19,7 @@ export class EncuentaSupervisorEmpleadoComponent implements OnInit {
 
   public forma: FormGroup;
   usuario: User;
-
+  valor: string;
   constructor(
     private navegador: Router,
     private fb: FormBuilder,
@@ -40,7 +40,6 @@ export class EncuentaSupervisorEmpleadoComponent implements OnInit {
       pregunta1: ['', Validators.required],
       pregunta2: ['', Validators.required],
       pregunta3: ['', Validators.required],
-      pregunta4: ['', Validators.required],
       pregunta5: ['', Validators.required]
     });
   }
@@ -59,7 +58,7 @@ export class EncuentaSupervisorEmpleadoComponent implements OnInit {
       pregunta3:'Comunicación del empleado',
       respuesta3:Number(this.forma.get('pregunta3').value) ,
       pregunta4:'Resolución de problemas',
-      respuesta4:'Buena',
+      respuesta4:this.valor,
       comentarios: this.forma.get('pregunta5').value,
       fecha: new Date(),
     };
@@ -72,6 +71,9 @@ export class EncuentaSupervisorEmpleadoComponent implements OnInit {
 
   }
 
+  checkBoxLongiClick(e){
+    this.valor = e.currentTarget.getAttribute('value');
+  }
 
 
   cerrarModal() {

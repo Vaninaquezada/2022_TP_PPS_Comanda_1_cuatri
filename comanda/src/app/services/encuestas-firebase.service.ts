@@ -39,7 +39,7 @@ export class EncuestasFirebaseService {
      private storage: AngularFireStorage,
      private authError: AuthErrorsService,
      private foto: FotoService, private utilidadesService: UtilidadesService) {
-    this.encuestasRef=db.collection<any>(this.dbpathSupervisor, ref => ref.orderBy('fecha'));
+    this.encuestasRef=db.collection<any>(this.dbpath, ref => ref.orderBy('fecha'));
     this.encuestas=this.encuestasRef.valueChanges(this.dbpath);
 
     this.encuestasRefSupervisor=db.collection<any>(this.dbpathSupervisor, ref => ref.orderBy('fecha'));
