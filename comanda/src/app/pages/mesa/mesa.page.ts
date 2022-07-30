@@ -12,6 +12,7 @@ import { UtilidadesService } from 'src/app/services/utilidades.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { Pedidos } from 'src/app/clases/pedidos';
 import { CuentaComponent } from 'src/app/componentes/cuenta/cuenta.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-mesa',
@@ -19,6 +20,7 @@ import { CuentaComponent } from 'src/app/componentes/cuenta/cuenta.component';
   styleUrls: ['./mesa.page.scss'],
 })
 export class MesaPage implements OnInit {
+  public user$: Observable<any> = this.authSvc.firebaseAuth.user;
 
   code: any;
   listaDeEspera: any;
@@ -52,6 +54,10 @@ export class MesaPage implements OnInit {
       this.listaMesas = resultado;
     })
 
+    this.mesaService.getAll().subscribe(resultado => {
+      this.listaMesas = resultado;
+    })
+    console.log('use$'+ this.user$);
     this.usuario = this.usera.usuarioSeleccionado;
     console.log('previo al if');
     if (this.usuario) {
@@ -84,12 +90,13 @@ export class MesaPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.mostrar);
     this.getCliente();
     this.usuario = this.usera.usuarioSeleccionado;
-
   }
   ionViewDidEnter() {
     this.gestionPedidos(this.usuario.mesaId);
+    this.usuario = this.usera.usuarioSeleccionado;
     //this.mostrar = false;
   }
   MenuView() {
@@ -267,6 +274,7 @@ export class MesaPage implements OnInit {
   }
 
   confirmarEntrega() {
+    console.log('encuesta' + this.usuario.encuestaCompletada);
     this.pedi.estado = 'entregado';
     this.pedido.updatePedido(this.pedi);
   }
@@ -279,6 +287,7 @@ export class MesaPage implements OnInit {
     console.log('mesa '+this.usuario.mesaId);
     this.usuario.encuestaCompletada= false;
     this.usera.guardarCambios(this.usuario);
+    
     this.Navegar('/principal');
   }
 
@@ -309,7 +318,7 @@ export class MesaPage implements OnInit {
   }
 
   gestionPedidos(codigo: string) {
-
+    console.log('encuesta' + this.usuario.encuestaCompletada);
     this.pedido.getPedidoByMesaId(codigo).then((p) =>
       p.subscribe((data) => {
         console.log('data', data);

@@ -81,13 +81,13 @@
 
 <ion-footer>
   <ion-toolbar color="input">
-      <ion-label slot="start">{{ getProductoTotalCount() }} ítems</ion-label>
-      <div class="item-end" slot="end">
+      <ion-label slot="end">{{ getProductoTotalCount() }} ítems</ion-label>
+      <div class="item-end" slot="start">
           <ion-label>
               <h2>Total ${{ getPrecioTotal() }}</h2>
               <h3>Tiempor estimado ~{{ getTiempoEstimado()}} min.</h3>
               <h3>Propina ${{ this.pedido.propina }}</h3>
-              <h3>Descuentos $0 </h3>
+              <h3>Descuentos ${{ this.pedido.descuentos }} </h3>
           </ion-label>
           <ion-button (click)="realizarPedido()" expand="block" fill="clear" shape="round" color="tertiary">
               Pedir

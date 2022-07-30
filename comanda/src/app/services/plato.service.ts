@@ -18,7 +18,7 @@ export class PlatoService {
       try {
         const id = this.db.createId();
         plato.platoId = id;
-        await this.db.collection('Platos').doc(plato.platoId).set(plato);
+        await this.db.collection('platos').doc(plato.platoId).set(plato);
       } catch (error) {
         console.log(error);
         throw Error('No se pudo crear');
@@ -27,7 +27,7 @@ export class PlatoService {
 
     async tieneComidasForPedido(pedidoId: string): Promise<boolean> {
       return this.db
-        .collection<Plato>('Platos', (ref) =>
+        .collection<Plato>('platos', (ref) =>
           ref
             .where('pedidoId', '==', pedidoId)
             .where('producto.tipoProducto', '==', 'comida')
@@ -38,7 +38,7 @@ export class PlatoService {
     }
     async tieneBebidasForPedido(pedidoId: string): Promise<boolean> {
       return this.db
-        .collection<Plato>('Platos', (ref) =>
+        .collection<Plato>('platos', (ref) =>
           ref
             .where('pedidoId', '==', pedidoId)
             .where('producto.tipoProducto', '==', 'bebida')
@@ -51,7 +51,7 @@ export class PlatoService {
 
      try {
       return this.db
-        .collection<Plato>('Platos', (ref) =>
+        .collection<Plato>('platos', (ref) =>
           ref
             .where('pedidoId', '==', pedidoId)
             .where('producto.estado', '!=', 'terminado')
@@ -66,7 +66,7 @@ export class PlatoService {
 
     async updatePlatoState(preparacionId: string, state: PlatoEstado) {
       this.db
-      .collection<Plato>('Platos')
+      .collection<Plato>('platos')
       .doc(preparacionId)
       .update({estado: state});
 
@@ -75,7 +75,7 @@ export class PlatoService {
 
     async updatePlatoStateInPedido(pedidoId: string, state: PlatoEstado) {
       this.db
-        .collection<Plato>('Platos', (ref) =>
+        .collection<Plato>('platos', (ref) =>
           ref
             .where('pedidoId', '==', pedidoId)
         )
@@ -88,7 +88,7 @@ export class PlatoService {
     }
     async updatePlatosStateInPedido(pedidoId: string, state: PlatoEstado) {
       this.db
-        .collection<Plato>('Platos', (ref) =>
+        .collection<Plato>('platos', (ref) =>
           ref
             .where('pedidoId', '==', pedidoId)
         )
@@ -101,7 +101,7 @@ export class PlatoService {
     }
     async getPlato(estado: PlatoEstado, tipo: TipoProducto): Promise<Observable<Plato[]>> {
    return this.db
-        .collection<Plato>('Platos', (ref) =>
+        .collection<Plato>('platos', (ref) =>
           ref
           .where('estado', '==', estado)
           .where('producto.tipoProducto', '==', tipo)
@@ -110,20 +110,20 @@ export class PlatoService {
     }
     async getPlatoByPedidoId(pedidoId: string): Promise<Observable<Plato[]>> {
       return this.db
-        .collection<Plato>('Platos', (ref) =>
+        .collection<Plato>('platos', (ref) =>
           ref.where('pedidoId', '==', pedidoId)
         )
         .valueChanges();
     }
     async deletePlato(platoId: string) {
       this.db
-        .collection<Plato>('Platos')
+        .collection<Plato>('platos')
         .doc(platoId)
         .delete();
     }
     async deletePlatoByPedidoId(pedidoId: string) {
       this.db
-      .collection<Plato>('Platos', (ref) =>
+      .collection<Plato>('platos', (ref) =>
         ref
           .where('pedidoId', '==', pedidoId)
       )

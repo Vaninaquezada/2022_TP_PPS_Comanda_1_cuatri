@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Photo } from '@capacitor/camera';
+import { MenuController } from '@ionic/angular';
 import { Encuestas } from 'src/app/clases/encuestas';
 import { EncuestasFirebaseService } from 'src/app/services/encuestas-firebase.service';
 import { FotoService } from 'src/app/services/foto.service';
@@ -20,7 +21,14 @@ export class EncuestaEmpleadoPage implements OnInit {
   registerForm: FormGroup;
   photoUrl = '';
 
-  constructor(private router: Router, private encuestaService: EncuestasFirebaseService, private usuarioService: UsuariosFirebaseService, private utilidadesService: UtilidadesService, private formBuild: FormBuilder, private uploadPhoto: FotoService) { }
+  constructor(private router: Router,
+    private encuestaService: EncuestasFirebaseService,
+
+    private usuarioService: UsuariosFirebaseService,
+     private utilidadesService: UtilidadesService,
+      private formBuild: FormBuilder, private uploadPhoto: FotoService) {
+        
+       }
 
   ngOnInit() {
     this.registerForm = this.formBuild.group({
@@ -79,6 +87,8 @@ export class EncuestaEmpleadoPage implements OnInit {
       this.utilidadesService.PresentarToastAbajo('Falta foto', 'danger');
     }
   }
+
+
 
 
 }

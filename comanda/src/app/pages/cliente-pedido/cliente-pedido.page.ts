@@ -19,7 +19,7 @@ import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.serv
   styleUrls: ['./cliente-pedido.page.scss'],
 })
 export class ClientePedidoPage implements OnInit {
-
+  usuario: User;
   productos: Productos[];
   pedido: Pedidos;
   pedido2: Pedidos =null;
@@ -45,18 +45,18 @@ export class ClientePedidoPage implements OnInit {
 
   ngOnInit(){
 
-     this.getCliente();
-
+     this.usuario = this.usuarioService.usuarioSeleccionado;
     this.productoService
     .getProductos()
     .then((p) => p.subscribe((data) => (this.productos = data)));
     this.cliente = this.usuarioService.usuarioSeleccionado;
-  this.pedido = {
+    this.pedido = {
     pedidoId: this.usuarios.crearId(),
     mesaId: this.cliente.mesaId,
     numeroMesa: this.cliente.numeroMesa,
     tiempoEstimado: 0,
     propina: 0,
+    descuento: 0,
     precioTotal: 0,
     estado: 'pendiente',
     platos: [],
@@ -133,14 +133,22 @@ async getMesa(id){
 
    // this.setCliente();
 
-    this.pedido.mesaId = this.cliente.mesaId;
+   //  this.pedido.mesaId = this.cliente.mesaId;
 
-    this.pedido.numeroMesa = this.cliente.numeroMesa;
+   //  this.pedido.numeroMesa = this.cliente.numeroMesa;
+
+   if (this.pedido.mesaId === null) {
+    this.pedido.mesaId = this.usuario.mesaId;
+   }
+   if (this.pedido.numeroMesa === null) {
+    this.pedido.numeroMesa = this.usuario.numeroMesa;
+  }
 
     this.pedido.precioTotal = this.getPrecioTotal();
     this.pedido.tiempoEstimado = this.getTiempoEstimado();
     this.pedidoService.crearPedido(this.pedido);
     this.nav.navigateBack('mesa');
+
   }
 
   async detalleFoto(producto: Productos) {

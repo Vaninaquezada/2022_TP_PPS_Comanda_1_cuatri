@@ -8,6 +8,7 @@ export interface Pedidos {
     precioTotal: number; // int
     estado: PedidoEstado;
     platos: Array<Plato>;
+    descuento?: number;
     propina?: number;
 }
 export type PedidoEstado = 'pendiente' | 'preparando' | 'terminado' | 'aEntregar' | 'confirmarEntrega' | 'entregado' | 'aCobrar'| 'aPagar' | 'pagado' | 'pendientePago';

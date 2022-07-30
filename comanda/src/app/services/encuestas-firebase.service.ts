@@ -75,10 +75,11 @@ export class EncuestasFirebaseService {
       }
 
     }
-    
-    this.db.collection('encuestas').doc(encuesta.id).set(encuesta);
     encuesta.usuario.encuestaCompletada= true;
     this.usuarioService.guardarCambios(encuesta.usuario);
+    
+    this.db.collection('encuestas').doc(encuesta.id).set(encuesta);
+    localStorage.setItem('encuesta', 'true');
     this.utilidadesService.RemoverLoading();
     this.utilidadesService.PresentarToastAbajo('Encuesta enviada', 'success');
        

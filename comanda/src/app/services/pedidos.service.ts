@@ -26,7 +26,7 @@ export class PedidosService {
     });
     //pedido.platos = [];
     try {
-      await this.db.collection('Pedidos').doc(pedido.pedidoId).set(pedido);
+      await this.db.collection('pedidos').doc(pedido.pedidoId).set(pedido);
     } catch (error) {
       throw Error('Error al cargar pedido');
     }
@@ -34,7 +34,7 @@ export class PedidosService {
 
   async updatePedido(pedido: Pedidos): Promise<void> {
     try {
-      await this.db.collection('Pedidos').doc(pedido.pedidoId).set(pedido);
+      await this.db.collection('pedidos').doc(pedido.pedidoId).set(pedido);
     } catch (error) {
       console.log(error);
       throw Error('Pedido no se pudo actualizar');
@@ -44,7 +44,7 @@ export class PedidosService {
   async terminarPedido(pedidoId: string): Promise<void> {
     try {
 
-      await this.db.collection('Pedidos').doc(pedidoId).update({estado: 'aEntregar'});
+      await this.db.collection('pedidos').doc(pedidoId).update({estado: 'aEntregar'});
      // await this.preparacionService.updatePlatoStateInPedido(pedidoId, 'pendiente');
     } catch (error) {
       console.log(error);
@@ -55,7 +55,7 @@ export class PedidosService {
   async confirmarPedido(pedido: Pedidos): Promise<void> {
     try {
       pedido.estado = 'preparando';
-      await this.db.collection('Pedidos').doc(pedido.pedidoId).set(pedido);
+      await this.db.collection('pedidos').doc(pedido.pedidoId).set(pedido);
       await this.preparacionService.updatePlatoStateInPedido(pedido.pedidoId, 'pendiente');
     } catch (error) {
       console.log(error);
@@ -66,7 +66,7 @@ export class PedidosService {
   async deletePedido(pedido: Pedidos): Promise<void> {
     try {
       await this.preparacionService.deletePlatoByPedidoId(pedido.pedidoId);
-      await this.db.collection('Pedidos').doc(pedido.pedidoId).delete();
+      await this.db.collection('pedidos').doc(pedido.pedidoId).delete();
     } catch (error) {
       console.log(error);
       throw Error('Pedidos error');
@@ -75,7 +75,7 @@ export class PedidosService {
 
   async getPedidoByMesaId(mesaId: string) {
     return this.db
-      .collection<Pedidos>('Pedidos', (ref) =>
+      .collection<Pedidos>('pedidos', (ref) =>
         ref
           .where('mesaId', '==', mesaId)
           .where('estado', '!=','pagado')
@@ -87,7 +87,7 @@ export class PedidosService {
   async getPedidoById(pedidoId: string) {
     try {
       return this.db
-      .collection<Pedidos>('Pedidos').doc(pedidoId)
+      .collection<Pedidos>('pedidos').doc(pedidoId)
       .valueChanges();
     } catch (error) {
       throw error;
@@ -97,7 +97,7 @@ export class PedidosService {
 
   async getPedidos(state: PedidoEstado): Promise<Observable<Pedidos[]>> {
     return this.db
-      .collection<Pedidos>('Pedidos', (ref) =>
+      .collection<Pedidos>('pedidos', (ref) =>
         ref
           .where('estado', '==', state)
       )
@@ -106,7 +106,7 @@ export class PedidosService {
 
   async getPedidosPendientes(): Promise<Observable<Pedidos[]>> {
     return this.db
-      .collection<Pedidos>('Pedidos', (ref) =>
+      .collection<Pedidos>('pedidos', (ref) =>
         ref
           .where('estado', '==', 'pendiente')
       )
@@ -131,7 +131,7 @@ export class PedidosService {
 
   private async getPreparacionesPendientes(tipo: TipoProducto): Promise<Observable<Plato[]>> {
     return this.db
-      .collection<Pedidos>('Pedidos', (ref) =>
+      .collection<Pedidos>('pedidos', (ref) =>
         ref
           .where('estado', '==', 'preparando')
       )
@@ -163,7 +163,7 @@ export class PedidosService {
 
   private async getPreparacionesPreparando(tipo: TipoProducto): Promise<Observable<Plato[]>> {
     return this.db
-      .collection<Pedidos>('Pedidos', (ref) =>
+      .collection<Pedidos>('pedidos', (ref) =>
         ref
           .where('estado', '==', 'preparando')
       )

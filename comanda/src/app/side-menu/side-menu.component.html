@@ -207,7 +207,7 @@
       </ion-item>
       <ion-item >
         <ion-label>Activar sonido</ion-label>
-        <ion-toggle color="danger" [(ngModel)]="myvar" [checked]="myvar" (ionChange)=myMethod()></ion-toggle>
+        <ion-toggle color="danger" [(ngModel)]="myvar" [checked]="user?.sonido" (ionChange)=myMethod()></ion-toggle>
       </ion-item>
       <ion-item (click)="Desconectarse()">
         <ion-icon name="log-out-outline" slot="start" color="danger"></ion-icon>

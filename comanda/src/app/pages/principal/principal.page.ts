@@ -61,7 +61,7 @@ export class PrincipalPage implements OnInit {
     await this.mesaService.actualizarEstadoMesasSegunReservas();
     await this.usuarioService.obtenerUsuario(localStorage.getItem("usuario"));
     // this.utilidadesService.PresentarLoading("Ingresando a lista de espera.");            
-    /*
+   /*
                  let ingreso: IngresoLocal = {
                    cliente: this.usuarioService.usuarioSeleccionado,
                    estado: 'esperando',
@@ -77,7 +77,8 @@ export class PrincipalPage implements OnInit {
                   this.pushOneSignal.enviarNotifAnonimoPendienteDelMetre( this.usuarioService.metresPushIds,"Info adicional bla");
                 });
                 this.Navegar('mesa');
-    */
+   */
+   
     this.barcodeScanner.scan().then(barcodeData => {
       console.log('Barcode data', barcodeData);
       this.code = barcodeData.text;

@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ahorcado</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="container-fluid">
+  <div class="row" id="app">
+    <div class="overlay-text {{start}}" (click)="clickBoton()">
+        Click para empezar
+    </div>
+    <div id="victory-text" class="overlay-text {{resultado}}" (click)="clickBoton()">
+        {{mensaje}}
+        <span class="overlay-text-small"><br> <br> <br> <br>Click para jugar de nuevo</span>
+    </div>
+    <div class="col-12 text-center">
+        <h1 class="text-success">Ahorcado</h1>
+        <h3 class="displayed-word">Palabra: {{displayedWord}}</h3>
+        <p class="h4 text-danger">Intentos restantes: {{remainingAttempts}}</p>
+
+        <br>
+        <img class="img-fluid" src="{{imagen}}" alt="">
+    </div>
+    <div class="col-12 text-center">
+        <button *ngFor="let letter of letters" class="btn btn-success m-1 btn-lg"
+            (click)="attemptWithLetter(letter.letter)">{{letter.letter}}</button>
+    </div>
+</div>
+
+</ion-content>

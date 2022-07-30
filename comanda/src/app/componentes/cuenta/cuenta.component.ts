@@ -15,7 +15,7 @@ export class CuentaComponent implements OnInit {
   propina: number;
   platos: Plato[];
   idPedido: string;
-  estado: 'string';
+  estado: string;
   pedidosPreparando: Pedidos[];
   pedidosEntregar: Pedidos[];
   acobrar = false;
@@ -23,6 +23,7 @@ export class CuentaComponent implements OnInit {
   aentregar = false;
   enpreparar = false;
   pagar = false;
+
   constructor(
     private preparacionService: PlatoService,
     private pedidoService: PedidosService,
@@ -66,18 +67,24 @@ export class CuentaComponent implements OnInit {
     switch (opcion) {
       case 'acobrar':
         this.acobrar = true;
+        this.estado = 'Pendiente cobro';
+
         break;
       case 'aconfirmar':
           this.aconfirmar = true;
+          this.estado = 'Pendiente confirmacion';
           break;
       case 'aentregar':
             this.aentregar = true;
+            this.estado = 'Pendiente Entregar';
             break;
       case 'enpreparacion':
           this.enpreparar = true;
+          this.estado = 'En preparacion';
           break;
       case 'pagar':
           this.pagar = true;
+          this.estado = 'Pendiente pagar';
           break;
     }
   }

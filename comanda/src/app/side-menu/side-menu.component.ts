@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 import { User } from 'src/app/clases/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { EmailService } from 'src/app/services/email.service';
@@ -15,6 +16,7 @@ import { SonidoService } from '../services/sonido.service';
 })
 export class SideMenuComponent implements OnInit {
   audio = new Audio();
+  public user$: Observable<any> = this.authSvc.firebaseAuth.user;
   public role: string = localStorage.getItem('role');
   usuario: User;
   myvar= true;

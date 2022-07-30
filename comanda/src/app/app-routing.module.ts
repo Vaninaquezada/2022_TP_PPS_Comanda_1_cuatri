@@ -129,6 +129,10 @@ const routes: Routes = [
   {
     path: 'graficos-encuesta',
     loadChildren: () => import('./pages/graficos-encuesta/graficos-encuesta.module').then( m => m.GraficosEncuestaPageModule)
+  },
+  {
+    path: 'juegos',
+    loadChildren: () => import('./pages/juegos/juegos.module').then( m => m.JuegosPageModule)
   }
 
 
