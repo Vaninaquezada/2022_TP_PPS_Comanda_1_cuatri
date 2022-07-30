@@ -13,7 +13,7 @@
         <ion-list>
           <ion-radio-group formControlName="limpieza" (ionChange)='EstadoLimpieza($event)'>
             <ion-list-header>
-              <h4>Como esta el espacio de trabajo?</h4>
+              <h4>¿Como esta el espacio de trabajo?</h4>
             </ion-list-header>
             <ion-item>
               <ion-label>Sucio</ion-label>
@@ -29,7 +29,7 @@
             <h4>Seleccione el nivel de orden:</h4>
           </ion-list-header>
           <ion-item class="labels" fill="outline">
-            <ion-label position='floating'>Espacio ordenado?</ion-label>
+            <ion-label position='floating'>¿Espacio ordenado?</ion-label>
             <ion-select interface="popover" formControlName="orden" (ionChange)='EstadoOrden($event)'>
               <ion-select-option value='ordenado'>Ordenado</ion-select-option>
               <ion-select-option value='desordenado'>Desordenado</ion-select-option>
@@ -55,7 +55,7 @@
             <ion-icon name="mail-open-outline"></ion-icon>
              Enviar encuesta
           </ion-button>
-
+        
 
         </ion-list>
 

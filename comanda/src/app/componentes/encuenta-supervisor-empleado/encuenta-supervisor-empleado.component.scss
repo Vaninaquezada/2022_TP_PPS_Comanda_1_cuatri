@@ -1,6 +1,6 @@
 ion-content{
   --background: #23C1E0;
-  
+  --padding-top: 1vh;
 }
 ion-title{
   color: #29dce9;
@@ -41,7 +41,7 @@ ion-icon {
 }
 
 .item{
-  --color: black;
+  --color: rgb(255, 255, 255);
   --background: rgba(0, 0, 0, 0.144);;
   --border-color:transparent;
 }

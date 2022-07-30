@@ -276,7 +276,8 @@ export class MesaPage implements OnInit {
     this.mesaService.update(this.pedi.mesaId, { estado: 'libre', cliente: null, usuarioConReserva:'' });
     this.usuario.mesaId = null;
     this.usuario.numeroMesa = null;
-    console.log(this.usuario.mesaId);
+    console.log('mesa '+this.usuario.mesaId);
+    this.usuario.encuestaCompletada= false;
     this.usera.guardarCambios(this.usuario);
     this.Navegar('/principal');
   }
@@ -345,6 +346,14 @@ export class MesaPage implements OnInit {
       this.utilidadesService.PresentarToastAbajo('Qr invalido', 'danger');
     }
     */
+  }
+
+
+  encuesta(){
+    this.Navegar('/encuesta-clientes');
+  }
+  encuestaGraficos(){
+    this.Navegar('/graficos-encuesta');
   }
 
 }

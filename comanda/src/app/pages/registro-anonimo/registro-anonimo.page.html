@@ -12,19 +12,33 @@
         <ion-label color="light" position="floating">&nbsp;Correo Electronico</ion-label>
         <ion-input formControlName="email"></ion-input>
       </ion-item>
-  
+      <span class="error ion-padding"      *ngIf="registerForm.get('email').errors?.required && registerForm.get('email').touched">
+        El email es requerido
+      </span> 
       <ion-item>
         <ion-label  color="light" position="floating">&nbsp;Contraseña</ion-label>
         <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
+      <span class="error ion-padding"      *ngIf="registerForm.get('password').errors?.required && registerForm.get('password').touched">
+        La contraseña es requerida.
+      </span> 
       <ion-item>
         <ion-label  color="light" position="floating">&nbsp;Reingrese Contraseña</ion-label>
         <ion-input type="password" formControlName="passwordR"></ion-input>
       </ion-item>
+      <span class="error ion-padding"      *ngIf="registerForm.get('passwordR').errors?.required && registerForm.get('passwordR').touched">
+        Repetir la contraseña es requerido.
+      </span> 
       <ion-item>
         <ion-label  color="light" position="floating">&nbsp;Nombre</ion-label>
         <ion-input type="text"  formControlName="nombre"></ion-input>
       </ion-item>
+      <span class="error ion-padding"      *ngIf="registerForm.get('nombre').errors?.required && registerForm.get('nombre').touched">
+        Nombre es requerido
+      </span> 
+      <span class="error ion-padding"  *ngIf="registerForm.get('nombre').hasError('pattern')">
+        El nombre no puede contener numeros.
+      </span> 
       <br>
       <ion-button expand="full" color="tertiary" (click)="getPhoto()">
         <ion-icon name="camera-outline"></ion-icon>Sacar Fotografia

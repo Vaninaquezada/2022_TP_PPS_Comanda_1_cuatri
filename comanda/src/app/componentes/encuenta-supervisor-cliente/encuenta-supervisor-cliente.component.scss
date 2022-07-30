@@ -1,6 +1,6 @@
 ion-content{
   --background: #23C1E0;
-  
+  --padding-top: 1vh;
 }
 ion-title{
   color: #29dce9;
@@ -9,9 +9,6 @@ ion-title{
     -webkit-text-fill-color: transparent;
 }
 
-ion-item{
-  margin-bottom: 2.5%;
-}
 
 
 ion-label{
@@ -25,7 +22,7 @@ ion-list{
     font-size: 0.8em;
   }
   ion-item{
-    margin-bottom: 0%;
+    margin-bottom: 2.5%;
     --color: white;
   }
   background-color: transparent;
@@ -41,7 +38,7 @@ ion-icon {
 }
 
 .item{
-  --color: black;
+  --color: rgb(255, 255, 255);
   --background: rgba(0, 0, 0, 0.144);;
   --border-color:transparent;
 }

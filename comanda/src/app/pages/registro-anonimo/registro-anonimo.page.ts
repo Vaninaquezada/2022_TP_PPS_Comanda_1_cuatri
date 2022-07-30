@@ -42,9 +42,13 @@ export class RegistroAnonimoPage implements OnInit {
         Validators.required,
         Validators.minLength(6),
       ]),
-      nombre: new FormControl('', [Validators.required]),
+      nombre: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+')]),
     });
 
+  }
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  get errorControl() {
+    return this.registerForm.controls;
   }
   async register() {
     console.log('registro');

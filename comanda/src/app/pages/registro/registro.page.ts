@@ -48,12 +48,15 @@ export class RegistroPage implements OnInit {
         Validators.required,
         Validators.minLength(6),
       ]),
-      nombre: new FormControl('', [Validators.required]),
-      apellido: new FormControl('', Validators.required),
-      dni: new FormControl('', [Validators.required, Validators.max(99999999)]),
+      nombre: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+')]),
+      apellido: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+')]),
+      dni: new FormControl('', [Validators.required, Validators.max(99999999),Validators.pattern('^[0-9]+$')]),
     });
   }
-
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  get errorControl() {
+    return this.registerForm.controls;
+  }
   async register() {
     console.log('registro');
     if (this.registerForm.value.password === this.registerForm.value.passwordR) {
@@ -62,7 +65,7 @@ export class RegistroPage implements OnInit {
       const usuario = this.registerForm.value as User;
       usuario.role = 'cliente';
       usuario.subTipo = 'registrado';
-      usuario.pushId = "0";
+      usuario.pushId = '0';
      // this.auth.SignUp(this.registerForm.value.email, this.registerForm.value.password);
      console.log('llora');
       this.usuarioService.registarUsuarioFoto(
@@ -71,7 +74,7 @@ export class RegistroPage implements OnInit {
         this.photo
       );
       this.usuarioService.obtenerPushIdAdmins().then(response=>{
-        this.pushOneSignal.enviarNotifClienteParaHabilitar( this.usuarioService.adminsPushIds,"Info adicional bla");
+        this.pushOneSignal.enviarNotifClienteParaHabilitar( this.usuarioService.adminsPushIds,'Info adicional bla');
       });
 
       this.registerForm.reset();

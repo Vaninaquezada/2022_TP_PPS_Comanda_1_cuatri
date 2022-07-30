@@ -96,6 +96,8 @@ export class UsuariosFirebaseService {
         fileRef.getDownloadURL().subscribe(async res => {
           console.log('aca entró 2');
           usuario.foto = res;
+          usuario.sonido = true;
+          usuario.encuestaCompletada = false;
           this.db.collection('usuarios').doc(usuario.id).set(usuario);
           this.utilidadesService.RemoverLoading();
           this.utilidadesService.PresentarToastAbajo('Usuario creado', 'success');

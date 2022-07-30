@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.service';
 import { UtilidadesService } from '../services/utilidades.service';
 import OneSignal from 'onesignal-cordova-plugin';
+import { SonidoService } from '../services/sonido.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class LoginPage {
   usuarioLogueado = new User();
   pushId: string;
 
-  constructor(public firebaseService: AuthService, private router: Router, private usuariosFire: UsuariosFirebaseService, private utilidadesService: UtilidadesService) { }
+  constructor(public firebaseService: AuthService, private sonido: SonidoService,private router: Router, private usuariosFire: UsuariosFirebaseService, private utilidadesService: UtilidadesService) { }
 
   ngOnInit() {
     // this.OneSignalInit();
@@ -123,6 +124,7 @@ export class LoginPage {
           this.usuarioLogueado.ingresos = new Array<Date>();
           this.usuarioLogueado.ingresos.push(new Date());
         }
+        this.sonido.sonidoLogin();
         this.usuariosFire.update(this.usuariosFire.id, { ingresos: this.usuarioLogueado.ingresos });
         console.log(this.usuarioLogueado.role);
         localStorage.setItem('role', this.usuarioLogueado.role);

@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { EmailService } from 'src/app/services/email.service';
 import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.service';
 import { UtilidadesService } from 'src/app/services/utilidades.service';
+import { SonidoService } from '../services/sonido.service';
 
 @Component({
   selector: 'app-side-menu',
@@ -16,15 +17,19 @@ export class SideMenuComponent implements OnInit {
   audio = new Audio();
   public role: string = localStorage.getItem('role');
   usuario: User;
+  myvar= true;
   constructor(
     private navegador: Router,
     private usuarioService: UsuariosFirebaseService,
     private authSvc: AuthService,
-    private menuControl: MenuController
-  ) { }
+    private menuControl: MenuController,
+    private sonido: SonidoService
+  ) {
+
+  }
 
   ngOnInit() {
-    this.usuario = this.usuarioService.usuarioSeleccionado;
+
   }
 
   Navegar(ruta: string){
@@ -34,20 +39,19 @@ export class SideMenuComponent implements OnInit {
   }
 
   Desconectarse(){
-    this.audio.src ='src/assets/sound/out.acc';
-    this.audio.load();
-
-   if( typeof this.usuario.sonido === 'undefined') {
-     this.usuario.sonido = true;
-    }else {
-      if ( this.usuario.sonido) {
-        this.audio.play();
-      }
-    }
-
 
     this.authSvc.LogOut();
+    this.sonido.sonidoLogOut();
     this.Navegar('home');
+  }
+
+  myMethod() {
+    console.log('>>>>: ' + this.myvar);
+    if (this.myvar) {
+      this.sonido.activarSonido();
+    } else {
+      this.sonido.desactivarSonido();
+    }
   }
 
 }

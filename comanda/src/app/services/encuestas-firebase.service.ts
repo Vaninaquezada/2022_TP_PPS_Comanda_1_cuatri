@@ -11,6 +11,7 @@ import {FotoService} from './foto.service';
 import { AuthErrorsService } from './auth-errors.service';
 import { Encuestas } from '../clases/encuestas';
 import { EncuestaSupervisor } from '../clases/encuesta-supervisor';
+import { UsuariosFirebaseService } from './usuarios-firebase.service';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,7 @@ export class EncuestasFirebaseService {
   constructor(private db: AngularFirestore,private auth: AuthService,
      private storage: AngularFireStorage,
      private authError: AuthErrorsService,
+     private usuarioService: UsuariosFirebaseService,
      private foto: FotoService, private utilidadesService: UtilidadesService) {
     this.encuestasRef=db.collection<any>(this.dbpath, ref => ref.orderBy('fecha'));
     this.encuestas=this.encuestasRef.valueChanges(this.dbpath);
@@ -71,16 +73,19 @@ export class EncuestasFirebaseService {
           encuesta.photourl3 = await this.foto.uploadPhotoEncuesta(foto3, encuesta.id+"_foto3");
         }
       }
+
     }
     
     this.db.collection('encuestas').doc(encuesta.id).set(encuesta);
+    encuesta.usuario.encuestaCompletada= true;
+    this.usuarioService.guardarCambios(encuesta.usuario);
     this.utilidadesService.RemoverLoading();
     this.utilidadesService.PresentarToastAbajo('Encuesta enviada', 'success');
        
   }
   
   public customFormatter(value: number) {
-    return `${value}%`
+    return `${value}%`;
   }
 
   getAllSupervisor(){
