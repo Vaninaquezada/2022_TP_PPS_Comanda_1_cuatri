@@ -28,6 +28,7 @@ export class UsuariosFirebaseService {
   metresPushIds = new Array<string>();
   mozosPushIds = new Array<string>();
   reservaConfirmadaPushIds = new Array<string>();
+  reservaRechazadaPushIds = new Array<string>();
   cocinerosPushIds = new Array<string>();
   bartendersPushIds = new Array<string>();
   // usuariosRefEspecialistas: AngularFirestoreCollection<any>;
@@ -210,12 +211,23 @@ export class UsuariosFirebaseService {
     });
   }
 
-  async obtenerPushIdClienteConReserva(clienteId:string) {
-    console.log("entro a obtenerPushIdBartenders")
+  async obtenerPushIdClienteConReservaConfirmada(clienteId:string) {
+    console.log("entro a obtenerPushIdClienteConReservaConfirmada")
     await this.db.collection('/usuarios').ref.where('id', '==', clienteId).get().then((responce) => {
       responce.docs.forEach(user => {
         if (user.data()["pushId"]) {
           this.reservaConfirmadaPushIds.push(user.data()["pushId"]);
+        }
+      });
+    });
+  }
+
+  async obtenerPushIdClienteConReservaRechazada(clienteId:string) {
+    console.log("entro a obtenerPushIdClienteConReservaRechazada")
+    await this.db.collection('/usuarios').ref.where('id', '==', clienteId).get().then((responce) => {
+      responce.docs.forEach(user => {
+        if (user.data()["pushId"]) {
+          this.reservaRechazadaPushIds.push(user.data()["pushId"]);
         }
       });
     });

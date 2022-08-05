@@ -36,8 +36,8 @@ export class ListaReservasPage implements OnInit {
     reserva.estado = true;
     reserva.pendienteValidacion=false;
     this.mesasService.updateReserva(reserva.id, reserva);
-    this.usuarioService.obtenerPushIdClienteConReserva(reserva.clienteId).then(response => {
-      console.log("this.obtenerPushIdMozos" + JSON.stringify(this.usuarioService.reservaConfirmadaPushIds));
+    this.usuarioService.obtenerPushIdClienteConReservaConfirmada(reserva.clienteId).then(response => {
+      console.log("this.obtenerPushIdClienteConReservaConfirmada" + JSON.stringify(this.usuarioService.reservaConfirmadaPushIds));
       this.pushOneSignal.enviarNotifReservaConfirmada(this.usuarioService.reservaConfirmadaPushIds, "Info adicional bla");
     });
   }
@@ -46,10 +46,9 @@ export class ListaReservasPage implements OnInit {
     reserva.estado = false;
     reserva.pendienteValidacion=false;
     this.mesasService.updateReserva(reserva.id, reserva);
-    if (reserva.estado) {
-      //mandar notif? o mail?
-    } else {
-      //mandar notif? o mail?
-    }
+    this.usuarioService.obtenerPushIdClienteConReservaRechazada(reserva.clienteId).then(response => {
+      console.log("this.obtenerPushIdClienteConReservaRechazada" + JSON.stringify(this.usuarioService.reservaConfirmadaPushIds));
+      this.pushOneSignal.enviarNotifReservaRechazada(this.usuarioService.reservaConfirmadaPushIds, "Info adicional bla");
+    });
   }
 }

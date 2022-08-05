@@ -4,6 +4,7 @@ import { MenuController } from '@ionic/angular';
 import { format, parseISO, addMinutes, subMinutes, getTime } from 'date-fns';
 import { User } from 'src/app/clases/user';
 import { MesaService } from 'src/app/services/mesa.service';
+import { PushOneSignalService } from 'src/app/services/push-one-signal.service';
 import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.service';
 import { UtilidadesService } from 'src/app/services/utilidades.service';
 
@@ -29,6 +30,7 @@ export class ReservaMesasPage implements OnInit {
 	constructor(
 		private mesasService: MesaService,
 		private formBuilder: FormBuilder,
+		private pushOneSignal: PushOneSignalService,
 		private utilidadesService: UtilidadesService,
 		private usuariosFire: UsuariosFirebaseService
 	) {
@@ -164,7 +166,12 @@ export class ReservaMesasPage implements OnInit {
 			cambioEstadoDeMesa: false
 		}
 		console.log(reservaJson);
-		return this.mesasService.crearReserva(reservaJson);
+		let aux = this.mesasService.crearReserva(reservaJson);
+		this.usuariosFire.obtenerPushIdAdmins().then(response => {
+			console.log("this.obtenerPushIdAdmins" + JSON.stringify(this.usuariosFire.adminsPushIds));
+			this.pushOneSignal.enviarNotifReservaCreada(this.usuariosFire.adminsPushIds, "Info adicional bla");
+		  });
+		return aux; 
 	}
 
 }

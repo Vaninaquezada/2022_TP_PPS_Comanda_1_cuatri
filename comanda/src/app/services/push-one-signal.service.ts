@@ -128,4 +128,16 @@ export class PushOneSignalService {
     this.enviarNotif(nombreNotif, mensajeNotif, idPush, infoAdjunta);
   }
 
+  enviarNotifReservaRechazada(idPush: string[], infoAdjunta?: string) {
+    let mensajeNotif = "Tu reserva fue rechazada!";
+    let nombreNotif = "Reserva rechazada";
+    this.enviarNotif(nombreNotif, mensajeNotif, idPush, infoAdjunta);
+  }
+
+  enviarNotifReservaCreada(idPush: string[], infoAdjunta?: string) {
+    let mensajeNotif = "Hay una nueva reserva para validar!";
+    let nombreNotif = "Nueva reserva creada";
+    this.enviarNotif(nombreNotif, mensajeNotif, idPush, infoAdjunta);
+  }
+
 }
