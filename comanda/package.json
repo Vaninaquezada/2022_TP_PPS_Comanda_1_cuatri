@@ -33,6 +33,7 @@
     "@capacitor/push-notifications": "^1.0.9",
     "@capacitor/splash-screen": "^1.2.2",
     "@capacitor/status-bar": "1.0.8",
+    "@codetrix-studio/capacitor-google-auth": "^3.1.4",
     "@emailjs/browser": "^3.6.2",
     "@ionic-native/barcode-scanner": "^5.36.0",
     "@ionic-native/base64": "^5.36.0",

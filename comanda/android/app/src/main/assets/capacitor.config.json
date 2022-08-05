@@ -18,9 +18,14 @@
 			"splashImmersive": true,
 			"layoutName": "launch_screen",
 			"useDialog": true
+		},
+		"GoogleAuth":{
+			"scopes":[
+				"profile",
+				"email"
+			],
+			"serverClientId":"1059233143564-hfsr0p1abnur4skm3bp4jjts5etpsndd.apps.googleusercontent.com",
+			"forceCodeForRefreshToken": true
 		}
-	},
-	"server": {
-		"url": "http://192.168.0.233:8100"
 	}
 }

@@ -6,7 +6,9 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { switchMap } from 'rxjs/operators';
 import { AuthErrorsService } from './auth-errors.service';
 import { UtilidadesService } from './utilidades.service';
+import '@codetrix-studio/capacitor-google-auth';
 import firebase from "firebase/compat/app";
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 
 
 @Injectable({
@@ -49,8 +51,9 @@ export class AuthService {
 
   async SignInWithGoogle() {
     try {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      const { user } = await this.firebaseAuth.signInWithPopup(provider);
+      //const provider = new firebase.auth.GoogleAuthProvider();
+      //const { user } = await this.firebaseAuth.signInWithPopup(provider);
+      const  user = await GoogleAuth.signIn();
       console.log('GoooooooogleLoginDevuelve: ',user);
       return user;
     } catch (error) {
