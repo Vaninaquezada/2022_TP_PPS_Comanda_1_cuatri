@@ -8,6 +8,8 @@ import { Pedidos } from 'src/app/clases/pedidos';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { threadId } from 'worker_threads';
+import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.service';
+import { PushOneSignalService } from 'src/app/services/push-one-signal.service';
 @Component({
   selector: 'app-cocinero-pedidos',
   templateUrl: './cocinero-pedidos.page.html',
@@ -21,18 +23,20 @@ export class CocineroPedidosPage implements OnInit {
   pedido: Pedidos;
   pedidoTerminado: boolean;
   subtipo: string;
- // Observable<any[]>;
+  // Observable<any[]>;
   constructor(
     public productoService: ProductosService,
     public platoService: PlatoService,
     public pedidoService: PedidosService,
+    private usuarioService: UsuariosFirebaseService,
+    private pushOneSignal: PushOneSignalService,
     private router: Router,
     private authSvc: AuthService,
     private menuController: MenuController) {
-      this.subtipo = localStorage.getItem("subtipo");
-      console.log(this.subtipo);
-      this.MenuView();
-    }
+    this.subtipo = localStorage.getItem("subtipo");
+    console.log(this.subtipo);
+    this.MenuView();
+  }
 
   ngOnInit() {
 
@@ -44,7 +48,7 @@ export class CocineroPedidosPage implements OnInit {
       .then((p) => p.subscribe((data) => (this.comidasPreparando = data)));
   }
 
-  MenuView(){
+  MenuView() {
     this.menuController.enable(false, 'clientesMenu');
     this.menuController.enable(false, 'adminMenu');
     this.menuController.enable(false, 'mozoMenu');
@@ -60,10 +64,10 @@ export class CocineroPedidosPage implements OnInit {
       'preparando'
     );
   }
- public traerPedido(plato: Plato) {
+  public traerPedido(plato: Plato) {
     this.pedidoService
-    .getPedidoById(plato.pedidoId)
-    .then((p) => p.subscribe((data) => (this.pedido = data)));
+      .getPedidoById(plato.pedidoId)
+      .then((p) => p.subscribe((data) => (this.pedido = data)));
   }
 
   async terminarPlato(plato: Plato) {
@@ -73,37 +77,40 @@ export class CocineroPedidosPage implements OnInit {
     );
 
     this.platoService.getPlatoByPedidoId(plato.pedidoId)
-    .then(
-      p => p.subscribe(data => {
-        this.platos = data;
-         this.verificarPedido();
+      .then(
+        p => p.subscribe(data => {
+          this.platos = data;
+          this.verificarPedido();
 
-         if(this.pedidoTerminado){
-           this.pedidoService.terminarPedido(plato.pedidoId);
-        }
-      })
-    );
+          if (this.pedidoTerminado) {
+            this.pedidoService.terminarPedido(plato.pedidoId);
+          }
+        })
+      );
 
-
+    this.usuarioService.obtenerPushIdMozos().then(response => {
+      console.log("this.obtenerPushIdMozos" + JSON.stringify(this.usuarioService.mozosPushIds));
+      this.pushOneSignal.enviarNotifComidaLista(this.usuarioService.mozosPushIds, "Info adicional bla");
+    });
 
 
 
   }
 
- async entregarPedido(pedido) {
+  async entregarPedido(pedido) {
     pedido.estado = 'aEntregar';
     this.pedidoService.updatePedido(pedido);
   }
 
 
-verificarPedido(){
+  verificarPedido() {
 
- // this.comidasPedido = this.pedido.platos;
- this.pedidoTerminado = this.platos.every( e => e.estado === 'terminado');
- console.log('terminado?',this.pedidoTerminado);
- console.log('platos?',this.platos);
-}
-  singOut(){
+    // this.comidasPedido = this.pedido.platos;
+    this.pedidoTerminado = this.platos.every(e => e.estado === 'terminado');
+    console.log('terminado?', this.pedidoTerminado);
+    console.log('platos?', this.platos);
+  }
+  singOut() {
     this.authSvc.LogOut();
     this.router.navigate(['login']);
   }

@@ -6,6 +6,8 @@ import { ProductosService } from 'src/app/services/productos.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { MenuController } from '@ionic/angular';
+import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.service';
+import { PushOneSignalService } from 'src/app/services/push-one-signal.service';
 
 @Component({
   selector: 'app-bartender-pedidos',
@@ -25,7 +27,9 @@ export class BartenderPedidosPage implements OnInit {
     public platoService: PlatoService,
     public pedidoService: PedidosService,
     public router: Router,
+    private usuarioService: UsuariosFirebaseService,
     public authSvc: AuthService,
+    private pushOneSignal: PushOneSignalService,
     private menuController: MenuController) {
       this.subtipo = localStorage.getItem('subtipo');
       console.log(this.subtipo);
@@ -75,6 +79,10 @@ export class BartenderPedidosPage implements OnInit {
         }
       })
     );
+    this.usuarioService.obtenerPushIdMozos().then(response => {
+      console.log("this.obtenerPushIdMozos" + JSON.stringify(this.usuarioService.mozosPushIds));
+      this.pushOneSignal.enviarNotifBebidaLista(this.usuarioService.mozosPushIds, "Info adicional bla");
+    });
   }
   verificarPedido(){
 

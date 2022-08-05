@@ -110,4 +110,22 @@ export class PushOneSignalService {
     this.enviarNotif(nombreNotif, mensajeNotif, idPush, infoAdjunta);
   }
 
+  enviarNotifBebidaLista(idPush: string[], infoAdjunta?: string) {
+    let mensajeNotif = "Tenes una bebida para llevar al cliente!";
+    let nombreNotif = "Pedido del bartender listo";
+    this.enviarNotif(nombreNotif, mensajeNotif, idPush, infoAdjunta);
+  }
+
+  enviarNotifComidaLista(idPush: string[], infoAdjunta?: string) {
+    let mensajeNotif = "Tenes un plato para llevar al cliente!";
+    let nombreNotif = "Plato de la cocina listo";
+    this.enviarNotif(nombreNotif, mensajeNotif, idPush, infoAdjunta);
+  }
+
+  enviarNotifReservaConfirmada(idPush: string[], infoAdjunta?: string) {
+    let mensajeNotif = "Tu reserva fue confirmada!";
+    let nombreNotif = "Reserva confirmada";
+    this.enviarNotif(nombreNotif, mensajeNotif, idPush, infoAdjunta);
+  }
+
 }

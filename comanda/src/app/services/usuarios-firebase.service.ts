@@ -27,6 +27,7 @@ export class UsuariosFirebaseService {
   adminsPushIds = new Array<string>();
   metresPushIds = new Array<string>();
   mozosPushIds = new Array<string>();
+  reservaConfirmadaPushIds = new Array<string>();
   cocinerosPushIds = new Array<string>();
   bartendersPushIds = new Array<string>();
   // usuariosRefEspecialistas: AngularFirestoreCollection<any>;
@@ -204,6 +205,17 @@ export class UsuariosFirebaseService {
       responce.docs.forEach(user => {
         if (user.data()["pushId"]) {
           this.bartendersPushIds.push(user.data()["pushId"]);
+        }
+      });
+    });
+  }
+
+  async obtenerPushIdClienteConReserva(clienteId:string) {
+    console.log("entro a obtenerPushIdBartenders")
+    await this.db.collection('/usuarios').ref.where('id', '==', clienteId).get().then((responce) => {
+      responce.docs.forEach(user => {
+        if (user.data()["pushId"]) {
+          this.reservaConfirmadaPushIds.push(user.data()["pushId"]);
         }
       });
     });
