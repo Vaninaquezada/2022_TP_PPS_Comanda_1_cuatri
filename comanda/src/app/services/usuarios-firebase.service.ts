@@ -26,6 +26,9 @@ export class UsuariosFirebaseService {
   usuariosEmpleados: Observable<any[]>;
   adminsPushIds = new Array<string>();
   metresPushIds = new Array<string>();
+  mozosPushIds = new Array<string>();
+  cocinerosPushIds = new Array<string>();
+  bartendersPushIds = new Array<string>();
   // usuariosRefEspecialistas: AngularFirestoreCollection<any>;
   // usuariosEspecialistas: Observable<any[]>;
 
@@ -168,6 +171,39 @@ export class UsuariosFirebaseService {
       responce.docs.forEach(user => {
         if (user.data()["pushId"]) {
           this.metresPushIds.push(user.data()["pushId"]);
+        }
+      });
+    });
+  }
+
+  async obtenerPushIdMozos() {
+    console.log("entro a obtenerPushIdMozos")
+    await this.db.collection('/usuarios').ref.where('subTipo', '==', 'mozo').get().then((responce) => {
+      responce.docs.forEach(user => {
+        if (user.data()["pushId"]) {
+          this.mozosPushIds.push(user.data()["pushId"]);
+        }
+      });
+    });
+  }
+
+  async obtenerPushIdCocineros() {
+    console.log("entro a obtenerPushIdCocineros")
+    await this.db.collection('/usuarios').ref.where('subTipo', '==', 'cocinero').get().then((responce) => {
+      responce.docs.forEach(user => {
+        if (user.data()["pushId"]) {
+          this.cocinerosPushIds.push(user.data()["pushId"]);
+        }
+      });
+    });
+  }
+
+  async obtenerPushIdBartenders() {
+    console.log("entro a obtenerPushIdBartenders")
+    await this.db.collection('/usuarios').ref.where('subTipo', '==', 'bartender').get().then((responce) => {
+      responce.docs.forEach(user => {
+        if (user.data()["pushId"]) {
+          this.bartendersPushIds.push(user.data()["pushId"]);
         }
       });
     });

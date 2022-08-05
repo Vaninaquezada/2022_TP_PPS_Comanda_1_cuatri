@@ -4,6 +4,8 @@ import { Pedidos } from 'src/app/clases/pedidos';
 import { Plato } from 'src/app/clases/plato';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { PlatoService } from 'src/app/services/plato.service';
+import { PushOneSignalService } from 'src/app/services/push-one-signal.service';
+import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.service';
 
 @Component({
   selector: 'app-cuenta',
@@ -28,7 +30,9 @@ export class CuentaComponent implements OnInit {
     private preparacionService: PlatoService,
     private pedidoService: PedidosService,
     private modalController: ModalController,
-    private navParams: NavParams
+    private navParams: NavParams,
+    private usuarioService: UsuariosFirebaseService,
+    private pushOneSignal: PushOneSignalService
   ) { }
 
   ngOnInit() {
@@ -92,12 +96,22 @@ export class CuentaComponent implements OnInit {
   async confirmarPedido(pedido: Pedidos) {
     pedido.estado = 'preparando';
     this.pedidoService.confirmarPedido(pedido);
-    this.preparacionService
-      .tieneComidasForPedido(pedido.pedidoId);
-    //  .then((val) => (val ? this.notificationService.nuevasComidas() : null));
-    this.preparacionService
-      .tieneBebidasForPedido(pedido.pedidoId);
-     // .then((val) => (val ? this.notificationService.nuevasBebidas() : null));
+    console.log('Cocinero?: '+await this.preparacionService.tieneComidasForPedido(pedido.pedidoId));
+    if(await this.preparacionService.tieneComidasForPedido(pedido.pedidoId)){
+      //notifico a cocineros
+      this.usuarioService.obtenerPushIdCocineros().then(response => {
+        console.log("this.cocinerosPushIds" + JSON.stringify(this.usuarioService.cocinerosPushIds));
+        this.pushOneSignal.enviarNotifPedidoParaCocineros(this.usuarioService.cocinerosPushIds, "Info adicional bla");
+      });
+    }
+    console.log('Bartender?: '+await this.preparacionService.tieneBebidasForPedido(pedido.pedidoId));
+    if(await this.preparacionService.tieneBebidasForPedido(pedido.pedidoId)){
+      //notif bartender
+      this.usuarioService.obtenerPushIdBartenders().then(response => {
+        console.log("this.metrePushIds" + JSON.stringify(this.usuarioService.bartendersPushIds));
+        this.pushOneSignal.enviarNotifPedidoParaBArtenders(this.usuarioService.bartendersPushIds, "Info adicional bla");
+      });
+    };
      this.cerrarModal() ;
   }
 

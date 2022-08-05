@@ -7,6 +7,7 @@ import { UsuariosFirebaseService } from 'src/app/services/usuarios-firebase.serv
 import { UtilidadesService } from '../services/utilidades.service';
 import OneSignal from 'onesignal-cordova-plugin';
 import { SonidoService } from '../services/sonido.service';
+import { PushOneSignalService } from '../services/push-one-signal.service';
 
 
 @Component({
@@ -19,16 +20,16 @@ export class LoginPage {
   ingresoApp = false;
   iniciado = false;
 
-  emailIngreso: string = '';
+  emailIngreso: string = ''; 
   contraIngreso: string = '';
   mostrar = false;
   usuarioLogueado = new User();
-  pushId: string;
 
-  constructor(public firebaseService: AuthService, private sonido: SonidoService,private router: Router, private usuariosFire: UsuariosFirebaseService, private utilidadesService: UtilidadesService) { }
+  constructor(public firebaseService: AuthService, private sonido: SonidoService,private router: Router, private usuariosFire: UsuariosFirebaseService, private utilidadesService: UtilidadesService,private pushNotifService:PushOneSignalService) {
+   }
 
   ngOnInit() {
-    // this.OneSignalInit();
+    
   }
 
   async OnSignIn(email: string, password: string) {
@@ -37,7 +38,7 @@ export class LoginPage {
       const user = await this.firebaseService.SignIn(email, password);
       console.log(user);
       this.checkUserIsVerified(user);
-      // this.updatePushId(user);
+      this.updatePushId(user);
       localStorage.setItem('usuario', email);
 
     } catch (error) {
@@ -54,7 +55,7 @@ export class LoginPage {
       this.utilidadesService.PresentarLoading('Ingresando...');
       const user = await this.firebaseService.SignInWithGoogle();
       this.checkUserIsVerified(user);
-      // this.updatePushId(user);
+      this.updatePushId(user);
       localStorage.setItem('usuario', user.email);
 
     } catch (error) {
@@ -182,43 +183,19 @@ export class LoginPage {
     }
   }
 
-  OneSignalInit() {
-    // Uncomment to set OneSignal device logging to VERBOSE  
-    // OneSignal.setLogLevel(6, 0);
-
-    // NOTE: Update the setAppId value below with your OneSignal AppId.
-   OneSignal.setAppId("0a7bacb7-1822-4740-b3fe-31f0c4399931");
-
-    //Se abre una notif
-    OneSignal.setNotificationOpenedHandler(notification => {
-      console.log("Notif recibida: " + JSON.stringify(notification));
-    });
-
-    OneSignal.getDeviceState((stateChanges) => {
-      if (stateChanges && stateChanges.hasNotificationPermission) {
-        this.pushId = stateChanges.userId;
-      } else {
-        console.log("Push notifications are disabled");
-      }
-    });
-
-  }
-
   private async updatePushId(user: User) {
     console.log('Updateando el pushId');
     if (user) {
       await this.usuariosFire.obtenerUsuario(user.email).then(response => {
         this.usuarioLogueado = this.usuariosFire.usuarioSeleccionado;
+        console.log('Entro en updatey muestro base '+this.usuarioLogueado.pushId+' y ahora service: '+this.pushNotifService.pushId);
         if (this.usuarioLogueado.pushId) {
-          console.log('Entro al segundo if');
-          if (this.usuarioLogueado.pushId === "0" || !(this.usuarioLogueado.pushId === this.pushId)) {
-            console.log('Entro al tercer if');
-            this.usuarioLogueado.pushId = this.pushId;
+          if (this.usuarioLogueado.pushId === "0" || !(this.usuarioLogueado.pushId === this.pushNotifService.pushId)) {
+            this.usuarioLogueado.pushId = this.pushNotifService.pushId;
             this.usuariosFire.guardarCambios(this.usuarioLogueado);
           }
         } else {
-          this.usuarioLogueado.pushId = this.pushId;
-          this.usuariosFire.guardarCambios(this.usuarioLogueado);
+          console.log('Se mantiene el mismo player id. en el sv '+this.usuarioLogueado.pushId+' y ahora: '+this.pushNotifService.pushId);
         }
       });
 
