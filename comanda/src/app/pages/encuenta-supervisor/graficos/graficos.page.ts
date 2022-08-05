@@ -61,15 +61,20 @@ export class GraficosPage implements OnInit {
   }
 
 
-  async presentModal(pregunta: string) {
-    this.dataModal(pregunta);
+  async presentModal(pregunta: string, quien: string) {
+    this.dataModal(pregunta,this.listadoEncuestaEmpleados);
+    let listadoUsuariosEmpleados= this.listadoUsuariosClientes;
+    let preguntaText = this.pregunta;
+    let respuesta=this.respuesta;
 
-   const listadoUsuariosEmpleados= this.listadoEncuestaEmpleados;
-   const preguntaText = this.pregunta;
-   const respuesta=this.respuesta;
 
-   console.log('listadoEncuestaEmpleados'+ this.listadoEncuestaEmpleados);
-
+    if(quien === 'cliente'){
+      this.dataModal(pregunta,this.listadoUsuariosClientes);
+       listadoUsuariosEmpleados= this.listadoUsuariosClientes;
+       preguntaText = this.pregunta;
+       respuesta=this.respuesta;
+  
+    }
 
     const modal = await this.modal.create({
       component: EncuentaGraficoDoughnutComponent,
@@ -87,15 +92,20 @@ export class GraficosPage implements OnInit {
 
   }
 
-  async presentModalBar(pregunta: string) {
-    this.dataModal(pregunta);
+  async presentModalBar(pregunta: string, quien: string) {
+    this.dataModal(pregunta,this.listadoEncuestaEmpleados);
+    let listadoUsuariosEmpleados= this.listadoUsuariosClientes;
+    let preguntaText = this.pregunta;
+    let respuesta=this.respuesta;
 
-   const listadoUsuariosEmpleados= this.listadoEncuestaEmpleados;
-   const preguntaText = this.pregunta;
-   const respuesta=this.respuesta;
 
-   console.log('listadoEncuestaEmpleados'+ this.listadoEncuestaEmpleados);
-
+    if(quien === 'cliente'){
+      this.dataModal(pregunta,this.listadoUsuariosClientes);
+       listadoUsuariosEmpleados= this.listadoUsuariosClientes;
+       preguntaText = this.pregunta;
+       respuesta=this.respuesta;
+  
+    }
 
     const modal = await this.modal.create({
       component: EncuentaGraficoBarrasComponent,
@@ -113,15 +123,20 @@ export class GraficosPage implements OnInit {
 
   }
 
-  async presentModalLine(pregunta: string) {
-    this.dataModal(pregunta);
+  async presentModalLine(pregunta: string, quien: string) {
+    this.dataModal(pregunta,this.listadoEncuestaEmpleados);
+    let listadoUsuariosEmpleados= this.listadoUsuariosClientes;
+    let preguntaText = this.pregunta;
+    let respuesta=this.respuesta;
 
-   const listadoUsuariosEmpleados= this.listadoEncuestaEmpleados;
-   const preguntaText = this.pregunta;
-   const respuesta=this.respuesta;
 
-   console.log('listadoEncuestaEmpleados'+ this.listadoEncuestaEmpleados);
-
+    if(quien === 'cliente'){
+      this.dataModal(pregunta,this.listadoUsuariosClientes);
+       listadoUsuariosEmpleados= this.listadoUsuariosClientes;
+       preguntaText = this.pregunta;
+       respuesta=this.respuesta;
+  
+    }
 
     const modal = await this.modal.create({
       component: EncuentaGraficoLineComponent,
@@ -139,15 +154,20 @@ export class GraficosPage implements OnInit {
 
   }
 
-  async presentModalPie(pregunta: string) {
-    this.dataModal(pregunta);
-   const listadoUsuariosEmpleados= this.listadoEncuestaEmpleados;
-   const preguntaText = this.pregunta;
-   const respuesta=this.respuesta;
-
-   console.log('listadoEncuestaEmpleados'+ this.listadoEncuestaEmpleados);
+  async presentModalPie(pregunta: string, quien: string) {
+    this.dataModal(pregunta,this.listadoEncuestaEmpleados);
+    let listadoUsuariosEmpleados= this.listadoUsuariosClientes;
+    let preguntaText = this.pregunta;
+    let respuesta=this.respuesta;
 
 
+    if(quien === 'cliente'){
+      this.dataModal(pregunta,this.listadoUsuariosClientes);
+       listadoUsuariosEmpleados= this.listadoUsuariosClientes;
+       preguntaText = this.pregunta;
+       respuesta=this.respuesta;
+  
+    }
     const modal = await this.modal.create({
       component: EncuentaGraficoPieComponent,
       swipeToClose: true,
@@ -166,9 +186,9 @@ export class GraficosPage implements OnInit {
 
 
 
-  dataModal(pregunta){
+  dataModal(pregunta, listado){
     this.respuesta = [];
-    this.listadoEncuestaEmpleados.forEach(element => {
+    listado.forEach(element => {
 
       if(pregunta === 'respuesta1'){
        this.pregunta = element.pregunta1;
