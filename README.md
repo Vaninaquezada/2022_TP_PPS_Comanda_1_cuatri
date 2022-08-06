@@ -44,7 +44,6 @@ https://docs.google.com/spreadsheets/d/1IxJ_jOkGoOFVfFLDb5P5j6MW7XNbcHcM7R4uWAIU
 | :heavy_check_mark: |                                                          Creacion de splash estatico y dinamico |
 | :heavy_check_mark: |                                                                               Creacion de login |
 | :heavy_check_mark: |                                        Conexion a firebase y creacion de servicios relacionados |
-|          Pendiente | Preparacion de servicios y configuraciones Push notification (todavia sin implementacion final) |
 | :heavy_check_mark: |                                           Creacion servicios de creacion de usuarios con imagen |
 | :heavy_check_mark: |                                                      Registro empleados (page basico con Forms) |
 | :heavy_check_mark: |                    Arreglo servicios registro, modificacion home, creacion page de verificacion |
@@ -67,12 +66,22 @@ https://docs.google.com/spreadsheets/d/1IxJ_jOkGoOFVfFLDb5P5j6MW7XNbcHcM7R4uWAIU
 
 ### Federico Alainz
 
-| :heavy_check_mark: |                                                 Nombre de tarea |
-| -----------------: |                                      -------------------------: |
-| :heavy_check_mark: |                                      Alta de dueño / supervisor |
-| :heavy_check_mark: |                                                       Alta mesa |
-|  heavy_check_mark: |     Push notifications -                                        |
-|                    |    Se modificaron todos los registrois de usuarios para incluir |
-|                    |                el id necesario para recibir las notifications.  |
-|                    |                                                                 |
-|                    |                                                                 |
+| :heavy_check_mark: |                                                                                  Nombre de tarea |
+| -----------------: |                                                                       -------------------------: |
+| :heavy_check_mark: |                                                            Page para Alta de dueños y supervisor |
+| :heavy_check_mark: |                                                           Page para Alta mesa + servicio de mesas|
+| :heavy_check_mark: |                    Modificacion del menu par apoder acceder a la page Alta de dueños y supervisor|
+| :heavy_check_mark: |            Se modificaron todos los registros de los usuarios para poder usar las notificaciones | 
+| :heavy_check_mark: |                                           Servicios y configuraciones para las Push notification.|
+| :heavy_check_mark: |                                                           Todas las notificaciones hasta punto 19|
+| :heavy_check_mark: |                                                          Autenticacion con redes sociales: Google|
+| :heavy_check_mark: |                                                                    Mejoras en la logica del login|
+| :heavy_check_mark: |   Page para que todos los empleados hagan la encuesta sobre el espacio de trabajo luego del login|
+| :heavy_check_mark: |Page para que los clientes puedan realizar reservas y consultar el estado de las que tienen hechas|
+| :heavy_check_mark: |                                         Servicio para reservas+logica con validaciones requeridas|
+| :heavy_check_mark: |Page para que los dueños/supervisores puedan ver la lista de reservas y confirmarlas o rechazarlas|
+| :heavy_check_mark: |  Modificacion de la page con el scan para escanear la mesa directo si esta en rango de la reserva|
+| :heavy_check_mark: |                                                                 Modificacion del login con google|
+| :heavy_check_mark: |            Modificacion del menu de dueños/supervisores para page con lista de reservas a validar|
+| :heavy_check_mark: |                                  Modificacion del menu de clientes para la page de crear reservas|
+ 
