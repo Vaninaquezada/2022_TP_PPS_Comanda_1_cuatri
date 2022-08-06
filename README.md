@@ -16,25 +16,33 @@ https://docs.google.com/spreadsheets/d/1IxJ_jOkGoOFVfFLDb5P5j6MW7XNbcHcM7R4uWAIU
 
 ### Vanina Quezada
 
-| :heavy_check_mark: |                                Nombre de tarea |
-| -----------------: |     -----------------------------------------: |
-| :heavy_check_mark: |                             creacion de iconos |
-| :heavy_check_mark: |                               mejoras en login |
-| :heavy_check_mark: |                               creacion spinner |
-| :heavy_check_mark: |                   mejoras en manejo de errores |
-| :heavy_check_mark: |     Alta cliente con alta foto y lectura de qr |
-| :heavy_check_mark: |                           Alta cliente anonimo |
-| :heavy_check_mark: |            Realizar pedidos (platos y bebidas) |
-| :heavy_check_mark: |                  creacion de menu de productos |
-| :heavy_check_mark: |            listado de productos con 3 imagenes |
-| :heavy_check_mark: |            Realizar pedidos (platos y bebidas) |
-| :heavy_check_mark: |     Confirmar pedidos por lado de los empleados|
-| :heavy_check_mark: |          Confirmar pedidos por lado del cliente|
-| :heavy_check_mark: |                                   Qr de propina|
-| :heavy_check_mark: |    consultar' al mozo, chat entre mozos y mesas|
-| :heavy_check_mark: |                       ver el estado del pedido.|
-| :heavy_check_mark: |                                 acceder al menú|
-| :heavy_check_mark: |                   mejoras en disño de pantallas|
+| :heavy_check_mark: |                                          Nombre de tarea |
+| -----------------: |               -----------------------------------------: |
+| :heavy_check_mark: |                                       creacion de iconos |
+| :heavy_check_mark: |                                         mejoras en login |
+| :heavy_check_mark: |                                         creacion spinner |
+| :heavy_check_mark: |                             mejoras en manejo de errores |
+| :heavy_check_mark: |               Alta cliente con alta foto y lectura de qr |
+| :heavy_check_mark: |                                     Alta cliente anonimo |
+| :heavy_check_mark: |                      Realizar pedidos (platos y bebidas) |
+| :heavy_check_mark: |                            creacion de menu de productos |
+| :heavy_check_mark: |                      listado de productos con 3 imagenes |
+| :heavy_check_mark: |                      Realizar pedidos (platos y bebidas) |
+| :heavy_check_mark: |                       Confirmar pedidos por lado del mozo|
+| :heavy_check_mark: |                               Gestion de pedidos del mozo|
+| :heavy_check_mark: |                            Gestion de pedidos del cliente|
+| :heavy_check_mark: |                          Gestion de pedidos del bartender|
+| :heavy_check_mark: |                           Gestion de pedidos del cocinero|
+| :heavy_check_mark: |                    Confirmar pedidos por lado del cliente|
+| :heavy_check_mark: |              Pedir cuenta de pedidos por lado del cliente|
+| :heavy_check_mark: |                                             Qr de propina|
+| :heavy_check_mark: |               consultar al mozo, chat entre mozos y mesas|
+| :heavy_check_mark: |      Menu de consultas de estados de pedidos para el mozo|
+| :heavy_check_mark: |                           Consulta de pedidos del cliente|
+| :heavy_check_mark: |                            Mejoras en diseño de pantallas|
+| :heavy_check_mark: | Encuesta supervisor de clientes y empleados con liastados|
+| :heavy_check_mark: |                   Graficos encuestas supervisor y cliente|
+| :heavy_check_mark: |                                 sonidos al login y logOut|
 
 ### Nicolas Gomez
 
